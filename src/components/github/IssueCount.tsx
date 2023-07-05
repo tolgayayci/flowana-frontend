@@ -5,7 +5,7 @@ export default function IssueCount() {
   return (
     <div>
       <h1>Issue Count</h1>
-      {JSON.stringify(useIssueCount, null, 2)}
+      {JSON.stringify(issueCount, null, 2)}
     </div>
   );
 }

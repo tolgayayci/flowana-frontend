@@ -1,12 +1,10 @@
 import CodeFrequency from "@/components/github/CodeFrequency";
 import CommitActivity from "@/components/github/CommitActivity";
 import CommunityProfile from "@/components/github/CommunityProfile";
-import IssueActivity from "@/components/github/IssueActivity";
 import IssueCount from "@/components/github/IssueCount";
 import LanguageBreakdown from "@/components/github/LanguageBreakdown";
 import MostActiveIssues from "@/components/github/MostActiveIssues";
 import Participation from "@/components/github/Participation";
-import PullRequestActivity from "@/components/github/PullRequestActivity";
 import PullRequestCount from "@/components/github/PullRequestCount";
 import PunchCard from "@/components/github/PunchCard";
 import RecentCommits from "@/components/github/RecentCommits";
@@ -22,12 +20,10 @@ export default function Projects() {
       <CodeFrequency />
       <CommitActivity />
       <CommunityProfile />
-      <IssueActivity />
       <IssueCount />
       <LanguageBreakdown />
       <MostActiveIssues />
       <Participation />
-      <PullRequestActivity />
       <PullRequestCount />
       <PunchCard />
       <RecentCommits />

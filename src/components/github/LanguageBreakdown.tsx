@@ -4,7 +4,7 @@ export default function LanguageBreakdown() {
 
   return (
     <div>
-      <h1>Issue Count</h1>
+      <h1>Language Breakdown</h1>
       {JSON.stringify(languageBreakdown, null, 2)}
     </div>
   );

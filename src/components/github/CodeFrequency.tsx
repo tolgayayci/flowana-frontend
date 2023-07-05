@@ -8,6 +8,7 @@ export default function CodeFrequency() {
   return (
     <div>
       <h1>Code Frequency</h1>
+      {JSON.stringify(codeFrequency, null, 2)}
     </div>
   );
 }
