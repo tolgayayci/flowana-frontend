@@ -6,7 +6,7 @@ const useRecentIssues = (protocol: string) => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const url = `/protocols/${protocol}/recent-issues?owner=${owner}&repo=${repo}`
+    const url = `/protocols/${protocol}/recent-issues?owner=${owner}&repo=${repo}&order_by=created_at`
     const { data, error, isValidating } = useSWR(repo ? url : null , fetcher);
 
     if(!error && !data) console.log("Loading repository info...");

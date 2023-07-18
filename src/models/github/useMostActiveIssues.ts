@@ -6,7 +6,7 @@ const useMostActiveIssues = (protocol: string) => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const url = `/protocols/${protocol}/most-active-issues?owner=${owner}&repo=${repo}&interval=week`
+    const url = `/protocols/${protocol}/most-active-issues?owner=${owner}&repo=${repo}&interval=month`
     const { data, error, isValidating } = useSWR(repo ? url : null , fetcher);
 
     if(!error && !data) console.log("Loading repository info...");
