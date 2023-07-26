@@ -1,7 +1,11 @@
-import usePullRequestCount from "@/models/github/usePullRequestCount";
-
 import ReactECharts from "echarts-for-react";
 
+// Hooks
+import usePullRequestCount from "@/models/github/usePullRequestCount";
+
+// Modules and Utils
+import Layout from "@/modules/Card/Layout/Layout";
+import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 
 export default function PullRequestCount() {
@@ -45,14 +49,16 @@ export default function PullRequestCount() {
   };
 
   return (
-    <div className="border-2 border-indigo-300 rounded-lg py-12">
-      <h1 className="ml-12 mb-8">Pull Request Count</h1>
-      <ReactECharts
-        option={option}
-        showLoading={isLoading}
-        style={{ minHeight: "350px", width: "100%" }}
-        notMerge={true}
-      />
-    </div>
+    <Layout>
+      <CardHeader title="Pull Request Count" />
+      <div className="h-full flex items-center">
+        <ReactECharts
+          option={option}
+          showLoading={isLoading}
+          style={{ minHeight: "350px", width: "100%" }}
+          notMerge={true}
+        />
+      </div>
+    </Layout>
   );
 }

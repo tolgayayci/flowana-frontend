@@ -1,11 +1,15 @@
-import usePunchCard from "@/models/github/usePunchCard";
-
 import ReactECharts from "echarts-for-react";
 
+//Hooks
+import usePunchCard from "@/models/github/usePunchCard";
+
+//Modules and Utils
+import Layout from "@/modules/Card/Layout/Layout";
+import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 
 export default function PunchCard() {
-  const { punchCard, isLoading } = usePunchCard("polkadot");
+  const { punchCard, isLoading } = usePunchCard();
 
   if (isLoading) return <CardLoader />;
   if (!punchCard) return;
@@ -19,12 +23,25 @@ export default function PunchCard() {
     "Friday",
     "Saturday",
   ];
+
   const hours = Array.from(Array(24).keys());
+
+  const hoursFormatted = hours.map((hour) => {
+    if (hour === 0) {
+      return "12 am"; // Special case for midnight
+    } else if (hour < 12) {
+      return `${hour} am`; // Morning hours
+    } else if (hour === 12) {
+      return "12 pm"; // Special case for noon
+    } else {
+      return `${hour - 12} pm`; // Afternoon and evening hours
+    }
+  });
 
   const option = {
     tooltip: {
       position: "top",
-      formatter: (params) => {
+      formatter: (params: any) => {
         const { day, hour, commits } = params.data;
         return `Number of commits on ${days[day]}, ${hour}:00: ${commits}`;
       },
@@ -37,7 +54,7 @@ export default function PunchCard() {
     },
     xAxis: {
       type: "category",
-      data: hours,
+      data: hoursFormatted,
       boundaryGap: true,
       splitArea: { show: true },
       axisTick: { alignWithLabel: true },
@@ -65,7 +82,7 @@ export default function PunchCard() {
         label: {
           show: true,
           color: "#000",
-          formatter: (params) => params.value[2],
+          formatter: (params: any) => params.value[2],
         },
         emphasis: {
           itemStyle: {
@@ -78,14 +95,14 @@ export default function PunchCard() {
   };
 
   return (
-    <div className="border-2 border-indigo-300 rounded-lg py-12">
-      <h1 className="ml-12 mb-8">Punch Card</h1>
+    <Layout>
+      <CardHeader title="Punch Card" />
       <ReactECharts
         option={option}
         showLoading={isLoading}
         style={{ minHeight: "350px", width: "100%" }}
         notMerge={true}
       />
-    </div>
+    </Layout>
   );
 }

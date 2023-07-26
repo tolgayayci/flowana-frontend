@@ -14,6 +14,11 @@ import RecentPullRequests from "@/components/github/RecentPullRequests";
 import RecentReleases from "@/components/github/RecentReleases";
 import RecentStargazingActivity from "@/components/github/RecentStargazingActivity";
 import RepositoryInfo from "@/components/github/RepositoryInfo";
+import Contributors from "@/components/github/Contributors";
+import ParticipationCount from "@/components/github/ParticipationCount";
+import IssueActivity from "@/components/github/IssueActivity";
+import PullRequestActivity from "@/components/github/PullRequestActivity";
+import HealthScore from "@/components/github/HealthScore";
 
 // Helper Components
 import Custom404 from "@/pages/404";
@@ -22,7 +27,7 @@ import Loader from "@/modules/Loader/Loader";
 // Models
 import useRepositoryInfoModel from "@/models/github/useRepositoryInfo";
 
-export default function Projects() {
+export default function ProjectDetail() {
   const { repositoryInfo, isLoading } = useRepositoryInfoModel("polkadot");
 
   if (isLoading) return <Loader />;
@@ -30,15 +35,19 @@ export default function Projects() {
 
   return (
     <div className="container mx-auto my-12 max-w-7xl px-4 sm:px-6 lg:px-8 py-1">
-      <div className="flex flex-wrap space-y-4">
+      <div className="flex flex-wrap space-y-8">
         <div className="w-full">
           <RepositoryInfo />
         </div>
-        <div className="w-full sm:w-1/2"></div>
-        <div className="w-full sm:w-1/2">
-          <CommunityProfile />
+        <div className="flex space-x-6 w-full">
+          <div className="w-full sm:w-1/2">
+            <HealthScore />
+          </div>
+          <div className="w-full sm:w-1/2">
+            <CommunityProfile />
+          </div>
         </div>
-        <div className="flex space-x-4 w-full">
+        <div className="flex space-x-6 w-full">
           <div className="w-full sm:w-2/3">
             <RecentStargazingActivity />
           </div>
@@ -49,44 +58,54 @@ export default function Projects() {
         <div className="w-full">
           <CommitActivity />
         </div>
-        <div className="flex space-x-4 w-full">
+        <div className="flex space-x-6 w-full">
           <div className="w-full sm:w-2/3">
             <RecentCommits />
           </div>
-          <div className="w-full sm:w-1/3"></div>
+          <div className="w-full sm:w-1/3">
+            <ParticipationCount />
+          </div>
         </div>
-        <div className="w-full"></div>
+        <div className="w-full">
+          <Contributors />
+        </div>
         <div className="w-full">
           <CodeFrequency />
         </div>
         <div className="w-full">
           <PunchCard />
         </div>
-        <div className="flex space-x-4 w-full">
-          <div className="w-full sm:w-2/3">
+        <div className="w-full">
+          <IssueActivity />
+        </div>
+        <div className="flex space-x-6 w-full">
+          <div className="w-full sm:w-2/3 h-full">
             <RecentIssues />
           </div>
-          <div className="w-full sm:w-1/3">
+          <div className="w-full sm:w-1/3 h-full">
             <IssueCount />
+          </div>
+        </div>
+        <div className="w-full">
+          <PullRequestActivity />
+        </div>
+        <div className="flex space-x-6 w-full">
+          <div className="w-full sm:w-1/3 h-full">
+            <PullRequestCount />
+          </div>
+          <div className="w-full sm:w-2/3 h-full">
+            <RecentPullRequests />
           </div>
         </div>
         <div className="w-full">
           <Participation />
         </div>
-        <div className="flex space-x-4 w-full">
-          <div className="w-full sm:w-1/3">
-            <PullRequestCount />
-          </div>
-          <div className="w-full sm:w-2/3">
-            <RecentPullRequests />
-          </div>
-        </div>
-        <div className="flex space-x-4 w-full">
-          <div className="w-full sm:w-1/3">
-            <RecentReleases />
-          </div>
-          <div className="w-full sm:w-2/3">
+        <div className="flex space-x-6 w-full">
+          <div className="w-full sm:w-2/3 h-full">
             <MostActiveIssues />
+          </div>
+          <div className="w-full sm:w-1/3 h-full">
+            <RecentReleases />
           </div>
         </div>
       </div>

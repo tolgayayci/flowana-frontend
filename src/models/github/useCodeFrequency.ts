@@ -1,17 +1,16 @@
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { fetcher } from '../../utils/fetcher';
+import { ICodeFrequency } from '@/types/githubTypes';
 
-const useCodeFrequency = (protocol: string) => {
+const useCodeFrequency = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const url = `/protocols/${protocol}/code-frequency?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWR(repo ? url : null , fetcher);
+    const protocol = "polkadot"
 
-    if(!error && !data) console.log("Loading repository info...");
-    if(error) console.log("Error loading repository info: ", error);
-    if(data) console.log(data);
+    const url = `/protocols/${protocol}/code-frequency?owner=${owner}&repo=${repo}`
+    const { data, error, isValidating } = useSWR<ICodeFrequency, any>(repo ? url : null , fetcher);
 
     return {
         codeFrequency: data,

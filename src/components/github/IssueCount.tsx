@@ -1,11 +1,15 @@
-import useIssueCount from "@/models/github/useIssueCount";
-
 import ReactECharts from "echarts-for-react";
 
+// Hooks
+import useIssueCount from "@/models/github/useIssueCount";
+
+// Modules and Utils
+import Layout from "@/modules/Card/Layout/Layout";
+import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 
 export default function IssueCount() {
-  const { issueCount, isLoading } = useIssueCount("polkadot");
+  const { issueCount, isLoading } = useIssueCount();
 
   if (isLoading) return <CardLoader />;
   if (!issueCount) return;
@@ -43,14 +47,14 @@ export default function IssueCount() {
   };
 
   return (
-    <div className="border-2 border-indigo-300 rounded-lg py-12">
-      <h1 className="ml-12 mb-8">Issue Count</h1>
+    <Layout>
+      <CardHeader title="Issue Count" />
       <ReactECharts
         option={option}
         showLoading={isLoading}
         style={{ minHeight: "350px", width: "100%" }}
         notMerge={true}
       />
-    </div>
+    </Layout>
   );
 }

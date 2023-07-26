@@ -2,16 +2,16 @@ import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { fetcher } from '../../utils/fetcher';
 
-const usePunchCard = (protocol: string) => {
+import { IPunchCard } from '@/types/githubTypes';
+
+const usePunchCard = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const url = `/protocols/${protocol}/punch-card?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWR(repo ? url : null , fetcher);
+    const protocol = "polkadot"
 
-    if(!error && !data) console.log("Loading repository info...");
-    if(error) console.log("Error loading repository info: ", error);
-    if(data) console.log(data);
+    const url = `/protocols/${protocol}/punch-card?owner=${owner}&repo=${repo}`
+    const { data, error, isValidating } = useSWR<IPunchCard[]>(repo ? url : null , fetcher);
 
     return {
         punchCard: data,

@@ -3,9 +3,11 @@ import { useRouter } from 'next/router';
 import { fetcher } from '../../utils/fetcher';
 import { ICommitActivity } from '@/types/githubTypes';
 
-const useCommitActivity = (protocol: string) => {
+const useCommitActivity = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
+
+    const protocol = "polkadot"
 
     const url = `/protocols/${protocol}/commit-activity?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<ICommitActivity[], any>(repo ? url : null , fetcher);

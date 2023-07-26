@@ -1,11 +1,15 @@
-import useCodeFrequency from "@/models/github/useCodeFrequency";
-
 import ReactECharts from "echarts-for-react";
 
+// Hooks
+import useCodeFrequency from "@/models/github/useCodeFrequency";
+
+// Modules and Utils
+import Layout from "@/modules/Card/Layout/Layout";
+import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 
 export default function CodeFrequency() {
-  const { codeFrequency, isLoading } = useCodeFrequency("polkadot");
+  const { codeFrequency, isLoading } = useCodeFrequency();
 
   if (isLoading) return <CardLoader />;
   if (!codeFrequency) return;
@@ -31,34 +35,34 @@ export default function CodeFrequency() {
     },
     dataZoom: [
       {
-        type: "slider", // Use a slider type of dataZoom
-        show: true, // Show the zoom slider
-        start: 60, // Initial start position (percentage)
-        end: 100, // Initial end position (percentage)
-        handleSize: 12, // Size of the slider handle
+        type: "slider",
+        show: true,
+        start: 60,
+        end: 100,
+        handleSize: 12,
         handleStyle: {
-          color: "#666", // Color of the slider handle
+          color: "#666",
         },
         textStyle: {
-          color: "#666", // Color of the dataZoom text
+          color: "#666",
         },
-        borderColor: "#EEE", // Color of the dataZoom border
-        fillerColor: "rgba(0, 0, 0, 0.1)", // Color of the filled area inside the dataZoom
-        backgroundColor: "#F5F5F5", // Background color of the dataZoom
-        filterMode: "filter", // Specify the filtering mode
+        borderColor: "#EEE",
+        fillerColor: "rgba(0, 0, 0, 0.1)",
+        backgroundColor: "#F5F5F5",
+        filterMode: "filter",
       },
     ],
   };
 
   return (
-    <div className="border-2 border-indigo-300 rounded-lg py-12">
-      <h1 className="ml-12 mb-8">Code Frequency</h1>
+    <Layout>
+      <CardHeader title="Code Frequency" />
       <ReactECharts
         option={option}
         showLoading={isLoading}
         style={{ minHeight: "350px", width: "100%" }}
         notMerge={true}
       />
-    </div>
+    </Layout>
   );
 }

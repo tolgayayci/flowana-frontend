@@ -18,7 +18,7 @@ export default function RepositoryInfo() {
     issue_count,
     release_count,
     owner_avatar_url,
-    topics,
+    ["categories.lvl0"]: categories,
     url,
     owner,
     repo,
@@ -75,7 +75,7 @@ export default function RepositoryInfo() {
           <div className="w-full mb-4">
             <p className="text-sm font-bold mb-3">Topics</p>
             <div className="flex flex-wrap">
-              {topics.map((topic: string, index: number) => (
+              {categories.map((topic: string, index: number) => (
                 <span
                   key={index}
                   className="bg-gray-200 text-gray-800 px-2 py-1 rounded mr-2 mb-2 text-sm"

@@ -2,16 +2,16 @@ import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { fetcher } from '../../utils/fetcher';
 
-const useRecentReleases = (protocol: string) => {
+import { IRecentReleases } from '@/types/githubTypes';
+
+const useRecentReleases = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const url = `/protocols/${protocol}/recent-releases?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWR(repo ? url : null , fetcher);
+    const protocol = "polkadot"
 
-    if(!error && !data) console.log("Loading repository info...");
-    if(error) console.log("Error loading repository info: ", error);
-    if(data) console.log(data);
+    const url = `/protocols/${protocol}/recent-releases?owner=${owner}&repo=${repo}`
+    const { data, error, isValidating } = useSWR<IRecentReleases[]>(repo ? url : null , fetcher);
 
     return {
         recentReleases: data,

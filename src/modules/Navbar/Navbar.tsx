@@ -8,6 +8,9 @@ import {
   CheckIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
+import MagnifyingGlassIcon from "@heroicons/react/24/outline";
+
+import SearchBar from "../SearchBar/SearchBar";
 
 const user = {
   name: "Tom Cook",
@@ -16,11 +19,13 @@ const user = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "/", current: false },
-  { name: "Projects", href: "/", current: false },
-  { name: "Lenster", href: "/projects/lensterxyz/lenster", current: true },
-  { name: "Twitter", href: "#", current: false },
-  { name: "Discourse", href: "#", current: false },
+  { name: "Ecosystems", href: "/", current: true },
+  { name: "Projects", href: "/projects", current: false },
+  { name: "GitHub", href: "/github", current: false },
+  { name: "Discourse", href: "/discourse", current: false },
+  { name: "Governance", href: "#", current: false },
+  { name: "Developers", href: "/developers", current: false },
+  { name: "Lenster", href: "/projects/lensterxyz/lenster", current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -35,12 +40,14 @@ const protocol = [
   { name: "Lens Protocol", logo: "/lens-logo.jpg" },
 ];
 
-function classNames(...classes) {
+function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
   const [selected, setSelected] = useState(protocol[0]);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
     <>
@@ -52,10 +59,11 @@ export default function Navbar() {
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-8 w-8"
+                      <Image
                         src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300"
-                        alt="Your Company"
+                        width="40"
+                        height="40"
+                        alt="Logo"
                       />
                     </div>
                   </div>
@@ -175,10 +183,12 @@ export default function Navbar() {
                 <div className="border-t border-indigo-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full"
+                      <Image
                         src={user.imageUrl}
+                        width="40"
+                        height="40"
                         alt=""
+                        className="rounded-full"
                       />
                     </div>
                     <div className="ml-3">
@@ -217,7 +227,7 @@ export default function Navbar() {
 
         <header className="bg-white shadow-sm">
           <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <div className="flex items-baseline space-x-4">
+            <div className="flex items-baseline space-x-4 w-2/3">
               {navigation.map((item) => (
                 <a
                   key={item.name}
@@ -234,7 +244,16 @@ export default function Navbar() {
                 </a>
               ))}
             </div>
-            <div>Search Bar</div>
+            <div className="w-1/3">
+              <SearchBar open={isSearchOpen} setOpen={setIsSearchOpen} />
+              <button
+                type="button"
+                className="text-indigo-900 text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-indigo-900 font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
+                onClick={() => setIsSearchOpen(true)}
+              >
+                Search on Flowana
+              </button>
+            </div>
           </div>
         </header>
       </div>

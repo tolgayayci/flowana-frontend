@@ -1,10 +1,15 @@
 import ReactECharts from "echarts-for-react";
 
+// Hooks
 import useLanguageBreakdown from "@/models/github/useLanguageBreakdown";
+
+// Modules and Utils
+import Layout from "@/modules/Card/Layout/Layout";
 import CardLoader from "@/modules/CardLoader/CardLoader";
+import CardHeader from "@/modules/Card/Header/Header";
 
 export default function LanguageBreakdown() {
-  const { languageBreakdown, isLoading } = useLanguageBreakdown("polkadot");
+  const { languageBreakdown, isLoading } = useLanguageBreakdown();
 
   if (isLoading) return <CardLoader />;
   if (!languageBreakdown) return;
@@ -53,14 +58,14 @@ export default function LanguageBreakdown() {
   };
 
   return (
-    <div className="border-2 border-indigo-300 rounded-lg py-12">
-      <h1 className="ml-12 mb-8">Language Breakdown</h1>
+    <Layout>
+      <CardHeader title="Language Breakdown" />
       <ReactECharts
         option={option}
         showLoading={isLoading}
         style={{ minHeight: "350px", width: "100%" }}
         notMerge={true}
       />
-    </div>
+    </Layout>
   );
 }

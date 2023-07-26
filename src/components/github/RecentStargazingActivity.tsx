@@ -1,13 +1,15 @@
 import ReactECharts from "echarts-for-react";
 
+// Hooks
 import useRecentStargazingActivity from "@/models/github/useRecentStargazingActivity";
-import CardLoader from "@/modules/CardLoader/CardLoader";
+
+// Modules and Utils
+import Layout from "@/modules/Card/Layout/Layout";
+import CardHeader from "@/modules/Card/Header/Header";
 
 export default function RecentStargazingActivity() {
-  const { recentStargazingActivity, isLoading } =
-    useRecentStargazingActivity("polkadot");
+  const { recentStargazingActivity, isLoading } = useRecentStargazingActivity();
 
-  if (isLoading) return <CardLoader />;
   if (!recentStargazingActivity) return;
 
   const option = {
@@ -32,14 +34,14 @@ export default function RecentStargazingActivity() {
   };
 
   return (
-    <div className="border-2 border-indigo-300 rounded-lg py-12">
-      <h1 className="ml-12 mb-8">Stargazing Activity Info</h1>
+    <Layout>
+      <CardHeader title="Recent Stargazing Activity" />
       <ReactECharts
         option={option}
         showLoading={isLoading}
         style={{ minHeight: "350px", width: "100%" }}
         notMerge={true}
       />
-    </div>
+    </Layout>
   );
 }

@@ -1,18 +1,26 @@
-import { useState, useEffect } from "react";
-import useCommitActivity from "@/models/github/useCommitActivity";
-
+import { useState } from "react";
 import ReactECharts from "echarts-for-react";
 
+// Hooks
+import useCommitActivity from "@/models/github/useCommitActivity";
+
+// Modules and Utils
+import Layout from "@/modules/Card/Layout/Layout";
+import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 
+import { ICommitActivity } from "@/types/githubTypes";
+
 export default function CommitActivity() {
-  const [selectedWeek, setSelectedWeek] = useState(null);
-  const { commitActivity, isLoading } = useCommitActivity("polkadot");
+  const [selectedWeek, setSelectedWeek] = useState<ICommitActivity | null>(
+    null
+  );
+  const { commitActivity, isLoading } = useCommitActivity();
 
   if (isLoading) return <CardLoader />;
   if (!commitActivity) return;
 
-  const handleClick = (params) => {
+  const handleClick = (params: any) => {
     const weekIndex = params.dataIndex;
     const clickedWeek = commitActivity[weekIndex];
     setSelectedWeek(clickedWeek);
@@ -65,8 +73,8 @@ export default function CommitActivity() {
   };
 
   return (
-    <div className="border-2 border-indigo-300 rounded-lg py-12">
-      <h1 className="ml-12 mb-8">Commit Activity</h1>
+    <Layout>
+      <CardHeader title="Commit Activity" />
       <ReactECharts
         option={option}
         showLoading={isLoading}
@@ -85,6 +93,6 @@ export default function CommitActivity() {
           />
         </div>
       )}
-    </div>
+    </Layout>
   );
 }

@@ -4,9 +4,11 @@ import { fetcher } from '../../utils/fetcher';
 
 import { IRecentStargazingActivity } from '@/types/githubTypes';
 
-const useRecentStargazingActivity = (protocol: string) => {
+const useRecentStargazingActivity = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
+
+    const protocol = "polkadot"
 
     const url = `/protocols/${protocol}/recent-stargazing-activity?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<IRecentStargazingActivity, any>(repo ? url : null , fetcher);
