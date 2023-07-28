@@ -1,5 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Disclosure, Listbox, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -18,19 +19,14 @@ const user = {
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
-const navigation = [
-  { name: "Ecosystems", href: "/", current: true },
+const initialNavigation = [
+  { name: "Ecosystems", href: "/", current: false },
   { name: "Projects", href: "/projects", current: false },
   { name: "GitHub", href: "/github", current: false },
   { name: "Discourse", href: "/discourse", current: false },
-  { name: "Governance", href: "#", current: false },
+  { name: "Governance", href: "/governance", current: false },
   { name: "Developers", href: "/developers", current: false },
   { name: "Lenster", href: "/projects/lensterxyz/lenster", current: false },
-];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
 ];
 
 const protocol = [
@@ -45,9 +41,23 @@ function classNames(...classes: any[]) {
 }
 
 export default function Navbar() {
+  const router = useRouter();
+
   const [selected, setSelected] = useState(protocol[0]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [navigation, setNavigation] = useState(initialNavigation);
+
+  useEffect(() => {
+    const currentHref = router.asPath;
+
+    const updatedNavigation = navigation.map((item) => ({
+      ...item,
+      current: item.href === currentHref,
+    }));
+
+    setNavigation(updatedNavigation);
+  }, [router.asPath]);
 
   return (
     <>
@@ -181,43 +191,15 @@ export default function Navbar() {
                   ))}
                 </div>
                 <div className="border-t border-indigo-700 pb-3 pt-4">
-                  <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      <Image
-                        src={user.imageUrl}
-                        width="40"
-                        height="40"
-                        alt=""
-                        className="rounded-full"
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium text-white">
-                        {user.name}
-                      </div>
-                      <div className="text-sm font-medium text-indigo-300">
-                        {user.email}
-                      </div>
-                    </div>
+                  <div className="w-full px-4">
+                    <SearchBar open={isSearchOpen} setOpen={setIsSearchOpen} />
                     <button
                       type="button"
-                      className="ml-auto flex-shrink-0 rounded-full bg-indigo-600 p-1 text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
+                      className="text-indigo-900 text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-indigo-900 font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
+                      onClick={() => setIsSearchOpen(true)}
                     >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
+                      Search on Flowana
                     </button>
-                  </div>
-                  <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map((item) => (
-                      <Disclosure.Button
-                        key={item.name}
-                        as="a"
-                        href={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-indigo-500 hover:bg-opacity-75"
-                      >
-                        {item.name}
-                      </Disclosure.Button>
-                    ))}
                   </div>
                 </div>
               </Disclosure.Panel>
@@ -225,7 +207,7 @@ export default function Navbar() {
           )}
         </Disclosure>
 
-        <header className="bg-white shadow-sm">
+        <header className="bg-white shadow-sm hidden md:block">
           <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <div className="flex items-baseline space-x-4 w-2/3">
               {navigation.map((item) => (
