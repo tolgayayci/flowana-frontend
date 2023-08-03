@@ -1,3 +1,5 @@
+import ReactECharts from "echarts-for-react";
+
 // Hooks
 import useDiscourseTopicMetrics from "@/models/discourse/useDiscourseTopicMetrics";
 
@@ -12,6 +14,12 @@ export default function TopicMetrics() {
     <Layout>
       <CardHeader title="Discourse Topic Metrics" />
       {JSON.stringify(discourseTopicMetrics)}
+      {/* <ReactECharts
+        option={option}
+        showLoading={isLoading}
+        style={{ minHeight: "350px", width: "100%" }}
+        notMerge={true}
+      /> */}
     </Layout>
   );
 }

@@ -13,7 +13,11 @@ const CardHeader: React.FC<ICardHeader> = ({
 }) => {
   return (
     <div className="flex justify-between items-center mb-8">
-      <h1 className={`w-2/3 font-medium text-lg ${!intervals ? "py-1" : ""}`}>
+      <h1
+        className={`${!intervals ? "w-full" : "w-2/3"} font-medium text-lg ${
+          !intervals ? "py-1" : ""
+        }`}
+      >
         {title}
       </h1>
       {intervals && intervals.length > 0 && (
