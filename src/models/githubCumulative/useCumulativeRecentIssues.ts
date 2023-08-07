@@ -7,9 +7,9 @@ const useCumulativeRecentIssues = (order_by: string = "created_at") => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/cumulative-recent-issues?order_by=${order_by}`
+    const url = `/github-ecosystem/${protocol}/recent-issues?order_by=${order_by}`
     const { data, error, isValidating } = useSWR<ICumulativeRecentIssues[], any>(repo ? url : null , fetcher);
 
     return {

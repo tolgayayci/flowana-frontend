@@ -4,11 +4,13 @@ import { fetcher } from '../../utils/fetcher';
 
 import { IParticipationCount } from '@/types/githubTypes';
 
-const useParticipationCount = (protocol: string) => {
+const useParticipationCount = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const url = `/protocols/${protocol}/participation_count?owner=${owner}&repo=${repo}`
+    const protocol = "lens"
+
+    const url = `/github-project/${protocol}/participation_count?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<IParticipationCount>(repo ? url : null , fetcher);
 
     return {

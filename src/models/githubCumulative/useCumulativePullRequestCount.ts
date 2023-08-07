@@ -7,9 +7,9 @@ const useCumulativePullRequestCount = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/cumulative-pull-request-count`
+    const url = `/github-ecosystem/${protocol}/pull-request-count`
     const { data, error, isValidating } = useSWR<ICumulativePullRequestCount, any>(repo ? url : null , fetcher);
 
     return {

@@ -7,9 +7,9 @@ const useCumulativeRecentPullRequests = (order_by: string = "created_at") => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/cumulative-recent-pull-requests?order_by=${order_by}`
+    const url = `/github-ecosystem/${protocol}/recent-pull-requests?order_by=${order_by}`
     const { data, error, isValidating } = useSWR<ICumulativeRecentPullRequests[], any>(repo ? url : null , fetcher);
 
     return {

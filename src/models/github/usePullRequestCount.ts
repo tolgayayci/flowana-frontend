@@ -4,11 +4,13 @@ import { fetcher } from '../../utils/fetcher';
 
 import { IPullRequestCount } from '@/types/githubTypes';
 
-const usePullRequestCount = (protocol: string) => {
+const usePullRequestCount = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const url = `/protocols/${protocol}/pull-request-count?owner=${owner}&repo=${repo}`
+    const protocol = "lens"
+
+    const url = `/github-project/${protocol}/pull-request-count?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<IPullRequestCount>(repo ? url : null , fetcher);
 
     return {

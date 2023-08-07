@@ -7,9 +7,9 @@ const useCumulativeLanguageBreakdown = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/cumulative-language-breakdown`
+    const url = `/github-ecosystem/${protocol}/language-breakdown`
     const { data, error, isValidating } = useSWR<ICumulativeLanguageBreakdown[], any>(repo ? url : null , fetcher);
 
     return {

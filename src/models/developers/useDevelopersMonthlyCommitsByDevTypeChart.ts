@@ -3,9 +3,9 @@ import { fetcher } from '../../utils/fetcher';
 import { IDevelopersChartData } from '@/types/developersTypes';
 
 const useDevelopersMonthlyCommitsByDevTypeChart = () => {
-    const protocol = "polkadot"
+    const protocol = "compound"
 
-    const url = `/protocols/${protocol}/developers-monthly-commits-by-dev-type-chart`
+    const url = `/developers/${protocol}/monthly-commits-by-dev-type-chart`
     const { data, error, isValidating } = useSWR<IDevelopersChartData, any>(protocol ? url : null , fetcher);
 
     return {

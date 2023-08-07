@@ -3,9 +3,9 @@ import { fetcher } from '../../utils/fetcher';
 import { IDiscourseTopicActivity } from '@/types/discourseTypes';
 
 const useDiscourseTopicActivity = (interval: string = "yearly") => {
-    const protocol = "polkadot"
+    const protocol = "compound"
 
-    const url = `/protocols/${protocol}/discourse-topic-activity?interval=${interval}`
+    const url = `/discourse/${protocol}/topic-activity?interval=${interval}`
     const { data, error, isValidating } = useSWR<IDiscourseTopicActivity, any>(protocol ? url : null , fetcher);
 
     return {

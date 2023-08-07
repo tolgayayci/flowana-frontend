@@ -1,17 +1,12 @@
 import useSWR from 'swr';
-import { useRouter } from 'next/router';
 import { fetcher } from '../../utils/fetcher';
-
 import { IContributors } from '@/types/githubTypes';
 
 const useContributors = () => {
-    const router = useRouter();
-    const { owner, repo } = router.query;
-
     const protocol = "lens"
 
-    const url = `/github-project/${protocol}/contributors?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWR<IContributors[]>(repo ? url : null , fetcher);
+    const url = `/github-leaderboard/${protocol}/contributors`
+    const { data, error, isValidating } = useSWR<IContributors[], any>(protocol ? url : null , fetcher);
 
     return {
         contributors: data,

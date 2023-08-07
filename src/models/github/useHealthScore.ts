@@ -4,11 +4,13 @@ import { fetcher } from '../../utils/fetcher';
 
 import { IHealthScore } from '@/types/githubTypes';
 
-const useHealthScore = (protocol: string) => {
+const useHealthScore = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const url = `/protocols/${protocol}/health-score?owner=${owner}&repo=${repo}`
+    const protocol = "lens"
+
+    const url = `/github-project/${protocol}/health-score?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<IHealthScore>(repo ? url : null , fetcher);
 
     return {

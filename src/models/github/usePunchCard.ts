@@ -8,9 +8,9 @@ const usePunchCard = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/punch-card?owner=${owner}&repo=${repo}`
+    const url = `/github-project/${protocol}/punch-card?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<IPunchCard[]>(repo ? url : null , fetcher);
 
     return {

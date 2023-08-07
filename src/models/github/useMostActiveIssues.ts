@@ -7,9 +7,10 @@ import { IMostActiveIssues } from '@/types/githubTypes';
 const useMostActiveIssues = (interval: string = "month") => {
     const router = useRouter();
     const { owner, repo } = router.query;
-    const protocol = "polkadot"
 
-    const url = `/protocols/${protocol}/most-active-issues?owner=${owner}&repo=${repo}&interval=${interval}`
+    const protocol = "lens"
+
+    const url = `/github-project/${protocol}/most-active-issues?owner=${owner}&repo=${repo}&interval=${interval}`
     const { data, error, isValidating } = useSWR<IMostActiveIssues[]>(repo ? url : null , fetcher);
 
     if(!data) console.log(data);

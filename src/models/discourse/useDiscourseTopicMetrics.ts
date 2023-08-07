@@ -3,9 +3,9 @@ import { fetcher } from '../../utils/fetcher';
 import { IDiscourseTopicMetrics } from '@/types/discourseTypes';
 
 const useDiscourseTopicMetrics = () => {
-    const protocol = "polkadot"
+    const protocol = "compound"
 
-    const url = `/protocols/${protocol}/discourse-topic-metrics`
+    const url = `/discourse/${protocol}/topic-metrics`
     const { data, error, isValidating } = useSWR<IDiscourseTopicMetrics, any>(protocol ? url : null , fetcher);
 
     return {

@@ -3,9 +3,9 @@ import { fetcher } from '../../utils/fetcher';
 import { IDevelopersCountModel } from '@/types/developersTypes';
 
 const useDevelopersFullTime = () => {
-    const protocol = "polkadot"
+    const protocol = "compound"
 
-    const url = `/protocols/${protocol}/developers-full-time`
+    const url = `/developers/${protocol}/full-time`
     const { data, error, isValidating } = useSWR<IDevelopersCountModel, any>(protocol ? url : null , fetcher);
 
     return {

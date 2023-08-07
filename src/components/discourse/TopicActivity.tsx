@@ -28,7 +28,7 @@ export default function TopicActivity() {
     return (
       <Layout>
         <CardHeader
-          title="Discourse Topic Activity"
+          title="Topic Activity"
           selectedInterval={selectedInterval}
           setSelectedInterval={setSelectedInterval}
           intervals={intervals}
@@ -79,7 +79,7 @@ export default function TopicActivity() {
   return (
     <Layout>
       <CardHeader
-        title="Discourse Topic Activity"
+        title="Topic Activity"
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}

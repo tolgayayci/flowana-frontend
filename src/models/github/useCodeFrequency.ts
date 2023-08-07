@@ -7,9 +7,9 @@ const useCodeFrequency = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/code-frequency?owner=${owner}&repo=${repo}`
+    const url = `/github-project/${protocol}/code-frequency?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<ICodeFrequency, any>(repo ? url : null , fetcher);
 
     return {

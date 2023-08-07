@@ -7,9 +7,9 @@ const useCumulativeCommitActivity = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/cumulative-commit-activity`
+    const url = `/github-ecosystem/${protocol}/commit-activity`
     const { data, error, isValidating } = useSWR<ICumulativeCommitActivity[], any>(repo ? url : null , fetcher);
 
     return {

@@ -3,9 +3,9 @@ import { fetcher } from '../../utils/fetcher';
 import { IDiscourseCategories } from '@/types/discourseTypes';
 
 const useDiscourseCategories = () => {
-    const protocol = "polkadot"
+    const protocol = "compound"
 
-    const url = `/protocols/${protocol}/discourse-categories`
+    const url = `/discourse/${protocol}/categories`
     const { data, error, isValidating } = useSWR<IDiscourseCategories, any>(protocol ? url : null , fetcher);
 
     return {

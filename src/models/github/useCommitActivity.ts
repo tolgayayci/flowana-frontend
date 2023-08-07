@@ -7,9 +7,9 @@ const useCommitActivity = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/commit-activity?owner=${owner}&repo=${repo}`
+    const url = `/github-project/${protocol}/commit-activity?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<ICommitActivity[], any>(repo ? url : null , fetcher);
 
     return {

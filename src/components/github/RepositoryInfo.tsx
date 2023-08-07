@@ -4,7 +4,7 @@ import useRepositoryInfoModel from "@/models/github/useRepositoryInfo";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 
 export default function RepositoryInfo() {
-  const { repositoryInfo, isLoading } = useRepositoryInfoModel("polkadot");
+  const { repositoryInfo, isLoading } = useRepositoryInfoModel();
 
   if (isLoading) return <CardLoader />;
   if (!repositoryInfo) return;

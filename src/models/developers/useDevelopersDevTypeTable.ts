@@ -3,9 +3,9 @@ import { fetcher } from '../../utils/fetcher';
 import { IDevelopersDevTypeTable } from '@/types/developersTypes';
 
 const useDevelopersDevTypeTable = () => {
-    const protocol = "polkadot"
+    const protocol = "compound"
 
-    const url = `/protocols/${protocol}/developers-dev-type-table`
+    const url = `/developers/${protocol}/dev-type-table`
     const { data, error, isValidating } = useSWR<IDevelopersDevTypeTable, any>(protocol ? url : null , fetcher);
 
     return {

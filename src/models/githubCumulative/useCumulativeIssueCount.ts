@@ -7,9 +7,9 @@ const useCumulativeIssueCount = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/cumulative-issue-count`
+    const url = `/github-ecosystem/${protocol}/issue-count`
     const { data, error, isValidating } = useSWR<ICumulativeIssueCount, any>(repo ? url : null , fetcher);
 
     return {

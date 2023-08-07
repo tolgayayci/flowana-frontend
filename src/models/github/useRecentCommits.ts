@@ -8,9 +8,9 @@ const useRecentCommits = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/recent-commits?owner=${owner}&repo=${repo}`
+    const url = `/github-project/${protocol}/recent-commits?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<IRecentCommits[], any>(repo ? url : null , fetcher);
 
     return {

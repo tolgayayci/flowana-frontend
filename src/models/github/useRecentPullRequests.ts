@@ -8,9 +8,9 @@ const useRecentPullRequests = (order_by: string = "created_at") => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/recent-pull-requests?owner=${owner}&repo=${repo}&order_by=${order_by}`
+    const url = `/github-project/${protocol}/recent-pull-requests?owner=${owner}&repo=${repo}&order_by=${order_by}`
     const { data, error, isValidating } = useSWR<IRecentPullRequests[]>(repo ? url : null , fetcher);
 
     return {

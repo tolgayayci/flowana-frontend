@@ -3,9 +3,9 @@ import { fetcher } from '../../utils/fetcher';
 import { IDevelopersCountModel } from '@/types/developersTypes';
 
 const useDevelopersTotalCommits = () => {
-    const protocol = "polkadot"
+    const protocol = "compound"
 
-    const url = `/protocols/${protocol}/developers-total-commits`
+    const url = `/developers/${protocol}/total-commits`
     const { data, error, isValidating } = useSWR<IDevelopersCountModel, any>(protocol ? url : null , fetcher);
 
     return {

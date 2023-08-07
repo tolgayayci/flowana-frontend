@@ -7,9 +7,9 @@ const useCumulativeCodeFrequency = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/cumulative-code-frequency`
+    const url = `/github-ecosystem/${protocol}/code-frequency`
     const { data, error, isValidating } = useSWR<ICumulativeCodeFrequency, any>(repo ? url : null , fetcher);
 
     return {

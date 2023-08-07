@@ -8,9 +8,9 @@ const useLanguageBreakdown = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
     
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/language-breakdown?owner=${owner}&repo=${repo}`
+    const url = `/github-project/${protocol}/language-breakdown?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<ILanguageBreakdown[], any>(repo ? url : null , fetcher);
 
     return {

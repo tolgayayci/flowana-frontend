@@ -7,9 +7,9 @@ const useCumulativeRecentCommits = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/cumulative-recent-commits`
+    const url = `/github-ecosystem/${protocol}/recent-commits`
     const { data, error, isValidating } = useSWR<ICumulativeRecentCommits[], any>(repo ? url : null , fetcher);
 
     return {

@@ -3,9 +3,9 @@ import { fetcher } from '../../utils/fetcher';
 import { IDiscourseLatestPosts } from '@/types/discourseTypes';
 
 const useDiscourseLatestPosts = () => {
-    const protocol = "polkadot"
+    const protocol = "compound"
 
-    const url = `/protocols/${protocol}/discourse-latest-posts`
+    const url = `/discourse/${protocol}/latest-posts`
     const { data, error, isValidating } = useSWR<IDiscourseLatestPosts[], any>(protocol ? url : null , fetcher);
 
     return {

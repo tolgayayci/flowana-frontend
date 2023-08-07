@@ -8,9 +8,9 @@ const usePullRequestActivity = (interval: string = "month") => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "polkadot"
+    const protocol = "lens"
 
-    const url = `/protocols/${protocol}/pull-request-activity?owner=${owner}&repo=${repo}&interval=${interval}`
+    const url = `/github-project/${protocol}/pull-request-activity?owner=${owner}&repo=${repo}&interval=${interval}`
     const { data, error, isValidating } = useSWR<IPullRequestActivity>(repo ? url : null , fetcher);
 
     return {
