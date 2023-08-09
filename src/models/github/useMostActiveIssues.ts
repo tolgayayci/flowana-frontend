@@ -8,7 +8,7 @@ const useMostActiveIssues = (interval: string = "month") => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "lens"
+    const protocol = "compound"
 
     const url = `/github-project/${protocol}/most-active-issues?owner=${owner}&repo=${repo}&interval=${interval}`
     const { data, error, isValidating } = useSWR<IMostActiveIssues[]>(repo ? url : null , fetcher);

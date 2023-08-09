@@ -7,7 +7,7 @@ const useCumulativeCodeFrequency = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "lens"
+    const protocol = "compound"
 
     const url = `/github-ecosystem/${protocol}/code-frequency`
     const { data, error, isValidating } = useSWR<ICumulativeCodeFrequency, any>(repo ? url : null , fetcher);

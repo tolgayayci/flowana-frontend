@@ -1,5 +1,5 @@
 import { Listbox } from "@headlessui/react";
-import React, { Fragment } from "react";
+import React from "react";
 import { ICardHeader } from "@/types/general";
 
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
@@ -12,7 +12,7 @@ const CardHeader: React.FC<ICardHeader> = ({
   intervals,
 }) => {
   return (
-    <div className="flex justify-between items-center mb-8">
+    <div className="flex justify-between items-center mb-8 bg-blue-300 rounded-md px-4 py-1">
       <h1
         className={`${!intervals ? "w-full" : "w-2/3"} font-medium text-lg ${
           !intervals ? "py-1" : ""

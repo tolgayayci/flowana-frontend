@@ -9,7 +9,7 @@ const useDiscourseTopicMetrics = () => {
     const { data, error, isValidating } = useSWR<IDiscourseTopicMetrics, any>(protocol ? url : null , fetcher);
 
     return {
-        discourseTopicMetrics: data,
+        topicMetrics: data,
         isLoading: !error && !data,
         isError: error,
         isValidating,

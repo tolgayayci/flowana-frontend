@@ -4,21 +4,12 @@ import { useRouter } from "next/router";
 import { Disclosure, Listbox, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
-  BellIcon,
   XMarkIcon,
-  CheckIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
-import MagnifyingGlassIcon from "@heroicons/react/24/outline";
 
 import SearchBar from "../SearchBar/SearchBar";
 
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
 const initialNavigation = [
   { name: "Projects", href: "/projects", current: false },
   { name: "GitHub", href: "/github", current: false },
@@ -43,7 +34,6 @@ export default function Navbar() {
   const router = useRouter();
 
   const [selected, setSelected] = useState(protocol[0]);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [navigation, setNavigation] = useState(initialNavigation);
 
@@ -60,18 +50,18 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="min-h-full">
+      <div className="fixed top-0 left-0 right-0 z-10">
         <Disclosure as="nav" className="bg-indigo-600">
           {({ open }) => (
             <>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-1">
+              <div className="mx-auto px-4 sm:px-6 lg:px-8 py-1 max-w-[90%]">
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <Image
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300"
-                        width="40"
-                        height="40"
+                        src="https://lenspulse.vercel.app/static/media/long_logo.93bc8d936fae22fee7e34bca834ca5a5.svg"
+                        width="170"
+                        height="80"
                         alt="Logo"
                       />
                     </div>
@@ -171,7 +161,7 @@ export default function Navbar() {
               </div>
 
               <Disclosure.Panel className="md:hidden">
-                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3 max-w-[90%]">
                   {navigation.map((item) => (
                     <Disclosure.Button
                       key={item.name}
@@ -206,9 +196,9 @@ export default function Navbar() {
           )}
         </Disclosure>
 
-        <header className="bg-white shadow-sm hidden md:block">
-          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <div className="flex items-baseline space-x-4 w-2/3">
+        <header className="bg-white shadow-sm hidden md:block mb-16">
+          <div className="mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center max-w-[90%]">
+            <div className="flex items-baseline space-x-4 w-3/4">
               {navigation.map((item) => (
                 <a
                   key={item.name}
@@ -225,7 +215,7 @@ export default function Navbar() {
                 </a>
               ))}
             </div>
-            <div className="w-1/3">
+            <div className="w-1/4">
               <SearchBar open={isSearchOpen} setOpen={setIsSearchOpen} />
               <button
                 type="button"

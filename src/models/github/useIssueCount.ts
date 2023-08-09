@@ -8,7 +8,7 @@ const useIssueCount = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "lens"
+    const protocol = "compound"
 
     const url = `/github-project/${protocol}/issue-count?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<IIssueCount>(repo ? url : null , fetcher);

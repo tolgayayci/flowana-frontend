@@ -8,7 +8,7 @@ const useContributors = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "lens"
+    const protocol = "compound"
 
     const url = `/github-project/${protocol}/contributors?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<IContributors[]>(repo ? url : null , fetcher);

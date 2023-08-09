@@ -33,3 +33,11 @@ export interface IHitProps {
     path: string;
     lastmodified: number;
 }
+
+export interface INavigationItem {
+    name: string;
+    href: string;
+    icon: React.ElementType;
+    count?: string;
+    current: boolean;
+  }

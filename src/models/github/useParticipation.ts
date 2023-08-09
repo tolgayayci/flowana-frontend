@@ -8,7 +8,7 @@ const useParticipation = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "lens"
+    const protocol = "compound"
 
     const url = `/github-project/${protocol}/participation?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<IParticipation>(repo ? url : null , fetcher);

@@ -10,7 +10,7 @@ export default function UserLayout({ children }: Props) {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main className="mt-48">{children}</main>
       <Footer />
     </>
   );
