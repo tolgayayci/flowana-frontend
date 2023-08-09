@@ -16,7 +16,8 @@ const initialNavigation = [
   { name: "Forum", href: "/discourse", current: false },
   { name: "Governance", href: "/governance", current: false },
   { name: "Developers", href: "/developers", current: false },
-  { name: "Lenster", href: "/projects/lensterxyz/lenster", current: false },
+  { name: "Comet", href: "/projects/compound-finance/comet", current: false },
+  { name: "Leaderboard", href: "#", current: false },
 ];
 
 const protocol = [
@@ -51,7 +52,7 @@ export default function Navbar() {
   return (
     <>
       <div className="fixed top-0 left-0 right-0 z-10">
-        <Disclosure as="nav" className="bg-indigo-600">
+        <Disclosure as="nav" className="bg-sfblue">
           {({ open }) => (
             <>
               <div className="mx-auto px-4 sm:px-6 lg:px-8 py-1 max-w-[90%]">
@@ -196,7 +197,7 @@ export default function Navbar() {
           )}
         </Disclosure>
 
-        <header className="bg-white shadow-sm hidden md:block mb-16">
+        <header className="bg-sfblue-400 shadow-sm hidden md:block mb-16">
           <div className="mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center max-w-[90%]">
             <div className="flex items-baseline space-x-4 w-3/4">
               {navigation.map((item) => (
@@ -205,8 +206,8 @@ export default function Navbar() {
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? "bg-indigo-700 text-white"
-                      : "text-indigo-700 hover:bg-indigo-700 hover:text-white",
+                      ? "bg-sfblue text-white"
+                      : "text-sfblue hover:bg-sfblue hover:text-white",
                     "rounded-md px-3 py-2 text-sm font-medium"
                   )}
                   aria-current={item.current ? "page" : undefined}
@@ -219,7 +220,7 @@ export default function Navbar() {
               <SearchBar open={isSearchOpen} setOpen={setIsSearchOpen} />
               <button
                 type="button"
-                className="text-indigo-900 text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-indigo-900 font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
+                className="text-sfblack text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-sfblue font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
                 onClick={() => setIsSearchOpen(true)}
               >
                 Search on Flowana

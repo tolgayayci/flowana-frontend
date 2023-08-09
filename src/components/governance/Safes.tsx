@@ -11,6 +11,7 @@ export default function Safes() {
   return (
     <Layout>
       <CardHeader title="Safes" />
+      {JSON.stringify(safes)}
     </Layout>
   );
 }

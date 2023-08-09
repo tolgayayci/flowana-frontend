@@ -1,5 +1,9 @@
 import Head from "next/head";
 
+// Sidebar
+import Sidebar from "@/modules/Sidebar/Sidebar";
+
+// Developer Components
 import DevTypeTable from "@/components/developers/DevTypeTable";
 import FullTime from "@/components/developers/FullTime";
 import MonthlyActiveDevs from "@/components/developers/MonthlyActiveDevs";
@@ -10,7 +14,52 @@ import MonthlyActiveDevChart from "@/components/developers/MonthlyActiveDevChart
 import MonthlyCommitsChart from "@/components/developers/MonthlyCommitsChart";
 import TotalMonthlyActiveDevChart from "@/components/developers/TotalMonthlyActiveDevChart";
 
+// Heroicons
+import { ChartPieIcon, HomeIcon } from "@heroicons/react/24/outline";
+
 export default function Developers() {
+  const navigation = [
+    {
+      name: "Stats",
+      href: "#stats",
+      icon: HomeIcon,
+      count: "5",
+      current: true,
+    },
+    {
+      name: "Developer Types",
+      href: "#developer-types",
+      icon: ChartPieIcon,
+      current: false,
+    },
+    {
+      name: "Total Monthly Active Devs",
+      href: "#total-monthly-active-devs",
+      icon: ChartPieIcon,
+      count: "12",
+      current: false,
+    },
+    {
+      name: "Monthly Commits By Dev Type",
+      href: "#monthly-commits-by-dev-type",
+      icon: ChartPieIcon,
+      count: "20+",
+      current: false,
+    },
+    {
+      name: "Monthly Active Devs",
+      href: "#monthly-active-devs",
+      icon: ChartPieIcon,
+      current: false,
+    },
+    {
+      name: "Monthly Commits Chart",
+      href: "#monthly-commits-chart",
+      icon: ChartPieIcon,
+      current: false,
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -19,36 +68,43 @@ export default function Developers() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <section className="container mx-auto my-12 max-w-7xl px-4 sm:px-6 lg:px-8 py-1">
-        <div className="flex flex-wrap space-y-8">
-          <div className="flex space-x-6 w-full">
-            <div className="w-full sm:w-1/2 md:w-1/4">
-              <FullTime />
+      <section className="max-w-[90%] mx-auto my-12 px-4 sm:px-6 lg:px-8 py-1">
+        <div className="grid grid-cols-5 gap-8">
+          <div className="col-span-1">
+            <Sidebar navigation={navigation} element />
+          </div>
+          <div className="col-span-4">
+            <div className="flex flex-wrap space-y-8">
+              <div id="stats" className="flex space-x-6 w-full">
+                <div className="w-full sm:w-1/2 md:w-1/4">
+                  <FullTime />
+                </div>
+                <div className="w-full sm:w-1/2 md:w-1/4">
+                  <MonthlyActiveDevs />
+                </div>
+                <div className="w-full sm:w-1/2 md:w-1/4">
+                  <TotalCommits />
+                </div>
+                <div className="w-full sm:w-1/2 md:w-1/4">
+                  <TotalRepos />
+                </div>
+              </div>
+              <div id="developer-types" className="w-full">
+                <DevTypeTable />
+              </div>
+              <div id="total-monthly-active-devs" className="w-full">
+                <TotalMonthlyActiveDevChart />
+              </div>
+              <div id="monthly-commits-by-dev-type" className="w-full">
+                <MonthlyCommitsByDevTypeChart />
+              </div>
+              <div id="monthly-active-devs" className="w-full">
+                <MonthlyActiveDevChart />
+              </div>
+              <div id="monthly-commits-chart" className="w-full">
+                <MonthlyCommitsChart />
+              </div>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/4">
-              <MonthlyActiveDevs />
-            </div>
-            <div className="w-full sm:w-1/2 md:w-1/4">
-              <TotalCommits />
-            </div>
-            <div className="w-full sm:w-1/2 md:w-1/4">
-              <TotalRepos />
-            </div>
-          </div>
-          <div className="w-full">
-            <DevTypeTable />
-          </div>
-          <div className="w-full">
-            <TotalMonthlyActiveDevChart />
-          </div>
-          <div className="w-full">
-            <MonthlyCommitsByDevTypeChart />
-          </div>
-          <div className="w-full">
-            <MonthlyActiveDevChart />
-          </div>
-          <div className="w-full">
-            <MonthlyCommitsChart />
           </div>
         </div>
       </section>

@@ -98,7 +98,7 @@ export default function SearchBar(props: SearchBarProps) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-indigo-900 bg-opacity-80 transition-opacity" />
+            <div className="fixed inset-0 bg-sfblue-500 bg-opacity-80 transition-opacity" />
           </Transition.Child>
 
           <div className="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20">
@@ -111,7 +111,7 @@ export default function SearchBar(props: SearchBarProps) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="mx-auto max-w-3xl transform divide-y divide-gray-200 overflow-hidden rounded-xl bg-white shadow-2xl transition-all mt-28 md:mt-60 border-indigo-600 border-[3px]">
+              <Dialog.Panel className="mx-auto max-w-3xl transform divide-y divide-gray-200 overflow-hidden rounded-xl bg-white shadow-2xl transition-all mt-28 md:mt-60 border-sfblue-800 border-[3px]">
                 <Combobox
                   value={selectedProject}
                   onChange={() => console.log(selectedProject)}
