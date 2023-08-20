@@ -1,16 +1,16 @@
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
-
 import { IPullRequestActivity } from '@/types/githubTypes';
 
 const usePullRequestActivity = (interval: string = "month") => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "compound"
+    const { protocol } = useProtocol();
 
-    const url = `/github-project/${protocol}/pull-request-activity?owner=${owner}&repo=${repo}&interval=${interval}`
+    const url = `/github-project/${protocol["protocol"]}/pull-request-activity?owner=${owner}&repo=${repo}&interval=${interval}`
     const { data, error, isValidating } = useSWR<IPullRequestActivity>(repo ? url : null , fetcher);
 
     return {

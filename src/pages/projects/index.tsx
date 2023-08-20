@@ -10,8 +10,12 @@ import {
 
 import ProjectCard from "@/components/projects/ProjectCard";
 import { searchClient } from "@/utils/searchClient";
+import { useProtocol } from "@/models/protocols/useProtocol";
+import { getSearchIndexForProtocol } from "@/utils/functions";
 
 export default function Projects() {
+  const { protocol } = useProtocol();
+
   return (
     <>
       <Head>
@@ -20,10 +24,11 @@ export default function Projects() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <section className="container mx-auto my-12 max-w-7xl px-4 sm:px-6 lg:px-8 py-1">
+      <section className="max-w-[90%] mx-auto my-12 px-4 sm:px-6 lg:px-8 py-1">
         <InstantSearch
-          searchClient={searchClient}
-          indexName={process.env.NEXT_PUBLIC_INDEX_NAME as string}
+          key={protocol["protocol"]}
+          searchClient={searchClient(protocol["protocol"])}
+          indexName={getSearchIndexForProtocol(protocol["protocol"])}
           routing={true}
         >
           <div className="grid grid-cols-4 gap-16 mb-24">

@@ -1,6 +1,10 @@
+// React Imports
 import { Fragment, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
+
+// Visual Components
 import { Disclosure, Listbox, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -8,24 +12,19 @@ import {
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
 
+// Hooks
+import { useProtocol } from "@/models/protocols/useProtocol";
+import { protocols } from "@/utils/protocols";
+import { pages } from "@/utils/pages";
+
+// Custom Components
 import SearchBar from "../SearchBar/SearchBar";
-
-const initialNavigation = [
-  { name: "Projects", href: "/projects", current: false },
-  { name: "GitHub", href: "/github", current: false },
-  { name: "Forum", href: "/discourse", current: false },
-  { name: "Governance", href: "/governance", current: false },
-  { name: "Developers", href: "/developers", current: false },
-  { name: "Comet", href: "/projects/compound-finance/comet", current: false },
-  { name: "Leaderboard", href: "#", current: false },
-];
-
-const protocol = [
-  { name: "Flow", logo: "/flow-logo.png" },
-  { name: "Polkadot", logo: "/polkadot-logo.jpg" },
-  { name: "Compound", logo: "/compound-logo.png" },
-  { name: "Lens Protocol", logo: "/lens-logo.jpg" },
-];
+import {
+  IProtocol,
+  IProtocols,
+  NavigationItem,
+  PageFlags,
+} from "@/types/general";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -34,12 +33,62 @@ function classNames(...classes: any[]) {
 export default function Navbar() {
   const router = useRouter();
 
-  const [selected, setSelected] = useState(protocol[0]);
+  const { protocol, setProtocol } = useProtocol();
+
+  const selectedProtocol = protocols.find(
+    (p) => p.value === protocol["protocol"]
+  );
+
+  const initialNavigation: NavigationItem[] = [
+    {
+      name: "Projects",
+      href: `/${protocol["protocol"]}/projects`,
+      current: false,
+      key: "projects",
+    },
+    {
+      name: "GitHub",
+      href: `/${protocol["protocol"]}/github`,
+      current: false,
+      key: "github",
+    },
+    {
+      name: "Forum",
+      href: `/${protocol["protocol"]}/discourse`,
+      current: false,
+      key: "forum",
+    },
+    {
+      name: "Governance",
+      href: `/${protocol["protocol"]}/governance`,
+      current: false,
+      key: "governance",
+    },
+    {
+      name: "Developers",
+      href: `/${protocol["protocol"]}/developers`,
+      current: false,
+      key: "developers",
+    },
+    {
+      name: "Leaderboard",
+      href: `/${protocol["protocol"]}/leaderboard`,
+      current: false,
+      key: "leaderboard",
+    },
+  ];
+
+  const filteredNavItems = initialNavigation.filter((item) => {
+    const protocolName = selectedProtocol.value as IProtocol["protocol"];
+    return pages[protocolName]?.[item.key];
+  });
+
+  const [selected, setSelected] = useState<IProtocols>(selectedProtocol);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [navigation, setNavigation] = useState(initialNavigation);
+  const [navigation, setNavigation] = useState(filteredNavItems);
 
   useEffect(() => {
-    const currentHref = router.asPath;
+    const currentHref = router.asPath.split("/")[2];
 
     const updatedNavigation = navigation.map((item) => ({
       ...item,
@@ -49,9 +98,30 @@ export default function Navbar() {
     setNavigation(updatedNavigation);
   }, [router.asPath]);
 
+  useEffect(() => {
+    setNavigation(filteredNavItems);
+  }, [protocol]);
+
+  const handleProtocolChange = (protocol: IProtocols) => {
+    // Extract the current page from the router's path
+    const currentPage = router.asPath.split("/")[2] as keyof PageFlags;
+
+    // Check if the current page exists for the newly selected protocol
+    if (!pages[protocol.value][currentPage]) {
+      // If it doesn't exist, navigate to the default page for the selected protocol
+      router.push(`/${protocol.value}/`);
+    } else {
+      // If it does, reload the page for the new protocol
+      router.push(`/${protocol.value}/${currentPage}`);
+    }
+
+    setProtocol({ protocol: protocol.value });
+    setSelected(protocol);
+  };
+
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-10">
+      <div className="sticky top-0 left-0 right-0 z-10">
         <Disclosure as="nav" className="bg-sfblue">
           {({ open }) => (
             <>
@@ -59,18 +129,23 @@ export default function Navbar() {
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <Image
-                        src="https://lenspulse.vercel.app/static/media/long_logo.93bc8d936fae22fee7e34bca834ca5a5.svg"
-                        width="170"
-                        height="80"
-                        alt="Logo"
-                      />
+                      <Link href="/">
+                        <Image
+                          src="/logo.svg"
+                          width="60"
+                          height="60"
+                          alt="Logo"
+                        />
+                      </Link>
                     </div>
                   </div>
                   <div className="hidden md:block">
                     <div className="flex items-center md:ml-6">
                       {/* Protocol Select */}
-                      <Listbox value={selected} onChange={setSelected}>
+                      <Listbox
+                        value={selected}
+                        onChange={(e) => handleProtocolChange(e)}
+                      >
                         <div className="relative mt-1">
                           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-3 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm flex items-center">
                             <span className="mr-2">
@@ -99,7 +174,7 @@ export default function Navbar() {
                             leaveTo="opacity-0"
                           >
                             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                              {protocol.map((protocol, protocolIdx) => (
+                              {protocols.map((protocol, protocolIdx) => (
                                 <Listbox.Option
                                   key={protocolIdx}
                                   className={({ active }) =>
@@ -182,13 +257,17 @@ export default function Navbar() {
                 </div>
                 <div className="border-t border-indigo-700 pb-3 pt-4">
                   <div className="w-full px-4">
-                    <SearchBar open={isSearchOpen} setOpen={setIsSearchOpen} />
+                    <SearchBar
+                      open={isSearchOpen}
+                      setOpen={setIsSearchOpen}
+                      protocol={protocol["protocol"]}
+                    />
                     <button
                       type="button"
                       className="text-indigo-900 text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-indigo-900 font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
                       onClick={() => setIsSearchOpen(true)}
                     >
-                      Search on Flowana
+                      Search on {protocol["protocol"]}
                     </button>
                   </div>
                 </div>
@@ -201,7 +280,7 @@ export default function Navbar() {
           <div className="mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center max-w-[90%]">
             <div className="flex items-baseline space-x-4 w-3/4">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className={classNames(
@@ -213,17 +292,21 @@ export default function Navbar() {
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
             <div className="w-1/4">
-              <SearchBar open={isSearchOpen} setOpen={setIsSearchOpen} />
+              <SearchBar
+                open={isSearchOpen}
+                setOpen={setIsSearchOpen}
+                protocol={protocol["protocol"]}
+              />
               <button
                 type="button"
                 className="text-sfblack text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-sfblue font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
                 onClick={() => setIsSearchOpen(true)}
               >
-                Search on Flowana
+                Search on {selected?.name}
               </button>
             </div>
           </div>

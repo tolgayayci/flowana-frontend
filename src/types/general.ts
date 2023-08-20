@@ -40,4 +40,32 @@ export interface INavigationItem {
     icon: React.ElementType;
     count?: string;
     current: boolean;
-  }
+}
+
+export interface IProtocol {
+    protocol: 'compound' | 'polkadot' | 'lens' | 'flow';
+}
+
+export interface IProtocols{
+    name: string;
+    value: IProtocol['protocol'];
+    logo: string;
+}
+
+type PageKey = "projects" | "github" | "forum" | "governance" | "developers" | "leaderboard";
+
+export interface NavigationItem {
+    name: string;
+    href: string;
+    current: boolean;
+    key: PageKey;
+}
+
+export type PageFlags = {
+    projects: boolean;
+    github: boolean;
+    forum: boolean;
+    governance: boolean;
+    developers: boolean;
+    leaderboard: boolean;
+};

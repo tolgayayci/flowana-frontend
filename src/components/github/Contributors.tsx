@@ -2,7 +2,7 @@ import useContributors from "@/models/github/useContributors";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 
 export default function Contributors() {
-  const { contributors, isLoading } = useContributors("polkadot");
+  const { contributors, isLoading } = useContributors();
 
   if (isLoading) return <CardLoader />;
   if (!contributors) return;

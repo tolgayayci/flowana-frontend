@@ -1,16 +1,16 @@
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
-
 import { ILanguageBreakdown } from '@/types/githubTypes';
 
 const useLanguageBreakdown = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
     
-    const protocol = "compound"
+    const { protocol } = useProtocol();
 
-    const url = `/github-project/${protocol}/language-breakdown?owner=${owner}&repo=${repo}`
+    const url = `/github-project/${protocol["protocol"]}/language-breakdown?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<ILanguageBreakdown[], any>(repo ? url : null , fetcher);
 
     return {

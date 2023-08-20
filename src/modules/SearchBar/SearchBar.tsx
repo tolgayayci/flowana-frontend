@@ -3,31 +3,28 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Combobox, Dialog, Transition } from "@headlessui/react";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { UsersIcon } from "@heroicons/react/24/outline";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 
 //** Algolia Imports */
-import algoliasearch from "algoliasearch";
 import {
   InstantSearch,
   Hits,
   Configure,
-  useSearchBox,
-  UseSearchBoxProps,
-  Index,
-  HitsProps,
   SearchBox,
 } from "react-instantsearch-hooks-web";
 
 import { searchClient } from "@/utils/searchClient";
+import { getSearchIndexForProtocol } from "@/utils/functions";
+import { useProtocol } from "@/models/protocols/useProtocol";
 
 //** Types */
 import { IHitProps } from "@/types/general";
+import { IProtocol } from "@/types/general";
 
 interface SearchBarProps {
   open: boolean;
   setOpen: (open: boolean) => void;
+  protocol: IProtocol["protocol"];
 }
 
 function classNames(...classes: any[]) {
@@ -40,8 +37,9 @@ export default function SearchBar(props: SearchBarProps) {
     null
   );
 
+  const { protocol } = useProtocol();
+
   function ProjectHit(hits: any) {
-    if (hits === undefined) return null;
     return (
       <>
         <div className="-mx-2 text-sm text-gray-700">
@@ -78,8 +76,8 @@ export default function SearchBar(props: SearchBarProps) {
 
   return (
     <InstantSearch
-      searchClient={searchClient}
-      indexName={process.env.NEXT_PUBLIC_INDEX_NAME as string}
+      searchClient={searchClient(props.protocol)}
+      indexName={getSearchIndexForProtocol(props.protocol)}
     >
       <Configure analytics={true} hitsPerPage={5} />
       <Transition.Root
@@ -123,10 +121,10 @@ export default function SearchBar(props: SearchBarProps) {
                       autoFocus={true}
                       onSubmit={() => setSelectedProject(null)}
                       classNames={{
-                        root: "w-full bg-transparent text-gray-800 placeholder-gray-400 ssm:text-sm",
+                        root: "w-full bg-transparent text-gray-800 placeholder-gray-400 ssm:text-sm pl-6",
                         form: "w-full focus:rounded-none",
                         input:
-                          "border-0 outline-none focus:border-none focus:ring-0",
+                          "border-0 outline-none focus:border-none focus:ring-0 w-full py-2",
                         submitIcon: "hidden",
                       }}
                       submitIconComponent={() => null}
@@ -165,7 +163,7 @@ export default function SearchBar(props: SearchBarProps) {
                             <h2 className="mt-3 font-semibold text-gray-900">
                               {selectedProject.repo}
                             </h2>
-                            {selectedProject["categories.lvl0"][0] ? (
+                            {selectedProject["categories.lvl0"] ? (
                               <span className="inline-flex ml-3 mt-3 h-6 items-center justify-center text-xs font-extrabold px-2 text-indigo-900 rounded border-2 border-indigo-900 bg-green-200 uppercase shadow-sm">
                                 {selectedProject["categories.lvl0"][0]}
                               </span>
@@ -187,7 +185,7 @@ export default function SearchBar(props: SearchBarProps) {
                             )}
 
                             <Link
-                              href={`/projects/${selectedProject.repo}/${selectedProject.owner}`}
+                              href={`/${protocol["protocol"]}/projects/${selectedProject.owner}/${selectedProject.repo}`}
                             >
                               <button
                                 type="button"

@@ -1,15 +1,16 @@
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { ICumulativeRecentCommits } from '@/types/githubCumulativeTypes';
 
 const useCumulativeRecentCommits = () => {
     const router = useRouter();
-    const { owner, repo } = router.query;
+    const { repo } = router.query;
 
-    const protocol = "lens"
+    const { protocol } = useProtocol();
 
-    const url = `/github-ecosystem/${protocol}/recent-commits`
+    const url = `/github-ecosystem/${protocol["protocol"]}/recent-commits`
     const { data, error, isValidating } = useSWR<ICumulativeRecentCommits[], any>(repo ? url : null , fetcher);
 
     return {

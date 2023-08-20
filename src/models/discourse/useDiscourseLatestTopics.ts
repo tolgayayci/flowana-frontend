@@ -1,11 +1,12 @@
 import useSWR from 'swr';
+import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { IDiscourseLatestTopics } from '@/types/discourseTypes';
 
 const useDiscourseLatestTopics = (order: string = "default") => {
-    const protocol = "compound"
+    const { protocol } = useProtocol()
 
-    const url = `/discourse/${protocol}/latest-topics?order=${order}`
+    const url = `/discourse/${protocol["protocol"]}/latest-topics?order=${order}`
     const { data, error, isValidating } = useSWR<IDiscourseLatestTopics[], any>(protocol ? url : null , fetcher);
 
     return {

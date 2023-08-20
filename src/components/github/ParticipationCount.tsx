@@ -7,7 +7,7 @@ import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 
 export default function ParticipationCount() {
-  const { participationCount, isLoading } = useParticipationCount("polkadot");
+  const { participationCount, isLoading } = useParticipationCount();
 
   if (isLoading) return <CardLoader />;
   if (!participationCount) return;

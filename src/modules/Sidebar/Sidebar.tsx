@@ -1,7 +1,7 @@
 import React from "react";
 import { INavigationItem } from "@/types/general";
 
-function classNames(...classes) {
+function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -16,7 +16,7 @@ export default function Sidebar({
     <>
       <div className="sticky top-[180px]">
         <div className="w-full mb-6">{element}</div>
-        <div className=" h-auto bg-white-200 shadow-xl p-12 border-2 border-indigo-400 rounded-lg">
+        <div className=" h-auto shadow-xl p-12 border-2 border-sfblue-800 rounded-2xl">
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
@@ -27,16 +27,16 @@ export default function Sidebar({
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? "bg-indigo-700 text-white"
-                            : "text-indigo-800 hover:text-white hover:bg-indigo-700",
-                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                            ? "bg-sfblue-800 text-white"
+                            : "text-sfblack-300 hover:text-white hover:bg-sfblue-800",
+                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-[410]"
                         )}
                       >
                         <item.icon
                           className={classNames(
                             item.current
                               ? "text-white"
-                              : "text-indigo-200 group-hover:text-white",
+                              : "text-sfred-700 group-hover:text-white",
                             "h-6 w-6 shrink-0"
                           )}
                           aria-hidden="true"

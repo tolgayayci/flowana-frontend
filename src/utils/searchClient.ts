@@ -1,6 +1,10 @@
 import algoliasearch from "algoliasearch";
+import { IProtocol } from "@/types/general";
+import { getAppIdForProtocol, getSearchKeyForProtocol } from "./functions";
 
-export const searchClient = algoliasearch(
-    process.env.NEXT_PUBLIC_POLKADOT_ALGOLIA_APP_ID as string,
-    process.env.NEXT_PUBLIC_POLKADOT_ALGOLIA_SEARCH_KEY as string
-);
+export const searchClient = (protocolName: IProtocol["protocol"]) => {
+    return algoliasearch(
+        getAppIdForProtocol(protocolName) as string,
+        getSearchKeyForProtocol(protocolName) as string
+    );
+}

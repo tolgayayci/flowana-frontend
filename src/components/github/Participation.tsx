@@ -9,7 +9,7 @@ import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 
 export default function Participation() {
-  const { participation, isLoading } = useParticipation("polkadot");
+  const { participation, isLoading } = useParticipation();
 
   if (isLoading) return <CardLoader />;
   if (!participation) return;

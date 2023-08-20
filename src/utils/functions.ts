@@ -19,4 +19,31 @@ export const formatDistanceToNow = (dateString: string) => {
     } else {
       return `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
     }
-  };
+};
+
+export function getAppIdForProtocol(protocol: string) {
+    switch (protocol) {
+       case 'polkadot': return process.env.NEXT_PUBLIC_POLKADOT_ALGOLIA_APP_ID as string;
+       case 'flow': return process.env.NEXT_PUBLIC_FLOW_ALGOLIA_APP_ID as string;
+       case 'lens': return process.env.NEXT_PUBLIC_LENS_ALGOLIA_APP_ID as string;
+       case 'compound': return process.env.NEXT_PUBLIC_COMPOUND_ALGOLIA_APP_ID as string;
+    }
+}
+ 
+export function getSearchKeyForProtocol(protocol: string) {
+    switch (protocol) {
+       case 'polkadot': return process.env.NEXT_PUBLIC_POLKADOT_ALGOLIA_SEARCH_KEY as string;
+       case 'flow': return process.env.NEXT_PUBLIC_FLOW_ALGOLIA_SEARCH_KEY as string;
+       case 'lens': return process.env.NEXT_PUBLIC_LENS_ALGOLIA_SEARCH_KEY as string;
+       case 'compound': return process.env.NEXT_PUBLIC_COMPOUND_ALGOLIA_SEARCH_KEY as string;
+    }
+}
+
+export function getSearchIndexForProtocol(protocol: string) {
+    switch (protocol) {
+       case 'polkadot': return process.env.NEXT_PUBLIC_POLKADOT_INDEX_NAME as string;
+       case 'flow': return process.env.NEXT_PUBLIC_FLOW_INDEX_NAME as string;
+       case 'lens': return process.env.NEXT_PUBLIC_LENS_INDEX_NAME as string;
+       case 'compound': return process.env.NEXT_PUBLIC_COMPOUND_INDEX_NAME as string;
+    }
+}

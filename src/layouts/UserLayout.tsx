@@ -10,7 +10,7 @@ export default function UserLayout({ children }: Props) {
   return (
     <>
       <Navbar />
-      <main className="mt-48">{children}</main>
+      <main className="scroll-smooth">{children}</main>
       <Footer />
     </>
   );

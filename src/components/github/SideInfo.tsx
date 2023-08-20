@@ -7,23 +7,23 @@ export default function SideInfo() {
   const { repositoryInfo, isLoading } = useRepositoryInfoModel();
 
   return (
-    <div className="border-2 border-black rounded-lg p-5 h-full shadow-xl bg-white-100">
+    <div className="border-2 border-sfblue-800 rounded-2xl p-5 h-full shadow-xl bg-white-100">
       <div className="flex items-center">
         <Image
-          src="https://avatars.githubusercontent.com/u/32911405?v=4"
+          src={repositoryInfo?.owner_avatar_url as string}
           alt="Owner Avatar"
-          className="rounded-lg mr-6 border-2 border-indigo-400"
+          className="rounded-lg mr-6"
           width={64}
           height={64}
         />
         <div>
-          <p className="text-xl font-semibold">{repositoryInfo?.owner_login}</p>
-          <p className="text-gray-500">{repositoryInfo?.repo}</p>
+          <p className="text-xl font-semibold">{repositoryInfo?.repo}</p>
+          <p className="text-gray-500">{repositoryInfo?.owner_login}</p>
           <a
             href={repositoryInfo?.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center mt-1 text-indigo-700 hover:underline"
+            className="flex items-center mt-1 text-sfred-800 hover:underline"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

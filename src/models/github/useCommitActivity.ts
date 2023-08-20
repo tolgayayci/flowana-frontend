@@ -1,5 +1,6 @@
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { ICommitActivity } from '@/types/githubTypes';
 
@@ -7,9 +8,9 @@ const useCommitActivity = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "compound"
+    const { protocol } = useProtocol();
 
-    const url = `/github-project/${protocol}/commit-activity?owner=${owner}&repo=${repo}`
+    const url = `/github-project/${protocol["protocol"]}/commit-activity?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<ICommitActivity[], any>(repo ? url : null , fetcher);
 
     return {

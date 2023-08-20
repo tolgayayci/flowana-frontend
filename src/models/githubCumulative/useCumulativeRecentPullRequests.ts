@@ -1,15 +1,16 @@
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { ICumulativeRecentPullRequests } from '@/types/githubCumulativeTypes';
 
 const useCumulativeRecentPullRequests = (order_by: string = "created_at") => {
     const router = useRouter();
-    const { owner, repo } = router.query;
+    const { repo } = router.query;
 
-    const protocol = "lens"
+    const { protocol } = useProtocol();
 
-    const url = `/github-ecosystem/${protocol}/recent-pull-requests?order_by=${order_by}`
+    const url = `/github-ecosystem/${protocol["protocol"]}/recent-pull-requests?order_by=${order_by}`
     const { data, error, isValidating } = useSWR<ICumulativeRecentPullRequests[], any>(repo ? url : null , fetcher);
 
     return {

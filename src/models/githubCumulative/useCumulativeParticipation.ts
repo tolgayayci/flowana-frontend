@@ -1,15 +1,16 @@
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { ICumulativeParticipation } from '@/types/githubCumulativeTypes';
 
 const useCumulativeParticipation = () => {
     const router = useRouter();
-    const { owner, repo } = router.query;
+    const { repo } = router.query;
 
-    const protocol = "lens"
+    const { protocol } = useProtocol();
 
-    const url = `/github-ecosystem/${protocol}/participation`
+    const url = `/github-ecosystem/${protocol["protocol"]}/participation`
     const { data, error, isValidating } = useSWR<ICumulativeParticipation, any>(repo ? url : null , fetcher);
 
     return {

@@ -14,6 +14,26 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/flow/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/compound/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/lens/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/polkadot/:path*',
+        destination: '/:path*',
+      },
+    ];
+  },
 }
 
 module.exports = withBundleAnalyzer(nextConfig)

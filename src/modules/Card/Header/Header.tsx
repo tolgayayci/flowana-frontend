@@ -6,15 +6,16 @@ import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
 const CardHeader: React.FC<ICardHeader> = ({
   title,
-  description,
   selectedInterval,
   setSelectedInterval,
   intervals,
 }) => {
   return (
-    <div className="flex justify-between items-center mb-8 bg-blue-300 rounded-md px-4 py-1">
+    <div className="flex justify-between items-center mb-8 bg-sfred-600 border-2 border-sfred-800 rounded-md px-4 py-1">
       <h1
-        className={`${!intervals ? "w-full" : "w-2/3"} font-medium text-lg ${
+        className={`${
+          !intervals ? "w-full" : "w-2/3"
+        } font-semibold text-md text-sfblue-900 tracking-wide ${
           !intervals ? "py-1" : ""
         }`}
       >

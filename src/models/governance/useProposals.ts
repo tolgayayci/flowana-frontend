@@ -1,11 +1,12 @@
 import useSWR from 'swr';
+import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { IProposal } from '@/types/governance';
 
 const useProposals = () => {
-    const protocol = "compound"
+    const { protocol } = useProtocol()
 
-    const url = `/governance/${protocol}/proposals`
+    const url = `/governance/${protocol["protocol"]}/proposals`
     const { data, error, isValidating } = useSWR<IProposal[], any>(protocol ? url : null , fetcher);
 
     return {

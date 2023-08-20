@@ -1,16 +1,16 @@
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
-
 import { IParticipation } from '@/types/githubTypes';
 
 const useParticipation = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const protocol = "compound"
+    const { protocol } = useProtocol();
 
-    const url = `/github-project/${protocol}/participation?owner=${owner}&repo=${repo}`
+    const url = `/github-project/${protocol["protocol"]}/participation?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWR<IParticipation>(repo ? url : null , fetcher);
 
     return {

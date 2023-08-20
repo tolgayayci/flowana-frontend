@@ -9,7 +9,7 @@ import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 
 export default function PullRequestCount() {
-  const { pullRequestCount, isLoading } = usePullRequestCount("polkadot");
+  const { pullRequestCount, isLoading } = usePullRequestCount();
 
   if (isLoading) return <CardLoader />;
   if (!pullRequestCount) return;

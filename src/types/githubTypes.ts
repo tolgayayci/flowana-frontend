@@ -243,7 +243,11 @@ export interface IPullRequestActivity {
 }
 
 export interface IHealthScore {
-  xAxis: {
-      data: string[];
-  };
+  total: number;
+  pull_request_activity: number,
+  commit_activity: number,
+  contribution_activity: number,
+  issue_activity: number,
+  grade: string,
+  release_activity: number
 }
