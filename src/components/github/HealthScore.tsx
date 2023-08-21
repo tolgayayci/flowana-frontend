@@ -1,5 +1,6 @@
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
+import NoData from "@/modules/NoData/NoData";
 
 // Hooks
 import useHealthScore from "@/models/github/useHealthScore";
@@ -8,7 +9,8 @@ export default function HealthScore() {
   const { healthScore, isLoading } = useHealthScore();
 
   // if (isLoading) return <CardLoader />;
-  // if (!healthScore) return;
+  if (!healthScore)
+    return <NoData element={<CardHeader title="Health Score" />} />;
 
   function ProgressBar({ label, value }: { label: string; value: number }) {
     return (

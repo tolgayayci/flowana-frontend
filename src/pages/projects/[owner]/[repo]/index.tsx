@@ -46,6 +46,13 @@ export default function ProjectDetail() {
 
   if (isLoading) return <Loader />;
   if (!repositoryInfo) return <Custom404 />;
+  if (repositoryInfo.is_fork) {
+    return (
+      <h2>
+        This repository is forked, because of that details are not displaying
+      </h2>
+    );
+  }
 
   const navigation = [
     {
@@ -53,18 +60,6 @@ export default function ProjectDetail() {
       href: "#repository-info",
       icon: HomeIcon,
       current: true,
-    },
-    {
-      name: "Health Score",
-      href: "#health-score",
-      icon: ChartPieIcon,
-      current: false,
-    },
-    {
-      name: "Community Profile",
-      href: "#community-profile",
-      icon: ChartPieIcon,
-      current: false,
     },
     {
       name: "Recent Stargazing Activity",
@@ -75,6 +70,18 @@ export default function ProjectDetail() {
     {
       name: "Language Breakdown",
       href: "#language-breakdown",
+      icon: ChartPieIcon,
+      current: false,
+    },
+    {
+      name: "Health Score",
+      href: "#health-score",
+      icon: ChartPieIcon,
+      current: false,
+    },
+    {
+      name: "Community Profile",
+      href: "#community-profile",
       icon: ChartPieIcon,
       current: false,
     },
@@ -185,15 +192,26 @@ export default function ProjectDetail() {
       </Head>
       <section className="max-w-[90%] mx-auto mb-8 -mt-8 px-4 sm:px-6 lg:px-8 py-1">
         <div className="grid grid-cols-5 gap-12">
-          {/* <div className="col-span-1">
+          <div className="md:col-span-1 md:block hidden">
             <Sidebar navigation={navigation} element={<SideInfo />} />
-          </div> */}
-          <div className="col-span-5">
-            <div className="flex flex-wrap space-y-8">
+          </div>
+          <div className="md:col-span-4 col-span-5">
+            <div className="flex flex-wrap space-y-10">
               <div id="repository-info" className="w-full">
                 <RepositoryInfo />
               </div>
-              <div className="flex space-x-6 w-full">
+              <div className="flex space-x-10 w-full">
+                <div
+                  id="recent-stargazing-activity"
+                  className="w-full md:w-2/3"
+                >
+                  <RecentStargazingActivity />
+                </div>
+                <div id="language-breakdown" className="w-full md:w-1/3">
+                  <LanguageBreakdown />
+                </div>
+              </div>
+              <div className="flex space-x-10 w-full">
                 <div id="health-score" className="w-full sm:w-1/2">
                   <HealthScore />
                 </div>
@@ -201,21 +219,10 @@ export default function ProjectDetail() {
                   <CommunityProfile />
                 </div>
               </div>
-              <div className="flex space-x-6 w-full">
-                <div
-                  id="recent-stargazing-activity"
-                  className="w-full sm:w-2/3"
-                >
-                  <RecentStargazingActivity />
-                </div>
-                <div id="language-breakdown" className="w-full sm:w-1/3">
-                  <LanguageBreakdown />
-                </div>
-              </div>
               <div id="commit-activity" className="w-full">
                 <CommitActivity />
               </div>
-              <div className="flex space-x-6 w-full">
+              <div className="flex space-x-10 w-full">
                 <div id="recent-commits" className="w-full sm:w-2/3">
                   <RecentCommits />
                 </div>
@@ -232,10 +239,10 @@ export default function ProjectDetail() {
               <div id="punch-card" className="w-full">
                 <PunchCard />
               </div>
-              {/* <div id="issue-activity" className="w-full">
+              <div id="issue-activity" className="w-full">
                 <IssueActivity />
-              </div> */}
-              <div className="flex space-x-6 w-full">
+              </div>
+              <div className="flex space-x-10 w-full">
                 <div id="recent-issues" className="w-full sm:w-2/3 h-full">
                   <RecentIssues />
                 </div>
@@ -246,7 +253,7 @@ export default function ProjectDetail() {
               <div id="pull-request-activity" className="w-full">
                 <PullRequestActivity />
               </div>
-              <div className="flex space-x-6 w-full">
+              <div className="flex space-x-10 w-full">
                 <div id="pull-request-count" className="w-full sm:w-1/3 h-full">
                   <PullRequestCount />
                 </div>
@@ -260,7 +267,7 @@ export default function ProjectDetail() {
               <div id="participation" className="w-full">
                 <Participation />
               </div>
-              <div className="flex space-x-6 w-full">
+              <div className="flex space-x-10 w-full">
                 <div id="most-active-issues" className="w-full sm:w-2/3 h-full">
                   <MostActiveIssues />
                 </div>

@@ -7,12 +7,27 @@ import useLanguageBreakdown from "@/models/github/useLanguageBreakdown";
 import Layout from "@/modules/Card/Layout/Layout";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
+import NoData from "@/modules/NoData/NoData";
 
 export default function LanguageBreakdown() {
   const { languageBreakdown, isLoading } = useLanguageBreakdown();
 
   if (isLoading) return <CardLoader />;
-  if (!languageBreakdown) return;
+  if (!languageBreakdown)
+    return <NoData element={<CardHeader title="Language Breakdown" />} />;
+
+  // Color palette based on the provided styles
+  const colorPalette = [
+    "#2F5061",
+    "#5B93AF",
+    "#4A7D98", // sfblue
+    "#4297A0",
+    "#8DC9D0",
+    "#70BCC4", // sfgreen
+    "#FAE5E6",
+    "#ECA1A5",
+    "#E57F84", // sfred
+  ];
 
   // Generate legend data
   const legendData = languageBreakdown.map(function (item) {
@@ -35,7 +50,7 @@ export default function LanguageBreakdown() {
     },
     legend: {
       orient: "horizontal",
-      top: "top",
+      top: "5%", // Adjust this value if needed for vertical positioning
       left: "center",
       data: legendData,
     },
@@ -46,6 +61,7 @@ export default function LanguageBreakdown() {
         radius: "55%",
         center: ["50%", "60%"],
         data: seriesData,
+        color: colorPalette, // Using the defined color palette
         emphasis: {
           itemStyle: {
             shadowBlur: 10,

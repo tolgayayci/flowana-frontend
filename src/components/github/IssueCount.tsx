@@ -7,13 +7,14 @@ import useIssueCount from "@/models/github/useIssueCount";
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
+import NoData from "@/modules/NoData/NoData";
 
 export default function IssueCount() {
   const { issueCount, isLoading } = useIssueCount();
 
   if (isLoading) return <CardLoader />;
-  if (!issueCount) return;
-
+  if (!IssueCount)
+    return <NoData element={<CardHeader title="Issue Count" />} />;
   const option = {
     tooltip: {
       trigger: "item",
@@ -35,6 +36,10 @@ export default function IssueCount() {
           { value: issueCount.closed, name: "Closed" },
           { value: issueCount.open, name: "Open" },
         ],
+        color: ["#5B93AF", "#ECA1A5"], // sfblue.500 for "Others" and sfgreen.500 for "Owner"
+        label: {
+          formatter: "{b}: {d}%",
+        },
         itemStyle: {
           emphasis: {
             shadowBlur: 10,
@@ -49,12 +54,14 @@ export default function IssueCount() {
   return (
     <Layout>
       <CardHeader title="Issue Count" />
-      <ReactECharts
-        option={option}
-        showLoading={isLoading}
-        style={{ minHeight: "350px", width: "100%" }}
-        notMerge={true}
-      />
+      <div className="h-full flex items-center -mt-8">
+        <ReactECharts
+          option={option}
+          showLoading={isLoading}
+          style={{ minHeight: "350px", width: "100%" }}
+          notMerge={true}
+        />
+      </div>
     </Layout>
   );
 }

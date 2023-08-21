@@ -1,13 +1,21 @@
-import useContributors from "@/models/github/useContributors";
+import Layout from "@/modules/Card/Layout/Layout";
+import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
+import NoData from "@/modules/NoData/NoData";
+
+// Hooks
+import useContributors from "@/models/github/useContributors";
 
 export default function Contributors() {
   const { contributors, isLoading } = useContributors();
 
   if (isLoading) return <CardLoader />;
-  if (!contributors) return;
+  if (!contributors)
+    return <NoData element={<CardHeader title="Contributors" />} />;
 
   return (
-    <div className="border-2 border-indigo-300 rounded-lg py-12 flex flex-col items-center md:flex-row"></div>
+    <Layout>
+      <CardHeader title="Contributors" />
+    </Layout>
   );
 }

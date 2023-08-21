@@ -7,7 +7,7 @@ import useRecentReleases from "@/models/github/useRecentReleases";
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import ReleasesLoader from "@/modules/Loaders/github/ReleasesLoader";
-import NoListData from "@/modules/NoData/NoListData";
+import NoData from "@/modules/NoData/NoData";
 
 export default function RecentReleases() {
   const { recentReleases, isLoading } = useRecentReleases();
@@ -21,7 +21,7 @@ export default function RecentReleases() {
     );
 
   if (!recentReleases)
-    return <NoListData element={<CardHeader title="Recent Releases" />} />;
+    return <NoData element={<CardHeader title="Recent Releases" />} />;
 
   const latestRelease = recentReleases[0];
 
@@ -34,7 +34,7 @@ export default function RecentReleases() {
             <li
               key={release.tag_name}
               className={`border border-gray-200 rounded-lg p-4 flex justify-between items-center ${
-                release === latestRelease ? "bg-indigo-100" : ""
+                release === latestRelease ? "bg-sfblue-100" : ""
               }`}
               style={{ flex: 1 }} // Added style to make the item fill available height
             >
@@ -46,7 +46,7 @@ export default function RecentReleases() {
               >
                 <div className="flex flex-col">
                   <span
-                    className={`text-indigo-600 font-semibold truncate ${
+                    className={`text-sfblue-800 font-semibold truncate ${
                       release === latestRelease ? "text-indigo-800" : ""
                     }`}
                   >

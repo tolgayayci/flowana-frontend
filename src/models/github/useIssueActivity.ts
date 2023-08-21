@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { useRouter } from 'next/router';
 import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
@@ -11,7 +11,7 @@ const useIssueActivity = (interval: string = "month") => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/issue-activity?owner=${owner}&repo=${repo}&interval=${interval}`
-    const { data, error, isValidating } = useSWR<IIssueActivity>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IIssueActivity>(repo ? url : null , fetcher);
 
     return {
         issueActivity: data,

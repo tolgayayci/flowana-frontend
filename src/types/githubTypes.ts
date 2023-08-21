@@ -219,7 +219,7 @@ export interface IContributors {
 
 export interface IParticipationCount {
   owner: number;
-  all: number;
+  others: number;
 }
 
 export interface IIssueActivity {

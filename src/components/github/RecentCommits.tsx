@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -34,7 +33,7 @@ export default function RecentCommits() {
           {recentCommits.map((commit) => (
             <li
               key={commit.url}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform hover:scale-105 border-2 border-indigo-600"
+              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-sfblue-600"
             >
               <Link
                 href={commit.url}
@@ -55,12 +54,15 @@ export default function RecentCommits() {
                         {commit.message}
                       </h3>
                       <p className="text-gray-500 text-xs sm:text-sm mt-1">
-                        Commit by {commit.author_login}
+                        Commit by{" "}
+                        <span className="bg-sfgreen-600 border-2 border-sfgreen-800 text-white rounded-lg px-1 py-0.5">
+                          {commit.author_login}
+                        </span>
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end">
-                    <div className="px-2 py-1 bg-indigo-200 border-2 border-indigo-400 text-indigo-700 rounded-md text-xs">
+                    <div className="px-2 py-1 bg-sfred-500 border-2 border-sfred-700 text-sfblue-800 rounded-md text-xs">
                       Committed Date:{" "}
                       {formatDistanceToNow(commit.committed_date)}
                     </div>

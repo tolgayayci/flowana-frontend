@@ -1,15 +1,16 @@
 import Image from "next/image";
 
 import useRepositoryInfoModel from "@/models/github/useRepositoryInfo";
-import CardLoader from "@/modules/CardLoader/CardLoader";
 
 import Layout from "@/modules/Card/Layout/Layout";
+import CardLoader from "@/modules/CardLoader/CardLoader";
+import NoData from "@/modules/NoData/NoData";
 
 export default function RepositoryInfo() {
   const { repositoryInfo, isLoading } = useRepositoryInfoModel();
 
   if (isLoading) return <CardLoader />;
-  if (!repositoryInfo) return;
+  if (!repositoryInfo) return <NoData element />;
 
   const {
     fork_count,
@@ -28,7 +29,7 @@ export default function RepositoryInfo() {
 
   return (
     <Layout>
-      <div className="flex flex-col">
+      <div className="flex flex-col -my-3">
         {/* First Row - Image, Repo Info, and Badges */}
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">

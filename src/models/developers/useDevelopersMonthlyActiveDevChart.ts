@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { IDevelopersChartData } from '@/types/developersTypes';
@@ -7,7 +7,7 @@ const useDevelopersMonthlyActiveDevChart = () => {
     const { protocol } = useProtocol();
 
     const url = `/developers/${protocol["protocol"]}/monthly-active-dev-chart`
-    const { data, error, isValidating } = useSWR<IDevelopersChartData, any>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IDevelopersChartData, any>(protocol ? url : null , fetcher);
 
     return {
         monthlyActiveDevChart: data,

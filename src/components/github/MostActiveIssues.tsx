@@ -70,7 +70,7 @@ export default function MostActiveIssues() {
           {mostActiveIssues?.map((issue) => (
             <li
               key={issue.number}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform hover:scale-105 border-2 border-indigo-600"
+              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-sfblue-600"
             >
               <Link
                 href={issue.url}

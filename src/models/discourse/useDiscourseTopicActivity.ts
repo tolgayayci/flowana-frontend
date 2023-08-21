@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { IDiscourseTopicActivity } from '@/types/discourseTypes';
@@ -7,7 +7,7 @@ const useDiscourseTopicActivity = (interval: string = "yearly") => {
     const { protocol } = useProtocol()
 
     const url = `/discourse/${protocol["protocol"]}/topic-activity?interval=${interval}`
-    const { data, error, isValidating } = useSWR<IDiscourseTopicActivity, any>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IDiscourseTopicActivity, any>(protocol ? url : null , fetcher);
 
     return {
         discourseTopicActivity: data,

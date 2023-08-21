@@ -1,16 +1,15 @@
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
+import NoData from "@/modules/NoData/NoData";
 
 //Hooks
 import useCommunityProfile from "@/models/github/useCommunityProfile";
 
-// Utils
-import { formatDistanceToNow } from "@/utils/functions";
-
 export default function CommunityProfile() {
   const { communityProfile, isLoading } = useCommunityProfile();
 
-  if (!communityProfile) return;
+  if (!communityProfile)
+    return <NoData element={<CardHeader title="Community Profile" />} />;
 
   const { health_percentage, updated_at, documentation, description, files } =
     communityProfile;

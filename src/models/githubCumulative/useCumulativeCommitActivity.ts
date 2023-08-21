@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { useRouter } from 'next/router';
 import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
@@ -11,7 +11,7 @@ const useCumulativeCommitActivity = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/commit-activity`
-    const { data, error, isValidating } = useSWR<ICumulativeCommitActivity[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeCommitActivity[], any>(repo ? url : null , fetcher);
 
     return {
         commitActivity: data,

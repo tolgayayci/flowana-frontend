@@ -7,12 +7,14 @@ import usePullRequestCount from "@/models/github/usePullRequestCount";
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
+import NoData from "@/modules/NoData/NoData";
 
 export default function PullRequestCount() {
   const { pullRequestCount, isLoading } = usePullRequestCount();
 
   if (isLoading) return <CardLoader />;
-  if (!pullRequestCount) return;
+  if (!pullRequestCount)
+    return <NoData element={<CardHeader title="Pull Request Count" />} />;
 
   const option = {
     tooltip: {
@@ -35,6 +37,7 @@ export default function PullRequestCount() {
           { value: pullRequestCount.closed, name: "Closed" },
           { value: pullRequestCount.open, name: "Open" },
         ],
+        color: ["#5B93AF", "#ECA1A5"], // sfblue.500 for "Others" and sfgreen.500 for "Owner"
         label: {
           formatter: "{b}: {d}%",
         },
@@ -51,7 +54,7 @@ export default function PullRequestCount() {
   return (
     <Layout>
       <CardHeader title="Pull Request Count" />
-      <div className="h-full flex items-center">
+      <div className="h-full flex items-center -mt-8">
         <ReactECharts
           option={option}
           showLoading={isLoading}

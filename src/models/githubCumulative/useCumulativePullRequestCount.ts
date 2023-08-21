@@ -1,5 +1,4 @@
-import useSWR from 'swr';
-import { useRouter } from 'next/router';
+import useSWRImmutable from 'swr/immutable';import { useRouter } from 'next/router';
 import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { ICumulativePullRequestCount } from '@/types/githubCumulativeTypes';
@@ -11,7 +10,7 @@ const useCumulativePullRequestCount = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/pull-request-count`
-    const { data, error, isValidating } = useSWR<ICumulativePullRequestCount, any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativePullRequestCount, any>(repo ? url : null , fetcher);
 
     return {
         pullRequestCount: data,

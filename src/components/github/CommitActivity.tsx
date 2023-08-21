@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactECharts from "echarts-for-react";
-
+import * as echarts from "echarts";
 // Hooks
 import useCommitActivity from "@/models/github/useCommitActivity";
 
@@ -8,17 +8,26 @@ import useCommitActivity from "@/models/github/useCommitActivity";
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
+import NoData from "@/modules/NoData/NoData";
 
 import { ICommitActivity } from "@/types/githubTypes";
 
 export default function CommitActivity() {
+  const { commitActivity, isLoading } = useCommitActivity();
+
   const [selectedWeek, setSelectedWeek] = useState<ICommitActivity | null>(
     null
   );
-  const { commitActivity, isLoading } = useCommitActivity();
+
+  useEffect(() => {
+    if (commitActivity && commitActivity.length > 0) {
+      setSelectedWeek(commitActivity[commitActivity.length - 1]);
+    }
+  }, [commitActivity]);
 
   if (isLoading) return <CardLoader />;
-  if (!commitActivity) return;
+  if (!commitActivity)
+    return <NoData element={<CardHeader title="Commit Activity" />} />;
 
   const handleClick = (params: any) => {
     const weekIndex = params.dataIndex;
@@ -35,7 +44,12 @@ export default function CommitActivity() {
     },
     xAxis: {
       type: "category",
-      data: commitActivity.map((week, index) => `Week ${index + 1}`),
+      data: commitActivity.map((week) => {
+        const date = new Date(week.week * 1000); // UNIX timestamp is in seconds, JS expects milliseconds
+        return `${date.getDate()} ${date.toLocaleString("default", {
+          month: "short",
+        })} ${date.getFullYear()}`; // Format: "dd MMM yyyy"
+      }),
     },
     yAxis: {
       type: "value",
@@ -44,8 +58,23 @@ export default function CommitActivity() {
       {
         data: commitActivity.map((week) => week.total),
         type: "bar",
+        name: "Commit Count",
+        itemStyle: {
+          color: "#3C677C", // using sfblue.500 for a solid color
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowOffsetY: 3,
+          shadowColor: "rgba(0, 0, 0, 0.3)",
+        },
       },
     ],
+    grid: {
+      left: "1%",
+      right: "1%",
+      top: "10%",
+      bottom: "17%",
+      containLabel: true,
+    },
   };
 
   const selectedWeekOption = {
@@ -53,23 +82,63 @@ export default function CommitActivity() {
       trigger: "axis",
       axisPointer: {
         type: "line",
+        lineStyle: {
+          color: "#2F5061", // sfblue.DEFAULT
+        },
       },
     },
     xAxis: {
       type: "category",
       data: selectedWeek
-        ? ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"]
+        ? Array.from({ length: 7 }).map((_, i) => {
+            const date = new Date(selectedWeek.week * 1000 + i * 86400000); // 86400000 milliseconds = 1 day
+            return `${date.getDate()} ${date.toLocaleString("default", {
+              month: "short",
+            })} ${date.getFullYear()}`; // Format: "dd MMM yyyy"
+          })
         : [],
+      axisLine: {
+        lineStyle: {
+          color: "#2F5061", // sfblue.DEFAULT
+        },
+      },
     },
     yAxis: {
       type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#2F5061", // sfblue.DEFAULT
+        },
+      },
     },
     series: [
       {
         data: selectedWeek ? selectedWeek.days : [],
         type: "line",
+        name: "Commit Count",
+        smooth: true, // To make the line chart smooth
+        itemStyle: {
+          color: "#DC5057", // sfred.900
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowOffsetY: 3,
+          shadowColor: "rgba(0, 0, 0, 0.3)",
+        },
+        lineStyle: {
+          color: "#1D313B", // sfblue.900
+        },
+        areaStyle: {
+          color: "#2F5061", // sfblue.DEFAULT
+        },
       },
     ],
+    grid: {
+      left: "1%",
+      right: "1%",
+      top: "10%",
+      bottom: "17%",
+      containLabel: true,
+    },
   };
 
   return (
@@ -77,19 +146,18 @@ export default function CommitActivity() {
       <CardHeader title="Commit Activity" />
       <ReactECharts
         option={option}
-        showLoading={isLoading}
-        style={{ minHeight: "350px", width: "100%" }}
-        notMerge={true}
+        style={{ minHeight: "150px" }}
         onEvents={{ click: handleClick }}
       />
       {selectedWeek && (
-        <div>
-          <h2 className="ml-12 mb-8">
-            Week {commitActivity.indexOf(selectedWeek) + 1} Details
-          </h2>
+        <div className="border-sfblue-700 border-2 py-12 px-8 rounded-lg mt-4 mb-2">
+          <CardHeader
+            title={`Week ${commitActivity.indexOf(selectedWeek) + 1} Details`}
+          />
+
           <ReactECharts
             option={selectedWeekOption}
-            style={{ height: "300px" }}
+            style={{ height: "200px" }}
           />
         </div>
       )}

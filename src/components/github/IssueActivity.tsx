@@ -8,6 +8,7 @@ import useIssueActivity from "@/models/github/useIssueActivity";
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
+import NoData from "@/modules/NoData/NoData";
 
 // Types
 import { Interval } from "@/types/general";
@@ -23,7 +24,20 @@ export default function IssueActivity() {
   const { issueActivity, isLoading } = useIssueActivity(selectedInterval.value);
 
   if (isLoading) return <CardLoader />;
-  if (!issueActivity) return;
+
+  if (!issueActivity || !issueActivity.xAxis || !issueActivity.series)
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Issue Activity"
+            intervals={intervals}
+            selectedInterval={selectedInterval}
+            setSelectedInterval={setSelectedInterval}
+          />
+        }
+      />
+    );
 
   const option = {
     tooltip: {
@@ -43,13 +57,37 @@ export default function IssueActivity() {
     series: issueActivity.series.map((series) => ({
       name: series.name,
       type: "line",
-      stack: "total",
       areaStyle: {}, // Area style can give a better visual presentation for issue activities
       emphasis: {
         focus: "series",
       },
       data: series.data,
     })),
+    dataZoom: [
+      // Slider
+      {
+        type: "slider",
+        start: 0,
+        end: 100,
+        handleStyle: {
+          color: "#E57F84", // sfred.800
+          shadowBlur: 3,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowOffsetX: 2,
+          shadowOffsetY: 2,
+        },
+      },
+      {
+        type: "inside",
+      },
+    ],
+    grid: {
+      left: "1%",
+      right: "1%",
+      top: "17%",
+      bottom: "20%",
+      containLabel: true,
+    },
   };
 
   return (

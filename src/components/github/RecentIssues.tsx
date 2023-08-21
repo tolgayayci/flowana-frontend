@@ -68,7 +68,7 @@ export default function RecentIssues() {
           {recentIssues.map((issue) => (
             <li
               key={issue.number}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform hover:scale-105 border-2 border-indigo-600"
+              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-sfblue-600"
             >
               <Link
                 href={issue.url}
@@ -105,7 +105,7 @@ export default function RecentIssues() {
                   <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end">
                     <div className="flex items-center space-x-2">
                       {issue.state === "CLOSED" ? (
-                        <div className="mr-2 px-2 py-1 bg-orange-200 border-2 border-orange-400 text-orange-700 rounded-md text-xs">
+                        <div className="mr-2 px-2 py-1 bg-sfred-500 border-2 border-sfred-800 text-sfred-900 rounded-md text-xs">
                           Closed {formatDistanceToNow(issue.updated_at)}
                         </div>
                       ) : (

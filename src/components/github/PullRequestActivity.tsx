@@ -8,6 +8,7 @@ import usePullRequestActivity from "@/models/github/usePullRequestActivity";
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
+import NoData from "@/modules/NoData/NoData";
 
 const intervals = [
   { name: "Week", value: "week" },
@@ -22,14 +23,36 @@ export default function PullRequestActivity() {
   );
 
   if (isLoading) return <CardLoader />;
-  if (!pullRequestActivity) return;
+  if (
+    !pullRequestActivity ||
+    !pullRequestActivity.xAxis ||
+    pullRequestActivity.series
+  ) {
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Pull Request Activity"
+            intervals={intervals}
+            selectedInterval={selectedInterval}
+            setSelectedInterval={setSelectedInterval}
+          />
+        }
+      />
+    );
+  }
 
   const option = {
     tooltip: {
       trigger: "axis",
     },
     legend: {
+      show: true,
       data: ["Opened", "Closed"],
+      textStyle: {
+        color: "#2F5061", // sfblue.DEFAULT
+      },
+      selectedMode: "multiple",
     },
     xAxis: {
       type: "category",
@@ -39,12 +62,40 @@ export default function PullRequestActivity() {
     yAxis: {
       type: "value",
     },
-    series: pullRequestActivity?.series.map((series) => ({
+    series: pullRequestActivity.series.map((series) => ({
       name: series.name,
       type: "line",
-      stack: "total",
+      areaStyle: {}, // Area style can give a better visual presentation for issue activities
+      emphasis: {
+        focus: "series",
+      },
       data: series.data,
     })),
+    dataZoom: [
+      // Slider
+      {
+        type: "slider",
+        start: 0,
+        end: 100,
+        handleStyle: {
+          color: "#E57F84", // sfred.800
+          shadowBlur: 3,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowOffsetX: 2,
+          shadowOffsetY: 2,
+        },
+      },
+      {
+        type: "inside",
+      },
+    ],
+    grid: {
+      left: "1%",
+      right: "1%",
+      top: "17%",
+      bottom: "20%",
+      containLabel: true,
+    },
   };
 
   return (

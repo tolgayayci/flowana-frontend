@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { useRouter } from 'next/router';
 import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
@@ -11,7 +11,7 @@ const useCumulativeLanguageBreakdown = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/language-breakdown`
-    const { data, error, isValidating } = useSWR<ICumulativeLanguageBreakdown[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeLanguageBreakdown[], any>(repo ? url : null , fetcher);
 
     return {
         languageBreakdown: data,

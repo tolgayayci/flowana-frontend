@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { INavigationItem } from "@/types/general";
 
 function classNames(...classes: any[]) {
@@ -12,24 +12,84 @@ export default function Sidebar({
   navigation: INavigationItem[];
   element: React.ReactNode | null;
 }) {
+  const [currentSection, setCurrentSection] = useState(null);
+  const sectionRefs = useRef({});
+
+  const OFFSET = 100;
+
+  const observeSections = () => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setCurrentSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.7 }
+    );
+
+    navigation.forEach((item) => {
+      const section = document.querySelector(item.href);
+      if (section) {
+        sectionRefs.current[item.href] = section;
+        observer.observe(section);
+      }
+    });
+
+    return () => {
+      Object.values(sectionRefs.current).forEach((section) => {
+        observer.unobserve(section);
+      });
+    };
+  };
+
+  useEffect(() => {
+    observeSections();
+  }, []);
+
+  const updatedNavigation = navigation.map((item) => {
+    const targetElement = document.querySelector(item.href) || null;
+    const targetPosition = targetElement ? targetElement.offsetTop : 0;
+    return {
+      ...item,
+      current: targetElement
+        ? window.scrollY >= targetPosition - OFFSET &&
+          window.scrollY < targetPosition + targetElement.offsetHeight - OFFSET
+        : false,
+    };
+  });
+
+  function smoothScrollToSection(href: string) {
+    const section = document.querySelector(href);
+    if (section) {
+      const topPosition = section.offsetTop - 180; // OFFSET to account for any header/nav bar height
+      window.scrollTo({ top: topPosition, behavior: "smooth" });
+    }
+  }
+
   return (
     <>
+      <div className="w-full mb-6">{element}</div>
       <div className="sticky top-[180px]">
-        <div className="w-full mb-6">{element}</div>
-        <div className=" h-auto shadow-xl p-12 border-2 border-sfblue-800 rounded-2xl">
+        <div className=" h-auto shadow-xl p-8 border-2 bg-sfblue-400 border-sfblue-800 tracking-wide rounded-2xl">
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
-                  {navigation.map((item) => (
+                  {updatedNavigation.map((item) => (
                     <li key={item.name}>
                       <a
                         href={item.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          smoothScrollToSection(item.href);
+                        }}
                         className={classNames(
                           item.current
                             ? "bg-sfblue-800 text-white"
-                            : "text-sfblack-300 hover:text-white hover:bg-sfblue-800",
-                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-[410]"
+                            : "text-sfblue-900 hover:text-white hover:bg-sfblue-800",
+                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-[520]"
                         )}
                       >
                         <item.icon

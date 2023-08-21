@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { useRouter } from 'next/router';
 import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
@@ -11,7 +11,7 @@ const useCommunityProfile = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/community-profile?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWR<ICommunityProfile, any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICommunityProfile, any>(repo ? url : null , fetcher);
 
     return {
         communityProfile: data,

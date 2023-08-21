@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { useRouter } from 'next/router';
 import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
@@ -11,7 +11,7 @@ const useParticipationCount = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/participation_count?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWR<IParticipationCount>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IParticipationCount>(repo ? url : null , fetcher);
 
     return {
         participationCount: data,

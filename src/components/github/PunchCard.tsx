@@ -7,12 +7,13 @@ import usePunchCard from "@/models/github/usePunchCard";
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
+import NoData from "@/modules/NoData/NoData";
 
 export default function PunchCard() {
   const { punchCard, isLoading } = usePunchCard();
 
   if (isLoading) return <CardLoader />;
-  if (!punchCard) return;
+  if (!punchCard) return <NoData element={<CardHeader title="Punch Card" />} />;
 
   const days = [
     "Sunday",
@@ -42,13 +43,21 @@ export default function PunchCard() {
     tooltip: {
       position: "top",
       formatter: (params: any) => {
-        const { day, hour, commits } = params.data;
-        return `Number of commits on ${days[day]}, ${hour}:00: ${commits}`;
+        const day = punchCard.map((d) => [d.day, d.hour, d.commits]);
+        return `Number of commits on ${day[0]}, ${day[1]} ${day[2]}`;
+      },
+    },
+    legend: {
+      data: ["Number of Commits"], // add your legend title
+      align: "right",
+      textStyle: {
+        color: "#333333", // Using sfblack color
       },
     },
     grid: {
-      left: "5%",
+      left: "1%",
       right: "5%",
+      top: "3%",
       bottom: "5%",
       containLabel: true,
     },
@@ -68,11 +77,11 @@ export default function PunchCard() {
       min: 0,
       max: Math.max(...punchCard.map((d) => d.commits)),
       calculable: true,
-      orient: "horizontal",
-      left: "center",
-      bottom: "5%",
+      orient: "vertical",
+      left: "95%",
+      bottom: "center",
       inRange: {
-        color: ["#f5f5f5", "steelblue"],
+        color: ["#C9DBE5", "#2F5061"],
       },
     },
     series: [
@@ -86,7 +95,7 @@ export default function PunchCard() {
         },
         emphasis: {
           itemStyle: {
-            borderColor: "#000",
+            borderColor: "#333333", // Using sfblack color for emphasis
             borderWidth: 2,
           },
         },

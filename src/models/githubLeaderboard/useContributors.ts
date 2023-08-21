@@ -1,5 +1,4 @@
-import useSWR from 'swr';
-import { useProtocol } from '../protocols/useProtocol';
+import useSWRImmutable from 'swr/immutable';import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { IContributors } from '@/types/githubTypes';
 
@@ -7,7 +6,7 @@ const useContributors = () => {
     const { protocol } = useProtocol()
 
     const url = `/github-leaderboard/${protocol["protocol"]}/contributors`
-    const { data, error, isValidating } = useSWR<IContributors[], any>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IContributors[], any>(protocol ? url : null , fetcher);
 
     return {
         contributors: data,

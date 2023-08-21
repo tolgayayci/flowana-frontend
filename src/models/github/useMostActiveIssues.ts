@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { useRouter } from 'next/router';
 import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
@@ -11,7 +11,7 @@ const useMostActiveIssues = (interval: string = "month") => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/most-active-issues?owner=${owner}&repo=${repo}&interval=${interval}`
-    const { data, error, isValidating } = useSWR<IMostActiveIssues[]>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IMostActiveIssues[]>(repo ? url : null , fetcher);
 
     if(!data) console.log(data);
 
