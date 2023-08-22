@@ -10,7 +10,7 @@ const useCumulativeRecentPullRequests = (order_by: string = "created_at") => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/recent-pull-requests?order_by=${order_by}`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativeRecentPullRequests[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeRecentPullRequests[], any>(protocol ? url : null , fetcher);
 
     return {
         recentPullRequests: data,

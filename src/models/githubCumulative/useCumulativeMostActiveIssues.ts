@@ -3,14 +3,14 @@ import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { ICumulativeMostActiveIssues } from '@/types/githubCumulativeTypes';
 
-const useCumulativeMostActiveIssues = () => {
+const useCumulativeMostActiveIssues = (interval:string = "month") => {
     const router = useRouter();
     const { repo } = router.query;
 
     const { protocol } = useProtocol();
 
-    const url = `/github-ecosystem/${protocol["protocol"]}/most-active-issues`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativeMostActiveIssues[], any>(repo ? url : null , fetcher);
+    const url = `/github-ecosystem/${protocol["protocol"]}/most-active-issues?interval=${interval}`
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeMostActiveIssues[], any>(protocol ? url : null , fetcher);
 
     return {
         mostActiveIssues: data,

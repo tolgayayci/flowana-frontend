@@ -12,9 +12,12 @@ import NoData from "@/modules/NoData/NoData";
 export default function IssueCount() {
   const { issueCount, isLoading } = useIssueCount();
 
-  if (isLoading) return <CardLoader />;
+  if (isLoading)
+    return <CardLoader element={<CardHeader title="Issue Count" />} />;
+
   if (!IssueCount)
-    return <NoData element={<CardHeader title="Issue Count" />} />;
+    return <NoData element={<CardHeader title="Issue Count" />} message="" />;
+
   const option = {
     tooltip: {
       trigger: "item",
@@ -33,8 +36,8 @@ export default function IssueCount() {
         radius: "55%",
         center: ["50%", "50%"], // Update the center property to center the pie chart
         data: [
-          { value: issueCount.closed, name: "Closed" },
-          { value: issueCount.open, name: "Open" },
+          { value: issueCount?.closed, name: "Closed" },
+          { value: issueCount?.open, name: "Open" },
         ],
         color: ["#5B93AF", "#ECA1A5"], // sfblue.500 for "Others" and sfgreen.500 for "Owner"
         label: {

@@ -1,5 +1,6 @@
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
+import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
 //Hooks
@@ -8,8 +9,14 @@ import useCommunityProfile from "@/models/github/useCommunityProfile";
 export default function CommunityProfile() {
   const { communityProfile, isLoading } = useCommunityProfile();
 
+  if (isLoading) {
+    return <CardLoader element={<CardHeader title="Community Profile" />} />;
+  }
+
   if (!communityProfile)
-    return <NoData element={<CardHeader title="Community Profile" />} />;
+    return (
+      <NoData element={<CardHeader title="Community Profile" />} message="" />
+    );
 
   const { health_percentage, updated_at, documentation, description, files } =
     communityProfile;
@@ -30,7 +37,7 @@ export default function CommunityProfile() {
         <div className="flex flex-col items-center justify-center w-1/3">
           {/* Display Health Percentage */}
           <div className="mb-8">
-            <div className="w-64 h-16 rounded-lg bg-sfgreen-600 border-2 border-sfgreen-900 text-white flex items-center justify-center text-lg font-bold">
+            <div className="w-full h-16 rounded-lg bg-sfgreen-600 border-2 border-sfgreen-900 text-white flex items-center justify-center text-lg font-bold px-8">
               Score: {health_percentage}%
             </div>
           </div>

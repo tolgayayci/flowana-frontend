@@ -11,7 +11,7 @@ const useRecentIssues = (order_by: string = "created_at") => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/recent-issues?owner=${owner}&repo=${repo}&order_by=${order_by}`
-    const { data, error, isValidating } = useSWRImmutable<IRecentIssues[]>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IRecentIssues[]>(protocol ? url : null , fetcher);
 
     return {
         recentIssues: data,

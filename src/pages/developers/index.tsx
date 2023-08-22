@@ -2,6 +2,7 @@ import Head from "next/head";
 
 // Sidebar
 import Sidebar from "@/modules/Sidebar/Sidebar";
+import SideInfo from "@/components/developers/SideInfo";
 
 // Developer Components
 import DevTypeTable from "@/components/developers/DevTypeTable";
@@ -15,47 +16,48 @@ import MonthlyCommitsChart from "@/components/developers/MonthlyCommitsChart";
 import TotalMonthlyActiveDevChart from "@/components/developers/TotalMonthlyActiveDevChart";
 
 // Heroicons
-import { ChartPieIcon, HomeIcon } from "@heroicons/react/24/outline";
+import {
+  PresentationChartLineIcon,
+  TableCellsIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 
 export default function Developers() {
   const navigation = [
     {
       name: "Stats",
       href: "#stats",
-      icon: HomeIcon,
-      count: "5",
+      icon: MagnifyingGlassIcon,
       current: true,
     },
     {
       name: "Developer Types",
       href: "#developer-types",
-      icon: ChartPieIcon,
+      icon: TableCellsIcon,
       current: false,
     },
     {
       name: "Total Monthly Active Devs",
       href: "#total-monthly-active-devs",
-      icon: ChartPieIcon,
-      count: "12",
+      icon: PresentationChartLineIcon,
       current: false,
     },
     {
       name: "Monthly Commits By Dev Type",
       href: "#monthly-commits-by-dev-type",
-      icon: ChartPieIcon,
-      count: "20+",
+      icon: PresentationChartLineIcon,
       current: false,
     },
     {
       name: "Monthly Active Devs",
       href: "#monthly-active-devs",
-      icon: ChartPieIcon,
+      icon: PresentationChartLineIcon,
       current: false,
     },
     {
       name: "Monthly Commits Chart",
       href: "#monthly-commits-chart",
-      icon: ChartPieIcon,
+      icon: PresentationChartLineIcon,
       current: false,
     },
   ];
@@ -71,7 +73,7 @@ export default function Developers() {
       <section className="max-w-[90%] mx-auto my-12 px-4 sm:px-6 lg:px-8 py-1">
         <div className="grid grid-cols-5 gap-8">
           <div className="col-span-1">
-            <Sidebar navigation={navigation} element />
+            <Sidebar navigation={navigation} element={<SideInfo />} />
           </div>
           <div className="col-span-4">
             <div className="flex flex-wrap space-y-8">

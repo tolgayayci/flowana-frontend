@@ -11,7 +11,7 @@ const useCodeFrequency = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/code-frequency?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<ICodeFrequency, any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICodeFrequency, any>(protocol ? url : null , fetcher);
 
     return {
         codeFrequency: data,

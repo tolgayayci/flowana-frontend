@@ -11,7 +11,7 @@ const useIssueActivity = (interval: string = "month") => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/issue-activity?owner=${owner}&repo=${repo}&interval=${interval}`
-    const { data, error, isValidating } = useSWRImmutable<IIssueActivity>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IIssueActivity>(protocol ? url : null , fetcher);
 
     return {
         issueActivity: data,

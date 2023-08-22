@@ -9,8 +9,8 @@ import NoData from "@/modules/NoData/NoData";
 export default function RepositoryInfo() {
   const { repositoryInfo, isLoading } = useRepositoryInfoModel();
 
-  if (isLoading) return <CardLoader />;
-  if (!repositoryInfo) return <NoData element />;
+  if (isLoading) return <CardLoader element />;
+  if (!repositoryInfo) return null;
 
   const {
     fork_count,

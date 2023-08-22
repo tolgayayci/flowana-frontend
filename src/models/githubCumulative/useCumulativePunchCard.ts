@@ -10,7 +10,7 @@ const useCumulativePunchCard = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/punch-card`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativePunchCard[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativePunchCard[], any>(protocol ? url : null , fetcher);
 
     return {
         punchCard: data,

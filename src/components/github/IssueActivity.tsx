@@ -23,7 +23,19 @@ export default function IssueActivity() {
   const [selectedInterval, setSelectedInterval] = useState(intervals[1]);
   const { issueActivity, isLoading } = useIssueActivity(selectedInterval.value);
 
-  if (isLoading) return <CardLoader />;
+  if (isLoading)
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Issue Activity"
+            intervals={intervals}
+            selectedInterval={selectedInterval}
+            setSelectedInterval={setSelectedInterval}
+          />
+        }
+      />
+    );
 
   if (!issueActivity || !issueActivity.xAxis || !issueActivity.series)
     return (
@@ -36,6 +48,7 @@ export default function IssueActivity() {
             setSelectedInterval={setSelectedInterval}
           />
         }
+        message=""
       />
     );
 

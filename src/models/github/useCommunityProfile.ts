@@ -11,7 +11,7 @@ const useCommunityProfile = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/community-profile?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<ICommunityProfile, any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICommunityProfile, any>(protocol ? url : null , fetcher);
 
     return {
         communityProfile: data,

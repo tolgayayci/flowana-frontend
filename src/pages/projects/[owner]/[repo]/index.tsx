@@ -45,7 +45,7 @@ export default function ProjectDetail() {
   const { repositoryInfo, isLoading } = useRepositoryInfoModel();
 
   if (isLoading) return <Loader />;
-  if (!repositoryInfo) return <Custom404 />;
+  if (!repositoryInfo?.owner) return <Custom404 />;
   if (repositoryInfo.is_fork) {
     return (
       <h2>

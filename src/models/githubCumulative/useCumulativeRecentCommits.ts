@@ -10,7 +10,7 @@ const useCumulativeRecentCommits = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/recent-commits`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativeRecentCommits[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeRecentCommits[], any>(protocol ? url : null , fetcher);
 
     return {
         recentCommits: data,

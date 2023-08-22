@@ -12,9 +12,12 @@ import NoData from "@/modules/NoData/NoData";
 export default function PullRequestCount() {
   const { pullRequestCount, isLoading } = usePullRequestCount();
 
-  if (isLoading) return <CardLoader />;
+  if (isLoading)
+    return <CardLoader element={<CardHeader title="Pull Request Count" />} />;
   if (!pullRequestCount)
-    return <NoData element={<CardHeader title="Pull Request Count" />} />;
+    return (
+      <NoData element={<CardHeader title="Pull Request Count" />} message="" />
+    );
 
   const option = {
     tooltip: {

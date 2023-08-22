@@ -11,7 +11,7 @@ const useCumulativeIssueCount = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/issue-count`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativeIssueCount, any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeIssueCount, any>(protocol ? url : null , fetcher);
 
     return {
         issueCount: data,

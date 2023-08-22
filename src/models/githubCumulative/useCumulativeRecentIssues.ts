@@ -10,7 +10,7 @@ const useCumulativeRecentIssues = (order_by: string = "created_at") => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/recent-issues?order_by=${order_by}`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativeRecentIssues[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeRecentIssues[], any>(protocol ? url : null , fetcher);
 
     return {
         recentIssues: data,

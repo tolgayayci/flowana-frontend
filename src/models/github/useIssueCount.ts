@@ -11,7 +11,7 @@ const useIssueCount = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/issue-count?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IIssueCount>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IIssueCount>(protocol ? url : null , fetcher);
 
     return {
         issueCount: data,

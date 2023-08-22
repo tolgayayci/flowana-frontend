@@ -9,9 +9,11 @@ import useContributors from "@/models/github/useContributors";
 export default function Contributors() {
   const { contributors, isLoading } = useContributors();
 
-  if (isLoading) return <CardLoader />;
+  if (isLoading)
+    return <CardLoader element={<CardHeader title="Contributors" />} />;
+
   if (!contributors)
-    return <NoData element={<CardHeader title="Contributors" />} />;
+    return <NoData element={<CardHeader title="Contributors" />} message="" />;
 
   return (
     <Layout>

@@ -11,7 +11,7 @@ const usePullRequestCount = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/pull-request-count?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IPullRequestCount>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IPullRequestCount>(protocol ? url : null , fetcher);
 
     return {
         pullRequestCount: data,

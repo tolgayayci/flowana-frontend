@@ -10,7 +10,7 @@ const useCumulativeParticipation = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/participation`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativeParticipation, any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeParticipation, any>(protocol ? url : null , fetcher);
 
     return {
         participation: data,

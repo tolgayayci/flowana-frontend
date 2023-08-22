@@ -13,6 +13,7 @@ export default function Sidebar({
   element: React.ReactNode | null;
 }) {
   const [currentSection, setCurrentSection] = useState(null);
+  const [updatedNavigation, setUpdatedNavigation] = useState([]);
   const sectionRefs = useRef({});
 
   const OFFSET = 100;
@@ -48,17 +49,21 @@ export default function Sidebar({
     observeSections();
   }, []);
 
-  const updatedNavigation = navigation.map((item) => {
-    const targetElement = document.querySelector(item.href) || null;
-    const targetPosition = targetElement ? targetElement.offsetTop : 0;
-    return {
-      ...item,
-      current: targetElement
-        ? window.scrollY >= targetPosition - OFFSET &&
-          window.scrollY < targetPosition + targetElement.offsetHeight - OFFSET
-        : false,
-    };
-  });
+  useEffect(() => {
+    const updated = navigation.map((item) => {
+      const targetElement = document.querySelector(item.href) || null;
+      const targetPosition = targetElement ? targetElement.offsetTop : 0;
+      return {
+        ...item,
+        current: targetElement
+          ? window.scrollY >= targetPosition - OFFSET &&
+            window.scrollY <
+              targetPosition + targetElement.offsetHeight - OFFSET
+          : false,
+      };
+    });
+    setUpdatedNavigation(updated);
+  }, [navigation]);
 
   function smoothScrollToSection(href: string) {
     const section = document.querySelector(href);
@@ -70,7 +75,7 @@ export default function Sidebar({
 
   return (
     <>
-      <div className="w-full mb-6">{element}</div>
+      <div className={`w-full ${element ? "mb-6" : null}`}>{element}</div>
       <div className="sticky top-[180px]">
         <div className=" h-auto shadow-xl p-8 border-2 bg-sfblue-400 border-sfblue-800 tracking-wide rounded-2xl">
           <nav className="flex flex-1 flex-col">
@@ -89,7 +94,7 @@ export default function Sidebar({
                           item.current
                             ? "bg-sfblue-800 text-white"
                             : "text-sfblue-900 hover:text-white hover:bg-sfblue-800",
-                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-[520]"
+                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-[420]"
                         )}
                       >
                         <item.icon

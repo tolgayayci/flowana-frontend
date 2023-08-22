@@ -22,12 +22,20 @@ export default function PullRequestActivity() {
     selectedInterval.value
   );
 
-  if (isLoading) return <CardLoader />;
-  if (
-    !pullRequestActivity ||
-    !pullRequestActivity.xAxis ||
-    pullRequestActivity.series
-  ) {
+  if (isLoading)
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Pull Request Activity"
+            intervals={intervals}
+            selectedInterval={selectedInterval}
+            setSelectedInterval={setSelectedInterval}
+          />
+        }
+      />
+    );
+  if (!pullRequestActivity || !pullRequestActivity.xAxis) {
     return (
       <NoData
         element={
@@ -38,6 +46,7 @@ export default function PullRequestActivity() {
             setSelectedInterval={setSelectedInterval}
           />
         }
+        message=""
       />
     );
   }
@@ -62,7 +71,7 @@ export default function PullRequestActivity() {
     yAxis: {
       type: "value",
     },
-    series: pullRequestActivity.series.map((series) => ({
+    series: pullRequestActivity.series.map((series: any) => ({
       name: series.name,
       type: "line",
       areaStyle: {}, // Area style can give a better visual presentation for issue activities

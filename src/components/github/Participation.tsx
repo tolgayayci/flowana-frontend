@@ -12,9 +12,17 @@ import NoData from "@/modules/NoData/NoData";
 export default function Participation() {
   const { participation, isLoading } = useParticipation();
 
-  if (isLoading) return <CardLoader />;
-  if (!participation)
-    return <NoData element={<CardHeader title="Participation" />} />;
+  if (isLoading)
+    return <CardLoader element={<CardHeader title="Participation" />} />;
+  if (
+    !participation ||
+    !participation.xAxis ||
+    !participation.yAxis ||
+    !participation.series
+  ) {
+    return <NoData element={<CardHeader title="Participation" />} message="" />;
+  }
+
   const option = {
     tooltip: {
       trigger: "axis",

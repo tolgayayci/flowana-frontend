@@ -10,10 +10,10 @@ const useCumulativeStats = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/stats`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativeStats, any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeStats, any>(protocol ? url : null , fetcher);
 
     return {
-        cumulativeStats: data,
+        stats: data,
         isLoading: !error && !data,
         isError: error,
         isValidating,

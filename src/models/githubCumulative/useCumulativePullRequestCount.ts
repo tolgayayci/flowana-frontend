@@ -10,7 +10,7 @@ const useCumulativePullRequestCount = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/pull-request-count`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativePullRequestCount, any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativePullRequestCount, any>(protocol ? url : null , fetcher);
 
     return {
         pullRequestCount: data,

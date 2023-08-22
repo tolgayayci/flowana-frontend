@@ -11,7 +11,7 @@ const useCumulativeLanguageBreakdown = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/language-breakdown`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativeLanguageBreakdown[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeLanguageBreakdown[], any>(protocol ? url : null , fetcher);
 
     return {
         languageBreakdown: data,

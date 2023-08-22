@@ -12,8 +12,10 @@ import NoData from "@/modules/NoData/NoData";
 export default function PunchCard() {
   const { punchCard, isLoading } = usePunchCard();
 
-  if (isLoading) return <CardLoader />;
-  if (!punchCard) return <NoData element={<CardHeader title="Punch Card" />} />;
+  if (isLoading)
+    return <CardLoader element={<CardHeader title="Punch Card" />} />;
+  if (!punchCard)
+    return <NoData element={<CardHeader title="Punch Card" />} message="" />;
 
   const days = [
     "Sunday",

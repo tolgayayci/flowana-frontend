@@ -11,7 +11,7 @@ const useRecentCommits = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/recent-commits?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IRecentCommits[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IRecentCommits[], any>(protocol ? url : null , fetcher);
 
     return {
         recentCommits: data,

@@ -6,14 +6,24 @@ import useRecentStargazingActivity from "@/models/github/useRecentStargazingActi
 // Modules and Utils
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
+import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
 export default function RecentStargazingActivity() {
   const { recentStargazingActivity, isLoading } = useRecentStargazingActivity();
 
-  if (!recentStargazingActivity)
+  if (isLoading) {
     return (
-      <NoData element={<CardHeader title="Recent Stargazing Activity" />} />
+      <CardLoader element={<CardHeader title="Recent Stargazing Activity" />} />
+    );
+  }
+
+  if (!recentStargazingActivity || !recentStargazingActivity.xAxis)
+    return (
+      <NoData
+        element={<CardHeader title="Recent Stargazing Activity" />}
+        message=""
+      />
     );
 
   const option = {

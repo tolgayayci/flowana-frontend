@@ -5,11 +5,30 @@ import useDevelopersTotalMonthlyActiveDevChart from "@/models/developers/useDeve
 
 // Models and Utils
 import Layout from "@/modules/Card/Layout/Layout";
+import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
+import NoData from "@/modules/NoData/NoData";
 
 export default function TotalMonthlyActiveDevChart() {
   const { totalMonthlyActiveDevChart, isLoading } =
     useDevelopersTotalMonthlyActiveDevChart();
+
+  if (isLoading) {
+    return (
+      <CardLoader
+        element={<CardHeader title="Total Monthly Active Dev Chart" />}
+      />
+    );
+  }
+
+  if (!totalMonthlyActiveDevChart || !totalMonthlyActiveDevChart.xAxis) {
+    return (
+      <NoData
+        element={<CardHeader title="Total Monthly Active Dev Chart" />}
+        message=""
+      />
+    );
+  }
 
   const seriesData = totalMonthlyActiveDevChart?.series[0].data.map(
     (point) => ({
@@ -32,24 +51,49 @@ export default function TotalMonthlyActiveDevChart() {
     series: [
       {
         type: "line",
+        name: "Total Monthly Active Devs",
         data: seriesData?.map((point) => point.value),
-        smooth: true,
-        // Add area shading below the line
-        areaStyle: {
-          color: "rgba(92, 151, 191, 0.3)",
-        },
-        // Add shadow for the line
+        smooth: true, // This makes the lines smooth
         itemStyle: {
+          color: "#DC5057", // sfred.900
           shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowOffsetY: 3,
           shadowColor: "rgba(0, 0, 0, 0.3)",
         },
         lineStyle: {
-          // Add shadow for the line
-          shadowBlur: 5,
-          shadowColor: "rgba(0, 0, 0, 0.1)",
+          color: "#1D313B", // sfblue.900
+        },
+        areaStyle: {
+          color: "#92B7CA", // sfblue.DEFAULT
         },
       },
     ],
+    dataZoom: [
+      // Slider
+      {
+        type: "slider",
+        start: 0,
+        end: 100,
+        handleStyle: {
+          color: "#E57F84", // sfred.800
+          shadowBlur: 3,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowOffsetX: 2,
+          shadowOffsetY: 2,
+        },
+      },
+      {
+        type: "inside",
+      },
+    ],
+    grid: {
+      left: "1%",
+      right: "1%",
+      top: "10%",
+      bottom: "17%",
+      containLabel: true,
+    },
   };
 
   return (

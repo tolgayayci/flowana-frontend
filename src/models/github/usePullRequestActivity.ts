@@ -11,7 +11,7 @@ const usePullRequestActivity = (interval: string = "month") => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/pull-request-activity?owner=${owner}&repo=${repo}&interval=${interval}`
-    const { data, error, isValidating } = useSWRImmutable<IPullRequestActivity>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IPullRequestActivity>(protocol ? url : null , fetcher);
 
     return {
         pullRequestActivity: data,

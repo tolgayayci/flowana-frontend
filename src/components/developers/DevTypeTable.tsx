@@ -3,10 +3,25 @@ import useDevelopersDevTypeTable from "@/models/developers/useDevelopersDevTypeT
 
 // Models and Utils
 import Layout from "@/modules/Card/Layout/Layout";
+import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
+import NoData from "@/modules/NoData/NoData";
 
 export default function DevTypeTable() {
   const { devTypeTable, isLoading } = useDevelopersDevTypeTable();
+
+  if (isLoading) {
+    return <CardLoader element={<CardHeader title="Developer Type Table" />} />;
+  }
+
+  if (!devTypeTable) {
+    return (
+      <NoData
+        element={<CardHeader title="Developer Type Table" />}
+        message=""
+      />
+    );
+  }
 
   return (
     <Layout>

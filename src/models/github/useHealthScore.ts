@@ -11,7 +11,7 @@ const useHealthScore = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/health-score?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IHealthScore>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IHealthScore>(protocol ? url : null , fetcher);
 
     return {
         healthScore: data,

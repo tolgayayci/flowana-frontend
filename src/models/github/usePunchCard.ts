@@ -11,7 +11,7 @@ const usePunchCard = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/punch-card?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IPunchCard[]>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IPunchCard[]>(protocol ? url : null , fetcher);
 
     return {
         punchCard: data,

@@ -11,7 +11,7 @@ const useCumulativeCommitActivity = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-ecosystem/${protocol["protocol"]}/commit-activity`
-    const { data, error, isValidating } = useSWRImmutable<ICumulativeCommitActivity[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICumulativeCommitActivity[], any>(protocol ? url : null , fetcher);
 
     return {
         commitActivity: data,

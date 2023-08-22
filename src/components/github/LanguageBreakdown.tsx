@@ -12,9 +12,12 @@ import NoData from "@/modules/NoData/NoData";
 export default function LanguageBreakdown() {
   const { languageBreakdown, isLoading } = useLanguageBreakdown();
 
-  if (isLoading) return <CardLoader />;
+  if (isLoading)
+    return <CardLoader element={<CardHeader title="Language Breakdown" />} />;
   if (!languageBreakdown)
-    return <NoData element={<CardHeader title="Language Breakdown" />} />;
+    return (
+      <NoData element={<CardHeader title="Language Breakdown" />} message="" />
+    );
 
   // Color palette based on the provided styles
   const colorPalette = [

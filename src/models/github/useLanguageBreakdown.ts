@@ -11,7 +11,7 @@ const useLanguageBreakdown = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/language-breakdown?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<ILanguageBreakdown[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ILanguageBreakdown[], any>(protocol ? url : null , fetcher);
 
     return {
         languageBreakdown: data,

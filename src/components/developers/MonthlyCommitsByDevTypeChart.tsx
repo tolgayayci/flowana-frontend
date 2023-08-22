@@ -5,11 +5,30 @@ import useDevelopersMonthlyCommitsByDevTypeChart from "@/models/developers/useDe
 
 // Models and Utils
 import Layout from "@/modules/Card/Layout/Layout";
+import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
+import NoData from "@/modules/NoData/NoData";
 
 export default function MonthlyCommitsByDevTypeChart() {
   const { monthlyCommitsByDevTypeChart, isLoading } =
     useDevelopersMonthlyCommitsByDevTypeChart();
+
+  if (isLoading) {
+    return (
+      <CardLoader
+        element={<CardHeader title="Monthly Commits By Dev Type Chart" />}
+      />
+    );
+  }
+
+  if (!monthlyCommitsByDevTypeChart || !monthlyCommitsByDevTypeChart.xAxis) {
+    return (
+      <NoData
+        element={<CardHeader title="Monthly Commits By Dev Type Chart" />}
+        message=""
+      />
+    );
+  }
 
   // Convert the data into the format required by ECharts
   const seriesData = monthlyCommitsByDevTypeChart?.series.map((series) =>
@@ -47,6 +66,31 @@ export default function MonthlyCommitsByDevTypeChart() {
         shadowColor: "rgba(0, 0, 0, 0.1)",
       },
     })),
+    dataZoom: [
+      // Slider
+      {
+        type: "slider",
+        start: 0,
+        end: 100,
+        handleStyle: {
+          color: "#E57F84", // sfred.800
+          shadowBlur: 3,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowOffsetX: 2,
+          shadowOffsetY: 2,
+        },
+      },
+      {
+        type: "inside",
+      },
+    ],
+    grid: {
+      left: "1%",
+      right: "1%",
+      top: "10%",
+      bottom: "17%",
+      containLabel: true,
+    },
   };
 
   return (

@@ -25,9 +25,12 @@ export default function CommitActivity() {
     }
   }, [commitActivity]);
 
-  if (isLoading) return <CardLoader />;
-  if (!commitActivity)
-    return <NoData element={<CardHeader title="Commit Activity" />} />;
+  if (isLoading)
+    return <CardLoader element={<CardHeader title="Commit Activity" />} />;
+  if (!commitActivity || !commitActivity[0].total)
+    return (
+      <NoData element={<CardHeader title="Commit Activity" />} message="" />
+    );
 
   const handleClick = (params: any) => {
     const weekIndex = params.dataIndex;

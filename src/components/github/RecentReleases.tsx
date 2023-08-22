@@ -6,22 +6,19 @@ import useRecentReleases from "@/models/github/useRecentReleases";
 // Models and Utils
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
-import ReleasesLoader from "@/modules/Loaders/github/ReleasesLoader";
+import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
 export default function RecentReleases() {
   const { recentReleases, isLoading } = useRecentReleases();
 
   if (isLoading)
-    return (
-      <ReleasesLoader
-        isLoading={isLoading}
-        element={<CardHeader title="Recent Releases" />}
-      />
-    );
+    return <CardLoader element={<CardHeader title="Recent Releases" />} />;
 
   if (!recentReleases)
-    return <NoData element={<CardHeader title="Recent Releases" />} />;
+    return (
+      <NoData element={<CardHeader title="Recent Releases" />} message="" />
+    );
 
   const latestRelease = recentReleases[0];
 

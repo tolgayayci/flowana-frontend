@@ -12,10 +12,13 @@ import NoData from "@/modules/NoData/NoData";
 export default function CodeFrequency() {
   const { codeFrequency, isLoading } = useCodeFrequency();
 
-  if (isLoading) return <CardLoader />;
+  if (isLoading)
+    return <CardLoader element={<CardHeader title="Code Frequency" />} />;
 
   if (!codeFrequency)
-    return <NoData element={<CardHeader title="Code Frequency" />} />;
+    return (
+      <NoData element={<CardHeader title="Code Frequency" />} message="" />
+    );
 
   const option = {
     xAxis: {

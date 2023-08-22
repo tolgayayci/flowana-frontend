@@ -11,7 +11,7 @@ const useContributors = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/contributors?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IContributors[]>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IContributors[]>(protocol ? url : null , fetcher);
 
     return {
         contributors: data,

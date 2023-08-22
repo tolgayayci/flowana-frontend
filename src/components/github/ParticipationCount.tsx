@@ -12,9 +12,12 @@ import NoData from "@/modules/NoData/NoData";
 export default function ParticipationCount() {
   const { participationCount, isLoading } = useParticipationCount();
 
-  if (isLoading) return <CardLoader />;
+  if (isLoading)
+    return <CardLoader element={<CardHeader title="Participation Count" />} />;
   if (!participationCount)
-    return <NoData element={<CardHeader title="Participation Count" />} />;
+    return (
+      <NoData element={<CardHeader title="Participation Count" />} message="" />
+    );
 
   const option = {
     tooltip: {

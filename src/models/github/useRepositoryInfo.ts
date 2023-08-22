@@ -11,7 +11,7 @@ const useRepositoryInfoModel = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/repository-info?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IRepositoryInfo, any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IRepositoryInfo, any>(protocol ? url : null , fetcher);
 
     console.log("data", data)
     console.log(protocol)

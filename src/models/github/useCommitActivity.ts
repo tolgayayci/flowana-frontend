@@ -11,7 +11,7 @@ const useCommitActivity = () => {
     const { protocol } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/commit-activity?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<ICommitActivity[], any>(repo ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICommitActivity[], any>(protocol ? url : null , fetcher);
 
     return {
         commitActivity: data,

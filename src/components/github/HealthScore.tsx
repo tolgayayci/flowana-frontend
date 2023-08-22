@@ -1,5 +1,6 @@
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
+import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
 // Hooks
@@ -8,9 +9,11 @@ import useHealthScore from "@/models/github/useHealthScore";
 export default function HealthScore() {
   const { healthScore, isLoading } = useHealthScore();
 
-  // if (isLoading) return <CardLoader />;
+  if (isLoading)
+    return <CardLoader element={<CardHeader title="Health Score" />} />;
+
   if (!healthScore)
-    return <NoData element={<CardHeader title="Health Score" />} />;
+    return <NoData element={<CardHeader title="Health Score" />} message="" />;
 
   function ProgressBar({ label, value }: { label: string; value: number }) {
     return (
@@ -32,7 +35,7 @@ export default function HealthScore() {
     <Layout>
       <CardHeader title="Flowana Health Score" />
       <div className="flex items-center space-x-12 mt-12">
-        <div className="flex flex-col items-center justify-center w-1/3 bg-gradient-to-br p-6 rounded-lg transition-shadow duration-300 ease-in-out">
+        <div className="flex flex-col items-center justify-center w-2/5 bg-gradient-to-br p-6 rounded-lg transition-shadow duration-300 ease-in-out">
           <p className="text-8xl font-extrabold text-sfgreen-800 mb-4">
             {healthScore?.grade}
           </p>
@@ -41,7 +44,7 @@ export default function HealthScore() {
           </p>
         </div>
 
-        <div className="flex flex-col space-y-4 w-2/3">
+        <div className="flex flex-col space-y-4 w-3/5">
           <ProgressBar
             label="Pull Requests"
             value={healthScore?.pull_request_activity as number}
