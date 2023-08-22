@@ -88,12 +88,17 @@ export default function Navbar() {
   const [navigation, setNavigation] = useState(filteredNavItems);
 
   useEffect(() => {
-    const currentHref = router.asPath.split("/")[2];
+    const currentHref =
+      "/" + router.asPath.split("/")[1] + "/" + router.asPath.split("/")[2];
+
+    console.log(currentHref);
 
     const updatedNavigation = navigation.map((item) => ({
       ...item,
       current: item.href === currentHref,
     }));
+
+    console.log(updatedNavigation);
 
     setNavigation(updatedNavigation);
   }, [router.asPath]);

@@ -25,33 +25,60 @@ export default function DevTypeTable() {
 
   return (
     <Layout>
-      <CardHeader title="Developer Type Table" />
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-xl shadow-md -m-10">
         <table className="w-full border-collapse table-auto">
           <thead>
-            <tr className="bg-gray-200 text-gray-600 text-left">
+            <tr className="bg-sfblue-800 text-white rounded-t-2xl">
               {devTypeTable?.header.map((item) => (
-                <th key={item.index} className="py-2 px-4 font-semibold">
+                <th
+                  key={item.index}
+                  className="py-3 px-6 font-bold text-sm uppercase tracking-wider rounded-t-lg"
+                >
                   {item.title}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="text-gray-700">
+          <tbody className="bg-white">
             {devTypeTable?.rows.map((row, index) => (
               <tr
                 key={index}
-                className={(index + 1) % 2 === 0 ? "bg-gray-100" : ""}
+                className={
+                  index === 3
+                    ? "bg-white"
+                    : (index + 1) % 2 === 0
+                    ? "bg-gray-50 border-sfblue-600 border-b-2"
+                    : "bg-white border-sfblue-600 border-b-2"
+                }
               >
-                {row.developer_type.map((type, typeIndex) => (
-                  <td key={typeIndex} className="py-2 px-4">
-                    {type}
-                  </td>
-                ))}
-                <td className="py-2 px-4">{row["jun-01_2023"]}</td>
-                <td className="py-2 px-4">{row["1y_%"]}%</td>
-                <td className="py-2 px-4">{row["2y_%"]}%</td>
-                <td className="py-2 px-4">{row["3y_%"]}%</td>
+                <td className="py-3 px-6 border-b font-medium text-gray-700">
+                  {row.developer_type[0]}
+                  <div className="text-xs text-gray-500 mt-1">
+                    {row.developer_type[1]}
+                  </div>
+                </td>
+                <td className="py-3 px-6 border-b">{row["jun-01_2023"]}</td>
+                <td
+                  className={`py-3 px-6 border-b ${
+                    row["1y_%"] < 0 ? "text-red-500" : "text-green-500"
+                  }`}
+                >
+                  {row["1y_%"] < 0 ? "↓" : "↑"} {Math.abs(row["1y_%"])}%
+                </td>
+                <td
+                  className={`py-3 px-6 border-b ${
+                    row["2y_%"] < 0 ? "text-red-500" : "text-green-500"
+                  }`}
+                >
+                  {row["2y_%"] < 0 ? "↓" : "↑"} {Math.abs(row["2y_%"])}%
+                </td>
+                <td
+                  className={`py-3 px-6 border-b ${
+                    row["3y_%"] < 0 ? "text-red-500" : "text-green-500"
+                  }`}
+                >
+                  {row["3y_%"] < 0 ? "↓" : "↑"} {Math.abs(row["3y_%"])}%
+                </td>
               </tr>
             ))}
           </tbody>

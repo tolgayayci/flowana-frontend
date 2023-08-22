@@ -13,14 +13,14 @@ export default function TotalCommits() {
   }
 
   return (
-    <Layout>
-      <div className="text-xl font-bold text-black-500 mb-2 truncate">
-        Total Commits
-      </div>
-      <div className="text-3xl font-bold text-blue-500 mb-2">
+    <div className="p-5 pl-6 border-2 border-sfgreen-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+      <div className="text-sfgreen-800 text-medium mb-3">Total Commits</div>
+      <div className="text-5xl font-bold text-sfblue-800 mb-3">
         {totalCommits?.count}
       </div>
-      <div className="text-gray-600 text-xs">{totalCommits?.subtitle}</div>
-    </Layout>
+      <div className="inline-block text-sfblack text-xs font-semibold bg-sfred-500 border-2 border-sfred-800 rounded-2xl px-2 py-0.5">
+        {totalCommits?.subtitle}
+      </div>
+    </div>
   );
 }

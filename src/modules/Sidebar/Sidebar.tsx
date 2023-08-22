@@ -13,12 +13,9 @@ export default function Sidebar({
   element: React.ReactNode | null;
 }) {
   const [currentSection, setCurrentSection] = useState(null);
-  const [updatedNavigation, setUpdatedNavigation] = useState([]);
   const sectionRefs = useRef({});
 
-  const OFFSET = 100;
-
-  const observeSections = () => {
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -27,7 +24,7 @@ export default function Sidebar({
           }
         });
       },
-      { threshold: 0.7 }
+      { threshold: 0.1 }
     );
 
     navigation.forEach((item) => {
@@ -43,26 +40,6 @@ export default function Sidebar({
         observer.unobserve(section);
       });
     };
-  };
-
-  useEffect(() => {
-    observeSections();
-  }, []);
-
-  useEffect(() => {
-    const updated = navigation.map((item) => {
-      const targetElement = document.querySelector(item.href) || null;
-      const targetPosition = targetElement ? targetElement.offsetTop : 0;
-      return {
-        ...item,
-        current: targetElement
-          ? window.scrollY >= targetPosition - OFFSET &&
-            window.scrollY <
-              targetPosition + targetElement.offsetHeight - OFFSET
-          : false,
-      };
-    });
-    setUpdatedNavigation(updated);
   }, [navigation]);
 
   function smoothScrollToSection(href: string) {
@@ -82,7 +59,7 @@ export default function Sidebar({
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
-                  {updatedNavigation.map((item) => (
+                  {navigation.map((item) => (
                     <li key={item.name}>
                       <a
                         href={item.href}
@@ -107,14 +84,6 @@ export default function Sidebar({
                           aria-hidden="true"
                         />
                         <span className="ml-4">{item.name}</span>
-                        {item.count ? (
-                          <span
-                            className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-indigo-600 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-indigo-500"
-                            aria-hidden="true"
-                          >
-                            {item.count}
-                          </span>
-                        ) : null}
                       </a>
                     </li>
                   ))}
