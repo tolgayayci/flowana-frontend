@@ -32,7 +32,7 @@ export default function DevTypeTable() {
               {devTypeTable?.header.map((item) => (
                 <th
                   key={item.index}
-                  className="py-3 px-6 font-bold text-sm uppercase tracking-wider rounded-t-lg"
+                  className="py-4 px-6 font-bold text-sm uppercase tracking-wider rounded-t-lg"
                 >
                   {item.title}
                 </th>
@@ -51,7 +51,7 @@ export default function DevTypeTable() {
                     : "bg-white border-sfblue-600 border-b-2"
                 }
               >
-                <td className="py-3 px-6 border-b font-medium text-gray-700">
+                <td className="py-4 px-6 border-b font-medium text-gray-700">
                   {row.developer_type[0]}
                   <div className="text-xs text-gray-500 mt-1">
                     {row.developer_type[1]}

@@ -7,6 +7,8 @@ import useDiscourseTopicActivity from "@/models/discourse/useDiscourseTopicActiv
 // Models and Utils
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
+import CardLoader from "@/modules/CardLoader/CardLoader";
+import NoData from "@/modules/NoData/NoData";
 
 // Types
 import { Interval } from "@/types/general";
@@ -19,25 +21,38 @@ const intervals: Interval[] = [
 ];
 
 export default function TopicActivity() {
-  const [selectedInterval, setSelectedInterval] = useState(intervals[1]);
+  const [selectedInterval, setSelectedInterval] = useState(intervals[2]);
   const { discourseTopicActivity, isLoading } = useDiscourseTopicActivity(
     selectedInterval.value
   );
 
   if (isLoading) {
     return (
-      <Layout>
+      <CardLoader
+        element={
+          <CardHeader
+            title="Topic Activity"
+            selectedInterval={selectedInterval}
+            setSelectedInterval={setSelectedInterval}
+            intervals={intervals}
+          />
+        }
+      />
+    );
+  }
+
+  if (!discourseTopicActivity) {
+    <NoData
+      element={
         <CardHeader
           title="Topic Activity"
           selectedInterval={selectedInterval}
           setSelectedInterval={setSelectedInterval}
           intervals={intervals}
         />
-        <div className="flex justify-center items-center h-96">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
-        </div>
-      </Layout>
-    );
+      }
+      message=""
+    />;
   }
 
   const option = {
@@ -45,33 +60,67 @@ export default function TopicActivity() {
     xAxis: {
       type: "category",
       data: discourseTopicActivity?.xAxis.data,
-      axisLabel: {
-        rotate: 45, // Rotate x-axis labels for better visibility
-      },
     },
     yAxis: {
       type: "value",
     },
-    legend: {
-      // Show the legend to display the series name
-      data: [discourseTopicActivity?.series[0]],
-    },
-    series: [
-      {
-        data: discourseTopicActivity?.series[0].data,
-        type: "line",
-        lineStyle: {
-          shadowColor: "rgba(0, 0, 0, 0.3)", // Shadow color
-          shadowBlur: 10, // Shadow blur size
-          shadowOffsetY: 8, // Shadow vertical offset
+    series: discourseTopicActivity!["series"].map((s) => ({
+      ...s,
+      name: "Topic Activity",
+      smooth: true, // This makes the lines smooth
+      itemStyle: {
+        color: "#DC5057", // sfred.900
+        shadowBlur: 10,
+        shadowOffsetX: 0,
+        shadowOffsetY: 3,
+        shadowColor: "rgba(0, 0, 0, 0.3)",
+      },
+      lineStyle: {
+        color: "#1D313B", // sfblue.900
+      },
+      areaStyle: {
+        color: "#2F5061", // sfblue.DEFAULT
+      },
+    })),
+    renderer: "svg",
+    tooltip: {
+      trigger: "axis",
+      axisPointer: {
+        type: "cross",
+        crossStyle: {
+          color: "#999",
         },
+      },
+    },
+    legend: {
+      show: true,
+      textStyle: {
+        color: "#2F5061", // sfblue.DEFAULT
+      },
+    },
+    dataZoom: [
+      // Slider
+      {
+        type: "slider",
+        start: 0,
+        end: 100,
+        handleStyle: {
+          color: "#E57F84", // sfred.800
+          shadowBlur: 3,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowOffsetX: 2,
+          shadowOffsetY: 2,
+        },
+      },
+      {
+        type: "inside",
       },
     ],
     grid: {
-      top: "10%", // Adjust the top margin of the chart
-      left: "3%", // Adjust the left margin of the chart
-      right: "3%", // Adjust the right margin of the chart
-      bottom: "3%", // Adjust the bottom margin of the chart
+      left: "1%",
+      right: "1%",
+      top: "14%",
+      bottom: "17%",
       containLabel: true,
     },
   };
