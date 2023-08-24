@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 //Hooks
-import useRecentReleases from "@/models/github/useRecentReleases";
+import useCumulativeRecentReleases from "@/models/githubCumulative/useCumulativeRecentReleases";
 
 // Models and Utils
 import Layout from "@/modules/Card/Layout/Layout";
@@ -10,7 +10,7 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
 export default function RecentReleases() {
-  const { recentReleases, isLoading } = useRecentReleases();
+  const { recentReleases, isLoading } = useCumulativeRecentReleases();
 
   if (isLoading)
     return <CardLoader element={<CardHeader title="Recent Releases" />} />;
@@ -25,7 +25,7 @@ export default function RecentReleases() {
   return (
     <Layout>
       <CardHeader title="Recent Releases" />
-      {/* <div className="max-h-[calc(5*6.2rem)] h-full">
+      <div className="max-h-[calc(5*6.2rem)] h-full">
         <ul className="flex flex-col h-full space-y-3">
           {recentReleases.slice(0, 5).map((release, index) => (
             <li
@@ -62,7 +62,7 @@ export default function RecentReleases() {
             </li>
           ))}
         </ul>
-      </div> */}
+      </div>
     </Layout>
   );
 }

@@ -2,7 +2,7 @@ import Head from "next/head";
 
 // Sidebar
 import Sidebar from "@/modules/Sidebar/Sidebar";
-import Loader from "@/modules/Loader/Loader";
+import SideInfo from "@/components/githubCumulative/SideInfo";
 
 // Github Ecosystem Components
 import CodeFrequency from "@/components/githubCumulative/CodeFrequency";
@@ -42,21 +42,9 @@ export default function Github() {
       current: false,
     },
     {
-      name: "Participation",
-      href: "#participation",
-      icon: ChartBarIcon,
-      current: false,
-    },
-    {
-      name: "Code Frequency",
-      href: "#code-frequency",
-      icon: ChartBarIcon,
-      current: false,
-    },
-    {
-      name: "Punch Card",
-      href: "#punch-card",
-      icon: ChartPieIcon,
+      name: "Recent Commits",
+      href: "#recent-commits",
+      icon: ListBulletIcon,
       current: false,
     },
     {
@@ -66,20 +54,8 @@ export default function Github() {
       current: false,
     },
     {
-      name: "Issue Count",
-      href: "#issue-count",
-      icon: ChartPieIcon,
-      current: false,
-    },
-    {
-      name: "Most Active Issues",
-      href: "#most-active-issues",
-      icon: ListBulletIcon,
-      current: false,
-    },
-    {
-      name: "Pull Request Count",
-      href: "#pull-request-count",
+      name: "Punch Card",
+      href: "#punch-card",
       icon: ChartPieIcon,
       current: false,
     },
@@ -90,15 +66,39 @@ export default function Github() {
       current: false,
     },
     {
+      name: "Issue Count",
+      href: "#issue-count",
+      icon: ChartPieIcon,
+      current: false,
+    },
+    {
+      name: "Pull Request Count",
+      href: "#pull-request-count",
+      icon: ChartPieIcon,
+      current: false,
+    },
+    {
       name: "Recent Pull Requests",
       href: "#recent-pull-requests",
       icon: ListBulletIcon,
       current: false,
     },
     {
-      name: "Recent Commits",
-      href: "#recent-commits",
+      name: "Participation",
+      href: "#participation",
+      icon: ChartBarIcon,
+      current: false,
+    },
+    {
+      name: "Most Active Issues",
+      href: "#most-active-issues",
       icon: ListBulletIcon,
+      current: false,
+    },
+    {
+      name: "Code Frequency",
+      href: "#code-frequency",
+      icon: ChartBarIcon,
       current: false,
     },
     {
@@ -117,10 +117,10 @@ export default function Github() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <section className="max-w-[90%] mx-auto mb-8 -mt-8 px-4 sm:px-6 lg:px-8 py-1">
+      <section className="max-w-[90%] mx-auto mb-8 -mt-6 px-4 sm:px-6 lg:px-8 py-1">
         <div className="grid grid-cols-5 gap-12">
           <div className="md:col-span-1 md:block hidden">
-            <Sidebar navigation={navigation} element />
+            <Sidebar navigation={navigation} element={<SideInfo />} />
           </div>
           <div className="md:col-span-4 col-span-5">
             <div className="flex flex-wrap space-y-10">
@@ -141,9 +141,9 @@ export default function Github() {
               <div id="punch-card" className="w-full">
                 <PunchCard />
               </div>
-              {/* <div id="code-frequency" className="w-full">
+              <div id="code-frequency" className="w-full">
                 <CodeFrequency />
-              </div> */}
+              </div>
               <div className="flex space-x-10 w-full">
                 <div id="recent-issues" className="w-full sm:w-2/3 h-full">
                   <RecentIssues />

@@ -1,7 +1,7 @@
 import ReactECharts from "echarts-for-react";
 
 // Hooks
-import useCodeFrequency from "@/models/github/useCodeFrequency";
+import useCumulativeCodeFrequency from "@/models/githubCumulative/useCumulativeCodeFrequency";
 
 // Modules and Utils
 import Layout from "@/modules/Card/Layout/Layout";
@@ -10,7 +10,7 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
 export default function CodeFrequency() {
-  const { codeFrequency, isLoading } = useCodeFrequency();
+  const { codeFrequency, isLoading } = useCumulativeCodeFrequency();
 
   if (isLoading)
     return <CardLoader element={<CardHeader title="Code Frequency" />} />;

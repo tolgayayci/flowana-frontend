@@ -7,22 +7,22 @@ const protocolInfos = {
   flow: {
     protocol_name: "Flow",
     image_url: "/flow-logo.png",
-    resource_link: "https://www.developerreport.com/ecosystems/flow",
+    forum_url: "#",
   },
   compound: {
     protocol_name: "Compound",
     image_url: "/compound-logo.png",
-    resource_link: "https://www.developerreport.com/ecosystems/compound",
+    forum_url: "#",
   },
   polkadot: {
     protocol_name: "Polkadot",
     image_url: "/polkadot-logo.jpg",
-    resource_link: "https://www.developerreport.com/ecosystems/polkadot",
+    forum_url: "#",
   },
   lens: {
     protocol_name: "Lens",
     image_url: "/lens-logo.jpg",
-    resource_link: "#",
+    forum_url: "#",
   },
 };
 
@@ -45,14 +45,14 @@ export default function SideInfo() {
           <p className="text-xl font-semibold truncate w-full mb-1">
             {protocolInfo.protocol_name}
           </p>
-          <p className="text-gray-500">Developer Report</p>
+          <p className="text-gray-500">Github Overview</p>
           <a
-            href={protocolInfo.resource_link}
+            href={protocolInfo.forum_url}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center mt-2.5 bg-sfred-500 border-2 border-sfred-800 text-sfblack px-3 py-0.5 rounded-xl text-sm font-semibold"
           >
-            Data: Electric Capital
+            Visit GitHub
           </a>
         </div>
       </div>

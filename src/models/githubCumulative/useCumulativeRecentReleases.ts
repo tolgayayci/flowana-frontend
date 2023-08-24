@@ -3,7 +3,7 @@ import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
 import { ICumulativeRecentReleases } from '@/types/githubCumulativeTypes';
 
-const useCumulativeRecentCommits = () => {
+const useCumulativeRecentReleases = () => {
     const router = useRouter();
     const { repo } = router.query;
 
@@ -20,4 +20,4 @@ const useCumulativeRecentCommits = () => {
     };
 }
 
-export default useCumulativeRecentCommits;
+export default useCumulativeRecentReleases;

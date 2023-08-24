@@ -14,6 +14,7 @@ export default function PullRequestCount() {
 
   if (isLoading)
     return <CardLoader element={<CardHeader title="Pull Request Count" />} />;
+
   if (!pullRequestCount)
     return (
       <NoData element={<CardHeader title="Pull Request Count" />} message="" />

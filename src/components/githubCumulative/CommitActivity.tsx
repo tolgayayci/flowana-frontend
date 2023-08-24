@@ -27,6 +27,7 @@ export default function CommitActivity() {
 
   if (isLoading)
     return <CardLoader element={<CardHeader title="Commit Activity" />} />;
+
   if (!commitActivity || !commitActivity[0].total)
     return (
       <NoData element={<CardHeader title="Commit Activity" />} message="" />

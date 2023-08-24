@@ -5,11 +5,8 @@ import Sidebar from "@/modules/Sidebar/Sidebar";
 import SideInfo from "@/components/developers/SideInfo";
 
 // Developer Components
+import Stats from "@/components/developers/Stats";
 import DevTypeTable from "@/components/developers/DevTypeTable";
-import FullTime from "@/components/developers/FullTime";
-import MonthlyActiveDevs from "@/components/developers/MonthlyActiveDevs";
-import TotalCommits from "@/components/developers/TotalCommits";
-import TotalRepos from "@/components/developers/TotalRepos";
 import MonthlyCommitsByDevTypeChart from "@/components/developers/MonthlyCommitsByDevTypeChart";
 import MonthlyActiveDevChart from "@/components/developers/MonthlyActiveDevChart";
 import MonthlyCommitsChart from "@/components/developers/MonthlyCommitsChart";
@@ -70,26 +67,15 @@ export default function Developers() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <section className="max-w-[90%] mx-auto my-12 px-4 sm:px-6 lg:px-8 py-1">
-        <div className="grid grid-cols-5 gap-8">
+      <section className="max-w-[90%] mx-auto mb-8 -mt-6 px-4 sm:px-6 lg:px-8 py-1">
+        <div className="grid grid-cols-5 gap-12">
           <div className="col-span-1">
             <Sidebar navigation={navigation} element={<SideInfo />} />
           </div>
           <div className="col-span-4">
             <div className="flex flex-wrap space-y-8">
-              <div id="stats" className="flex space-x-6 w-full">
-                <div className="w-full sm:w-1/2 md:w-1/4">
-                  <FullTime />
-                </div>
-                <div className="w-full sm:w-1/2 md:w-1/4">
-                  <MonthlyActiveDevs />
-                </div>
-                <div className="w-full sm:w-1/2 md:w-1/4">
-                  <TotalCommits />
-                </div>
-                <div className="w-full sm:w-1/2 md:w-1/4">
-                  <TotalRepos />
-                </div>
+              <div id="stats" className="w-full">
+                <Stats />
               </div>
               <div id="developer-types" className="w-full">
                 <DevTypeTable />

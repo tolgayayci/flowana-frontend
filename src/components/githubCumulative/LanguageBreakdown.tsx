@@ -14,6 +14,7 @@ export default function LanguageBreakdown() {
 
   if (isLoading)
     return <CardLoader element={<CardHeader title="Language Breakdown" />} />;
+
   if (!languageBreakdown)
     return (
       <NoData element={<CardHeader title="Language Breakdown" />} message="" />
@@ -45,11 +46,18 @@ export default function LanguageBreakdown() {
     };
   });
 
+  const topLegends = legendData.slice(0, 4);
+
   // Configure the chart options
   var option = {
     tooltip: {
       trigger: "item",
       formatter: "{b}: {c} ({d}%)",
+    },
+    legend: {
+      orient: "vertical",
+      right: "top",
+      data: topLegends, // Use the top 4 legends
     },
     series: [
       {
@@ -73,12 +81,14 @@ export default function LanguageBreakdown() {
   return (
     <Layout>
       <CardHeader title="Language Breakdown" />
-      <ReactECharts
-        option={option}
-        showLoading={isLoading}
-        style={{ minHeight: "350px", width: "100%" }}
-        notMerge={true}
-      />
+      <div className="h-full flex items-center -mt-8">
+        <ReactECharts
+          option={option}
+          showLoading={isLoading}
+          style={{ minHeight: "450px", width: "100%" }}
+          notMerge={true}
+        />
+      </div>
     </Layout>
   );
 }
