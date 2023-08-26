@@ -17,89 +17,101 @@ export default function PunchCard() {
   if (!punchCard)
     return <NoData element={<CardHeader title="Punch Card" />} message="" />;
 
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+  const hours = [
+    "12 am",
+    "1 am",
+    "2 am",
+    "3 am",
+    "4 am",
+    "5 am",
+    "6 am",
+    "7 am",
+    "8 am",
+    "9 am",
+    "10 am",
+    "11 am",
+    "12 pm",
+    "1 pm",
+    "2 pm",
+    "3 pm",
+    "4 pm",
+    "5 pm",
+    "6 pm",
+    "7 pm",
+    "8 pm",
+    "9 pm",
+    "10 pm",
+    "11 pm",
   ];
 
-  const hours = Array.from(Array(24).keys());
+  const days = [
+    "Saturday",
+    "Friday",
+    "Thursday",
+    "Wednesday",
+    "Tuesday",
+    "Monday",
+    "Sunday",
+  ];
 
-  const hoursFormatted = hours.map((hour) => {
-    if (hour === 0) {
-      return "12 am"; // Special case for midnight
-    } else if (hour < 12) {
-      return `${hour} am`; // Morning hours
-    } else if (hour === 12) {
-      return "12 pm"; // Special case for noon
-    } else {
-      return `${hour - 12} pm`; // Afternoon and evening hours
-    }
+  const data = punchCard.map((item) => {
+    return [item.hour, item.day, item.commits];
   });
 
   const option = {
     tooltip: {
       position: "top",
-      formatter: (params: any) => {
-        const day = punchCard.map((d) => [d.day, d.hour, d.commits]);
-        return `Number of commits on ${day[0]}, ${day[1]} ${day[2]}`;
-      },
-    },
-    legend: {
-      data: ["Number of Commits"], // add your legend title
-      align: "right",
-      textStyle: {
-        color: "#333333", // Using sfblack color
+      formatter: function (params: any) {
+        return (
+          params.value[2] +
+          " commits in " +
+          hours[params.value[0]] +
+          " of " +
+          days[params.value[1]]
+        );
       },
     },
     grid: {
       left: "1%",
-      right: "5%",
-      top: "3%",
-      bottom: "5%",
+      top: "5%",
+      bottom: "10%",
+      right: "1%",
       containLabel: true,
     },
     xAxis: {
       type: "category",
-      data: hoursFormatted,
-      boundaryGap: true,
-      splitArea: { show: true },
-      axisTick: { alignWithLabel: true },
+      data: hours,
+      boundaryGap: false,
+      splitLine: {
+        show: true,
+      },
+      axisLine: {
+        show: false,
+      },
     },
     yAxis: {
       type: "category",
       data: days,
-      splitArea: { show: true },
-    },
-    visualMap: {
-      min: 0,
-      max: Math.max(...punchCard.map((d) => d.commits)),
-      calculable: true,
-      orient: "vertical",
-      left: "95%",
-      bottom: "center",
-      inRange: {
-        color: ["#C9DBE5", "#2F5061"],
+      axisLine: {
+        show: false,
+      },
+      axisTick: {
+        show: false,
+      },
+      splitLine: {
+        show: false,
       },
     },
     series: [
       {
-        type: "heatmap",
-        data: punchCard.map((d) => [d.hour, d.day, d.commits]),
-        label: {
-          show: true,
-          color: "#000",
-          formatter: (params: any) => params.value[2],
+        name: "Punch Card",
+        type: "scatter",
+        symbolSize: function (val: any) {
+          return val[2] * 0.015; // Here, the dots will be one-tenth of their previous size.
         },
-        emphasis: {
-          itemStyle: {
-            borderColor: "#333333", // Using sfblack color for emphasis
-            borderWidth: 2,
-          },
+        data: data,
+        animationDelay: function (idx: any) {
+          return idx * 5;
         },
       },
     ],
@@ -111,7 +123,7 @@ export default function PunchCard() {
       <ReactECharts
         option={option}
         showLoading={isLoading}
-        style={{ minHeight: "350px", width: "100%" }}
+        style={{ minHeight: "450px", width: "100%" }}
         notMerge={true}
       />
     </Layout>

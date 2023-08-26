@@ -39,6 +39,18 @@ export default function CommitActivity() {
     setSelectedWeek(clickedWeek);
   };
 
+  const formatDateRange = (timestamp: number) => {
+    const startDate = new Date(timestamp * 1000); // start of the week
+    const endDate = new Date(timestamp * 1000 + 6 * 86400000); // end of the week
+
+    return `${startDate.getDate()} ${startDate.toLocaleString("default", {
+      month: "short",
+    })} ${startDate.getFullYear()} - ${endDate.getDate()} ${endDate.toLocaleString(
+      "default",
+      { month: "short" }
+    )} ${endDate.getFullYear()}`;
+  };
+
   const option = {
     tooltip: {
       trigger: "axis",
@@ -81,6 +93,8 @@ export default function CommitActivity() {
     },
   };
 
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
   const selectedWeekOption = {
     tooltip: {
       trigger: "axis",
@@ -93,14 +107,7 @@ export default function CommitActivity() {
     },
     xAxis: {
       type: "category",
-      data: selectedWeek
-        ? Array.from({ length: 7 }).map((_, i) => {
-            const date = new Date(selectedWeek.week * 1000 + i * 86400000); // 86400000 milliseconds = 1 day
-            return `${date.getDate()} ${date.toLocaleString("default", {
-              month: "short",
-            })} ${date.getFullYear()}`; // Format: "dd MMM yyyy"
-          })
-        : [],
+      data: days,
       axisLine: {
         lineStyle: {
           color: "#2F5061", // sfblue.DEFAULT
@@ -121,6 +128,7 @@ export default function CommitActivity() {
         type: "line",
         name: "Commit Count",
         smooth: true, // To make the line chart smooth
+        showSymbol: false, // To hide the dots on the line chart
         itemStyle: {
           color: "#DC5057", // sfred.900
           shadowBlur: 10,
@@ -156,9 +164,8 @@ export default function CommitActivity() {
       {selectedWeek && (
         <div className="border-sfblue-700 border-2 py-12 px-8 rounded-lg mt-4 mb-2">
           <CardHeader
-            title={`Week ${commitActivity.indexOf(selectedWeek) + 1} Details`}
+            title={`${formatDateRange(selectedWeek.week)} - Commit Activity`}
           />
-
           <ReactECharts
             option={selectedWeekOption}
             style={{ height: "200px" }}

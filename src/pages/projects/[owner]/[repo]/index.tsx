@@ -28,6 +28,8 @@ import HealthScore from "@/components/github/HealthScore";
 
 // Helper Components
 import Custom404 from "@/pages/404";
+import Closed404 from "@/components/github/Closed404";
+import Forked404 from "@/components/github/Forked404";
 import Loader from "@/modules/Loader/Loader";
 
 // Heroicons
@@ -45,13 +47,15 @@ export default function ProjectDetail() {
   const { repositoryInfo, isLoading } = useRepositoryInfoModel();
 
   if (isLoading) return <Loader />;
-  if (!repositoryInfo?.owner) return <Custom404 />;
+
+  if (!repositoryInfo) return <Custom404 />;
+
+  if (repositoryInfo.isClosed) {
+    return <Closed404 />;
+  }
+
   if (repositoryInfo.is_fork) {
-    return (
-      <h2>
-        This repository is forked, because of that details are not displaying
-      </h2>
-    );
+    return <Forked404 />;
   }
 
   const navigation = [

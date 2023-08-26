@@ -23,6 +23,8 @@ export interface IRepositoryInfo {
     is_empty: boolean;
     owner: string;
     repo: string;
+    isClosed?: boolean;
+    valid?: boolean;
 }
 
 interface GitHubFileInfo {

@@ -4,7 +4,7 @@ import { useState } from "react";
 // Hooks
 import useVotingPowerChart from "@/models/governance/useVotingPowerChart";
 
-// Models and Utils
+// Components and Utils
 import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 
@@ -22,13 +22,38 @@ export default function VotingPower() {
     selectedInterval.value
   );
 
+  // Convert timestamp to date
+  const convertTimestampToDate = (timestamp: string) => {
+    const date = new Date(timestamp);
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  };
+
+  // Extract and sort timestamps from the series
+  const sortedTimestamps = votingPowerChart?.series[0].data
+    .map((item) => item.timestamp)
+    .sort((a, b) => new Date(a) - new Date(b))
+    .map(convertTimestampToDate);
+
+  // Sort series by their data length and slice top 5 for legends
+  const sortedSeries = votingPowerChart?.series
+    .sort((a, b) => b.data.length - a.data.length)
+    .slice(0, 5);
+
+  const distinctColors = [
+    "#FF4500",
+    "#228B22",
+    "#4B0082",
+    "#FFD700",
+    "#1E90FF",
+  ];
+
   const option = {
     tooltip: {
       trigger: "axis",
       formatter: "{b}<br/>{a0}: {c0}<br/>{a1}: {c1}",
     },
     legend: {
-      data: votingPowerChart?.series.map((item) => item.name),
+      data: sortedSeries?.map((item) => item.name),
       textStyle: {
         color: "#666",
         fontSize: 14,
@@ -36,14 +61,17 @@ export default function VotingPower() {
     },
     xAxis: {
       type: "category",
-      data: votingPowerChart?.series[0].data.map((item) => item.timestamp),
-      axisLabel: {
-        textStyle: {
-          color: "#666",
-          fontSize: 12,
-        },
-      },
+      data: sortedTimestamps,
+      // ... the rest of your xAxis options ...
     },
+    series: sortedSeries?.map((item, index) => ({
+      name: item.name,
+      type: "line",
+      data: item.data.map((point) => point.balance),
+      itemStyle: {
+        color: distinctColors[index],
+      },
+    })),
     yAxis: {
       type: "value",
       axisLabel: {
@@ -53,12 +81,31 @@ export default function VotingPower() {
         },
       },
     },
-    series: votingPowerChart?.series.map((item) => ({
-      name: item.name,
-      type: "line",
-      data: item.data.map((point) => point.balance),
-    })),
-    color: ["#FF6A4D", "#0066CC", "#44AD52", "#FFC107", "#FF5722"], // Custom color scheme
+    dataZoom: [
+      // Slider
+      {
+        type: "slider",
+        start: 0,
+        end: 100,
+        handleStyle: {
+          color: "#E57F84", // sfred.800
+          shadowBlur: 3,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowOffsetX: 2,
+          shadowOffsetY: 2,
+        },
+      },
+      {
+        type: "inside",
+      },
+    ],
+    grid: {
+      left: "1%",
+      right: "1%",
+      top: "14%",
+      bottom: "20%",
+      containLabel: true,
+    },
   };
 
   return (
@@ -72,7 +119,7 @@ export default function VotingPower() {
       <ReactECharts
         option={option}
         showLoading={isLoading}
-        style={{ minHeight: "350px", width: "100%" }}
+        style={{ minHeight: "400px", width: "100%" }}
         notMerge={true}
       />
     </Layout>

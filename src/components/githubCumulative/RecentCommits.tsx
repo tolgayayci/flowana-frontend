@@ -33,7 +33,7 @@ export default function RecentCommits() {
           {recentCommits.map((commit) => (
             <li
               key={commit.url}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-sfblue-600"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600"
             >
               <Link
                 href={commit.url}

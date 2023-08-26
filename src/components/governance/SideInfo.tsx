@@ -12,7 +12,7 @@ const protocolInfos = {
   compound: {
     protocol_name: "Compound",
     image_url: "/compound-logo.png",
-    forum_url: "#",
+    forum_url: "https://www.tally.xyz/gov/compound",
   },
   polkadot: {
     protocol_name: "Polkadot",
@@ -45,14 +45,14 @@ export default function SideInfo() {
           <p className="text-xl font-semibold truncate w-full mb-1">
             {protocolInfo.protocol_name}
           </p>
-          <p className="text-gray-500">Github Overview</p>
+          <p className="text-gray-500">Governance Analysis</p>
           <a
             href={protocolInfo.forum_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="items-center mt-2.5 bg-sfred-500 border-2 border-sfred-800 text-sfblack px-3 py-0.5 rounded-xl text-sm font-semibold inline-block"
+            className="flex items-center mt-2.5 bg-sfred-500 border-2 border-sfred-800 text-sfblack px-3 py-0.5 rounded-xl text-sm font-semibold"
           >
-            Visit GitHub
+            Data: Tally
           </a>
         </div>
       </div>

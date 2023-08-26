@@ -29,3 +29,10 @@
   opacity: 0.01;
   transition: opacity 500ms ease-in;
 }
+
+.truncate-2-lines {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}

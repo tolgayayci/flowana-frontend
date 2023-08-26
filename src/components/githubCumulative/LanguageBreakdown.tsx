@@ -20,33 +20,24 @@ export default function LanguageBreakdown() {
       <NoData element={<CardHeader title="Language Breakdown" />} message="" />
     );
 
-  // Color palette based on the provided styles
-  const colorPalette = [
-    "#2F5061",
-    "#5B93AF",
-    "#4A7D98", // sfblue
-    "#4297A0",
-    "#8DC9D0",
-    "#70BCC4", // sfgreen
-    "#FAE5E6",
-    "#ECA1A5",
-    "#E57F84", // sfred
-  ];
+  // Sort the data by size in descending order
+  const sortedData = [...languageBreakdown].sort((a, b) => b.size - a.size);
 
-  // Generate legend data
-  const legendData = languageBreakdown.map(function (item) {
-    return item.name;
-  });
+  // Generate legend data for top 5 languages
+  const topLegends = sortedData.slice(0, 4).map((item) => item.name);
 
-  // Generate series data
-  const seriesData = languageBreakdown.map(function (item) {
+  const topLanguageName = sortedData[0].name; // Get the name of the top language
+
+  // Generate series data for all languages
+  const allSeriesData = languageBreakdown.map((item) => {
+    let isSelected = item.name === topLanguageName;
     return {
       name: item.name,
       value: item.size,
+      selected: isSelected,
+      itemStyle: isSelected ? { borderWidth: 2 } : {}, // Optional: Highlight selected item with a border
     };
   });
-
-  const topLegends = legendData.slice(0, 4);
 
   // Configure the chart options
   var option = {
@@ -55,25 +46,51 @@ export default function LanguageBreakdown() {
       formatter: "{b}: {c} ({d}%)",
     },
     legend: {
-      orient: "vertical",
-      right: "top",
-      data: topLegends, // Use the top 4 legends
+      top: "2%",
+      left: "center",
+      data: topLegends,
     },
     series: [
       {
-        name: "File Size",
+        name: "Access From",
         type: "pie",
-        radius: "55%",
-        center: ["50%", "60%"],
-        data: seriesData,
-        color: colorPalette, // Using the defined color palette
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        selectedMode: "single", // This allows for only one slice to be selected at a time
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: true,
+          position: "center",
+          formatter: function (params: any) {
+            if (params.data.selected) {
+              return params.name;
+            } else {
+              return "";
+            }
+          },
+          fontSize: 20,
+          fontWeight: "normal",
+        },
         emphasis: {
+          label: {
+            show: true,
+            fontSize: 20,
+            fontWeight: "normal",
+          },
           itemStyle: {
-            shadowBlur: 10,
+            shadowBlur: 5,
             shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
+            shadowColor: "rgba(0, 0, 0, 0.25)",
           },
         },
+        labelLine: {
+          show: false,
+        },
+        data: allSeriesData,
       },
     ],
   };

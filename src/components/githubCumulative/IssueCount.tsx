@@ -41,7 +41,11 @@ export default function IssueCount() {
         ],
         color: ["#5B93AF", "#ECA1A5"], // sfblue.500 for "Others" and sfgreen.500 for "Owner"
         label: {
-          formatter: "{b}: {d}%",
+          show: true,
+          formatter(param: any) {
+            // correct the percentage
+            return param.name + " (" + param.percent * 2 + "%)";
+          },
         },
         itemStyle: {
           emphasis: {

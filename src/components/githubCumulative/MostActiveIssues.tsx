@@ -23,7 +23,7 @@ const intervals: Interval[] = [
 ];
 
 export default function MostActiveIssues() {
-  const [selectedInterval, setSelectedInterval] = useState(intervals[2]);
+  const [selectedInterval, setSelectedInterval] = useState(intervals[3]);
   const { mostActiveIssues, isLoading } = useCumulativeMostActiveIssues(
     selectedInterval.value
   );
@@ -70,7 +70,7 @@ export default function MostActiveIssues() {
           {mostActiveIssues?.map((issue) => (
             <li
               key={issue.number}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-sfblue-600"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600"
             >
               <Link
                 href={issue.url}

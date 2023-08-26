@@ -22,7 +22,7 @@ export default function Categories() {
     return <NoData element={<CardHeader title="Categories" />} message="" />;
   }
 
-  const handleChartClick = (params) => {
+  const handleChartClick = (params: any) => {
     const category = discourseCategories.find(
       (cat) => cat.name === params.name
     );
