@@ -9,6 +9,9 @@ import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
+import { AiFillGithub, AiFillCalendar, AiFillRocket } from "react-icons/ai";
+import { formatChartDate } from "@/utils/functions";
+
 export default function RecentReleases() {
   const { recentReleases, isLoading } = useCumulativeRecentReleases();
 
@@ -27,13 +30,11 @@ export default function RecentReleases() {
       <CardHeader title="Recent Releases" />
       <div className="max-h-[calc(5*6.2rem)] h-full">
         <ul className="flex flex-col h-full space-y-3">
-          {recentReleases.slice(0, 5).map((release, index) => (
+          {recentReleases.slice(0, 5).map((release) => (
             <li
               key={release.tag_name}
-              className={`border border-gray-200 rounded-lg p-4 flex justify-between items-center ${
-                release === latestRelease ? "bg-sfblue-100" : ""
-              }`}
-              style={{ flex: 1 }} // Added style to make the item fill available height
+              className={`border border-gray-200 rounded-lg p-4 flex justify-between items-center`}
+              style={{ flex: 1 }}
             >
               <Link
                 href={release.url}
@@ -41,22 +42,22 @@ export default function RecentReleases() {
                 rel="noopener noreferrer"
                 className="flex flex-col w-full"
               >
-                <div className="flex flex-col">
-                  <span
-                    className={`text-sfblue-800 font-semibold truncate ${
-                      release === latestRelease ? "text-indigo-800" : ""
-                    }`}
-                  >
-                    {release.name}
-                    {index === 0 && (
-                      <span className="bg-green-500 text-white text-xs font-semibold px-2 py-1 ml-2 rounded">
-                        Latest
-                      </span>
-                    )}
+                <div className="flex flex-col items-start">
+                  <span className="text-sfblue-800 font-semibold mb-2">
+                    <AiFillRocket className="inline mr-1" />
+
+                    {release.tag_name}
                   </span>
-                  <p className="text-gray-500 text-sm truncate">
-                    Published: {new Date(release.published_at).toDateString()}
-                  </p>
+                  <div className="flex space-x-2 items-center">
+                    <span className="bg-indigo-200 border border-indigo-300 text-indigo-800 text-xs font-semibold px-2 py-0.5 rounded">
+                      <AiFillGithub className="inline mr-1" />
+                      {release.repo}
+                    </span>
+                    <span className="bg-blue-200 border border-blue-300 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded">
+                      <AiFillCalendar className="inline mr-1" />
+                      {formatChartDate(release.published_at)}
+                    </span>
+                  </div>
                 </div>
               </Link>
             </li>

@@ -14,6 +14,7 @@ export default function PunchCard() {
 
   if (isLoading)
     return <CardLoader element={<CardHeader title="Punch Card" />} />;
+
   if (!punchCard)
     return <NoData element={<CardHeader title="Punch Card" />} message="" />;
 

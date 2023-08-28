@@ -15,45 +15,46 @@ export default function IssueCount() {
   if (isLoading)
     return <CardLoader element={<CardHeader title="Issue Count" />} />;
 
-  if (!IssueCount)
+  if (!issueCount)
     return <NoData element={<CardHeader title="Issue Count" />} message="" />;
 
   const option = {
     tooltip: {
       trigger: "item",
-      formatter: "{b}: {c} ({d}%)",
     },
     legend: {
-      orient: "horizontal",
-      top: "top",
+      top: "0%",
       left: "center",
-      data: ["Open", "Closed"], // Add legend data
     },
     series: [
       {
-        name: "Status",
+        name: "Issue Count",
         type: "pie",
-        radius: "55%",
-        center: ["50%", "50%"], // Update the center property to center the pie chart
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 20,
+            fontWeight: "bold",
+          },
+        },
+        labelLine: {
+          show: false,
+        },
         data: [
           { value: issueCount?.closed, name: "Closed" },
           { value: issueCount?.open, name: "Open" },
         ],
-        color: ["#5B93AF", "#ECA1A5"], // sfblue.500 for "Others" and sfgreen.500 for "Owner"
-        label: {
-          show: true,
-          formatter(param: any) {
-            // correct the percentage
-            return param.name + " (" + param.percent * 2 + "%)";
-          },
-        },
-        itemStyle: {
-          emphasis: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
-          },
-        },
       },
     ],
   };

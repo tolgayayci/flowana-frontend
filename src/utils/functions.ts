@@ -21,6 +21,11 @@ export const formatDistanceToNow = (dateString: string) => {
     }
 };
 
+export function formatChartDate(dateString: string) {
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}
+
 export function getAppIdForProtocol(protocol: string) {
     switch (protocol) {
        case 'polkadot': return process.env.NEXT_PUBLIC_POLKADOT_ALGOLIA_APP_ID as string;

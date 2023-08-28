@@ -63,23 +63,14 @@ export default function LanguageBreakdown() {
           borderWidth: 2,
         },
         label: {
-          show: true,
+          show: false,
           position: "center",
-          formatter: function (params: any) {
-            if (params.data.selected) {
-              return params.name;
-            } else {
-              return "";
-            }
-          },
-          fontSize: 20,
-          fontWeight: "normal",
         },
         emphasis: {
           label: {
             show: true,
             fontSize: 20,
-            fontWeight: "normal",
+            fontWeight: "bold",
           },
           itemStyle: {
             shadowBlur: 5,

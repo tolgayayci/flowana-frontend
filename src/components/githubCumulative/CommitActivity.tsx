@@ -139,9 +139,6 @@ export default function CommitActivity() {
         lineStyle: {
           color: "#1D313B", // sfblue.900
         },
-        areaStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
-        },
       },
     ],
     grid: {

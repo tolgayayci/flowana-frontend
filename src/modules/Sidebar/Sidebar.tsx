@@ -54,7 +54,7 @@ export default function Sidebar({
     <>
       <div className={`w-full ${element ? "mb-6" : null}`}>{element}</div>
       <div className="sticky top-[180px]">
-        <div className=" h-auto shadow-xl p-8 border-2 bg-sfblue-400 border-sfblue-800 tracking-wide rounded-2xl">
+        <div className=" h-auto shadow-xl p-8 border-2  border-sfblue-800 tracking-wide rounded-2xl">
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
@@ -83,7 +83,7 @@ export default function Sidebar({
                           )}
                           aria-hidden="true"
                         />
-                        <span className="ml-4">{item.name}</span>
+                        <span className="ml-1">{item.name}</span>
                       </a>
                     </li>
                   ))}

@@ -46,13 +46,12 @@ module.exports = {
           950: '#D73941'
         },
         sfgray: "#FFCDB2",
-        sfblack: "#333333"
+        sfblack: "rgba(51, 51, 51, 0.5)"
       },
       fontFamily: {
         'cabin': ['"Cabin"', 'sans-serif'],
       },
     },
-    
   },
   plugins: [],
 }

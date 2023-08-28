@@ -12,9 +12,9 @@ function StatItem({ title, count }: { title: string; count: number }) {
 
   return (
     <div className="col-span-1">
-      <div className="p-5 pl-6 border-2 border-sfgreen-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+      <div className="p-5 pl-6 border-2 border-sfblack rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
         <div className="text-sfgreen-800 text-medium mb-5">{title}</div>
-        <div className="text-5xl font-bold text-sfblue-800 mb-3">
+        <div className="text-5xl font-bold text-[#333333] mb-3">
           <div>{formattedCount}</div>
         </div>
         {/* <div className="inline-block text-sfblack text-xs font-semibold bg-sfred-500 border-2 border-sfred-800 rounded-2xl px-2 py-0.5">

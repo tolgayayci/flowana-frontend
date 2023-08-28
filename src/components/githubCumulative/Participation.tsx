@@ -14,6 +14,7 @@ export default function Participation() {
 
   if (isLoading)
     return <CardLoader element={<CardHeader title="Participation" />} />;
+
   if (
     !participation ||
     !participation.xAxis ||
@@ -33,21 +34,58 @@ export default function Participation() {
         },
       },
     },
+    legend: {
+      data: participation.series.map((series) => series.name),
+      textStyle: {
+        color: "#2F5061", // sfblue.DEFAULT
+      },
+      top: "0%",
+      left: "center",
+    },
     xAxis: {
       type: "category",
       data: participation["xAxis"]["data"],
+      axisLine: {
+        lineStyle: {
+          color: "#2F5061",
+        },
+      },
+      axisTick: {
+        alignWithLabel: true,
+        lineStyle: {
+          color: "#2F5061",
+        },
+      },
     },
     yAxis: {
       type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#2F5061",
+        },
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#2F5061",
+        },
+      },
     },
-    series: participation.series.map((series) => ({
+    series: participation.series.map((series, index) => ({
       name: series.name,
       type: "line",
+      smooth: true,
       areaStyle: {}, // Area style can give a better visual presentation for issue activities
       emphasis: {
         focus: "series",
       },
       data: series.data,
+      lineStyle: {
+        color: index === 0 ? "#28A745" : index === 1 ? "#ECA1A5" : "#5B93AF",
+        width: 2,
+      },
+      itemStyle: {
+        color: index === 0 ? "#28A745" : index === 1 ? "#ECA1A5" : "#5B93AF",
+      },
     })),
     renderer: "svg",
     dataZoom: [
@@ -59,7 +97,7 @@ export default function Participation() {
         handleStyle: {
           color: "#E57F84", // sfred.800
           shadowBlur: 3,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowColor: "rgba(0, 0, 0, 1)",
           shadowOffsetX: 2,
           shadowOffsetY: 2,
         },
@@ -71,7 +109,7 @@ export default function Participation() {
     grid: {
       left: "1%",
       right: "1%",
-      top: "5%",
+      top: "13%",
       bottom: "20%",
       containLabel: true,
     },
@@ -83,7 +121,7 @@ export default function Participation() {
       <ReactECharts
         option={option}
         showLoading={isLoading}
-        style={{ minHeight: "350px", width: "100%" }}
+        style={{ minHeight: "400px", width: "100%" }}
         notMerge={true}
       />
     </Layout>

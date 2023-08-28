@@ -32,7 +32,7 @@ export default function SideInfo() {
   const protocolInfo = protocolInfos[protocol["protocol"]];
 
   return (
-    <div className="border-2 border-sfblue-800 bg-sfblue-400 text-sfblue-900 rounded-2xl p-5 h-full shadow-xl bg-white-100">
+    <div className="border-2 border-sfblue-800 text-sfblue-900 rounded-2xl p-5 h-full shadow-xl bg-white-100">
       <div className="flex items-center">
         <Image
           src={protocolInfo.image_url}
@@ -50,7 +50,7 @@ export default function SideInfo() {
             href={protocolInfo.forum_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="items-center mt-2.5 bg-sfred-500 border-2 border-sfred-800 text-sfblack px-3 py-0.5 rounded-xl text-sm font-semibold inline-block"
+            className="items-center mt-2.5 bg-sfred-500 border-2 border-sfred-800 text-black px-3 py-0.5 rounded-xl text-sm font-semibold inline-block"
           >
             Visit GitHub
           </a>

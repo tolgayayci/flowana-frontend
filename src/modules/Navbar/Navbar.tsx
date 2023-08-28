@@ -127,11 +127,11 @@ export default function Navbar() {
   return (
     <>
       <div className="sticky top-0 left-0 right-0 z-10">
-        <Disclosure as="nav" className="bg-sfblue">
+        <Disclosure as="nav" className="bg-[#2A3855]">
           {({ open }) => (
             <>
               <div className="mx-auto px-4 sm:px-6 lg:px-8 py-1 max-w-[90%]">
-                <div className="flex h-16 items-center justify-between">
+                <div className="flex h-16 items-center justify-between my-2">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <Link href="/">

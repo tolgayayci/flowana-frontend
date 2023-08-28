@@ -23,34 +23,40 @@ export default function PullRequestCount() {
   const option = {
     tooltip: {
       trigger: "item",
-      formatter: "{b}: {c} ({d}%)",
     },
     legend: {
-      orient: "horizontal",
-      top: "top",
-      x: "center",
-      data: ["Closed", "Open"],
+      top: "0%",
+      left: "center",
     },
     series: [
       {
-        name: "Issue Status",
+        name: "Pull Request Count",
         type: "pie",
-        radius: "55%",
-        center: ["50%", "50%"],
-        data: [
-          { value: pullRequestCount.closed, name: "Closed" },
-          { value: pullRequestCount.open, name: "Open" },
-        ],
-        color: ["#5B93AF", "#ECA1A5"], // sfblue.500 for "Others" and sfgreen.500 for "Owner"
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
         label: {
-          formatter: "{b}: {d}%",
+          show: false,
+          position: "center",
         },
         emphasis: {
           label: {
             show: true,
+            fontSize: 20,
             fontWeight: "bold",
           },
         },
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: pullRequestCount?.closed, name: "Closed" },
+          { value: pullRequestCount?.open, name: "Open" },
+        ],
       },
     ],
   };
