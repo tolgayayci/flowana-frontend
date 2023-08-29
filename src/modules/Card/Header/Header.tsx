@@ -11,10 +11,10 @@ const CardHeader: React.FC<ICardHeader> = ({
   intervals,
 }) => {
   return (
-    <div className="flex justify-between items-center mb-8 bg-[#3C4D6E] rounded-md px-4 py-1">
+    <div className="flex justify-between items-center mb-6 bg-[#3C4D6E] rounded-md px-4 py-1">
       <h1
         className={`${
-          !intervals ? "w-full" : "w-2/3"
+          !intervals ? "w-full" : "w-3/4"
         } font-semibold text-md text-white tracking-wider uppercase ${
           !intervals ? "py-1" : ""
         }`}
@@ -25,8 +25,8 @@ const CardHeader: React.FC<ICardHeader> = ({
         <Listbox value={selectedInterval} onChange={setSelectedInterval}>
           {({ open }) => (
             <>
-              <div className="relative w-1/3">
-                <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <div className="relative w-1/4 max-w-xs">
+                <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 py-1.5 my-1 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <span className="block truncate">
                     {selectedInterval?.name}
                   </span>

@@ -9,6 +9,8 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
 import NoData from "@/modules/NoData/NoData";
 
+import { formatChartDate } from "@/utils/functions";
+
 export default function MonthlyCommitsByDevTypeChart() {
   const { monthlyCommitsByDevTypeChart, isLoading } =
     useDevelopersMonthlyCommitsByDevTypeChart();
@@ -33,7 +35,7 @@ export default function MonthlyCommitsByDevTypeChart() {
   // Convert the data into the format required by ECharts
   const seriesData = monthlyCommitsByDevTypeChart?.series.map((series) =>
     series.data.map((point) => ({
-      name: new Date(point.date).toISOString().slice(0, 10),
+      name: formatChartDate(point.date),
       value: point.value,
     }))
   );
@@ -44,33 +46,63 @@ export default function MonthlyCommitsByDevTypeChart() {
     },
     xAxis: {
       type: "category",
-      data: seriesData?.[0]?.map((point) => point.name), // Assuming all series have the same data points
+      data: seriesData?.[0]?.map((point) => point.name),
+      axisLine: {
+        lineStyle: {
+          color: "#2F5061",
+        },
+      },
+      axisTick: {
+        alignWithLabel: true,
+        lineStyle: {
+          color: "#2F5061",
+        },
+      },
     },
     yAxis: {
       type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#2F5061",
+        },
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#2F5061",
+        },
+      },
+    },
+    legend: {
+      data: monthlyCommitsByDevTypeChart.series.map((series) => series.name),
+      textStyle: {
+        color: "#2F5061", // sfblue.DEFAULT
+      },
+      top: "0%",
+      left: "center",
     },
     series: monthlyCommitsByDevTypeChart?.series.map((series, index) => ({
       name: series.name,
       type: "line",
-      data: seriesData?.[index]?.map((point) => point.value),
       smooth: true,
-      areaStyle: {
-        color: `rgba(152, 83, 150, ${(index + 1) * 0.2})`, // Varying opacity for each series
+      showSymbol: false,
+      areaStyle: {}, // Area style can give a better visual presentation for issue activities
+      emphasis: {
+        focus: "series",
+      },
+      data: series.data,
+      lineStyle: {
+        color: index === 0 ? "#28A745" : index === 1 ? "#ECA1A5" : "#5B93AF",
+        width: 2,
       },
       itemStyle: {
-        shadowBlur: 10,
-        shadowColor: "rgba(0, 0, 0, 0.3)",
-      },
-      lineStyle: {
-        shadowBlur: 5,
-        shadowColor: "rgba(0, 0, 0, 0.1)",
+        color: index === 0 ? "#28A745" : index === 1 ? "#ECA1A5" : "#5B93AF",
       },
     })),
     dataZoom: [
       // Slider
       {
         type: "slider",
-        start: 0,
+        start: 75,
         end: 100,
         handleStyle: {
           color: "#E57F84", // sfred.800
@@ -87,8 +119,8 @@ export default function MonthlyCommitsByDevTypeChart() {
     grid: {
       left: "1%",
       right: "1%",
-      top: "10%",
-      bottom: "17%",
+      top: "13%",
+      bottom: "20%",
       containLabel: true,
     },
   };
@@ -99,7 +131,7 @@ export default function MonthlyCommitsByDevTypeChart() {
       <ReactECharts
         option={option}
         showLoading={isLoading}
-        style={{ minHeight: "350px", width: "100%" }}
+        style={{ minHeight: "400px", width: "100%" }}
         notMerge={true}
       />
     </Layout>

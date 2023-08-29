@@ -12,6 +12,7 @@ import NoData from "@/modules/NoData/NoData";
 
 // Types
 import { Interval } from "@/types/general";
+import { formatChartDate } from "@/utils/functions";
 
 const intervals: Interval[] = [
   { name: "Day", value: "daily" },
@@ -59,7 +60,9 @@ export default function TopicActivity() {
     color: "#1890FF", // Line color
     xAxis: {
       type: "category",
-      data: discourseTopicActivity?.xAxis.data,
+      data: discourseTopicActivity?.xAxis.data.map((date) =>
+        formatChartDate(date)
+      ),
     },
     yAxis: {
       type: "value",
@@ -68,6 +71,7 @@ export default function TopicActivity() {
       ...s,
       name: "Topic Activity",
       smooth: true, // This makes the lines smooth
+      showSymbol: false, // This removes the dots on the line
       itemStyle: {
         color: "#DC5057", // sfred.900
         shadowBlur: 10,
@@ -77,9 +81,7 @@ export default function TopicActivity() {
       },
       lineStyle: {
         color: "#1D313B", // sfblue.900
-      },
-      areaStyle: {
-        color: "#2F5061", // sfblue.DEFAULT
+        width: 3,
       },
     })),
     renderer: "svg",
@@ -90,12 +92,6 @@ export default function TopicActivity() {
         crossStyle: {
           color: "#999",
         },
-      },
-    },
-    legend: {
-      show: true,
-      textStyle: {
-        color: "#2F5061", // sfblue.DEFAULT
       },
     },
     dataZoom: [
@@ -119,8 +115,8 @@ export default function TopicActivity() {
     grid: {
       left: "1%",
       right: "1%",
-      top: "14%",
-      bottom: "17%",
+      top: "5%",
+      bottom: "20%",
       containLabel: true,
     },
   };

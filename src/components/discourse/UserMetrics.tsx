@@ -34,7 +34,7 @@ export default function UserMetrics() {
               {discourseUserMetrics.users_total_likes_received}
             </span>
             <span className="bg-yellow-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-              {discourseUserMetrics.users_total_likes_given}
+              {discourseUserMetrics.users_total_likes_received}
             </span>
             <span className="bg-yellow-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
               {discourseUserMetrics.users_average_likes_received.toFixed(2)}

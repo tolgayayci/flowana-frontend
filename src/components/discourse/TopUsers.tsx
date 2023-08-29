@@ -15,6 +15,16 @@ import NoListData from "@/modules/NoData/NoListData";
 // Types
 import { Interval, Order } from "@/types/general";
 
+import {
+  FaComments,
+  FaReply,
+  FaEye,
+  FaHeart,
+  FaThumbsUp,
+  FaBook,
+} from "react-icons/fa";
+import { formatBadgeStatsCount } from "@/utils/functions";
+
 const intervals: Interval[] = [
   { name: "Day", value: "daily" },
   { name: "Week", value: "weekly" },
@@ -52,6 +62,21 @@ const forumInfos = {
     logo: "/lens-logo.jpg",
   },
 };
+
+function CountIcon({ icon, count, tooltip }) {
+  return (
+    <span className="w-12 flex justify-center items-center group relative">
+      {icon}
+      <span className="ml-1">{formatBadgeStatsCount(count)}</span>
+
+      {/* Tooltip */}
+      <span className="group-hover:opacity-100 opacity-0 bg-gray-800 text-white text-xs rounded py-1 px-2 absolute top-1/2 transform -translate-y-1/2 z-20">
+        {" "}
+        {tooltip}
+      </span>
+    </span>
+  );
+}
 
 export default function TopUsers() {
   const [selectedInterval, setSelectedInterval] = useState(intervals[4]);
@@ -103,7 +128,7 @@ export default function TopUsers() {
           {topUsers.map((user) => (
             <li
               key={user.id}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-sfblue-600"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600"
             >
               <Link
                 href={forumInfo.forum_url + "u/" + user.username}
@@ -111,7 +136,7 @@ export default function TopUsers() {
                 className="block hover:no-underline"
               >
                 <div className="flex justify-between">
-                  <div className="flex items-center space-x-2 w-2/3">
+                  <div className="flex items-center space-x-2 w-1/2">
                     <Image
                       src={
                         forumInfo.forum_url +
@@ -132,13 +157,41 @@ export default function TopUsers() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/3 justify-end">
-                    <span className="mr-2 px-2 py-1 bg-red-200 border-2 border-red-400 text-red-700 rounded-md text-xs">
-                      Likes Given: {user.likes_received}
+                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
+                    <span className="bg-pink-300 border border-pink-500 text-pink-800 text-xs font-semibold px-2 py-1 rounded relative group">
+                      <CountIcon
+                        icon={<FaThumbsUp className="inline" />}
+                        count={user.likes_given}
+                        tooltip="Given likes"
+                      />
                     </span>
-                    <span className="px-2 py-1 bg-indigo-200 border-2 border-indigo-400 text-indigo-700 rounded-md text-xs">
-                      {user.post_count}{" "}
-                      {user.post_count !== 1 ? "posts" : "post"}
+                    <span className="bg-red-300 border border-red-500 text-red-800 text-xs font-semibold px-2 py-1 rounded relative group">
+                      <CountIcon
+                        icon={<FaHeart className="inline" />}
+                        count={user.likes_received}
+                        tooltip="Received likes"
+                      />
+                    </span>
+                    <span className="bg-green-300 border border-green-500 text-green-800 text-xs font-semibold px-2 py-1 rounded">
+                      <CountIcon
+                        icon={<FaBook className="inline" />}
+                        count={user.topic_count}
+                        tooltip="Topic count"
+                      />
+                    </span>
+                    <span className="bg-purple-300 border border-purple-500 text-purple-800 text-xs font-semibold px-2 py-1 rounded">
+                      <CountIcon
+                        icon={<FaEye className="inline" />}
+                        count={user.posts_read}
+                        tooltip="Posts read"
+                      />
+                    </span>
+                    <span className="bg-orange-300 border border-orange-500 text-orange-800 text-xs font-semibold px-2 py-1 rounded">
+                      <CountIcon
+                        icon={<FaComments className="inline" />}
+                        count={user.topics_entered}
+                        tooltip="Number of posts"
+                      />
                     </span>
                   </div>
                 </div>

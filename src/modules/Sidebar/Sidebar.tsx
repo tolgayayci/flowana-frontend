@@ -78,7 +78,7 @@ export default function Sidebar({
                           className={classNames(
                             item.current
                               ? "text-white"
-                              : "text-sfred-700 group-hover:text-white",
+                              : "text-[#3C4D6E] group-hover:text-white",
                             "h-6 w-6 shrink-0"
                           )}
                           aria-hidden="true"

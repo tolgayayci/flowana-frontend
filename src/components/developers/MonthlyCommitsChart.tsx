@@ -9,6 +9,8 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
 import NoData from "@/modules/NoData/NoData";
 
+import { formatChartDate } from "@/utils/functions";
+
 export default function MonthlyCommitsChart() {
   const { monthlyCommitsChart, isLoading } = useDevelopersMonthlyCommitsChart();
 
@@ -30,7 +32,7 @@ export default function MonthlyCommitsChart() {
   // Convert the data into the format required by ECharts
   const seriesData = monthlyCommitsChart?.series.map((series) =>
     series.data.map((point) => ({
-      name: new Date(point.date).toISOString().slice(0, 10),
+      name: formatChartDate(point.date),
       value: point.value,
     }))
   );
@@ -49,6 +51,7 @@ export default function MonthlyCommitsChart() {
     series: monthlyCommitsChart?.series.map((series, index) => ({
       name: series.name,
       type: "line",
+      showSymbol: false,
       data: seriesData?.[index]?.map((point) => point.value),
       smooth: true,
       areaStyle: {
@@ -67,7 +70,7 @@ export default function MonthlyCommitsChart() {
       // Slider
       {
         type: "slider",
-        start: 0,
+        start: 75,
         end: 100,
         handleStyle: {
           color: "#E57F84", // sfred.800

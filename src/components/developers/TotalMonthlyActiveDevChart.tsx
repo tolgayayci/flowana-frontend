@@ -9,6 +9,8 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
 import NoData from "@/modules/NoData/NoData";
 
+import { formatChartDate } from "@/utils/functions";
+
 export default function TotalMonthlyActiveDevChart() {
   const { totalMonthlyActiveDevChart, isLoading } =
     useDevelopersTotalMonthlyActiveDevChart();
@@ -32,7 +34,7 @@ export default function TotalMonthlyActiveDevChart() {
 
   const seriesData = totalMonthlyActiveDevChart?.series[0].data.map(
     (point) => ({
-      name: new Date(point.date).toISOString().slice(0, 10), // Convert date to ISO format
+      name: formatChartDate(point.date),
       value: point.value,
     })
   );
@@ -52,6 +54,7 @@ export default function TotalMonthlyActiveDevChart() {
       {
         type: "line",
         name: "Total Monthly Active Devs",
+        showSymbol: false,
         data: seriesData?.map((point) => point.value),
         smooth: true, // This makes the lines smooth
         itemStyle: {
@@ -73,7 +76,7 @@ export default function TotalMonthlyActiveDevChart() {
       // Slider
       {
         type: "slider",
-        start: 0,
+        start: 75,
         end: 100,
         handleStyle: {
           color: "#E57F84", // sfred.800

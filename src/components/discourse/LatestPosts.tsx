@@ -10,7 +10,10 @@ import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoListData from "@/modules/NoData/NoListData";
+
+import { FaMedal, FaReply, FaEye } from "react-icons/fa";
 import { formatDistanceToNow } from "@/utils/functions";
+import { formatBadgeStatsCount } from "@/utils/functions";
 
 const forumInfos = {
   flow: {
@@ -30,6 +33,21 @@ const forumInfos = {
     logo: "/lens-logo.jpg",
   },
 };
+
+function CountIcon({ icon, count, tooltip }) {
+  return (
+    <span className="w-12 flex justify-center items-center group relative">
+      {icon}
+      <span className="ml-1">{formatBadgeStatsCount(count)}</span>
+
+      {/* Tooltip */}
+      <span className="group-hover:opacity-100 opacity-0 bg-gray-800 text-white text-xs rounded py-1 px-2 absolute top-1/2 transform -translate-y-1/2 z-20">
+        {" "}
+        {tooltip}
+      </span>
+    </span>
+  );
+}
 
 export default function LatestPosts() {
   const { latestPosts, isLoading } = useDiscourseLatestPosts();
@@ -57,7 +75,7 @@ export default function LatestPosts() {
           {latestPosts.map((post) => (
             <li
               key={post.id}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform  border-2 border-sfblue-600"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600"
             >
               <Link
                 href={
@@ -68,7 +86,7 @@ export default function LatestPosts() {
                 className="block hover:no-underline"
               >
                 <div className="flex justify-between">
-                  <div className="flex items-center space-x-2 w-2/3">
+                  <div className="flex items-center space-x-2 w-1/2">
                     <Image
                       src={forumInfo.logo}
                       alt="Avatar"
@@ -81,18 +99,38 @@ export default function LatestPosts() {
                         {post.topic_title}
                       </h3>
                       <p className="text-gray-500 text-xs sm:text-sm mt-1">
-                        {formatDistanceToNow(post.created_at)}
+                        Opened {formatDistanceToNow(post.created_at)}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/3 justify-end">
-                    <span className="mr-2 px-2 py-1 bg-blue-200 border-2 border-blue-400 text-blue-700 rounded-md text-xs">
-                      Last Update: {formatDistanceToNow(post.updated_at)}
+                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
+                    <span className="bg-red-300 border border-red-500 text-red-800 text-xs font-semibold px-2 py-1 rounded relative group">
+                      <CountIcon
+                        icon={<FaEye className="inline" />}
+                        count={post.reads}
+                        tooltip="Number of reads"
+                      />
                     </span>
-                    <span className="px-2 py-1 bg-indigo-200 border-2 border-indigo-400 text-indigo-700 rounded-md text-xs">
-                      {post.reads} {post.reads !== 1 ? "reads" : "read"}
+                    <span
+                      className="bg-green-300 border border-green-500 text-green-800 text-xs font-semibold px-2 py-1 rounded"
+                      title="Number of replies"
+                    >
+                      <CountIcon
+                        icon={<FaReply className="inline" />}
+                        count={post.reply_count}
+                        tooltip="Number of replies"
+                      />
                     </span>
-                    {/* Additional badges can be added here... */}
+                    <span
+                      className="bg-purple-300 border border-purple-500 text-purple-800 text-xs font-semibold px-2 py-1 rounded"
+                      title="Number of views"
+                    >
+                      <CountIcon
+                        icon={<FaMedal className="inline" />}
+                        count={post.score}
+                        tooltip="Score"
+                      />
+                    </span>
                   </div>
                 </div>
               </Link>

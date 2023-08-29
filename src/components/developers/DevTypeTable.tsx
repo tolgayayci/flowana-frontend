@@ -25,14 +25,14 @@ export default function DevTypeTable() {
 
   return (
     <Layout>
-      <div className="overflow-x-auto rounded-xl shadow-md -m-10">
+      <div className="overflow-x-auto rounded-xl shadow-md">
         <table className="w-full border-collapse table-auto">
           <thead>
-            <tr className="bg-sfblue-800 text-white rounded-t-2xl">
+            <tr className="bg-[#3C4D6E] rounded-t-md">
               {devTypeTable?.header.map((item) => (
                 <th
                   key={item.index}
-                  className="py-4 px-6 font-bold text-sm uppercase tracking-wider rounded-t-lg"
+                  className="py-1 px-4 font-semibold text-md text-white tracking-wider uppercase"
                 >
                   {item.title}
                 </th>

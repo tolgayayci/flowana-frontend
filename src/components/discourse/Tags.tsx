@@ -26,28 +26,52 @@ export default function Tags() {
   // Get the top 6 tags for the legends
   const topTags = sortedTags.slice(0, 4);
 
-  const option = {
+  // Configure the chart options
+  var option = {
     tooltip: {
       trigger: "item",
-      formatter: "{a} <br/>{b}: {c} ({d}%)",
+      formatter: "{b}: {c} ({d}%)",
     },
     legend: {
-      orient: "horizontal",
-      top: "top",
+      top: "0%",
+      left: "center",
       data: topTags.map((tag) => tag.text),
     },
     series: [
       {
         name: "Tags",
         type: "pie",
-        radius: "50%",
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        selectedMode: "single", // This allows for only one slice to be selected at a time
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 20,
+            fontWeight: "bold",
+          },
+          itemStyle: {
+            shadowBlur: 5,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.25)",
+          },
+        },
+        labelLine: {
+          show: false,
+        },
         data: sortedTags.map((tag) => ({
           value: tag.count,
           name: tag.text,
         })),
-        label: {
-          formatter: "{b}: {c} ({d}%)",
-        },
       },
     ],
   };

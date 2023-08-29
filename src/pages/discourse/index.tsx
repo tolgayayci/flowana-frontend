@@ -117,16 +117,16 @@ export default function Discourse() {
               <div id="categories" className="w-full">
                 <Categories />
               </div>
-              <div id="latest-posts" className="w-full">
-                <LatestPosts />
-              </div>
               <div className="flex space-x-6 w-full">
-                <div id="top-users" className="w-full sm:w-2/3 md:w-2/3">
-                  <TopUsers />
+                <div id="latest-posts" className="w-full sm:w-2/3 md:w-2/3">
+                  <LatestPosts />
                 </div>
                 <div id="user-metrics" className="w-full sm:w-1/3 md:w-1/3">
                   <UserMetrics />
                 </div>
+              </div>
+              <div id="top-users" className="w-full ">
+                <TopUsers />
               </div>
               <div id="latest-topics" className="w-full">
                 <LatestTopics />
