@@ -9,6 +9,7 @@ import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 
 import { Interval } from "@/types/general";
+import { formatChartDate } from "@/utils/functions";
 
 const intervals: Interval[] = [
   { name: "Week", value: "WEEK" },
@@ -22,56 +23,26 @@ export default function VotingPower() {
     selectedInterval.value
   );
 
-  // Convert timestamp to date
-  const convertTimestampToDate = (timestamp: string) => {
-    const date = new Date(timestamp);
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  };
-
   // Extract and sort timestamps from the series
   const sortedTimestamps = votingPowerChart?.series[0].data
     .map((item) => item.timestamp)
     .sort((a, b) => new Date(a) - new Date(b))
-    .map(convertTimestampToDate);
+    .map(formatChartDate);
 
   // Sort series by their data length and slice top 5 for legends
   const sortedSeries = votingPowerChart?.series
     .sort((a, b) => b.data.length - a.data.length)
     .slice(0, 5);
 
-  const distinctColors = [
-    "#FF4500",
-    "#228B22",
-    "#4B0082",
-    "#FFD700",
-    "#1E90FF",
-  ];
-
   const option = {
     tooltip: {
       trigger: "axis",
-      formatter: "{b}<br/>{a0}: {c0}<br/>{a1}: {c1}",
-    },
-    legend: {
-      data: sortedSeries?.map((item) => item.name),
-      textStyle: {
-        color: "#666",
-        fontSize: 14,
-      },
     },
     xAxis: {
       type: "category",
       data: sortedTimestamps,
       // ... the rest of your xAxis options ...
     },
-    series: sortedSeries?.map((item, index) => ({
-      name: item.name,
-      type: "line",
-      data: item.data.map((point) => point.balance),
-      itemStyle: {
-        color: distinctColors[index],
-      },
-    })),
     yAxis: {
       type: "value",
       axisLabel: {
@@ -81,6 +52,22 @@ export default function VotingPower() {
         },
       },
     },
+    legend: {
+      data: sortedSeries?.map((item) => item.name),
+      textStyle: {
+        color: "#666",
+        fontSize: 14,
+      },
+    },
+    series: sortedSeries?.map((item, index) => ({
+      name: item.name,
+      type: "line",
+      showSymbol: false,
+      data: item.data.map((point) => point.balance),
+      lineStyle: {
+        width: 4, // Adjust this value for the desired line width
+      },
+    })),
     dataZoom: [
       // Slider
       {

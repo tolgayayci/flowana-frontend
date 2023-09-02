@@ -32,9 +32,10 @@ export default function SideInfo() {
   const protocolInfo = protocolInfos[protocol["protocol"]];
 
   return (
-    <div className="border-2 border-sfblue-800 bg-sfblue-400 text-sfblue-900 rounded-2xl p-5 h-full shadow-xl bg-white-100">
+    <div className="border-2 border-sfblue-800 text-sfblue-900 rounded-2xl p-5 h-full shadow-xl bg-white-100">
       <div className="flex items-center">
         <Image
+          unoptimized
           src={protocolInfo.image_url}
           alt={`${protocolInfo.protocol_name} Avatar`}
           className="rounded-lg mr-6"
@@ -50,7 +51,7 @@ export default function SideInfo() {
             href={protocolInfo.forum_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center mt-2.5 bg-sfred-500 border-2 border-sfred-800 text-sfblack px-3 py-0.5 rounded-xl text-sm font-semibold"
+            className="inline-block items-center mt-2.5 bg-sfred-500 border-2 border-sfred-800 text-[#333333] px-3 py-0.5 rounded-xl text-sm font-semibold"
           >
             Data: Tally
           </a>

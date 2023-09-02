@@ -9,6 +9,8 @@ import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
+import { formatChartDate } from "@/utils/functions";
+
 export default function Participation() {
   const { participation, isLoading } = useCumulativeParticipation();
 
@@ -44,7 +46,7 @@ export default function Participation() {
     },
     xAxis: {
       type: "category",
-      data: participation["xAxis"]["data"],
+      data: participation["xAxis"]["data"].map((date) => formatChartDate(date)),
       axisLine: {
         lineStyle: {
           color: "#2F5061",
@@ -75,6 +77,7 @@ export default function Participation() {
       type: "line",
       smooth: true,
       areaStyle: {}, // Area style can give a better visual presentation for issue activities
+      showSymbol: false,
       emphasis: {
         focus: "series",
       },

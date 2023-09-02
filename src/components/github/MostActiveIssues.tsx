@@ -80,6 +80,7 @@ export default function MostActiveIssues() {
                 <div className="flex justify-between">
                   <div className="flex items-center space-x-2 w-1/2">
                     <Image
+                      unoptimized
                       src={issue.author_avatar_url}
                       alt="Avatar"
                       width={52}

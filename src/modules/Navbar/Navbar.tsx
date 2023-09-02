@@ -39,6 +39,14 @@ export default function Navbar() {
     (p) => p.value === protocol["protocol"]
   );
 
+  useEffect(() => {
+    const selectedProtocol = protocols.find(
+      (p) => p.value === protocol["protocol"]
+    );
+    setSelected(selectedProtocol);
+    console.log("Navbar.tsx: selectedProtocol: ", selectedProtocol);
+  }, [protocol]);
+
   const initialNavigation: NavigationItem[] = [
     {
       name: "Projects",
@@ -88,24 +96,15 @@ export default function Navbar() {
   const [navigation, setNavigation] = useState(filteredNavItems);
 
   useEffect(() => {
-    const currentHref =
-      "/" + router.asPath.split("/")[1] + "/" + router.asPath.split("/")[2];
-
-    console.log(currentHref);
-
-    const updatedNavigation = navigation.map((item) => ({
-      ...item,
-      current: item.href === currentHref,
-    }));
-
-    console.log(updatedNavigation);
-
-    setNavigation(updatedNavigation);
-  }, [router.asPath]);
-
-  useEffect(() => {
-    setNavigation(filteredNavItems);
+    const newNavItems = filterNavigationItems(protocol["protocol"]);
+    setNavigation(newNavItems);
   }, [protocol]);
+
+  function filterNavigationItems(currentProtocol) {
+    return initialNavigation.filter((item) => {
+      return pages[currentProtocol]?.[item.key];
+    });
+  }
 
   const handleProtocolChange = (protocol: IProtocols) => {
     // Extract the current page from the router's path
@@ -124,6 +123,18 @@ export default function Navbar() {
     setSelected(protocol);
   };
 
+  useEffect(() => {
+    const currentHref =
+      "/" + router.asPath.split("/")[1] + "/" + router.asPath.split("/")[2];
+
+    const updatedNavigation = navigation.map((item) => ({
+      ...item,
+      current: item.href === currentHref,
+    }));
+
+    setNavigation(updatedNavigation);
+  }, [router.asPath]);
+
   return (
     <>
       <div className="sticky top-0 left-0 right-0 z-10">
@@ -131,11 +142,12 @@ export default function Navbar() {
           {({ open }) => (
             <>
               <div className="mx-auto px-4 sm:px-6 lg:px-8 py-1 max-w-[90%]">
-                <div className="flex h-16 items-center justify-between my-2">
+                <div className="flex h-12 items-center justify-between my-2">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <Link href="/">
                         <Image
+                          unoptimized
                           src="/logo.svg"
                           width="60"
                           height="60"
@@ -151,10 +163,11 @@ export default function Navbar() {
                         value={selected}
                         onChange={(e) => handleProtocolChange(e)}
                       >
-                        <div className="relative mt-1">
-                          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-3 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm flex items-center">
+                        <div className="relative">
+                          <Listbox.Button className="relative w-[10rem] cursor-default rounded-lg bg-white py-2 pl-3 pr-3 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm flex items-center justify-between">
                             <span className="mr-2">
                               <Image
+                                unoptimized
                                 src={selected.logo}
                                 width="20"
                                 height="20"
@@ -195,6 +208,7 @@ export default function Navbar() {
                                     <span className="flex items-center">
                                       <span className="mr-2">
                                         <Image
+                                          unoptimized
                                           src={protocol.logo}
                                           width="20"
                                           height="20"
@@ -269,7 +283,7 @@ export default function Navbar() {
                     />
                     <button
                       type="button"
-                      className="text-indigo-900 text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-indigo-900 font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
+                      className="text-[#333333] text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-indigo-900 font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
                       onClick={() => setIsSearchOpen(true)}
                     >
                       Search on {protocol["protocol"]}
@@ -290,8 +304,8 @@ export default function Navbar() {
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? "bg-sfblue text-white"
-                      : "text-sfblue hover:bg-sfblue hover:text-white",
+                      ? "bg-[#3C4D6E] text-white"
+                      : "text-sfblue hover:bg-[#3C4D6E] hover:text-white",
                     "rounded-md px-3 py-2 text-sm font-medium"
                   )}
                   aria-current={item.current ? "page" : undefined}
@@ -300,7 +314,7 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
-            <div className="w-1/4">
+            {/* <div className="w-1/4">
               <SearchBar
                 open={isSearchOpen}
                 setOpen={setIsSearchOpen}
@@ -313,7 +327,7 @@ export default function Navbar() {
               >
                 Search on {selected?.name}
               </button>
-            </div>
+            </div> */}
           </div>
         </header>
       </div>

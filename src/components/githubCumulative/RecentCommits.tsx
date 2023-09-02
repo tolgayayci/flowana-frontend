@@ -43,6 +43,7 @@ export default function RecentCommits() {
                 <div className="flex justify-between">
                   <div className="flex items-center space-x-2 w-1/2">
                     <Image
+                      unoptimized
                       src={commit.author_avatar_url}
                       className="rounded-full mr-5"
                       alt="Avatar"

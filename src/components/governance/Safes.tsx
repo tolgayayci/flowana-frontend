@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Tooltip } from "react-tooltip";
 
 // Hooks
 import useSafes from "@/models/governance/useSafes";
@@ -26,6 +27,28 @@ export default function Safes() {
     return <NoData element={<CardHeader title="Safes" />} message="" />;
   }
 
+  function BadgeWithTooltip({
+    element,
+    tooltipId,
+    tooltipContent,
+    tooltipPlace,
+  }) {
+    return (
+      <>
+        <a
+          data-tooltip-id={tooltipId}
+          data-tooltip-content={tooltipContent}
+          data-tooltip-place={tooltipPlace}
+        >
+          {element}
+        </a>
+        <Tooltip id={tooltipId} place={tooltipPlace}>
+          {tooltipContent}
+        </Tooltip>
+      </>
+    );
+  }
+
   return (
     <Layout>
       <CardHeader title="Safes" />
@@ -44,6 +67,7 @@ export default function Safes() {
                 <div className="flex justify-between">
                   <div className="flex items-center space-x-2 w-1/2">
                     <Image
+                      unoptimized
                       src={"/compound-logo.png"}
                       alt="Avatar"
                       width={52}
@@ -56,7 +80,10 @@ export default function Safes() {
                       </h3>
                       <p className="text-gray-500 text-xs sm:text-sm mt-1">
                         <span className="px-2 py-1 rounded-lg text-xxs sm:text-xs bg-green-200 text-green-800 border-2 border-green-500">
-                          {safe.balance.totalUSDValue} USD
+                          Total Value: $
+                          {Intl.NumberFormat().format(
+                            safe.balance.totalUSDValue
+                          )}
                         </span>
                       </p>
                     </div>
@@ -66,11 +93,20 @@ export default function Safes() {
                       <span className="mr-2 font-semibold">Tokens</span>
                       <div className="isolate flex -space-x-2 overflow-hidden items-center">
                         {safe.balance.tokens.map((token) => (
-                          <Link href={token.logoURI} key={token.address}>
-                            <img
-                              className="relative z-30 inline-block h-8 w-8 rounded-full ring-2 ring-white hover:scale-105"
-                              src={token.logoURI || "/compound-logo.png"}
-                              alt=""
+                          <Link href={token.logoURI || "#"} key={token.address}>
+                            <BadgeWithTooltip
+                              element={
+                                <div className="relative z-30 h-8 w-8 rounded-full bg-indigo-700 text-white inline-flex items-center justify-center">
+                                  {token.symbol.charAt(0).toUpperCase()}
+                                </div>
+                              }
+                              tooltipId={token.address}
+                              tooltipContent={
+                                token.symbol +
+                                " $" +
+                                Intl.NumberFormat().format(token.fiat)
+                              }
+                              tooltipPlace="top"
                             />
                           </Link>
                         ))}
@@ -79,10 +115,19 @@ export default function Safes() {
                       <div className="isolate flex -space-x-2 overflow-hidden items-center">
                         {safe.owners.map((owner) => (
                           <Link href={owner.tally_url} key={owner.address}>
-                            <img
-                              className="relative z-30 inline-block h-8 w-8 rounded-full ring-2 ring-white hover:scale-105"
-                              src={owner.picture || "/compound-logo.png"}
-                              alt=""
+                            <BadgeWithTooltip
+                              element={
+                                <Image
+                                  className="relative z-30 inline-block h-8 w-8 rounded-full ring-2 ring-white hover:scale-105"
+                                  src={owner.picture || "/compound-logo.png"}
+                                  alt=""
+                                  width={35}
+                                  height={25}
+                                />
+                              }
+                              tooltipId={owner.address}
+                              tooltipContent={owner.name}
+                              tooltipPlace="top"
                             />
                           </Link>
                         ))}

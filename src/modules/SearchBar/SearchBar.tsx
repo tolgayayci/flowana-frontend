@@ -31,6 +31,25 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+const protocolInfos = {
+  flow: {
+    protocol_name: "Flow",
+    image_url: "/flow-logo.png",
+  },
+  compound: {
+    protocol_name: "Compound",
+    image_url: "/compound-logo.png",
+  },
+  polkadot: {
+    protocol_name: "Polkadot",
+    image_url: "/polkadot-logo.jpg",
+  },
+  lens: {
+    protocol_name: "Lens",
+    image_url: "/lens-logo.jpg",
+  },
+};
+
 export default function SearchBar(props: SearchBarProps) {
   const [query, setQuery] = useState("");
   const [selectedProject, setSelectedProject] = useState<IHitProps | null>(
@@ -39,7 +58,10 @@ export default function SearchBar(props: SearchBarProps) {
 
   const { protocol } = useProtocol();
 
+  const protocolInfo = protocolInfos[protocol["protocol"]];
+
   function ProjectHit(hits: any) {
+    console.log(hits);
     return (
       <>
         <div className="-mx-2 text-sm text-gray-700">
@@ -57,7 +79,8 @@ export default function SearchBar(props: SearchBarProps) {
             }
           >
             <Image
-              src={hits?.avatar_url}
+              unoptimized
+              src={hits?.avatar_url || protocolInfo.image_url}
               alt=""
               width={24}
               height={24}
@@ -109,15 +132,12 @@ export default function SearchBar(props: SearchBarProps) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="mx-auto max-w-3xl transform divide-y divide-gray-200 overflow-hidden rounded-xl bg-white shadow-2xl transition-all mt-28 md:mt-60 border-sfblue-800 border-[3px]">
-                <Combobox
-                  value={selectedProject}
-                  onChange={() => console.log(selectedProject)}
-                >
+              <Dialog.Panel className="mx-auto max-w-5xl transform divide-y divide-gray-200 overflow-hidden rounded-xl bg-white shadow-2xl transition-all md:mt-60 border-sfblue-800 border-[3px]">
+                <Combobox value={selectedProject}>
                   <>
                     <SearchBox
                       searchAsYouType={false}
-                      placeholder="Search for Awesome Projects or Articles"
+                      placeholder={`Search on ${protocolInfo.protocol_name} projects`}
                       autoFocus={true}
                       onSubmit={() => setSelectedProject(null)}
                       classNames={{
@@ -154,7 +174,11 @@ export default function SearchBar(props: SearchBarProps) {
                         <div className="hidden h-92 w-1/2 flex-none flex-col divide-y divide-gray-100 overflow-y-auto sm:flex">
                           <div className="flex-none p-6 text-center">
                             <Image
-                              src={selectedProject.avatar_url}
+                              unoptimized
+                              src={
+                                selectedProject.avatar_url ||
+                                protocolInfo.image_url
+                              }
                               alt=""
                               width={24}
                               height={24}
@@ -163,13 +187,15 @@ export default function SearchBar(props: SearchBarProps) {
                             <h2 className="mt-3 font-semibold text-gray-900">
                               {selectedProject.repo}
                             </h2>
-                            {selectedProject["categories.lvl0"] ? (
+                            {selectedProject["categories.lvl0"] && (
                               <span className="inline-flex ml-3 mt-3 h-6 items-center justify-center text-xs font-extrabold px-2 text-indigo-900 rounded border-2 border-indigo-900 bg-green-200 uppercase shadow-sm">
                                 {selectedProject["categories.lvl0"][0]}
                               </span>
-                            ) : (
-                              <span className="inline-flex ml-3 mt-3 h-6 items-center justify-center text-xs font-extrabold px-2 text-indigo-900 rounded border-2 border-indigo-900 bg-green-200 uppercase shadow-sm">
-                                No Category
+                            )}
+                            {selectedProject.health_score?.grade && (
+                              <span className="inline-flex ml-3 mt-3 h-6 items-center justify-center text-xs font-extrabold px-2 text-indigo-900 rounded border-2 border-indigo-900 bg-orange-200 uppercase shadow-sm">
+                                Health Score:{" "}
+                                {selectedProject.health_score.grade}
                               </span>
                             )}
                           </div>
@@ -189,7 +215,7 @@ export default function SearchBar(props: SearchBarProps) {
                             >
                               <button
                                 type="button"
-                                className="w-full rounded-md -mt-1 border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
+                                className="w-full rounded-md -mt-1 border border-transparent bg-[#2A3855] py-2 px-4 text-sm font-medium text-white shadow-sm"
                                 onClick={() => {
                                   props.setOpen(false);
                                 }}

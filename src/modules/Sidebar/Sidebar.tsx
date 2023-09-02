@@ -69,8 +69,8 @@ export default function Sidebar({
                         }}
                         className={classNames(
                           item.current
-                            ? "bg-sfblue-800 text-white"
-                            : "text-sfblue-900 hover:text-white hover:bg-sfblue-800",
+                            ? "bg-[#3C4D6E] text-white"
+                            : "text-sfblue-900 hover:text-white hover:bg-[#3C4D6E]",
                           "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-[420]"
                         )}
                       >

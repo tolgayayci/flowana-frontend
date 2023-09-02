@@ -39,6 +39,7 @@ export default function Projects() {
                 <div className="flex items-center justify-between text-lg font-semibold mb-4 border-b-2 pb-4 border-sfblue-700">
                   <div className="flex items-center space-x-3">
                     <Image
+                      unoptimized
                       src="/flow-logo.png"
                       alt="Category Icon"
                       className="w-6 h-6"

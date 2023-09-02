@@ -1,3 +1,5 @@
+import { IProtocol } from "@/types/general";
+
 export const formatDistanceToNow = (dateString: string) => {
     const currentDate = new Date();
     const inputDate = new Date(dateString);

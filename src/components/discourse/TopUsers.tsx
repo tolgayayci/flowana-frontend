@@ -138,6 +138,7 @@ export default function TopUsers() {
                 <div className="flex justify-between">
                   <div className="flex items-center space-x-2 w-1/2">
                     <Image
+                      unoptimized
                       src={
                         forumInfo.forum_url +
                           user.avatar_template.replace("{size}", "120") ||

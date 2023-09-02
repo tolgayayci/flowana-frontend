@@ -19,6 +19,16 @@ export interface ICardHeader {
     intervals?: Interval[];
 }
 
+type HealthScoreProps = {
+    commit_activity: number;
+    contribution_activity: number;
+    grade: string;
+    issue_activity: number;
+    pull_request_activity: number;
+    release_activity: number;
+    total: number;
+}
+
 export interface IHitProps {
     objectID: string;
     url: string;
@@ -32,6 +42,7 @@ export interface IHitProps {
     "categories.lvl0": string[];
     path: string;
     lastmodified: number;
+    health_score?: HealthScoreProps;
 }
 
 export interface INavigationItem {

@@ -1,22 +1,52 @@
 import { useState, useEffect, ReactNode } from "react";
+import { useRouter } from "next/router";
 import { IProtocol } from "@/types/general";
 import { ProtocolContext } from "./ProtocolStateContext";
+
+import { protocols } from "@/utils/protocols";
 
 export function ProtocolStateProvider({ children }: { children: ReactNode }) {
   const [protocol, setProtocol] = useState<IProtocol>({ protocol: "flow" });
 
-  // Load protocol from localStorage on mount, since useEffect runs only on the client.
-  useEffect(() => {
-    const savedProtocol = localStorage.getItem("protocol");
-    if (savedProtocol) {
-      setProtocol(JSON.parse(savedProtocol));
-    }
-  }, []);
+  const router = useRouter();
 
-  // This effect runs whenever protocol changes. It's used to save the updated protocol to local storage.
   useEffect(() => {
-    localStorage.setItem("protocol", JSON.stringify(protocol));
-  }, [protocol]);
+    const updateProtocol = (pathname: string) => {
+      const protocol = protocols.find(
+        (p) => p.value === pathname.split("/")[1]
+      );
+
+      if (protocol) {
+        setProtocol({ protocol: protocol.value });
+        localStorage.setItem("protocol", protocol.value);
+      }
+    };
+
+    // Update protocol initially based on the current path
+    updateProtocol(router.asPath);
+
+    // Update protocol on route changes
+    const handleRouteChange = (url: string) => {
+      updateProtocol(url);
+    };
+
+    const storedHref = localStorage.getItem("protocol");
+
+    if (storedHref && storedHref !== router.asPath.split("/")[1]) {
+      console.log("storedHref", storedHref);
+      router.push(storedHref + "/projects");
+    } else {
+      updateProtocol(router.asPath); // Update protocol initially based on the current path
+    }
+
+    // Listen to route changes
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // Cleanup
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [router.asPath]);
 
   return (
     <ProtocolContext.Provider value={{ protocol, setProtocol }}>

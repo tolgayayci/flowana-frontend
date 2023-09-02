@@ -34,6 +34,7 @@ export default function ProjectCard({ hit }: any) {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Image
+              unoptimized
               className="w-12 h-12 rounded-full"
               src={hit.avatar_url || protocolInfo.image_url}
               alt="Avatar"

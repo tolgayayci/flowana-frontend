@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Tooltip } from "react-tooltip";
 
 // Hooks
 import useDelegates from "@/models/governance/useDelegates";
@@ -8,7 +11,9 @@ import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoListData from "@/modules/NoData/NoListData";
-import { formatDistanceToNow } from "@/utils/functions";
+
+import { FaWallet } from "react-icons/fa";
+import { get } from "http";
 
 const sortBy = [
   { name: "Created", value: "CREATED" },
@@ -56,6 +61,92 @@ export default function Delegates() {
       />
     );
 
+  function shortenAddress(address: string) {
+    if (!address || address.length < 10) {
+      return "Invalid address";
+    }
+    const start = address.substring(0, 6);
+    const end = address.substring(address.length - 4);
+    return `${start}...${end}`;
+  }
+
+  function getDelegateName(name) {
+    if (!name || name.startsWith("0x")) {
+      return "Unknown Name";
+    }
+    return name;
+  }
+
+  function DelegateCard({ delegate }) {
+    return (
+      <Link href={delegate.account.tally_url || "#"} target="_blank">
+        <div className="col-span-1 border p-4 rounded-md h-full">
+          {" "}
+          <div className="flex items-center mb-4 flex-col space-y-1">
+            <Image
+              unoptimized
+              src={delegate.account.picture || "/compound-logo.png"}
+              alt="Delegate"
+              className="rounded-full w-20 h-20 mb-2"
+              width={35}
+              height={35}
+            />
+            <h3 className="text-lg font-bold">
+              {getDelegateName(delegate.account.name)}
+            </h3>
+            <p className="text-sm font-semibold border border-indigo-500 text-indigo-800 bg-indigo-300 py-0.5 px-2 rounded-xl inline-flex items-center">
+              <FaWallet className="mr-2" />
+              <BadgeWithTooltip
+                text={shortenAddress(delegate.account.address)}
+                tooltipId="address"
+                tooltipContent={delegate.account.address}
+                tooltipPlace="top"
+              />
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <BadgeWithTooltip
+              text={`Voting Power: ${delegate.participation.stats.votingPower.net}`}
+              tooltipId="voting-power"
+              tooltipContent="Net voting power of the delegate."
+              tooltipPlace="top"
+            />
+            <BadgeWithTooltip
+              text={`Delegations: ${delegate.participation.stats.delegations.total}`}
+              tooltipId="delegations"
+              tooltipContent="delegations."
+              tooltipPlace="top"
+            />
+            <BadgeWithTooltip
+              text={`Votes Cast: ${delegate.participation.stats.voteCount}`}
+              tooltipId="votes-cast"
+              tooltipContent="cast"
+              tooltipPlace="top"
+            />
+            {/* Add more badges here as necessary */}
+          </div>
+        </div>
+      </Link>
+    );
+  }
+
+  function BadgeWithTooltip({ text, tooltipId, tooltipContent, tooltipPlace }) {
+    return (
+      <>
+        <a
+          data-tooltip-id={tooltipId}
+          data-tooltip-content={tooltipContent}
+          data-tooltip-place={tooltipPlace}
+        >
+          {text}
+        </a>
+        <Tooltip id={tooltipId} place={tooltipPlace}>
+          {tooltipContent}
+        </Tooltip>
+      </>
+    );
+  }
+
   return (
     <Layout>
       <CardHeader
@@ -64,7 +155,11 @@ export default function Delegates() {
         setSelectedInterval={setSelectedInterval}
         intervals={sortBy}
       />
-      {JSON.stringify(delegates)}
+      <div className="grid grid-cols-3 gap-4">
+        {delegates.slice(0, 6).map((delegate) => (
+          <DelegateCard key={delegate.account.id} delegate={delegate} />
+        ))}
+      </div>
     </Layout>
   );
 }

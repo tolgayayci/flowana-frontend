@@ -88,6 +88,7 @@ export default function LatestPosts() {
                 <div className="flex justify-between">
                   <div className="flex items-center space-x-2 w-1/2">
                     <Image
+                      unoptimized
                       src={forumInfo.logo}
                       alt="Avatar"
                       width={52}

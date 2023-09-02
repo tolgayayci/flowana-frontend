@@ -10,6 +10,7 @@ export default function SideInfo() {
     <div className="border-2 border-sfblue-800 bg-sfblue-400 text-sfblue-900 rounded-2xl p-5 h-full shadow-xl bg-white-100">
       <div className="flex items-center">
         <Image
+          unoptimized
           src={repositoryInfo?.owner_avatar_url as string}
           alt="Owner Avatar"
           className="rounded-lg mr-6"

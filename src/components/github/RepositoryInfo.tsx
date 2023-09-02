@@ -34,6 +34,7 @@ export default function RepositoryInfo() {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Image
+              unoptimized
               src={owner_avatar_url}
               alt="Repository Owner Avatar"
               className="rounded-full"

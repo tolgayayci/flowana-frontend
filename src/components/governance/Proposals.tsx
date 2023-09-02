@@ -10,6 +10,8 @@ import CardHeader from "@/modules/Card/Header/Header";
 import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoData from "@/modules/NoData/NoData";
 
+import { formatChartDate } from "@/utils/functions";
+
 export default function Proposals() {
   const { proposals, isLoading } = useProposals();
 
@@ -72,105 +74,110 @@ export default function Proposals() {
     );
 
     return (
-      <tr className="hover:bg-gray-100/50">
-        <td className="py-4 whitespace-nowrap">
-          <div className="flex items-center">
-            {/* Displaying the image on the left */}
-            <div className="w-12 h-12 overflow-hidden rounded">
-              <Image
-                src={"/compound-logo.png"}
-                alt="Proposal"
-                className="w-full h-full object-cover"
-                width={50}
-                height={50}
-              />
+      <div className="hover:bg-gray-100/50 flex">
+        <div className="py-4 px-4 w-1/2 flex items-center">
+          {/* Displaying the image on the left */}
+          <div className="w-12 h-12 overflow-hidden rounded">
+            <Image
+              unoptimized
+              src={"/compound-logo.png"}
+              alt="Proposal"
+              className="w-full h-full object-cover"
+              width={50}
+              height={50}
+            />
+          </div>
+          {/* Content to the right of the image */}
+          <Link href={proposal.tally_url} target="_blank">
+            <div className="ml-4">
+              <div className="text-md font-semibold text-gray-900 truncate max-w-xl">
+                {title.startsWith("#") ? title.slice(1).trim() : title}{" "}
+              </div>
+              <div className="flex items-center space-x-2 mt-2">
+                <div
+                  className={`text-xs ${statusColors.textColor} ${statusColors.bgColor} p-1 rounded inline-block`}
+                >
+                  {statusChanges[statusChanges.length - 1].type}
+                </div>
+                <div className="text-sm text-sfblue-800">
+                  Proposed on: {formatChartDate(start.timestamp)}
+                </div>
+              </div>
             </div>
+          </Link>
+        </div>
+        <div className="px-6 py-4 w-1/6 flex flex-col justify-center">
+          {/* Votes For */}
+          {/* Count */}
+          <div className="text-sm font-semibold text-green-500">
+            {votesFor.weight}
+          </div>
+          {/* Percentage Bar */}
+          <div className="mt-2">
+            <div className="overflow-hidden h-2 text-xs flex rounded bg-green-200">
+              <div
+                style={{ width: `${percentageFor}%` }}
+                className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
+              ></div>
+            </div>
+          </div>
+        </div>
 
-            {/* Content to the right of the image */}
-            <Link href={proposal.tally_url} target="_blank">
-              <div className="ml-4">
-                <div className="text-md font-semibold text-gray-900 truncate max-w-xl">
-                  {title}
-                </div>
-                <div className="flex items-center space-x-2 mt-2">
-                  <div
-                    className={`text-xs ${statusColors.textColor} ${statusColors.bgColor} p-1 rounded inline-block`}
-                  >
-                    {statusChanges[statusChanges.length - 1].type}
-                  </div>
-                  <div className="text-sm text-sfblue-800">
-                    Proposed On:{" "}
-                    {new Date(start.timestamp).toLocaleDateString()}
-                  </div>
-                </div>
-              </div>
-            </Link>
+        <div className="px-6 py-4 w-1/6 flex flex-col justify-center">
+          {/* Votes Against */}
+          {/* Count */}
+          <div className="text-sm font-semibold text-red-500">
+            {votesAgainst.weight}
           </div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="flex items-center space-x-4">
-            <div className="text-sm text-green-500">{votesFor.weight}</div>
-            <div className="relative w-full">
-              <div className="overflow-hidden h-2 text-xs flex rounded bg-green-200">
-                <div
-                  style={{ width: `${percentageFor}%` }}
-                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
-                ></div>
-              </div>
+          {/* Percentage Bar */}
+          <div className="mt-2">
+            <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-200">
+              <div
+                style={{ width: `${percentageAgainst}%` }}
+                className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
+              ></div>
             </div>
           </div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className="flex items-center space-x-4">
-            <div className="text-sm text-red-500">{votesAgainst.weight}</div>
-            <div className="relative w-full">
-              <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-200">
-                <div
-                  style={{ width: `${percentageAgainst}%` }}
-                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
-                ></div>
-              </div>
-            </div>
-          </div>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap flex flex-col justify-end items-end">
+        </div>
+        <div className="px-6 py-4 whitespace-nowrap flex flex-col justify-center items-end w-1/6">
+          {/* Total Votes */}
           <div className="text-md font-semibold text-gray-900 text-right">
             {totalVotes}
           </div>
           <div className="text-xs text-gray-500 text-right">
             {totalAddresses} addresses
           </div>
-        </td>
-      </tr>
+        </div>
+      </div>
     );
   }
 
   return (
     <Layout>
-      <CardHeader title="Proposals" />
-      <table className="min-w-full divide-y divide-sfblue-500 mx-2 -mt-4">
-        <thead>
-          <tr>
-            <th className="py-3 text-left text-xs font-semibold text-gray-800 uppercase tracking-wider">
-              Proposal
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-semibold text-gray-800 uppercase tracking-wider">
-              Votes for
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-semibold text-gray-800 uppercase tracking-wider">
-              Votes against
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-semibold text-gray-800 uppercase tracking-wider flex flex-col justify-end items-end">
-              Total votes
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-sfblue-500">
+      <div className="min-w-full mt-2">
+        <div className="bg-gradient-to-r from-[#3C4D6E] to-[#4D5E7E] p-1 rounded-lg shadow-md flex">
+          {/* First div now has flex-2 to take up half the space */}
+          <div className="py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider w-1/2">
+            Proposal
+          </div>
+          {/* Each of the following divs have flex-1 to share the remaining space equally */}
+          <div className="py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider w-1/6">
+            Votes For
+          </div>
+          <div className="py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider w-1/6">
+            Votes Against
+          </div>
+          <div className="py-1.5 px-4 text-end text-md font-semibold text-white tracking-wider w-1/6 justify-end items-end">
+            Total Votes
+          </div>
+        </div>
+
+        <div className="bg-white divide-y divide-sfblue-500">
           {proposals.slice(0, 5).map((proposal) => (
             <ProposalRow key={proposal.id} proposal={proposal} />
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </Layout>
   );
 }
