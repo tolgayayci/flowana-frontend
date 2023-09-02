@@ -1,6 +1,33 @@
 import Head from "next/head";
+import { useState } from "react";
+
+import Project from "@/components/leaderboard/Project";
+import Contributors from "@/components/leaderboard/Contributors";
+
+const tabOptions = [
+  { name: "Project Leaderboard", current: true, key: "project" },
+  { name: "Contributor Leaderboard", current: false, key: "contributors" },
+];
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export default function LeaderBoard() {
+  const [tabs, setTabs] = useState(tabOptions);
+  const selectedTab = tabs.find((tab) => tab.current).name;
+
+  const handleTabChange = (tabKey) => {
+    const newTabs = tabs.map((tab) => {
+      if (tab.key === tabKey) {
+        return { ...tab, current: true };
+      } else {
+        return { ...tab, current: false };
+      }
+    });
+    setTabs(newTabs);
+  };
+
   return (
     <>
       <Head>
@@ -9,10 +36,34 @@ export default function LeaderBoard() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <section className="container mx-auto my-12 max-w-7xl px-4 sm:px-6 lg:px-8 py-1">
+      <section className="max-w-[90%] mx-auto mb-8 -mt-6 px-4 sm:px-6 lg:px-8 py-1">
+        <div>
+          <div className="hidden sm:block">
+            <div>
+              <nav className="-mb-px flex space-x-6" aria-label="Tabs">
+                {tabs.map((tab) => (
+                  <a
+                    key={tab.key}
+                    className={classNames(
+                      tab.current
+                        ? "border-indigo-500 text-white bg-indigo-800"
+                        : "border-b-2 border-indigo-500 text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                      "w-1/2 border-2 py-3 px-1 text-center text-sm font-medium rounded-xl"
+                    )}
+                    onClick={() => handleTabChange(tab.key)}
+                    aria-current={tab.current ? "page" : undefined}
+                  >
+                    {tab.name}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </div>
+        </div>
         <div className="flex flex-wrap space-y-8">
-          <div className="w-full">
-            <h2>leaderboard</h2>
+          <div className="w-full mt-8">
+            {selectedTab === "Project Leaderboard" && <Project />}
+            {selectedTab === "Contributor Leaderboard" && <Contributors />}
           </div>
         </div>
       </section>

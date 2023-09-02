@@ -23,7 +23,7 @@ interface RepositoryInfo {
   release_count: number;
   owner_login: string;
   is_empty: boolean;
-  stargazer_count: number;
+  stargazers_count: number;
   categories: {
     lvl0: string[];
   };
@@ -58,5 +58,7 @@ interface HealthScore {
 
 export interface IProjects {
   repository_info: RepositoryInfo;
+  repo: string;
   health_score: HealthScore;
+  owner: string;
 }

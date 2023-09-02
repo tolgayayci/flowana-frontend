@@ -36,3 +36,15 @@
   -webkit-line-clamp: 2; /* number of lines to show */
   -webkit-box-orient: vertical;
 }
+
+.bg-gold {
+  background-color: #FFD700;
+}
+
+.bg-silver {
+  background-color: #C0C0C0;
+}
+
+.bg-bronze {
+  background-color: #CD7F32;
+}
