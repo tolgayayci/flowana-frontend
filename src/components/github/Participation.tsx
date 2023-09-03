@@ -13,14 +13,33 @@ export default function Participation() {
   const { participation, isLoading } = useParticipation();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Participation" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Participation Trend"
+            tooltip="View the weekly commit activity chart for the past year, highlighting contributions from all, owners, and others."
+          />
+        }
+      />
+    );
   if (
     !participation ||
     !participation.xAxis ||
     !participation.yAxis ||
     !participation.series
   ) {
-    return <NoData element={<CardHeader title="Participation" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Participation Trend"
+            tooltip="View the weekly commit activity chart for the past year, highlighting contributions from all, owners, and others."
+          />
+        }
+        message=""
+      />
+    );
   }
 
   const option = {
@@ -79,7 +98,10 @@ export default function Participation() {
 
   return (
     <Layout>
-      <CardHeader title="Participation" />
+      <CardHeader
+        title="Participation Trend"
+        tooltip="View the weekly commit activity chart for the past year, highlighting contributions from all, owners, and others."
+      />
       <ReactECharts
         option={option}
         showLoading={isLoading}

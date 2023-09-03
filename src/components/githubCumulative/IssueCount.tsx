@@ -13,10 +13,29 @@ export default function IssueCount() {
   const { issueCount, isLoading } = useCumulativeIssueCount();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Issue Count" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Issue Distribution"
+            tooltip="Shows the distribution of open and closed issues across all repositories in a pie chart."
+          />
+        }
+      />
+    );
 
   if (!issueCount)
-    return <NoData element={<CardHeader title="Issue Count" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Issue Distribution"
+            tooltip="Shows the distribution of open and closed issues across all repositories in a pie chart."
+          />
+        }
+        message=""
+      />
+    );
 
   const option = {
     tooltip: {
@@ -61,7 +80,10 @@ export default function IssueCount() {
 
   return (
     <Layout>
-      <CardHeader title="Issue Count" />
+      <CardHeader
+        title="Issue Distribution"
+        tooltip="Shows the distribution of open and closed issues across all repositories in a pie chart."
+      />
       <div className="h-full flex items-center -mt-8">
         <ReactECharts
           option={option}

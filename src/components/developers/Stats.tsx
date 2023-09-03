@@ -26,13 +26,25 @@ export default function Stats() {
     isLoadingTotalRepos
   )
     return (
-      <CardLoader element={<CardHeader title="Developer Report Stats" />} />
+      <CardLoader
+        element={
+          <CardHeader
+            title="Developer Overview"
+            tooltip="Dive into the pulse of developer ecosystem. Displays key insights on developer and repository activities."
+          />
+        }
+      />
     );
 
   if (!fullTime || !monthlyActiveDevs || !totalCommits || !totalRepos)
     return (
       <NoData
-        element={<CardHeader title="Developer Report Stats" />}
+        element={
+          <CardHeader
+            title="Developer Overview"
+            tooltip="Dive into the pulse of developer ecosystem. Displays key insights on developer and repository activities."
+          />
+        }
         message=""
       />
     );
@@ -65,7 +77,10 @@ export default function Stats() {
 
   return (
     <Layout>
-      <CardHeader title="Developer Report Stats" />
+      <CardHeader
+        title="Developer Overview"
+        tooltip="Dive into the pulse of developer ecosystem. Displays key insights on developer and repository activities."
+      />{" "}
       <div className="grid grid-cols-4 gap-5">
         <StatItem
           title="Full Time Devs"

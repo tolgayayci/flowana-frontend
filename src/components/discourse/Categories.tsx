@@ -65,11 +65,30 @@ export default function Categories() {
   }, [discourseCategories]);
 
   if (isLoading) {
-    return <CardLoader element={<CardHeader title="Categories" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Category Distribution"
+            tooltip="Dive into a dual-pie chart experience! The first chart showcases the main categories, and by clicking on any segment, the second chart reveals the associated subcategories. Each category and subcategory displays their respective post and topic counts, offering a comprehensive view of content distribution on the platform."
+          />
+        }
+      />
+    );
   }
 
   if (!discourseCategories) {
-    return <NoData element={<CardHeader title="Categories" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Category Distribution"
+            tooltip="Dive into a dual-pie chart experience! The first chart showcases the main categories, and by clicking on any segment, the second chart reveals the associated subcategories. Each category and subcategory displays their respective post and topic counts, offering a comprehensive view of content distribution on the platform."
+          />
+        }
+        message=""
+      />
+    );
   }
 
   const handleChartClick = (params) => {
@@ -179,7 +198,10 @@ export default function Categories() {
 
   return (
     <Layout>
-      <CardHeader title="Categories" />
+      <CardHeader
+        title="Category Distribution"
+        tooltip="Dive into a dual-pie chart experience! The first chart showcases the main categories, and by clicking on any segment, the second chart reveals the associated subcategories. Each category and subcategory displays their respective post and topic counts, offering a comprehensive view of content distribution on the platform."
+      />{" "}
       <div className="flex justify-between my-10">
         {/* Main Categories Chart */}
         <ReactECharts

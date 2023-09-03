@@ -6,7 +6,9 @@ import useVotingPowerChart from "@/models/governance/useVotingPowerChart";
 
 // Components and Utils
 import Layout from "@/modules/Card/Layout/Layout";
+import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
+import NoData from "@/modules/NoData/NoData";
 
 import { Interval } from "@/types/general";
 import { formatChartDate } from "@/utils/functions";
@@ -22,6 +24,43 @@ export default function VotingPower() {
   const { votingPowerChart, isLoading } = useVotingPowerChart(
     selectedInterval.value
   );
+
+  if (isLoading) {
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Voting Power Activity"
+            tooltip="Visualizes the voting power distribution in the protocol's governance system. Monitor key stakeholders, their voting balances, and track changes in their influence over time."
+            intervals={intervals}
+            selectedInterval={selectedInterval}
+            setSelectedInterval={setSelectedInterval}
+          />
+        }
+      />
+    );
+  }
+
+  if (
+    !votingPowerChart ||
+    !votingPowerChart.series ||
+    !votingPowerChart.series[0].data
+  ) {
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Voting Power Activity"
+            tooltip="Visualizes the voting power distribution in the protocol's governance system. Monitor key stakeholders, their voting balances, and track changes in their influence over time."
+            intervals={intervals}
+            selectedInterval={selectedInterval}
+            setSelectedInterval={setSelectedInterval}
+          />
+        }
+        message=""
+      />
+    );
+  }
 
   // Extract and sort timestamps from the series
   const sortedTimestamps = votingPowerChart?.series[0].data
@@ -98,7 +137,8 @@ export default function VotingPower() {
   return (
     <Layout>
       <CardHeader
-        title="Voting Power"
+        title="Voting Power Activity"
+        tooltip="Visualizes the voting power distribution in the protocol's governance system. Monitor key stakeholders, their voting balances, and track changes in their influence over time."
         intervals={intervals}
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}

@@ -13,10 +13,27 @@ export default function LanguageBreakdown() {
   const { languageBreakdown, isLoading } = useLanguageBreakdown();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Language Breakdown" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Language Breakdown"
+            tooltip="Visualizes the distribution of programming languages used in the repository, highlighting the dominant languages by code size."
+          />
+        }
+      />
+    );
   if (!languageBreakdown)
     return (
-      <NoData element={<CardHeader title="Language Breakdown" />} message="" />
+      <NoData
+        element={
+          <CardHeader
+            title="Language Breakdown"
+            tooltip="Visualizes the distribution of programming languages used in the repository, highlighting the dominant languages by code size."
+          />
+        }
+        message=""
+      />
     );
 
   // Color palette based on the provided styles
@@ -78,7 +95,10 @@ export default function LanguageBreakdown() {
 
   return (
     <Layout>
-      <CardHeader title="Language Breakdown" />
+      <CardHeader
+        title="Language Breakdown"
+        tooltip="Visualizes the distribution of programming languages used in the repository, highlighting the dominant languages by code size."
+      />
       <ReactECharts
         option={option}
         showLoading={isLoading}

@@ -60,16 +60,33 @@ export default function LatestPosts() {
     return (
       <ListLoader
         isLoading={isLoading}
-        element={<CardHeader title="Latest Posts" />}
+        element={
+          <CardHeader
+            title="Latest Posts"
+            tooltip="View the latest posts on the forum."
+          />
+        }
       />
     );
 
   if (!latestPosts)
-    return <NoListData element={<CardHeader title="Latest Posts" />} />;
+    return (
+      <NoListData
+        element={
+          <CardHeader
+            title="Latest Posts"
+            tooltip="View the latest posts on the forum."
+          />
+        }
+      />
+    );
 
   return (
     <Layout>
-      <CardHeader title="Latest Posts" />
+      <CardHeader
+        title="Latest Posts"
+        tooltip="View the latest posts on the forum."
+      />
       <div className="max-h-[calc(5*6.1rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
         <ul className="space-y-3">
           {latestPosts.map((post) => (

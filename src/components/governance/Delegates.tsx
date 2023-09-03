@@ -39,6 +39,7 @@ export default function Delegates() {
         element={
           <CardHeader
             title="Delegates"
+            tooltip="Displays a comprehensive list of delegate profiles within the protocol's governance system. Each delegate's data showcases their participation metrics, voting power, and associated account details."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={sortBy}
@@ -53,6 +54,7 @@ export default function Delegates() {
         element={
           <CardHeader
             title="Delegates"
+            tooltip="Displays a comprehensive list of delegate profiles within the protocol's governance system. Each delegate's data showcases their participation metrics, voting power, and associated account details."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={sortBy}
@@ -151,6 +153,7 @@ export default function Delegates() {
     <Layout>
       <CardHeader
         title="Delegates"
+        tooltip="Displays a comprehensive list of delegate profiles within the protocol's governance system. Each delegate's data showcases their participation metrics, voting power, and associated account details."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={sortBy}

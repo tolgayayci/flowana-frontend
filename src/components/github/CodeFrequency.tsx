@@ -13,11 +13,28 @@ export default function CodeFrequency() {
   const { codeFrequency, isLoading } = useCodeFrequency();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Code Frequency" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Code Frequency"
+            tooltip="Shows the weekly activity of code additions and deletions in the repository over time in last year."
+          />
+        }
+      />
+    );
 
   if (!codeFrequency)
     return (
-      <NoData element={<CardHeader title="Code Frequency" />} message="" />
+      <NoData
+        element={
+          <CardHeader
+            title="Code Frequency"
+            tooltip="Shows the weekly activity of code additions and deletions in the repository over time in last year."
+          />
+        }
+        message=""
+      />
     );
 
   const option = {
@@ -115,7 +132,10 @@ export default function CodeFrequency() {
 
   return (
     <Layout>
-      <CardHeader title="Code Frequency" />
+      <CardHeader
+        title="Code Frequency"
+        tooltip="Shows the weekly activity of code additions and deletions in the repository over time in last year."
+      />{" "}
       <ReactECharts
         option={option}
         showLoading={isLoading}

@@ -17,14 +17,26 @@ export default function MonthlyActiveDevChart() {
 
   if (isLoading) {
     return (
-      <CardLoader element={<CardHeader title="Monthly Active Dev Chart" />} />
+      <CardLoader
+        element={
+          <CardHeader
+            title="Monthly Active Devs"
+            tooltip="Visualizes the monthly engagement of developers in different categories. Track the activity of Full-Time, Part-Time, and One-Time Developers to understand the protocol's developer engagement depth and breadth."
+          />
+        }
+      />
     );
   }
 
   if (!monthlyActiveDevChart || !monthlyActiveDevChart.xAxis) {
     return (
       <NoData
-        element={<CardHeader title="Monthly Active Dev Chart" />}
+        element={
+          <CardHeader
+            title="Monthly Active Devs"
+            tooltip="Visualizes the monthly engagement of developers in different categories. Track the activity of Full-Time, Part-Time, and One-Time Developers to understand the protocol's developer engagement depth and breadth."
+          />
+        }
         message=""
       />
     );
@@ -125,7 +137,10 @@ export default function MonthlyActiveDevChart() {
 
   return (
     <Layout>
-      <CardHeader title="Monthly Active Dev Chart" />
+      <CardHeader
+        title="Monthly Active Devs"
+        tooltip="Visualizes the monthly engagement of developers in different categories. Track the activity of Full-Time, Part-Time, and One-Time Developers to understand the protocol's developer engagement depth and breadth."
+      />
       <ReactECharts
         option={option}
         showLoading={isLoading}

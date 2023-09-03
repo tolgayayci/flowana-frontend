@@ -93,6 +93,7 @@ export default function TopUsers() {
         element={
           <CardHeader
             title="Top Users"
+            tooltip="Discover the standout members of our community across different time frames. This widget highlights users who have made the most impact in terms of likes, posts, topics, and more. Filter by daily, weekly, monthly, and other intervals to see who's leading the way."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -107,6 +108,7 @@ export default function TopUsers() {
         element={
           <CardHeader
             title="Top Users"
+            tooltip="Discover the standout members of our community across different time frames. This widget highlights users who have made the most impact in terms of likes, posts, topics, and more. Filter by daily, weekly, monthly, and other intervals to see who's leading the way."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -119,6 +121,7 @@ export default function TopUsers() {
     <Layout>
       <CardHeader
         title="Top Users"
+        tooltip="Discover the standout members of our community across different time frames. This widget highlights users who have made the most impact in terms of likes, posts, topics, and more. Filter by daily, weekly, monthly, and other intervals to see who's leading the way."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}

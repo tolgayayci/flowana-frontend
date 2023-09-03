@@ -13,11 +13,28 @@ export default function LanguageBreakdown() {
   const { languageBreakdown, isLoading } = useCumulativeLanguageBreakdown();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Language Breakdown" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Language Breakdown"
+            tooltip="Visualizes the distribution of programming languages used across all repositories, highlighting the dominant languages by code size."
+          />
+        }
+      />
+    );
 
   if (!languageBreakdown)
     return (
-      <NoData element={<CardHeader title="Language Breakdown" />} message="" />
+      <NoData
+        element={
+          <CardHeader
+            title="Language Breakdown"
+            tooltip="Visualizes the distribution of programming languages used across all repositories, highlighting the dominant languages by code size."
+          />
+        }
+        message=""
+      />
     );
 
   // Sort the data by size in descending order
@@ -88,7 +105,10 @@ export default function LanguageBreakdown() {
 
   return (
     <Layout>
-      <CardHeader title="Language Breakdown" />
+      <CardHeader
+        title="Language Breakdown"
+        tooltip="Visualizes the distribution of programming languages used across all repositories, highlighting the dominant languages by code size."
+      />
       <div className="h-full flex items-center -mt-8">
         <ReactECharts
           option={option}

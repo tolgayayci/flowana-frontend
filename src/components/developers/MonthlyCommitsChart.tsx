@@ -16,14 +16,26 @@ export default function MonthlyCommitsChart() {
 
   if (isLoading) {
     return (
-      <CardLoader element={<CardHeader title="Monthly Commits Chart" />} />
+      <CardLoader
+        element={
+          <CardHeader
+            title="Monthly Commits"
+            tooltip="Displays the monthly commits for the protocol. Track the protocol's momentum and gauge the development activity over time."
+          />
+        }
+      />
     );
   }
 
   if (!monthlyCommitsChart || !monthlyCommitsChart.xAxis) {
     return (
       <NoData
-        element={<CardHeader title="Monthly Commits Chart" />}
+        element={
+          <CardHeader
+            title="Monthly Commits"
+            tooltip="Displays the monthly commits for the protocol. Track the protocol's momentum and gauge the development activity over time."
+          />
+        }
         message=""
       />
     );
@@ -95,7 +107,10 @@ export default function MonthlyCommitsChart() {
 
   return (
     <Layout>
-      <CardHeader title="Monthly Commits Chart" />
+      <CardHeader
+        title="Monthly Commits"
+        tooltip="Displays the monthly commits for the protocol. Track the protocol's momentum and gauge the development activity over time."
+      />
       <ReactECharts
         option={option}
         showLoading={isLoading}

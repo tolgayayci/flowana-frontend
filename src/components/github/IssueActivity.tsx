@@ -29,6 +29,7 @@ export default function IssueActivity() {
         element={
           <CardHeader
             title="Issue Activity"
+            tooltip="Displays a timeline of opened and closed issues in distinct time intervals. Note: This chart represents the counts of issues opened and closed within each interval, not the cumulative totals."
             intervals={intervals}
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
@@ -43,6 +44,7 @@ export default function IssueActivity() {
         element={
           <CardHeader
             title="Issue Activity"
+            tooltip="Displays a timeline of opened and closed issues in distinct time intervals. Note: This chart represents the counts of issues opened and closed within each interval, not the cumulative totals."
             intervals={intervals}
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
@@ -107,6 +109,7 @@ export default function IssueActivity() {
     <Layout>
       <CardHeader
         title="Issue Activity"
+        tooltip="Displays a timeline of opened and closed issues in distinct time intervals. Note: This chart represents the counts of issues opened and closed within each interval, not the cumulative totals."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}

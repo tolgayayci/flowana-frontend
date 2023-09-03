@@ -18,16 +18,33 @@ export default function RecentCommits() {
     return (
       <ListLoader
         isLoading={isLoading}
-        element={<CardHeader title="Recent Commits" />}
+        element={
+          <CardHeader
+            title="Latest Commits"
+            tooltip="View the latest commits across all repositories of the protocol."
+          />
+        }
       />
     );
 
   if (!recentCommits)
-    return <NoListData element={<CardHeader title="Recent Commits" />} />;
+    return (
+      <NoListData
+        element={
+          <CardHeader
+            title="Latest Commits"
+            tooltip="View the latest commits across all repositories of the protocol."
+          />
+        }
+      />
+    );
 
   return (
     <Layout>
-      <CardHeader title="Recent Commits" />
+      <CardHeader
+        title="Latest Commits"
+        tooltip="View the latest commits across all repositories of the protocol."
+      />
       <div className="max-h-[calc(5*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
         <ul className="space-y-3">
           {recentCommits.map((commit) => (

@@ -78,6 +78,7 @@ export default function TopTopics() {
         element={
           <CardHeader
             title="Top Topics"
+            tooltip="Discover the leading topics on the platform sorted by your chosen interval, be it daily, weekly, monthly, quarterly, yearly, or of all time. Dive into what's trending during specific periods or overall."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -92,6 +93,7 @@ export default function TopTopics() {
         element={
           <CardHeader
             title="Top Topics"
+            tooltip="Discover the leading topics on the platform sorted by your chosen interval, be it daily, weekly, monthly, quarterly, yearly, or of all time. Dive into what's trending during specific periods or overall."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -104,6 +106,7 @@ export default function TopTopics() {
     <Layout>
       <CardHeader
         title="Top Topics"
+        tooltip="Discover the leading topics on the platform sorted by your chosen interval, be it daily, weekly, monthly, quarterly, yearly, or of all time. Dive into what's trending during specific periods or overall."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}

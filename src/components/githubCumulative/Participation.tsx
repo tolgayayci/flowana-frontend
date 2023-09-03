@@ -15,7 +15,16 @@ export default function Participation() {
   const { participation, isLoading } = useCumulativeParticipation();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Participation" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Participation Trend"
+            tooltip="View the weekly commit trend across all repositories of the protocol for the past year, highlighting contributions from all, owners, and others. Displays how development participation has evolved over the past year for the protocol.  "
+          />
+        }
+      />
+    );
 
   if (
     !participation ||
@@ -23,7 +32,17 @@ export default function Participation() {
     !participation.yAxis ||
     !participation.series
   ) {
-    return <NoData element={<CardHeader title="Participation" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Participation Trend"
+            tooltip="View the weekly commit trend across all repositories of the protocol for the past year, highlighting contributions from all, owners, and others. Displays how development participation has evolved over the past year for the protocol.  "
+          />
+        }
+        message=""
+      />
+    );
   }
 
   const option = {
@@ -120,7 +139,10 @@ export default function Participation() {
 
   return (
     <Layout>
-      <CardHeader title="Participation" />
+      <CardHeader
+        title="Participation Trend"
+        tooltip="View the weekly commit trend across all repositories of the protocol for the past year, highlighting contributions from all, owners, and others. Displays how development participation has evolved over the past year for the protocol.  "
+      />
       <ReactECharts
         option={option}
         showLoading={isLoading}

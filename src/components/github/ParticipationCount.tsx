@@ -13,10 +13,27 @@ export default function ParticipationCount() {
   const { participationCount, isLoading } = useParticipationCount();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Participation Count" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Contribution Breakdown"
+            tooltip="See the total commit contributions from owners and others over the past year."
+          />
+        }
+      />
+    );
   if (!participationCount)
     return (
-      <NoData element={<CardHeader title="Participation Count" />} message="" />
+      <NoData
+        element={
+          <CardHeader
+            title="Contribution Breakdown"
+            tooltip="See the total commit contributions from owners and others over the past year."
+          />
+        }
+        message=""
+      />
     );
 
   const option = {
@@ -59,7 +76,10 @@ export default function ParticipationCount() {
   return (
     <Layout>
       {" "}
-      <CardHeader title="Participation Count" />
+      <CardHeader
+        title="Contribution Breakdown"
+        tooltip="See the total commit contributions from owners and others over the past year."
+      />{" "}
       <div className="h-full flex items-center -mt-8">
         <ReactECharts
           option={option}

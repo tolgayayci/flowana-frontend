@@ -13,9 +13,28 @@ export default function PunchCard() {
   const { punchCard, isLoading } = usePunchCard();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Punch Card" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Punch Card"
+            tooltip="Analyze when commits happen throughout the week with this punch card. Dots represent the number of commits, allowing you to spot peak contribution times."
+          />
+        }
+      />
+    );
   if (!punchCard)
-    return <NoData element={<CardHeader title="Punch Card" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Punch Card"
+            tooltip="Analyze when commits happen throughout the week with this punch card. Dots represent the number of commits, allowing you to spot peak contribution times."
+          />
+        }
+        message=""
+      />
+    );
 
   const days = [
     "Sunday",
@@ -107,7 +126,10 @@ export default function PunchCard() {
 
   return (
     <Layout>
-      <CardHeader title="Punch Card" />
+      <CardHeader
+        title="Punch Card"
+        tooltip="Analyze when commits happen throughout the week with this punch card. Dots represent the number of commits, allowing you to spot peak contribution times."
+      />
       <ReactECharts
         option={option}
         showLoading={isLoading}

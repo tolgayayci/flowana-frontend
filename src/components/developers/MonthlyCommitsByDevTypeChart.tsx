@@ -18,7 +18,12 @@ export default function MonthlyCommitsByDevTypeChart() {
   if (isLoading) {
     return (
       <CardLoader
-        element={<CardHeader title="Monthly Commits By Dev Type Chart" />}
+        element={
+          <CardHeader
+            title="Commit Trends by Devs"
+            tooltip="Displays monthly commits segmented by developer categories. See how Full-Time, Part-Time, and One-Time Developers contribute over time, revealing the protocol's developer engagement diversity."
+          />
+        }
       />
     );
   }
@@ -26,7 +31,12 @@ export default function MonthlyCommitsByDevTypeChart() {
   if (!monthlyCommitsByDevTypeChart || !monthlyCommitsByDevTypeChart.xAxis) {
     return (
       <NoData
-        element={<CardHeader title="Monthly Commits By Dev Type Chart" />}
+        element={
+          <CardHeader
+            title="Commit Trends by Devs"
+            tooltip="Displays monthly commits segmented by developer categories. See how Full-Time, Part-Time, and One-Time Developers contribute over time, revealing the protocol's developer engagement diversity."
+          />
+        }
         message=""
       />
     );
@@ -127,7 +137,10 @@ export default function MonthlyCommitsByDevTypeChart() {
 
   return (
     <Layout>
-      <CardHeader title="Monthly Commits By Dev Type Chart" />
+      <CardHeader
+        title="Commit Trends by Devs"
+        tooltip="Displays monthly commits segmented by developer categories. See how Full-Time, Part-Time, and One-Time Developers contribute over time, revealing the protocol's developer engagement diversity."
+      />{" "}
       <ReactECharts
         option={option}
         showLoading={isLoading}

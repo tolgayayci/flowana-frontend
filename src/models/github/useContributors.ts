@@ -1,17 +1,13 @@
 import useSWRImmutable from 'swr/immutable';
-import { useRouter } from 'next/router';
 import { useProtocol } from '../protocols/useProtocol';
 import { fetcher } from '../../utils/fetcher';
-import { IContributors } from '@/types/githubTypes';
+import { IContributor } from '@/types/githubLeaderboard';
 
 const useContributors = () => {
-    const router = useRouter();
-    const { owner, repo } = router.query;
-
     const { protocol } = useProtocol();
 
-    const url = `/github-project/${protocol["protocol"]}/contributors?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IContributors[]>(protocol ? url : null , fetcher);
+    const url = `/github-leaderboard/${protocol["protocol"]}/contributors`
+    const { data, error, isValidating } = useSWRImmutable<IContributor[]>(protocol ? url : null , fetcher);
 
     return {
         contributors: data,

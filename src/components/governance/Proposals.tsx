@@ -19,12 +19,27 @@ export default function Proposals() {
     return (
       <ListLoader
         isLoading={isLoading}
-        element={<CardHeader title="Proposals" />}
+        element={
+          <CardHeader
+            title="Proposals"
+            tooltip="Displays a list of governance proposals within the specified protocol. Users can view information related to each proposal."
+          />
+        }
       />
     );
 
   if (!proposals || !proposals?.length) {
-    return <NoData element={<CardHeader title="Proposals" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Proposals"
+            tooltip="Displays a list of governance proposals within the specified protocol. Users can view information related to each proposal."
+          />
+        }
+        message=""
+      />
+    );
   }
 
   function ProposalRow({ proposal }: { proposal: any }) {

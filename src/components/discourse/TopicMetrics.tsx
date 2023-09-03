@@ -10,10 +10,30 @@ import NoData from "@/modules/NoData/NoData";
 export default function TopicMetrics() {
   const { topicMetrics, isLoading } = useDiscourseTopicMetrics();
 
-  if (isLoading) return <CardLoader element={<CardHeader title="Stats" />} />;
+  if (isLoading)
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Forum Overview"
+            tooltip="View a summary of forum engagement, showcasing the total number of topics, posts, replies, views, likes, and their respective averages."
+          />
+        }
+      />
+    );
 
   if (!topicMetrics)
-    return <NoData element={<CardHeader title="Stats" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Forum Overview"
+            tooltip="View a summary of forum engagement, showcasing the total number of topics, posts, replies, views, likes, and their respective averages."
+          />
+        }
+        message=""
+      />
+    );
 
   function StatItem({ title, count }: { title: string; count: number }) {
     const formattedCount = new Intl.NumberFormat(undefined, {
@@ -36,7 +56,10 @@ export default function TopicMetrics() {
   return (
     <>
       <Layout>
-        <CardHeader title="Topic Metrics" />
+        <CardHeader
+          title="Forum Overview"
+          tooltip="View a summary of forum engagement, showcasing the total number of topics, posts, replies, views, likes, and their respective averages."
+        />
         <div className="grid grid-cols-4 gap-5">
           <StatItem title="Total Replies" count={topicMetrics.total_replies} />
           <StatItem title="Total Posts" count={topicMetrics.total_posts} />

@@ -18,7 +18,12 @@ export default function TotalMonthlyActiveDevChart() {
   if (isLoading) {
     return (
       <CardLoader
-        element={<CardHeader title="Total Monthly Active Dev Chart" />}
+        element={
+          <CardHeader
+            title="Total Active Devs"
+            tooltip="Track the protocol's growth with monthly active developers. Each data point shows developer engagement for a specific month, highlighting trends and adoption rates."
+          />
+        }
       />
     );
   }
@@ -26,7 +31,12 @@ export default function TotalMonthlyActiveDevChart() {
   if (!totalMonthlyActiveDevChart || !totalMonthlyActiveDevChart.xAxis) {
     return (
       <NoData
-        element={<CardHeader title="Total Monthly Active Dev Chart" />}
+        element={
+          <CardHeader
+            title="Total Active Devs"
+            tooltip="Track the protocol's growth with monthly active developers. Each data point shows developer engagement for a specific month, highlighting trends and adoption rates."
+          />
+        }
         message=""
       />
     );
@@ -101,7 +111,10 @@ export default function TotalMonthlyActiveDevChart() {
 
   return (
     <Layout>
-      <CardHeader title="Total Monthly Active Dev Chart" />
+      <CardHeader
+        title="Total Active Devs"
+        tooltip="Track the protocol's growth with monthly active developers. Each data point shows developer engagement for a specific month, highlighting trends and adoption rates."
+      />{" "}
       <ReactECharts
         option={option}
         showLoading={isLoading}

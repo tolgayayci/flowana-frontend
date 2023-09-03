@@ -13,10 +13,29 @@ export default function PunchCard() {
   const { punchCard, isLoading } = useCumulativePunchCard();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Punch Card" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Cumulative Punch Card"
+            tooltip="Analyze when commits occur across all repositories of the protocol throughout the week. Dots represent the number of commits, enabling you to identify peak contribution times."
+          />
+        }
+      />
+    );
 
   if (!punchCard)
-    return <NoData element={<CardHeader title="Punch Card" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Cumulative Punch Card"
+            tooltip="Analyze when commits occur across all repositories of the protocol throughout the week. Dots represent the number of commits, enabling you to identify peak contribution times."
+          />
+        }
+        message=""
+      />
+    );
 
   const hours = [
     "12 am",
@@ -120,7 +139,10 @@ export default function PunchCard() {
 
   return (
     <Layout>
-      <CardHeader title="Punch Card" />
+      <CardHeader
+        title="Cumulative Punch Card"
+        tooltip="Analyze when commits occur across all repositories of the protocol throughout the week. Dots represent the number of commits, enabling you to identify peak contribution times."
+      />
       <ReactECharts
         option={option}
         showLoading={isLoading}

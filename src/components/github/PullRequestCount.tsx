@@ -13,10 +13,27 @@ export default function PullRequestCount() {
   const { pullRequestCount, isLoading } = usePullRequestCount();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Pull Request Count" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Pull Request Count"
+            tooltip="Shows the distribution of open and closed pull requests in a pie chart. Quickly understand the current status of pull requests in the repository at a glance."
+          />
+        }
+      />
+    );
   if (!pullRequestCount)
     return (
-      <NoData element={<CardHeader title="Pull Request Count" />} message="" />
+      <NoData
+        element={
+          <CardHeader
+            title="Pull Request Count"
+            tooltip="Shows the distribution of open and closed pull requests in a pie chart. Quickly understand the current status of pull requests in the repository at a glance."
+          />
+        }
+        message=""
+      />
     );
 
   const option = {
@@ -56,7 +73,10 @@ export default function PullRequestCount() {
 
   return (
     <Layout>
-      <CardHeader title="Pull Request Count" />
+      <CardHeader
+        title="Pull Request Count"
+        tooltip="Shows the distribution of open and closed pull requests in a pie chart. Quickly understand the current status of pull requests in the repository at a glance."
+      />
       <div className="h-full flex items-center -mt-8">
         <ReactECharts
           option={option}

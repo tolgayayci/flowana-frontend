@@ -11,16 +11,38 @@ export default function UserMetrics() {
   const { discourseUserMetrics, isLoading } = useDiscourseUserMetrics();
 
   if (isLoading) {
-    return <CardLoader element={<CardHeader title="User Metrics" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="User Metrics"
+            tooltip=" Explore insights into the behavior of active users. Displays average and total actions of community members, from likes to reads. Note: Metrics might not represent all users, as only those with significant activity are included."
+          />
+        }
+      />
+    );
   }
 
   if (!discourseUserMetrics) {
-    return <NoData element={<CardHeader title="User Metrics" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="User Metrics"
+            tooltip=" Explore insights into the behavior of active users. Displays average and total actions of community members, from likes to reads. Note: Metrics might not represent all users, as only those with significant activity are included."
+          />
+        }
+        message=""
+      />
+    );
   }
 
   return (
     <Layout>
-      <CardHeader title="User Metrics" />
+      <CardHeader
+        title="User Metrics"
+        tooltip=" Explore insights into the behavior of active users. Displays average and total actions of community members, from likes to reads. Note: Metrics might not represent all users, as only those with significant activity are included."
+      />
       <div className="space-y-6 mt-4">
         <div className="flex justify-between items-center border p-4 rounded">
           <div>

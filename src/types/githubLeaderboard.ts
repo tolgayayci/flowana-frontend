@@ -1,21 +1,24 @@
-interface ContributionInfo {
-    owner: string;
-    repo: string;
-    html_url: string;
-    commits: number;
+interface Contribution {
+  html_url: string;
+  repo: string;
+  commits: number;
+  owner: string;
 }
-  
-interface AuthorInfo {
-    avatar_url: string;
-    html_url: string;
-    login: string;
+
+interface Author {
+  avatar_url: string;
+  html_url: string;
+  login: string;
 }
-  
-export interface IContributors {
-    contributions: Record<string, ContributionInfo>;
-    author: AuthorInfo;
-    total_commits: number;
+
+export interface IContributor {
+  total_commits: number;
+  contributions: {
+    [key: string]: Contribution;
+  };
+  author: Author;
 }
+
 
 interface RepositoryInfo {
   created_at: string;

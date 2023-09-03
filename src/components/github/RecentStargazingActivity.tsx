@@ -14,14 +14,26 @@ export default function RecentStargazingActivity() {
 
   if (isLoading) {
     return (
-      <CardLoader element={<CardHeader title="Recent Stargazing Activity" />} />
+      <CardLoader
+        element={
+          <CardHeader
+            title="Stargazing Trend"
+            tooltip="Displays the recent trend of user 'starring' activity for the repository, giving a glimpse into its growing popularity over time."
+          />
+        }
+      />
     );
   }
 
   if (!recentStargazingActivity || !recentStargazingActivity.xAxis)
     return (
       <NoData
-        element={<CardHeader title="Recent Stargazing Activity" />}
+        element={
+          <CardHeader
+            title="Stargazing Trend"
+            tooltip="Displays the recent trend of user 'starring' activity for the repository, giving a glimpse into its growing popularity over time."
+          />
+        }
         message=""
       />
     );
@@ -107,7 +119,10 @@ export default function RecentStargazingActivity() {
 
   return (
     <Layout>
-      <CardHeader title="Recent Stargazing Activity" />
+      <CardHeader
+        title="Stargazing Trend"
+        tooltip="Displays the recent trend of user 'starring' activity for the repository, giving a glimpse into its growing popularity over time."
+      />{" "}
       <ReactECharts option={option} style={{ minHeight: "350px" }} />
     </Layout>
   );

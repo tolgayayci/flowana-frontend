@@ -33,6 +33,7 @@ export default function TopicActivity() {
         element={
           <CardHeader
             title="Topic Activity"
+            tooltip="Track the creation of topics on a chart, broken down by daily, weekly, monthly, or yearly intervals. This allows you to observe activity patterns and trends on the platform across different time frames."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -47,6 +48,7 @@ export default function TopicActivity() {
       element={
         <CardHeader
           title="Topic Activity"
+          tooltip="Track the creation of topics on a chart, broken down by daily, weekly, monthly, or yearly intervals. This allows you to observe activity patterns and trends on the platform across different time frames."
           selectedInterval={selectedInterval}
           setSelectedInterval={setSelectedInterval}
           intervals={intervals}
@@ -125,6 +127,7 @@ export default function TopicActivity() {
     <Layout>
       <CardHeader
         title="Topic Activity"
+        tooltip="Track the creation of topics on a chart, broken down by daily, weekly, monthly, or yearly intervals. This allows you to observe activity patterns and trends on the platform across different time frames."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}

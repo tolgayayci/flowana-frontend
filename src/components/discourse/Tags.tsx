@@ -13,11 +13,30 @@ export default function Tags() {
   const { discourseTags, isLoading } = useDiscourseTags();
 
   if (isLoading) {
-    return <CardLoader element={<CardHeader title="Tags" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Tags"
+            tooltip="Shows the distribution of tags in a pie chart, reflecting the most frequently used topics in discussions."
+          />
+        }
+      />
+    );
   }
 
   if (!discourseTags || discourseTags.length === 0) {
-    return <NoData element={<CardHeader title="Tags" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Tags"
+            tooltip="Shows the distribution of tags in a pie chart, reflecting the most frequently used topics in discussions."
+          />
+        }
+        message=""
+      />
+    );
   }
 
   // Sort the tags by count in descending order
@@ -78,7 +97,10 @@ export default function Tags() {
 
   return (
     <Layout>
-      <CardHeader title="Tags" />
+      <CardHeader
+        title="Tags"
+        tooltip="Shows the distribution of tags in a pie chart, reflecting the most frequently used topics in discussions."
+      />
       <div className="h-full flex items-center -mt-16">
         <ReactECharts
           option={option}

@@ -86,6 +86,7 @@ export default function LatestTopics() {
         element={
           <CardHeader
             title="Latest Topics"
+            tooltip="View the latest topics by interval on the forum."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -100,6 +101,7 @@ export default function LatestTopics() {
         element={
           <CardHeader
             title="Latest Topics"
+            tooltip="View the latest topics by interval on the forum."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -112,6 +114,7 @@ export default function LatestTopics() {
     <Layout>
       <CardHeader
         title="Latest Topics"
+        tooltip="View the latest topics by interval on the forum."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}

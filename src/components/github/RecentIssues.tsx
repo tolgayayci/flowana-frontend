@@ -32,7 +32,8 @@ export default function RecentIssues() {
         isLoading={isLoading}
         element={
           <CardHeader
-            title="Recent Issues"
+            title="Latest Issues"
+            tooltip="View the latest issues sorted by either creation time, or update time."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -46,7 +47,8 @@ export default function RecentIssues() {
       <NoListData
         element={
           <CardHeader
-            title="Recent Issues"
+            title="Latest Issues"
+            tooltip="View the latest issues sorted by either creation time, or update time."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -58,7 +60,8 @@ export default function RecentIssues() {
   return (
     <Layout>
       <CardHeader
-        title="Recent Issues"
+        title="Latest Issues"
+        tooltip="View the latest issues sorted by either creation time, or update time."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}

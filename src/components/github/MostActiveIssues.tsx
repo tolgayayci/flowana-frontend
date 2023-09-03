@@ -35,6 +35,7 @@ export default function MostActiveIssues() {
         element={
           <CardHeader
             title="Most Active Issues"
+            tooltip="View the top issues with the most comments in the specified repository. Filter by different time intervals: daily, weekly, monthly, or yearly to identify which topics are generating the most discussion."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -49,6 +50,7 @@ export default function MostActiveIssues() {
         element={
           <CardHeader
             title="Most Active Issues"
+            tooltip="View the top issues with the most comments in the specified repository. Filter by different time intervals: daily, weekly, monthly, or yearly to identify which topics are generating the most discussion."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -61,6 +63,7 @@ export default function MostActiveIssues() {
     <Layout>
       <CardHeader
         title="Most Active Issues"
+        tooltip="View the top issues with the most comments in the specified repository. Filter by different time intervals: daily, weekly, monthly, or yearly to identify which topics are generating the most discussion."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}

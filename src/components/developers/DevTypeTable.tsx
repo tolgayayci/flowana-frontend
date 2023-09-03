@@ -11,13 +11,27 @@ export default function DevTypeTable() {
   const { devTypeTable, isLoading } = useDevelopersDevTypeTable();
 
   if (isLoading) {
-    return <CardLoader element={<CardHeader title="Developer Type Table" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Developer Types"
+            tooltip="Explore the diversity of the developer community by type and monitor their activity trends over time. Table lists different developer categories and displays relevant metrics, such as activity counts for specific dates and growth percentages over different year intervals."
+          />
+        }
+      />
+    );
   }
 
   if (!devTypeTable) {
     return (
       <NoData
-        element={<CardHeader title="Developer Type Table" />}
+        element={
+          <CardHeader
+            title="Developer Types"
+            tooltip="Explore the diversity of the developer community by type and monitor their activity trends over time. Table lists different developer categories and displays relevant metrics, such as activity counts for specific dates and growth percentages over different year intervals."
+          />
+        }
         message=""
       />
     );

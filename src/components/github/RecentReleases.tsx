@@ -13,18 +13,38 @@ export default function RecentReleases() {
   const { recentReleases, isLoading } = useRecentReleases();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Recent Releases" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Latest Releases"
+            tooltip="View the latest releases created by the repository."
+          />
+        }
+      />
+    );
 
   if (!recentReleases)
     return (
-      <NoData element={<CardHeader title="Recent Releases" />} message="" />
+      <NoData
+        element={
+          <CardHeader
+            title="Latest Releases"
+            tooltip="View the latest releases created by the repository."
+          />
+        }
+        message=""
+      />
     );
 
   const latestRelease = recentReleases[0];
 
   return (
     <Layout>
-      <CardHeader title="Recent Releases" />
+      <CardHeader
+        title="Latest Releases"
+        tooltip="View the latest releases created by the repository."
+      />
       <div className="max-h-[calc(5*6.2rem)] h-full">
         <ul className="flex flex-col h-full space-y-3">
           {recentReleases.slice(0, 5).map((release, index) => (

@@ -26,11 +26,28 @@ export default function CommitActivity() {
   }, [commitActivity]);
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Commit Activity" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Cumulative Commit Activity"
+            tooltip="Presents an aggregated view of the commit activity across different repositories. It combines and displays the commit activity for each day over the last year, grouped by week. Click on a specific week to see a daily breakdown of commits for that week."
+          />
+        }
+      />
+    );
 
   if (!commitActivity || !commitActivity[0].total)
     return (
-      <NoData element={<CardHeader title="Commit Activity" />} message="" />
+      <NoData
+        element={
+          <CardHeader
+            title="Cumulative Commit Activity"
+            tooltip="Presents an aggregated view of the commit activity across different repositories. It combines and displays the commit activity for each day over the last year, grouped by week. Click on a specific week to see a daily breakdown of commits for that week."
+          />
+        }
+        message=""
+      />
     );
 
   const handleClick = (params: any) => {
@@ -152,7 +169,10 @@ export default function CommitActivity() {
 
   return (
     <Layout>
-      <CardHeader title="Commit Activity" />
+      <CardHeader
+        title="Cumulative Commit Activity"
+        tooltip="Presents an aggregated view of the commit activity across different repositories. It combines and displays the commit activity for each day over the last year, grouped by week. Click on a specific week to see a daily breakdown of commits for that week."
+      />
       <ReactECharts
         option={option}
         style={{ minHeight: "150px" }}

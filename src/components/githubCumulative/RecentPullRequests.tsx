@@ -34,7 +34,8 @@ export default function RecentPullRequests() {
         isLoading={isLoading}
         element={
           <CardHeader
-            title="Recent Pull Requests"
+            title="Latest Pull Requests"
+            tooltip="View the latest pull requests sorted by either creation time, or update time across all repositories of the protocol."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -48,7 +49,8 @@ export default function RecentPullRequests() {
       <NoListData
         element={
           <CardHeader
-            title="Recent Pull Requests"
+            title="Latest Pull Requests"
+            tooltip="View the latest pull requests sorted by either creation time, or update time across all repositories of the protocol."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -82,7 +84,8 @@ export default function RecentPullRequests() {
   return (
     <Layout>
       <CardHeader
-        title="Recent Pull Requests"
+        title="Latest Pull Requests"
+        tooltip="View the latest pull requests sorted by either creation time, or update time across all repositories of the protocol."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}

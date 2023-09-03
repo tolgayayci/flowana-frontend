@@ -17,9 +17,6 @@ function StatItem({ title, count }: { title: string; count: number }) {
         <div className="text-5xl font-bold text-[#333333] mb-3">
           <div>{formattedCount}</div>
         </div>
-        {/* <div className="inline-block text-sfblack text-xs font-semibold bg-sfred-500 border-2 border-sfred-800 rounded-2xl px-2 py-0.5">
-          {count}
-        </div> */}
       </div>
     </div>
   );
@@ -28,14 +25,37 @@ function StatItem({ title, count }: { title: string; count: number }) {
 export default function Stats() {
   const { stats, isLoading } = useCumulativeStats();
 
-  if (isLoading) return <CardLoader element={<CardHeader title="Stats" />} />;
+  if (isLoading)
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Protocol Overview"
+            tooltip="Provides comprehensive overview of various cumulative statistics related to the protocol."
+          />
+        }
+      />
+    );
 
   if (!stats)
-    return <NoData element={<CardHeader title="Stats" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Protocol Overview"
+            tooltip="Provides comprehensive overview of various cumulative statistics related to the protocol."
+          />
+        }
+        message=""
+      />
+    );
 
   return (
     <Layout>
-      <CardHeader title="Stats" />
+      <CardHeader
+        title="Protocol Overview"
+        tooltip="Provides comprehensive overview of various cumulative statistics related to the protocol."
+      />
       <div className="grid grid-cols-4 gap-5">
         <StatItem
           title="Branch Commits"

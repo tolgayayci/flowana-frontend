@@ -13,6 +13,7 @@ export type Order = {
   
 export interface ICardHeader {
     title: string;
+    tooltip?: string;
     description?: string;
     selectedInterval?: Interval;
     setSelectedInterval?: (interval: Interval) => void;

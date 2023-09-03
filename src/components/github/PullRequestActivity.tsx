@@ -28,6 +28,7 @@ export default function PullRequestActivity() {
         element={
           <CardHeader
             title="Pull Request Activity"
+            tooltip="Displays a timeline of opened and issues pull requests in distinct time intervals. Note: This chart represents the counts of pull requests opened and closed within each interval, not the cumulative totals."
             intervals={intervals}
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
@@ -41,6 +42,7 @@ export default function PullRequestActivity() {
         element={
           <CardHeader
             title="Pull Request Activity"
+            tooltip="Displays a timeline of opened and issues pull requests in distinct time intervals. Note: This chart represents the counts of pull requests opened and closed within each interval, not the cumulative totals."
             intervals={intervals}
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
@@ -111,6 +113,7 @@ export default function PullRequestActivity() {
     <Layout>
       <CardHeader
         title="Pull Request Activity"
+        tooltip="Displays a timeline of opened and issues pull requests in distinct time intervals. Note: This chart represents the counts of pull requests opened and closed within each interval, not the cumulative totals."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}

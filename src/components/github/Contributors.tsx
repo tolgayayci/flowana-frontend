@@ -10,14 +10,36 @@ export default function Contributors() {
   const { contributors, isLoading } = useContributors();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Contributors" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Top Contributors"
+            tooltip="Discover the most active contributors to the repository."
+          />
+        }
+      />
+    );
 
   if (!contributors)
-    return <NoData element={<CardHeader title="Contributors" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Top Contributors"
+            tooltip="Discover the most active contributors to the repository."
+          />
+        }
+        message=""
+      />
+    );
 
   return (
     <Layout>
-      <CardHeader title="Contributors" />
+      <CardHeader
+        title="Top Contributors"
+        tooltip="Discover the most active contributors to the repository."
+      />
     </Layout>
   );
 }

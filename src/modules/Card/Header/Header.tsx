@@ -1,11 +1,15 @@
 import { Listbox } from "@headlessui/react";
 import React from "react";
-import { ICardHeader } from "@/types/general";
+import { Tooltip } from "react-tooltip";
 
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import { FaInfoCircle } from "react-icons/fa";
+
+import { ICardHeader } from "@/types/general";
 
 const CardHeader: React.FC<ICardHeader> = ({
   title,
+  tooltip,
   selectedInterval,
   setSelectedInterval,
   intervals,
@@ -21,6 +25,14 @@ const CardHeader: React.FC<ICardHeader> = ({
       >
         {title}
       </h1>
+      {tooltip && (
+        <>
+          <FaInfoCircle className="ml-2 text-white cursor-pointer info-icon text-xl" />
+          <Tooltip anchorSelect=".info-icon" place="top">
+            {tooltip}
+          </Tooltip>
+        </>
+      )}
       {intervals && intervals.length > 0 && (
         <Listbox value={selectedInterval} onChange={setSelectedInterval}>
           {({ open }) => (

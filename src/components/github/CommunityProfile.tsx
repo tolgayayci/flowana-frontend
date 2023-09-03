@@ -10,12 +10,29 @@ export default function CommunityProfile() {
   const { communityProfile, isLoading } = useCommunityProfile();
 
   if (isLoading) {
-    return <CardLoader element={<CardHeader title="Community Profile" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Community Profile"
+            tooltip="Displays key components of the protocol's community structure along with a health score. This score encapsulates the robustness of the community's guidelines and resources."
+          />
+        }
+      />
+    );
   }
 
   if (!communityProfile)
     return (
-      <NoData element={<CardHeader title="Community Profile" />} message="" />
+      <NoData
+        element={
+          <CardHeader
+            title="Community Profile"
+            tooltip="Displays key components of the protocol's community structure along with a health score. This score encapsulates the robustness of the community's guidelines and resources."
+          />
+        }
+        message=""
+      />
     );
 
   const { health_percentage, updated_at, documentation, description, files } =
@@ -31,7 +48,10 @@ export default function CommunityProfile() {
 
   return (
     <Layout>
-      <CardHeader title="Community Profile" />
+      <CardHeader
+        title="Community Profile"
+        tooltip="Displays key components of the protocol's community structure along with a health score. This score encapsulates the robustness of the community's guidelines and resources."
+      />{" "}
       <div className="flex items-center space-x-12">
         {/* Left Side */}
         <div className="flex flex-col items-center justify-center w-1/3">

@@ -18,13 +18,28 @@ export default function Safes() {
     return (
       <ListLoader
         isLoading={isLoading}
-        element={<CardHeader title="Safes" />}
+        element={
+          <CardHeader
+            title="Safes"
+            tooltip="Displays governance safes for the protocol."
+          />
+        }
       />
     );
   }
 
   if (!safes) {
-    return <NoData element={<CardHeader title="Safes" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Safes"
+            tooltip="Displays governance safes for the protocol."
+          />
+        }
+        message=""
+      />
+    );
   }
 
   function BadgeWithTooltip({
@@ -51,7 +66,10 @@ export default function Safes() {
 
   return (
     <Layout>
-      <CardHeader title="Safes" />
+      <CardHeader
+        title="Safes"
+        tooltip="Displays governance safes for the protocol."
+      />
       <div className="max-h-[calc(5*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
         <ul className="space-y-3">
           {safes.gnosisSafes.map((safe) => (

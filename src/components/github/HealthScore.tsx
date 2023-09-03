@@ -10,10 +10,29 @@ export default function HealthScore() {
   const { healthScore, isLoading } = useHealthScore();
 
   if (isLoading)
-    return <CardLoader element={<CardHeader title="Health Score" />} />;
+    return (
+      <CardLoader
+        element={
+          <CardHeader
+            title="Flowana Health Score"
+            tooltip="Provides an overall health score of the protocol based on various metrics such as commit activity, issue resolution, pull request engagement, release consistency, and contributor involvement. A comprehensive glimpse into the ongoing development and maintenance status of the project."
+          />
+        }
+      />
+    );
 
   if (!healthScore)
-    return <NoData element={<CardHeader title="Health Score" />} message="" />;
+    return (
+      <NoData
+        element={
+          <CardHeader
+            title="Flowana Health Score"
+            tooltip="Provides an overall health score of the protocol based on various metrics such as commit activity, issue resolution, pull request engagement, release consistency, and contributor involvement. A comprehensive glimpse into the ongoing development and maintenance status of the project."
+          />
+        }
+        message=""
+      />
+    );
 
   function ProgressBar({ label, value }: { label: string; value: number }) {
     return (
@@ -33,7 +52,10 @@ export default function HealthScore() {
 
   return (
     <Layout>
-      <CardHeader title="Flowana Health Score" />
+      <CardHeader
+        title="Flowana Health Score"
+        tooltip="Provides an overall health score of the protocol based on various metrics such as commit activity, issue resolution, pull request engagement, release consistency, and contributor involvement. A comprehensive glimpse into the ongoing development and maintenance status of the project."
+      />
       <div className="flex items-center space-x-12 mt-12">
         <div className="flex flex-col items-center justify-center w-2/5 bg-gradient-to-br p-6 rounded-lg transition-shadow duration-300 ease-in-out">
           <p className="text-8xl font-extrabold text-sfgreen-800 mb-4">
