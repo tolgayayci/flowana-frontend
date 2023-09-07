@@ -50,8 +50,8 @@ module.exports = {
           800: "#2A3855"
         },
         "side" : {
-          DEFAULT: "#E4EEF2",
-          400: "#E4EEF2"
+          DEFAULT: "#DAE1ED",
+          400: "#DAE1ED"
         },
         sfgray: "#FFCDB2",
         sfblack: "rgba(51, 51, 51, 0.5)"

@@ -59,9 +59,10 @@ export default function TopicActivity() {
   }
 
   const option = {
-    color: "#1890FF", // Line color
+    color: "#778dd1", // Line color
     xAxis: {
       type: "category",
+      boundaryGap: false,
       data: discourseTopicActivity?.xAxis.data.map((date) =>
         formatChartDate(date)
       ),
@@ -75,16 +76,11 @@ export default function TopicActivity() {
       smooth: true, // This makes the lines smooth
       showSymbol: false, // This removes the dots on the line
       itemStyle: {
-        color: "#DC5057", // sfred.900
-        shadowBlur: 10,
-        shadowOffsetX: 0,
-        shadowOffsetY: 3,
-        shadowColor: "rgba(0, 0, 0, 0.3)",
+        color: "#778dd1", // sfred.900
       },
       lineStyle: {
-        color: "#1D313B", // sfblue.900
-        width: 3,
-      },
+        color: "#778dd1", // sfblue.900
+      }
     })),
     renderer: "svg",
     tooltip: {
@@ -100,20 +96,16 @@ export default function TopicActivity() {
       // Slider
       {
         type: "slider",
-        start: 0,
+        start: 60,
         end: 100,
         handleStyle: {
-          color: "#E57F84", // sfred.800
-          shadowBlur: 3,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
-          shadowOffsetX: 2,
-          shadowOffsetY: 2,
+          color: "#e8efff", // sfred.800
         },
       },
       {
         type: "inside",
       },
-    ],
+        ],
     grid: {
       left: "1%",
       right: "1%",

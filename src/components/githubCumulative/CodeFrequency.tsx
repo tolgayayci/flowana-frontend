@@ -45,7 +45,7 @@ export default function CodeFrequency() {
       data: codeFrequency["xAxis"]["data"].map((date) => formatChartDate(date)),
       axisLine: {
         lineStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#3b4e6e", 
         },
       },
     },
@@ -53,7 +53,7 @@ export default function CodeFrequency() {
       type: "value",
       axisLine: {
         lineStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#3b4e6e", 
         },
       },
     },
@@ -61,10 +61,10 @@ export default function CodeFrequency() {
       let color, name;
 
       if (index === 0) {
-        color = "#28A745"; // Green for additions
+        color = "#778dd1"; // Green for additions
         name = "Additions";
       } else {
-        color = "#DC5057"; // Red for deletions
+        color = "#e28d9b"; // Red for deletions
         name = "Deletions";
       }
 
@@ -75,14 +75,10 @@ export default function CodeFrequency() {
         showSymbol: false,
         itemStyle: {
           color: color,
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowOffsetY: 3,
-          shadowColor: "rgba(0, 0, 0, 0.1)",
         },
         lineStyle: {
           color: color,
-          width: 3,
+          width: 2.5,
         },
       };
     }),
@@ -100,7 +96,7 @@ export default function CodeFrequency() {
       show: true,
       data: ["Additions", "Deletions"],
       textStyle: {
-        color: "#2F5061", // sfblue.DEFAULT
+        color: "#3b4e6e",
       },
       selectedMode: "multiple", // Allows multiple selection (default behavior)
     },
@@ -108,14 +104,10 @@ export default function CodeFrequency() {
       // Slider
       {
         type: "slider",
-        start: 75,
+        start: 60,
         end: 100,
         handleStyle: {
-          color: "#E57F84", // sfred.800
-          shadowBlur: 3,
-          shadowColor: "rgba(0, 0, 0, 1)",
-          shadowOffsetX: 2,
-          shadowOffsetY: 2,
+          color: "#e8efff", // sfred.800
         },
       },
       {

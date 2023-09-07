@@ -45,6 +45,7 @@ export default function PullRequestCount() {
       top: "0%",
       left: "center",
     },
+    color:["#e28d9b", "#778dd1"],
     series: [
       {
         name: "Pull Request Count",
@@ -63,9 +64,14 @@ export default function PullRequestCount() {
         emphasis: {
           label: {
             show: true,
-            fontSize: 20,
+            fontSize: 15,
             fontWeight: "bold",
           },
+          itemStyle: {
+            shadowBlur: 2,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.30)",
+          }
         },
         labelLine: {
           show: false,

@@ -57,7 +57,7 @@ export default function PullRequestCount() {
           { value: pullRequestCount.closed, name: "Closed" },
           { value: pullRequestCount.open, name: "Open" },
         ],
-        color: ["#5B93AF", "#ECA1A5"], // sfblue.500 for "Others" and sfgreen.500 for "Owner"
+        color: ["#778dd1", "#ECA1A5"], // sfblue.500 for "Others" and sfgreen.500 for "Owner"
         label: {
           formatter: "{b}: {d}%",
         },

@@ -75,13 +75,13 @@ export default function Tags() {
         emphasis: {
           label: {
             show: true,
-            fontSize: 20,
+            fontSize: 15,
             fontWeight: "bold",
           },
           itemStyle: {
-            shadowBlur: 5,
+            shadowBlur: 2,
             shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.25)",
+            shadowColor: "rgba(0, 0, 0, 0.30)",
           },
         },
         labelLine: {

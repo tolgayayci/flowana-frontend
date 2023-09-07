@@ -51,15 +51,37 @@ export default function TotalMonthlyActiveDevChart() {
 
   const option = {
     tooltip: {
-      trigger: "axis", // Show tooltips when hovering on data points
+      trigger: "axis",
     },
     xAxis: {
       type: "category",
       data: seriesData?.map((point) => point.name),
+      axisLine: {
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
+      axisTick: {
+        alignWithLabel: true,
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
     },
     yAxis: {
       type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
     },
+
     series: [
       {
         type: "line",
@@ -67,33 +89,43 @@ export default function TotalMonthlyActiveDevChart() {
         showSymbol: false,
         data: seriesData?.map((point) => point.value),
         smooth: true, // This makes the lines smooth
-        itemStyle: {
-          color: "#DC5057", // sfred.900
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowOffsetY: 3,
-          shadowColor: "rgba(0, 0, 0, 0.3)",
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+                offset: 0, color: "#657ECA" // color at 0% position
+            }, {
+                offset: 1, color: "#98A9DC" // color at 100% position, which is white
+            }, 
+          ],
+            global: false 
+          }
+        }, 
+        emphasis: {
+          focus: "series",
         },
         lineStyle: {
-          color: "#1D313B", // sfblue.900
+          color: "#657ECA",
+          width: 2,
         },
-        areaStyle: {
-          color: "#92B7CA", // sfblue.DEFAULT
+        itemStyle: {
+          color: "#657ECA",
         },
+
       },
     ],
     dataZoom: [
       // Slider
       {
         type: "slider",
-        start: 75,
+        start: 60,
         end: 100,
         handleStyle: {
-          color: "#E57F84", // sfred.800
-          shadowBlur: 3,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
-          shadowOffsetX: 2,
-          shadowOffsetY: 2,
+          color: "#e8efff", // sfred.800
         },
       },
       {
