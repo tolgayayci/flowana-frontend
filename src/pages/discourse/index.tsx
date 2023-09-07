@@ -27,8 +27,8 @@ import {
 export default function Discourse() {
   const navigation = [
     {
-      name: "Topic Metrics",
-      href: "#topic-metrics",
+      name: "Forum Overview",
+      href: "#forum-overview",
       icon: PresentationChartBarIcon,
       current: true,
     },
@@ -53,8 +53,8 @@ export default function Discourse() {
       current: false,
     },
     {
-      name: "Categories",
-      href: "#categories",
+      name: "Category Distribution",
+      href: "#Category Distribution",
       icon: ChartPieIcon,
       count: "12",
       current: false,
@@ -66,15 +66,15 @@ export default function Discourse() {
       current: false,
     },
     {
-      name: "Top Users",
-      href: "#top-users",
-      icon: ListBulletIcon,
-      current: false,
-    },
-    {
       name: "User Metrics",
       href: "#user-metrics",
       icon: UserGroupIcon,
+      current: false,
+    },
+    {
+      name: "Top Users",
+      href: "#top-users",
+      icon: ListBulletIcon,
       current: false,
     },
     {

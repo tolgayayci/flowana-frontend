@@ -138,7 +138,7 @@ export default function Navbar() {
   return (
     <>
       <div className="sticky top-0 left-0 right-0 z-10">
-        <Disclosure as="nav" className="bg-[#2A3855]">
+        <Disclosure as="nav" className="bg-main">
           {({ open }) => (
             <>
               <div className="mx-auto px-4 sm:px-6 lg:px-8 py-1 max-w-[90%]">
@@ -295,7 +295,7 @@ export default function Navbar() {
           )}
         </Disclosure>
 
-        <header className="bg-sfblue-400 shadow-sm hidden md:block mb-16">
+        <header className="bg-side shadow-sm hidden md:block mb-16">
           <div className="mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center max-w-[90%]">
             <div className="flex items-baseline space-x-4 w-3/4">
               {navigation.map((item) => (
@@ -314,7 +314,7 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
-            {/* <div className="w-1/4">
+            <div className="w-1/4">
               <SearchBar
                 open={isSearchOpen}
                 setOpen={setIsSearchOpen}
@@ -322,12 +322,12 @@ export default function Navbar() {
               />
               <button
                 type="button"
-                className="text-sfblack text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-sfblue font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
+                className="text-[#333333] text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-sfblue font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
                 onClick={() => setIsSearchOpen(true)}
               >
                 Search on {selected?.name}
               </button>
-            </div> */}
+            </div>
           </div>
         </header>
       </div>

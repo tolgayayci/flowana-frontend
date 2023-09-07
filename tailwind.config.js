@@ -45,6 +45,14 @@ module.exports = {
           900: '#DC5057',
           950: '#D73941'
         },
+        "main" : {
+          DEFAULT: "#2A3855",
+          800: "#2A3855"
+        },
+        "side" : {
+          DEFAULT: "#E4EEF2",
+          400: "#E4EEF2"
+        },
         sfgray: "#FFCDB2",
         sfblack: "rgba(51, 51, 51, 0.5)"
       },

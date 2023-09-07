@@ -22,8 +22,8 @@ import {
 export default function Developers() {
   const navigation = [
     {
-      name: "Stats",
-      href: "#stats",
+      name: "Developer Overview",
+      href: "#developer-overview",
       icon: MagnifyingGlassIcon,
       current: true,
     },
@@ -34,14 +34,14 @@ export default function Developers() {
       current: false,
     },
     {
-      name: "Total Monthly Active Devs",
-      href: "#total-monthly-active-devs",
+      name: "Total Active Devs",
+      href: "#total-active-devs",
       icon: PresentationChartLineIcon,
       current: false,
     },
     {
-      name: "Monthly Commits By Dev Type",
-      href: "#monthly-commits-by-dev-type",
+      name: "Commit Trends by Devs",
+      href: "#commit-trends-by-devs",
       icon: PresentationChartLineIcon,
       current: false,
     },
@@ -52,8 +52,8 @@ export default function Developers() {
       current: false,
     },
     {
-      name: "Monthly Commits Chart",
-      href: "#monthly-commits-chart",
+      name: "Monthly Commits",
+      href: "#monthly-commits",
       icon: PresentationChartLineIcon,
       current: false,
     },

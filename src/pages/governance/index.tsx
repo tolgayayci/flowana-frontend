@@ -38,8 +38,8 @@ export default function Governance() {
       current: false,
     },
     {
-      name: "Voting Power",
-      href: "#voting-power",
+      name: "Voting Power Activity",
+      href: "#voting-power-activity",
       icon: ChartBarIcon,
       current: false,
     },

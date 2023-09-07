@@ -36,7 +36,7 @@ export default function Contributors() {
     return (
       <div className="flex flex-col justify-between p-8 rounded-md border-gray-100 border-2 h-full relative">
         {" "}
-        <div className="flex items-center mb-8">
+        <div className="flex items-center mb-6">
           <Image
             unoptimized
             src={contributor.author.avatar_url}
@@ -52,33 +52,39 @@ export default function Contributors() {
             #1
           </span>
         </div>
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          {sortedContributions.map((contribution, index) => (
-            <div
-              key={index}
-              className="flex flex-col p-4 border rounded-md bg-white hover:shadow-md transition-shadow"
-            >
-              <Link
-                href={contribution.html_url}
-                className="text-indigo-600 hover:underline flex items-center justify-between"
+        <div className="max-h-[calc(5*3.2rem)] overflow-y-auto">
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            {sortedContributions.map((contribution, index) => (
+              <div
+                key={index}
+                className="flex flex-col p-3 border rounded-md bg-white hover:shadow-md transition-shadow"
               >
-                <div className="flex items-center">
-                  <FaGithub size={30} className="mr-3 text-gray-600" />
-                  <div className="flex flex-col">
-                    <span className="text-gray-700 font-medium">
-                      {contribution.repo}
-                    </span>
-                    <span className="mt-1 text-xs bg-blue-500 text-white rounded-full px-2 py-0.5">
-                      {contribution.owner}
-                    </span>
+                <Link
+                  href={
+                    contribution.html_url +
+                    `/commits?author=${contributor.author.login}`
+                  }
+                  target="_blank"
+                  className="text-indigo-600 hover:underline flex items-center justify-between"
+                >
+                  <div className="flex items-center">
+                    <FaGithub size={30} className="mr-3 text-gray-600" />
+                    <div className="flex flex-col">
+                      <span className="text-gray-700 font-medium">
+                        {contribution.repo}
+                      </span>
+                      <span className="mt-1 text-xs bg-blue-500 text-white rounded-full px-2 py-0.5">
+                        {contribution.owner}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <span className="ml-2 text-black text-md ">
-                  {contribution.commits} commits
-                </span>
-              </Link>
-            </div>
-          ))}
+                  <span className="ml-2 text-black text-md ">
+                    {contribution.commits} commits
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
         <Link
           href={contributor.author.html_url}

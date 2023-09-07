@@ -99,8 +99,10 @@ export default function SearchBar(props: SearchBarProps) {
 
   return (
     <InstantSearch
-      searchClient={searchClient(props.protocol)}
-      indexName={getSearchIndexForProtocol(props.protocol)}
+      key={protocol["protocol"]}
+      searchClient={searchClient(protocol["protocol"])}
+      indexName={getSearchIndexForProtocol(protocol["protocol"])}
+      routing={true}
     >
       <Configure analytics={true} hitsPerPage={5} />
       <Transition.Root

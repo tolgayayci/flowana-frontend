@@ -30,19 +30,19 @@ import {
 export default function Github() {
   const navigation = [
     {
-      name: "Stats",
-      href: "#stats",
+      name: "Protocol Overview",
+      href: "#protocol-overview",
       icon: HomeIcon,
       current: true,
     },
     {
-      name: "Commit Activity",
+      name: "Cumulative Commit Activity",
       href: "#commit-activity",
       icon: ChartBarIcon,
       current: false,
     },
     {
-      name: "Recent Commits",
+      name: "Latest Commits",
       href: "#recent-commits",
       icon: ListBulletIcon,
       current: false,
@@ -54,37 +54,43 @@ export default function Github() {
       current: false,
     },
     {
-      name: "Punch Card",
+      name: "Cumulative Punch Card",
       href: "#punch-card",
       icon: ChartPieIcon,
       current: false,
     },
     {
-      name: "Recent Issues",
+      name: "Code Frequency",
+      href: "#code-frequency",
+      icon: ChartBarIcon,
+      current: false,
+    },
+    {
+      name: "Latest Issues",
       href: "#recent-issues",
       icon: ListBulletIcon,
       current: false,
     },
     {
-      name: "Issue Count",
+      name: "Issue Distribution",
       href: "#issue-count",
       icon: ChartPieIcon,
       current: false,
     },
     {
-      name: "Pull Request Count",
+      name: "Pull Request Distribution",
       href: "#pull-request-count",
       icon: ChartPieIcon,
       current: false,
     },
     {
-      name: "Recent Pull Requests",
+      name: "Latest Pull Requests",
       href: "#recent-pull-requests",
       icon: ListBulletIcon,
       current: false,
     },
     {
-      name: "Participation",
+      name: "Participation Trend",
       href: "#participation",
       icon: ChartBarIcon,
       current: false,
@@ -95,14 +101,9 @@ export default function Github() {
       icon: ListBulletIcon,
       current: false,
     },
+
     {
-      name: "Code Frequency",
-      href: "#code-frequency",
-      icon: ChartBarIcon,
-      current: false,
-    },
-    {
-      name: "Recent Releases",
+      name: "Latest Releases",
       href: "#recent-releases",
       icon: ListBulletIcon,
       current: false,

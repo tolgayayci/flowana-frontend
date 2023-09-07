@@ -213,7 +213,7 @@ export default function Categories() {
         />
 
         {/* Subcategories Chart */}
-        <div className="border-l-2 border-sfgreen-900 w-1/2">
+        <div className="border-l-2 border-gray-600/10 w-1/2">
           <ReactECharts
             option={subOption}
             style={{ minHeight: "450px", width: "100%" }}

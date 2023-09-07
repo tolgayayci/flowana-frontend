@@ -50,7 +50,7 @@ export default function ProjectDetail() {
 
   if (!repositoryInfo) return <Custom404 />;
 
-  if (repositoryInfo.isClosed) {
+  if (repositoryInfo.is_closed) {
     return <Closed404 />;
   }
 

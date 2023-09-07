@@ -1,6 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  FaCode,
+  FaCodeBranch,
+  FaArchive,
+  FaMedal,
+  FaStar,
+} from "react-icons/fa";
 
 import { useProtocol } from "@/models/protocols/useProtocol";
 
@@ -30,7 +37,7 @@ export default function ProjectCard({ hit }: any) {
 
   return (
     <Link href={`/${protocol["protocol"]}/projects/${hit.owner}/${hit.repo}`}>
-      <div className="bg-white h-full p-8 rounded-md w-full border-[3px] border-sfblue-700 flex flex-col justify-between shadow-xl hover:shadow-2xl">
+      <div className="bg-white h-full p-10 rounded-md w-full border border-[#3C4D6E] flex flex-col justify-between shadow-lg hover:shadow-xl">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Image
@@ -42,7 +49,7 @@ export default function ProjectCard({ hit }: any) {
               height={48}
             />
             <div>
-              <div className="text-lg truncate font-semibold max-w-[170px]">
+              <div className="text-lg truncate font-semibold max-w-[220px]">
                 {hit.repo}
               </div>
               <div className="text-sm text-gray-500 truncate font-semibold">
@@ -50,8 +57,9 @@ export default function ProjectCard({ hit }: any) {
               </div>
             </div>
           </div>
-          <div className="px-3 py-1 text-sm bg-orange-300 border border-orange-800 text-orange-700 rounded-full">
-            {hit.stars} ⭐
+          <div className="px-3 py-1 text-sm bg-[#3C4D6E] border text-white rounded-md flex items-center">
+            <FaStar className="mr-1" />
+            {hit.stars}
           </div>
         </div>
 
@@ -68,24 +76,34 @@ export default function ProjectCard({ hit }: any) {
         </div>
 
         <div className="flex space-x-2">
-          {hit.health_score && (
-            <span className="px-3 py-1 bg-blue-500 text-white text-sm rounded-full">
-              Grade: {hit.health_score.grade}
+          {hit.is_closed && (
+            <span className="px-2 py-1 bg-red-600 text-white text-sm rounded-md flex items-center">
+              <FaCode className="mr-1" /> Closed
             </span>
           )}
           {hit.is_fork && (
-            <span className="px-3 py-1 bg-green-500 text-white text-sm rounded-full">
-              Forked
+            <span className="px-3 py-1 bg-green-500 text-white text-sm rounded-md flex items-center">
+              <FaCodeBranch className="mr-1" /> Forked
             </span>
           )}
-          {hit.is_closed && (
-            <span className="px-2 py-1 bg-red-500 text-white text-sm rounded-full">
-              Closed
+          {hit.is_archived && (
+            <span className="px-2 py-1 bg-yellow-500 text-white text-sm rounded-md flex items-center">
+              <FaArchive className="mr-1" /> Archived
             </span>
           )}
-          {new Date(hit.created_at).toString() !== "Invalid Date" && (
-            <span className="px-2 py-1 bg-green-300 text-green-800 text-sm rounded-full">
-              Created: {new Date(hit.created_at).toLocaleDateString()}
+          {hit.health_score && (
+            <span
+              className={`px-3 py-1 text-sm rounded-md flex items-center ${
+                hit.health_score.grade === "A"
+                  ? "bg-green-500 text-white"
+                  : hit.health_score.grade === "B"
+                  ? "bg-blue-500 text-white"
+                  : hit.health_score.grade === "C+"
+                  ? "bg-yellow-500 text-white"
+                  : "bg-gray-400 text-gray-800"
+              }`}
+            >
+              <FaMedal className="mr-1" /> Grade: {hit.health_score.grade}
             </span>
           )}
         </div>

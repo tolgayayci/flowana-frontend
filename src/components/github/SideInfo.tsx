@@ -26,7 +26,7 @@ export default function SideInfo() {
             href={repositoryInfo?.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center mt-1 bg-sfred-500 border-2 border-sfred-700 text-sfblack px-1 rounded-xl"
+            className="inline-flex items-center mt-1 bg-sfred-500 border-2 border-sfred-700 text-[#333333] px-2 rounded-xl"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

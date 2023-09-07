@@ -68,7 +68,7 @@ export default function Sidebar({
                           smoothScrollToSection(item.href);
                         }}
                         className={classNames(
-                          item.current
+                          item.href === `#${currentSection}`
                             ? "bg-[#3C4D6E] text-white"
                             : "text-sfblue-900 hover:text-white hover:bg-[#3C4D6E]",
                           "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-[420]"
@@ -76,7 +76,7 @@ export default function Sidebar({
                       >
                         <item.icon
                           className={classNames(
-                            item.current
+                            item.href === `#${currentSection}`
                               ? "text-white"
                               : "text-[#3C4D6E] group-hover:text-white",
                             "h-6 w-6 shrink-0"

@@ -49,7 +49,7 @@ export default function Project() {
     value: number;
   }) {
     return (
-      <div className="border border-gray-300 p-2 rounded">
+      <div className="border border-gray-600/20 p-2 rounded">
         <div className="flex justify-between items-center mb-3">
           <div className="flex items-center space-x-2">
             {icon}
@@ -74,7 +74,7 @@ export default function Project() {
 
   function ProjectDetails({ project }: { project: IProjects }) {
     return (
-      <div className="flex flex-col justify-between p-8 rounded-md border-gray-100 border-2 h-full relative">
+      <div className="flex flex-col justify-between p-8 rounded-md border-gray-600/30 border-2 h-full relative">
         {" "}
         <div className="flex items-center mb-8">
           <Image

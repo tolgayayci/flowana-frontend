@@ -23,7 +23,7 @@ export interface IRepositoryInfo {
     is_empty: boolean;
     owner: string;
     repo: string;
-    isClosed?: boolean;
+    is_closed?: boolean;
     valid?: boolean;
 }
 

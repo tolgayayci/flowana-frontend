@@ -15,7 +15,9 @@ const CardHeader: React.FC<ICardHeader> = ({
   intervals,
 }) => {
   return (
-    <div className="flex justify-between items-center mb-6 bg-[#3C4D6E] rounded-md px-4 py-1">
+    <div className="flex justify-between items-center mb-6 bg-[#3C4D6E] rounded-md px-4 h-10">
+      {" "}
+      {/* 1. Set a fixed height */}{" "}
       <h1
         className={`${
           !intervals ? "w-full" : "w-3/4"
@@ -25,14 +27,6 @@ const CardHeader: React.FC<ICardHeader> = ({
       >
         {title}
       </h1>
-      {tooltip && (
-        <>
-          <FaInfoCircle className="ml-2 text-white cursor-pointer info-icon text-xl" />
-          <Tooltip anchorSelect=".info-icon" place="top">
-            {tooltip}
-          </Tooltip>
-        </>
-      )}
       {intervals && intervals.length > 0 && (
         <Listbox value={selectedInterval} onChange={setSelectedInterval}>
           {({ open }) => (
@@ -101,6 +95,14 @@ const CardHeader: React.FC<ICardHeader> = ({
             </>
           )}
         </Listbox>
+      )}
+      {tooltip && (
+        <>
+          <FaInfoCircle className="ml-2 text-white cursor-pointer info-icon text-xl" />
+          <Tooltip anchorSelect=".info-icon" place="top">
+            {tooltip}
+          </Tooltip>
+        </>
       )}
     </div>
   );
