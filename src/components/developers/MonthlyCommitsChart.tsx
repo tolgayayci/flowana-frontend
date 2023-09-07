@@ -55,11 +55,33 @@ export default function MonthlyCommitsChart() {
     },
     xAxis: {
       type: "category",
-      data: seriesData?.[0]?.map((point) => point.name), // Assuming all series have the same data points
+      data: seriesData?.[0]?.map((point) => point.name),
+      axisLine: {
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
+      axisTick: {
+        alignWithLabel: true,
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
     },
     yAxis: {
       type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
     },
+
     series: monthlyCommitsChart?.series.map((series, index) => ({
       name: series.name,
       type: "line",
@@ -67,29 +89,40 @@ export default function MonthlyCommitsChart() {
       data: seriesData?.[index]?.map((point) => point.value),
       smooth: true,
       areaStyle: {
-        color: `rgba(152, 83, 150, ${(index + 1) * 0.2})`, // Varying opacity for each series
-      },
-      itemStyle: {
-        shadowBlur: 10,
-        shadowColor: "rgba(0, 0, 0, 0.3)",
+        color: {
+          type: "linear",
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [{
+              offset: 0, color: "#DC7989" // color at 0% position
+          }, {
+              offset: 1, color: "#EEBEC6" // color at 100% position, which is white
+          }, 
+        ],
+          global: false 
+        }
+      }, 
+      emphasis: {
+        focus: "series",
       },
       lineStyle: {
-        shadowBlur: 5,
-        shadowColor: "rgba(0, 0, 0, 0.1)",
+        color: "#DC7989",
+        width: 2,
       },
-    })),
+      itemStyle: {
+        color: "#DC7989",
+      },
+})),
     dataZoom: [
       // Slider
       {
         type: "slider",
-        start: 75,
+        start: 60,
         end: 100,
         handleStyle: {
-          color: "#E57F84", // sfred.800
-          shadowBlur: 3,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
-          shadowOffsetX: 2,
-          shadowOffsetY: 2,
+          color: "#e8efff", // sfred.800
         },
       },
       {

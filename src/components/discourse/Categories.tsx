@@ -113,23 +113,30 @@ export default function Categories() {
   );
 
   // Get the top 5 categories for the legends
-  const topCategories = sortedCategories.slice(0, 4);
+  // const topCategories = sortedCategories.slice(0, 4);
 
   const mainOption = {
     tooltip: {
       trigger: "item",
-      formatter: "{a} <br/>{b}: {c} ({d}%)",
+      formatter: "{b}: {c} ({d}%)",
     },
-    legend: {
-      orient: "vertical",
-      left: "left",
-      data: topCategories.map((cat) => cat.name),
+    // legend: {
+    //   orient: "vertical",
+    //   left: "left",
+    //   data: topCategories.map((cat) => cat.name),
+    // },
+    label: {
+      show: false,
+      position: "center",
+    },
+    labelLine: {
+      show: false,
     },
     series: [
       {
         name: "Categories",
         type: "pie",
-        radius: ["40%", "55%"],
+        radius: ["40%", "70%"],
         selectedMode: "single", // This allows only one item to be selected at a time
         selectedOffset: 10, // This controls the pixel distance the selected slice moves outward
         data: discourseCategories.map((cat) => ({
@@ -137,6 +144,24 @@ export default function Categories() {
           name: cat.name,
           selected: selectedCategory && cat.name === selectedCategory.name, // This will mark the category as selected if it matches the selectedCategory
         })),
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 15,
+            fontWeight: "bold",
+          },
+          itemStyle: {
+            shadowBlur: 2,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.30)",
+          },
+        },
+    
         label: {
           formatter: (params) => {
             return isClickable(params.name) ? `${params.name} ➔` : params.name;
@@ -155,7 +180,7 @@ export default function Categories() {
   const subOption = {
     tooltip: {
       trigger: "item",
-      formatter: "{a} <br/>{b}: {c} ({d}%)",
+      formatter: "{b}: {c} ({d}%)",
     },
     legend: {
       orient: "horizontal",
@@ -173,9 +198,28 @@ export default function Categories() {
     },
     series: [
       {
+        
         name: "Subcategories",
         type: "pie",
-        radius: ["40%", "55%"],
+        radius: ["40%", "70%"],
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        emphasis: {
+          label: {
+            show: true,
+            // fontSize: ,
+            fontWeight: "bold",
+          },
+          itemStyle: {
+            shadowBlur: 2,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.30)",
+          },
+        },
+    
         data:
           selectedCategory &&
           selectedCategory.subcategories &&
@@ -208,12 +252,12 @@ export default function Categories() {
           option={mainOption}
           onEvents={{ click: handleChartClick }}
           showLoading={isLoading}
-          style={{ minHeight: "450px", width: "50%" }}
+          style={{ minHeight: "450px", width: "100%" }}
           notMerge={true}
         />
 
         {/* Subcategories Chart */}
-        <div className="border-l-2 border-gray-600/10 w-1/2">
+        <div className="border-l-2 border-gray-600/10 w-1/3">
           <ReactECharts
             option={subOption}
             style={{ minHeight: "450px", width: "100%" }}

@@ -72,7 +72,7 @@ export default function CommitActivity() {
     tooltip: {
       trigger: "axis",
       axisPointer: {
-        type: "shadow",
+        type: "cross",
       },
     },
     xAxis: {
@@ -93,11 +93,12 @@ export default function CommitActivity() {
         type: "bar",
         name: "Commit Count",
         itemStyle: {
-          color: "#3C677C", // using sfblue.500 for a solid color
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowOffsetY: 3,
-          shadowColor: "rgba(0, 0, 0, 0.3)",
+          emphasis: {
+            barBorderRadius: [3, 3],
+          },
+          normal: {
+            barBorderRadius: [5, 5, 0, 0],
+          },
         },
       },
     ],
@@ -118,25 +119,25 @@ export default function CommitActivity() {
       axisPointer: {
         type: "line",
         lineStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#999", // sfblue.DEFAULT
         },
       },
     },
     xAxis: {
       type: "category",
+      boundaryGap: false,
       data: days,
       axisLine: {
         lineStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#3b4e6e", // sfblue.DEFAULT
         },
       },
-      boundaryGap: false,
     },
     yAxis: {
       type: "value",
       axisLine: {
         lineStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#3b4e6e", // sfblue.DEFAULT
         },
       },
     },
@@ -148,14 +149,11 @@ export default function CommitActivity() {
         smooth: true, // To make the line chart smooth
         showSymbol: false, // To hide the dots on the line chart
         itemStyle: {
-          color: "#DC5057", // sfred.900
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowOffsetY: 3,
-          shadowColor: "rgba(0, 0, 0, 0.3)",
+          color: "#778dd1", // sfred.900
         },
         lineStyle: {
-          color: "#1D313B", // sfblue.900
+          color: "#778dd1", // sfblue.900
+          width: 2.5,
         },
       },
     ],

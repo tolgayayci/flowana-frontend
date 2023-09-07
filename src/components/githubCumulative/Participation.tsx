@@ -58,7 +58,7 @@ export default function Participation() {
     legend: {
       data: participation.series.map((series) => series.name),
       textStyle: {
-        color: "#2F5061", // sfblue.DEFAULT
+        color: "#3b4e6e", // sfblue.DEFAULT
       },
       top: "0%",
       left: "center",
@@ -68,13 +68,13 @@ export default function Participation() {
       data: participation["xAxis"]["data"].map((date) => formatChartDate(date)),
       axisLine: {
         lineStyle: {
-          color: "#2F5061",
+          color: "#3b4e6e",
         },
       },
       axisTick: {
         alignWithLabel: true,
         lineStyle: {
-          color: "#2F5061",
+          color: "#3b4e6e",
         },
       },
     },
@@ -82,33 +82,68 @@ export default function Participation() {
       type: "value",
       axisLine: {
         lineStyle: {
-          color: "#2F5061",
+          color: "#3b4e6e",
         },
       },
       axisTick: {
         lineStyle: {
-          color: "#2F5061",
+          color: "#3b4e6e",
         },
       },
     },
-    series: participation.series.map((series, index) => ({
-      name: series.name,
-      type: "line",
-      smooth: true,
-      areaStyle: {}, // Area style can give a better visual presentation for issue activities
-      showSymbol: false,
-      emphasis: {
-        focus: "series",
-      },
-      data: series.data,
-      lineStyle: {
-        color: index === 0 ? "#28A745" : index === 1 ? "#ECA1A5" : "#5B93AF",
-        width: 2,
-      },
-      itemStyle: {
-        color: index === 0 ? "#28A745" : index === 1 ? "#ECA1A5" : "#5B93AF",
-      },
-    })),
+    series: participation.series.map((series, index) => {
+      let startColor, endColor = "#FFFFFF"; // The gradient will end with white color for all lines
+    
+      switch(index) {
+        case 0: 
+          startColor = "#e28d9b"; // blue
+          endColor = "#F7DFE3" ; // light blue
+          break;
+        case 1:
+          startColor = "#64A490"; // green
+          endColor = "#F2E3D8"; // light blue
+          break;
+        default: // For third line or any additional lines
+          startColor = "#778dd1"; // red
+          endColor = "#E2E7F5"; // light blue
+          break;
+      }
+    
+      return {
+        name: series.name,
+        type: "line",
+        smooth: true,
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+                offset: 0, color: startColor // color at 0% position
+            }, {
+                offset: 0.9, color: endColor // color at 100% position, which is white
+            }, {
+              offset: 1, color: "#FFFF" // color at 100% position, which is white
+          }],
+            global: false 
+          }
+        },
+        showSymbol: false,
+        emphasis: {
+          focus: "series",
+        },
+        data: series.data,
+        lineStyle: {
+          color: startColor,
+          width: 2,
+        },
+        itemStyle: {
+          color: startColor,
+        },
+      };
+    }),
     renderer: "svg",
     dataZoom: [
       // Slider
@@ -117,11 +152,7 @@ export default function Participation() {
         start: 0,
         end: 100,
         handleStyle: {
-          color: "#E57F84", // sfred.800
-          shadowBlur: 3,
-          shadowColor: "rgba(0, 0, 0, 1)",
-          shadowOffsetX: 2,
-          shadowOffsetY: 2,
+          color: "#e8efff", // sfred.800
         },
       },
       {

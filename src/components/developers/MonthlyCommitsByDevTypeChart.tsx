@@ -49,7 +49,6 @@ export default function MonthlyCommitsByDevTypeChart() {
       value: point.value,
     }))
   );
-
   const option = {
     tooltip: {
       trigger: "axis",
@@ -59,13 +58,13 @@ export default function MonthlyCommitsByDevTypeChart() {
       data: seriesData?.[0]?.map((point) => point.name),
       axisLine: {
         lineStyle: {
-          color: "#2F5061",
+          color: "#3b4e6e",
         },
       },
       axisTick: {
         alignWithLabel: true,
         lineStyle: {
-          color: "#2F5061",
+          color: "#3b4e6e",
         },
       },
     },
@@ -73,53 +72,85 @@ export default function MonthlyCommitsByDevTypeChart() {
       type: "value",
       axisLine: {
         lineStyle: {
-          color: "#2F5061",
+          color: "#3b4e6e",
         },
       },
       axisTick: {
         lineStyle: {
-          color: "#2F5061",
+          color: "#3b4e6e",
         },
       },
     },
     legend: {
       data: monthlyCommitsByDevTypeChart.series.map((series) => series.name),
       textStyle: {
-        color: "#2F5061", // sfblue.DEFAULT
+        color: "#3b4e6e", // sfblue.DEFAULT
       },
       top: "0%",
       left: "center",
     },
-    series: monthlyCommitsByDevTypeChart?.series.map((series, index) => ({
-      name: series.name,
-      type: "line",
-      smooth: true,
-      showSymbol: false,
-      areaStyle: {}, // Area style can give a better visual presentation for issue activities
-      emphasis: {
-        focus: "series",
-      },
-      data: series.data,
-      lineStyle: {
-        color: index === 0 ? "#28A745" : index === 1 ? "#ECA1A5" : "#5B93AF",
-        width: 2,
-      },
-      itemStyle: {
-        color: index === 0 ? "#28A745" : index === 1 ? "#ECA1A5" : "#5B93AF",
-      },
-    })),
+    series: monthlyCommitsByDevTypeChart?.series.map((series, index) => {
+
+      let startColor, endColor = "#FFFFFF"; // The gradient will end with white color for all lines
+    
+      switch(index) {
+        case 0: 
+        startColor = "#657ECA"; // red
+        endColor = "#98A9DC"; // light blue
+        break;
+        case 1:
+          startColor = "#DC7989"; // blue
+          endColor = "#EEBEC6" ; // light blue
+          break;
+          
+        default: // For third line or any additional lines
+          startColor = "#64A490"; // green
+          endColor = "#F2E3D8"; // light blue
+          break;
+      }
+
+      return {
+        name: series.name,
+        type: "line",
+        smooth: true,
+        showSymbol: false,
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+                offset: 0, color: startColor // color at 0% position
+            }, {
+                offset: 1, color: endColor // color at 100% position, which is white
+            }, 
+          ],
+            global: false 
+          }
+        }, 
+        emphasis: {
+          focus: "series",
+        },
+        data: series.data,
+        lineStyle: {
+          color: startColor,
+          width: 2,
+        },
+        itemStyle: {
+          color: startColor,
+        },
+      }
+    }),
     dataZoom: [
       // Slider
       {
         type: "slider",
-        start: 75,
+        start: 60,
         end: 100,
         handleStyle: {
-          color: "#E57F84", // sfred.800
-          shadowBlur: 3,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
-          shadowOffsetX: 2,
-          shadowOffsetY: 2,
+          color: "#e8efff", // sfred.800
         },
       },
       {
