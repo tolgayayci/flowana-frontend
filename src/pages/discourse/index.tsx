@@ -54,14 +54,14 @@ export default function Discourse() {
     },
     {
       name: "Category Distribution",
-      href: "#Category Distribution",
+      href: "#category-distribution",
       icon: ChartPieIcon,
       count: "12",
       current: false,
     },
     {
-      name: "Latest Posts",
-      href: "#latest-posts",
+      name: "Top Users",
+      href: "#top-users",
       icon: ListBulletIcon,
       current: false,
     },
@@ -71,9 +71,10 @@ export default function Discourse() {
       icon: UserGroupIcon,
       current: false,
     },
+
     {
-      name: "Top Users",
-      href: "#top-users",
+      name: "Latest Posts",
+      href: "#latest-posts",
       icon: ListBulletIcon,
       current: false,
     },
@@ -100,7 +101,7 @@ export default function Discourse() {
           </div>
           <div className="col-span-4">
             <div className="flex flex-wrap space-y-6">
-              <div id="topic-metrics" className="w-full">
+              <div id="forum-overview" className="w-full">
                 <TopicMetrics />
               </div>
               <div id="topic-activity" className="w-full">
@@ -114,19 +115,19 @@ export default function Discourse() {
                   <Tags />
                 </div>
               </div>
-              <div id="categories" className="w-full">
+              <div id="category-distribution" className="w-full">
                 <Categories />
               </div>
               <div className="flex space-x-6 w-full">
-                <div id="latest-posts" className="w-full sm:w-2/3 md:w-2/3">
-                  <LatestPosts />
+                <div id="top-users" className="w-full sm:w-2/3 md:w-2/3">
+                  <TopUsers />
                 </div>
                 <div id="user-metrics" className="w-full sm:w-1/3 md:w-1/3">
                   <UserMetrics />
                 </div>
               </div>
-              <div id="top-users" className="w-full ">
-                <TopUsers />
+              <div id="latest-posts" className="w-full">
+                <LatestPosts />
               </div>
               <div id="latest-topics" className="w-full">
                 <LatestTopics />

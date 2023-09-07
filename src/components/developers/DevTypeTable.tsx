@@ -61,8 +61,8 @@ export default function DevTypeTable() {
                   index === 3
                     ? "bg-white"
                     : (index + 1) % 2 === 0
-                    ? "bg-gray-50 border-sfblue-600 border-b-2"
-                    : "bg-white border-sfblue-600 border-b-2"
+                    ? "bg-gray-50 border-side-500 border-b-2"
+                    : "bg-white border-side-500 border-b-2"
                 }
               >
                 <td className="py-4 px-6 border-b font-semibold text-gray-700">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Tooltip } from "react-tooltip";
 
 // Hooks
 import useDiscourseTopUsers from "@/models/discourse/useDiscourseTopUsers";
@@ -63,17 +64,16 @@ const forumInfos = {
   },
 };
 
-function CountIcon({ icon, count, tooltip }) {
+function CountIcon({ icon, count, tooltip, id }) {
   return (
-    <span className="w-12 flex justify-center items-center group relative">
+    <span className="w-12 justify-center items-center inline-flex z-50">
       {icon}
       <span className="ml-1">{formatBadgeStatsCount(count)}</span>
 
       {/* Tooltip */}
-      <span className="group-hover:opacity-100 opacity-0 bg-gray-800 text-white text-xs rounded py-1 px-2 absolute top-1/2 transform -translate-y-1/2 z-20">
-        {" "}
+      <Tooltip id={id} place="top">
         {tooltip}
-      </span>
+      </Tooltip>
     </span>
   );
 }
@@ -131,7 +131,7 @@ export default function TopUsers() {
           {topUsers.map((user) => (
             <li
               key={user.id}
-              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500"
             >
               <Link
                 href={forumInfo.forum_url + "u/" + user.username}
@@ -143,15 +143,19 @@ export default function TopUsers() {
                     <Image
                       unoptimized
                       src={
-                        forumInfo.forum_url +
-                          user.avatar_template.replace("{size}", "120") ||
-                        forumInfo.logo
+                        user.avatar_template.startsWith(
+                          "https://avatars.discourse-cdn.com/v4/letter/"
+                        )
+                          ? user.avatar_template.replace("{size}", "120")
+                          : forumInfo.forum_url +
+                            user.avatar_template.replace("{size}", "120")
                       }
                       alt="Avatar"
                       width={52}
                       height={52}
                       className="rounded-full mr-5"
                     />
+
                     <div className="flex-grow min-w-0 max-w-lg">
                       <h3 className="text-base sm:text-md font-semibold truncate">
                         {user.name ? user.name : "No Name"}
@@ -162,39 +166,59 @@ export default function TopUsers() {
                     </div>
                   </div>
                   <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
-                    <span className="bg-pink-300 border border-pink-500 text-pink-800 text-xs font-semibold px-2 py-1 rounded relative group">
+                    <span
+                      className="bg-pink-200/70 border-2 border-pink-300 text-pink-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="likes_given"
+                    >
                       <CountIcon
+                        id="likes_given"
                         icon={<FaThumbsUp className="inline" />}
                         count={user.likes_given}
                         tooltip="Given likes"
                       />
                     </span>
-                    <span className="bg-red-300 border border-red-500 text-red-800 text-xs font-semibold px-2 py-1 rounded relative group">
+                    <span
+                      className="bg-red-200/70 border-2 border-red-300 text-red-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="likes_received"
+                    >
                       <CountIcon
+                        id="likes_received"
                         icon={<FaHeart className="inline" />}
                         count={user.likes_received}
                         tooltip="Received likes"
                       />
                     </span>
-                    <span className="bg-green-300 border border-green-500 text-green-800 text-xs font-semibold px-2 py-1 rounded">
+                    <span
+                      className="bg-green-200/70 border-2 border-green-300 text-green-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="topic_count"
+                    >
                       <CountIcon
+                        id="topic_count"
                         icon={<FaBook className="inline" />}
                         count={user.topic_count}
                         tooltip="Topic count"
                       />
                     </span>
-                    <span className="bg-purple-300 border border-purple-500 text-purple-800 text-xs font-semibold px-2 py-1 rounded">
+                    <span
+                      className="bg-purple-200/70 border-2 border-purple-300 text-purple-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="posts_read"
+                    >
                       <CountIcon
+                        id="posts_read"
                         icon={<FaEye className="inline" />}
                         count={user.posts_read}
                         tooltip="Posts read"
                       />
                     </span>
-                    <span className="bg-orange-300 border border-orange-500 text-orange-800 text-xs font-semibold px-2 py-1 rounded">
+                    <span
+                      className="bg-orange-200/70 border-2 border-orange-300 text-orange-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="topics_entered"
+                    >
                       <CountIcon
+                        id="topics_entered"
                         icon={<FaComments className="inline" />}
                         count={user.topics_entered}
-                        tooltip="Number of posts"
+                        tooltip="Topics Entered"
                       />
                     </span>
                   </div>

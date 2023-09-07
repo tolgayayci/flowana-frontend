@@ -35,9 +35,25 @@ export default function ProjectCard({ hit }: any) {
 
   const protocolInfo = protocolInfos[protocol["protocol"]];
 
+  const gradeStyles = {
+    "S+": "bg-green-500 text-white border-2 border-green-700",
+    S: "bg-blue-500 text-white border-2 border-blue-700",
+    "A+": "bg-yellow-500 text-white border-2 border-yellow-700",
+    A: "bg-yellow-500 text-white border-2 border-yellow-700",
+    "B+": "bg-blue-500 text-white border-2 border-blue-700",
+    B: "bg-blue-500 text-white border-2 border-blue-700",
+    "C+": "bg-yellow-500 text-white border-2 border-yellow-700",
+    C: "bg-yellow-500 text-white border-2 border-yellow-700",
+    "D+": "bg-red-500 text-white border-2 border-red-700",
+    D: "bg-red-500 text-white border-2 border-red-700",
+    "E+": "bg-red-500 text-white border-2 border-red-700",
+    E: "bg-red-500 text-white border-2 border-red-700",
+    F: "bg-gray-400 text-gray-800 border-2 border-gray-600",
+  };
+
   return (
     <Link href={`/${protocol["protocol"]}/projects/${hit.owner}/${hit.repo}`}>
-      <div className="bg-white h-full p-10 rounded-md w-full border border-[#3C4D6E] flex flex-col justify-between shadow-lg hover:shadow-xl">
+      <div className="bg-white h-full p-10 rounded-2xl w-full border-2 border-sfblack flex flex-col justify-between shadow-lg hover:shadow-xl">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Image
@@ -57,7 +73,7 @@ export default function ProjectCard({ hit }: any) {
               </div>
             </div>
           </div>
-          <div className="px-3 py-1 text-sm bg-[#3C4D6E] border text-white rounded-md flex items-center">
+          <div className="px-3 py-1 text-sm bg-[#3C4D6E] text-white rounded-md flex items-center">
             <FaStar className="mr-1" />
             {hit.stars}
           </div>
@@ -77,30 +93,25 @@ export default function ProjectCard({ hit }: any) {
 
         <div className="flex space-x-2">
           {hit.is_closed && (
-            <span className="px-2 py-1 bg-red-600 text-white text-sm rounded-md flex items-center">
+            <span className="px-2 py-1 bg-red-500 border-2 border-red-800 text-white text-sm rounded-md flex items-center">
               <FaCode className="mr-1" /> Closed
             </span>
           )}
           {hit.is_fork && (
-            <span className="px-3 py-1 bg-green-500 text-white text-sm rounded-md flex items-center">
+            <span className="px-3 py-1 bg-green-500 border-2 border-green-800 text-white text-sm rounded-md flex items-center">
               <FaCodeBranch className="mr-1" /> Forked
             </span>
           )}
           {hit.is_archived && (
-            <span className="px-2 py-1 bg-yellow-500 text-white text-sm rounded-md flex items-center">
+            <span className="px-2 py-1 bg-yellow-500 border-2 border-yellow-800 text-white text-sm rounded-md flex items-center">
               <FaArchive className="mr-1" /> Archived
             </span>
           )}
           {hit.health_score && (
             <span
               className={`px-3 py-1 text-sm rounded-md flex items-center ${
-                hit.health_score.grade === "A"
-                  ? "bg-green-500 text-white"
-                  : hit.health_score.grade === "B"
-                  ? "bg-blue-500 text-white"
-                  : hit.health_score.grade === "C+"
-                  ? "bg-yellow-500 text-white"
-                  : "bg-gray-400 text-gray-800"
+                gradeStyles[hit.health_score.grade] ||
+                "bg-gray-400 text-gray-800"
               }`}
             >
               <FaMedal className="mr-1" /> Grade: {hit.health_score.grade}

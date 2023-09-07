@@ -15,7 +15,7 @@ const CardHeader: React.FC<ICardHeader> = ({
   intervals,
 }) => {
   return (
-    <div className="flex justify-between items-center mb-6 bg-[#3C4D6E] rounded-md px-4 h-10">
+    <div className="flex justify-between items-center mb-6 bg-main-700 rounded-md px-4 h-10">
       {" "}
       {/* 1. Set a fixed height */}{" "}
       <h1

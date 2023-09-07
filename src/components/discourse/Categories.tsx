@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ReactECharts from "echarts-for-react";
 import Link from "next/link";
 import Image from "next/image";
+import { Tooltip } from "react-tooltip";
 
 // Hooks
 import useDiscourseCategories from "@/models/discourse/useDiscourseCategories";
@@ -18,15 +19,15 @@ import { FaMedal, FaReply, FaEye } from "react-icons/fa";
 
 const forumInfos = {
   flow: {
-    forum_url: "https://forum.onflow.org/t/",
+    forum_url: "https://forum.onflow.org/c/",
     logo: "/flow-logo.png",
   },
   compound: {
-    forum_url: "https://www.comp.xyz/t/",
+    forum_url: "https://www.comp.xyz/c/",
     logo: "/compound-logo.png",
   },
   polkadot: {
-    forum_url: "https://forum.polkadot.network/t/",
+    forum_url: "https://forum.polkadot.network/c/",
     logo: "/polkadot-logo.jpg",
   },
   lens: {
@@ -35,17 +36,16 @@ const forumInfos = {
   },
 };
 
-function CountIcon({ icon, count, tooltip }) {
+function CountIcon({ icon, count, tooltip, id }) {
   return (
-    <span className="w-12 flex justify-center items-center group relative overflow-x-clip">
+    <span className="w-12 justify-center items-center inline-flex z-50">
       {icon}
       <span className="ml-1">{formatBadgeStatsCount(count)}</span>
 
       {/* Tooltip */}
-      <span className="group-hover:opacity-100 opacity-0 bg-gray-800 text-white text-xs rounded py-1 px-2 absolute top-1/2 transform -translate-y-1/2 z-20">
-        {" "}
+      <Tooltip id={id} place="top">
         {tooltip}
-      </span>
+      </Tooltip>
     </span>
   );
 }
@@ -226,13 +226,10 @@ export default function Categories() {
           <ul>
             <li
               key={selectedCategory.id}
-              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500"
             >
               <Link
-                href={
-                  forumInfo.forum_url +
-                  `${selectedCategory.topic_slug}/${selectedCategory.topic_id}/${selectedCategory.id}`
-                }
+                href={forumInfo.forum_url + `${selectedCategory.slug}`}
                 target="_blank"
                 className="block hover:no-underline"
               >
@@ -257,27 +254,33 @@ export default function Categories() {
                   </div>
                   <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
                     <span
-                      className="bg-green-300 border border-green-500 text-green-800 text-xs font-semibold px-2 py-1 rounded"
-                      title="Number of replies"
+                      className="bg-green-200/70 border-2 border-green-300 text-green-800 text-xs font-semibold px-2 py-1 rounded"
+                      id="topic_count"
                     >
                       <CountIcon
+                        id="topic_count"
                         icon={<FaReply className="inline" />}
                         count={selectedCategory.topic_count}
                         tooltip="Topic Count"
                       />
                     </span>
-                    <span className="bg-red-300 border border-red-500 text-red-800 text-xs font-semibold px-2 py-1 rounded relative group">
+                    <span
+                      className="bg-red-200/70 border-2 border-red-300 text-red-800 text-xs font-semibold px-2 py-1 rounded"
+                      id="post_count"
+                    >
                       <CountIcon
+                        id="post_count"
                         icon={<FaEye className="inline" />}
                         count={selectedCategory.post_count}
                         tooltip="Post Count"
                       />
                     </span>
                     <span
-                      className="bg-purple-300 border border-purple-500 text-purple-800 text-xs font-semibold px-2 py-1 rounded"
-                      title="Number of views"
+                      className="bg-purple-200/70 border-2 border-purple-300 text-purple-800 text-xs font-semibold px-2 py-1 rounded"
+                      id="num_featured_topics"
                     >
                       <CountIcon
+                        id="num_featured_topics"
                         icon={<FaMedal className="inline" />}
                         count={selectedCategory.num_featured_topics}
                         tooltip="Number of Featured Topics"

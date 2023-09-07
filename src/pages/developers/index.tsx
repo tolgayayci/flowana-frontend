@@ -17,6 +17,7 @@ import {
   PresentationChartLineIcon,
   TableCellsIcon,
   MagnifyingGlassIcon,
+  ChartBarIcon,
 } from "@heroicons/react/24/outline";
 
 export default function Developers() {
@@ -36,25 +37,25 @@ export default function Developers() {
     {
       name: "Total Active Devs",
       href: "#total-active-devs",
-      icon: PresentationChartLineIcon,
+      icon: ChartBarIcon,
       current: false,
     },
     {
       name: "Commit Trends by Devs",
       href: "#commit-trends-by-devs",
-      icon: PresentationChartLineIcon,
+      icon: ChartBarIcon,
       current: false,
     },
     {
       name: "Monthly Active Devs",
       href: "#monthly-active-devs",
-      icon: PresentationChartLineIcon,
+      icon: ChartBarIcon,
       current: false,
     },
     {
       name: "Monthly Commits",
       href: "#monthly-commits",
-      icon: PresentationChartLineIcon,
+      icon: ChartBarIcon,
       current: false,
     },
   ];
@@ -74,22 +75,22 @@ export default function Developers() {
           </div>
           <div className="col-span-4">
             <div className="flex flex-wrap space-y-8">
-              <div id="stats" className="w-full">
+              <div id="developer-overview" className="w-full">
                 <Stats />
               </div>
               <div id="developer-types" className="w-full">
                 <DevTypeTable />
               </div>
-              <div id="total-monthly-active-devs" className="w-full">
+              <div id="total-active-devs" className="w-full">
                 <TotalMonthlyActiveDevChart />
               </div>
-              <div id="monthly-commits-by-dev-type" className="w-full">
+              <div id="commit-trends-by-devs" className="w-full">
                 <MonthlyCommitsByDevTypeChart />
               </div>
               <div id="monthly-active-devs" className="w-full">
                 <MonthlyActiveDevChart />
               </div>
-              <div id="monthly-commits-chart" className="w-full">
+              <div id="monthly-commits" className="w-full">
                 <MonthlyCommitsChart />
               </div>
             </div>

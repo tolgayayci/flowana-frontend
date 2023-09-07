@@ -109,7 +109,7 @@ export default function LanguageBreakdown() {
         title="Language Breakdown"
         tooltip="Visualizes the distribution of programming languages used across all repositories, highlighting the dominant languages by code size."
       />
-      <div className="h-full flex items-center -mt-8">
+      <div className="h-full flex items-center">
         <ReactECharts
           option={option}
           showLoading={isLoading}

@@ -160,7 +160,7 @@ export default function Project() {
               <li
                 key={project.owner + "/" + project.repo}
                 onClick={() => setSelectedProject(project)}
-                className={`cursor-pointer hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600 ${
+                className={`cursor-pointer hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500 ${
                   selectedProject &&
                   project.owner + "/" + project.repo ===
                     selectedProject.owner + "/" + selectedProject.repo

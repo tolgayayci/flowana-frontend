@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import ReactECharts from "echarts-for-react";
-import * as echarts from "echarts";
+
 // Hooks
 import useCumulativeCommitActivity from "@/models/githubCumulative/useCumulativeCommitActivity";
 
@@ -130,6 +130,7 @@ export default function CommitActivity() {
           color: "#2F5061", // sfblue.DEFAULT
         },
       },
+      boundaryGap: false,
     },
     yAxis: {
       type: "value",
@@ -162,7 +163,7 @@ export default function CommitActivity() {
       left: "1%",
       right: "1%",
       top: "10%",
-      bottom: "17%",
+      bottom: "0%",
       containLabel: true,
     },
   };

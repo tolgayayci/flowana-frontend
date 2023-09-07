@@ -67,7 +67,7 @@ export function RangeSlider(props: UseRangeProps) {
           max={max}
           value={value.end}
           onChange={handleChange}
-          className="w-full cursor-pointer accent-indigo-700"
+          className="w-full cursor-pointer accent-main"
           disabled={!canRefine}
         />
       </div>
@@ -94,10 +94,10 @@ export default function Projects() {
           searchClient={searchClient(protocol["protocol"])}
           indexName={getSearchIndexForProtocol(protocol["protocol"])}
         >
-          <div className="grid grid-cols-4 gap-16">
-            <Configure analytics={false} hitsPerPage={15} />
+          <div className="grid grid-cols-5 gap-12">
+            <Configure analytics={false} hitsPerPage={16} />
             <div className="self-start col-span-5 md:col-span-1 hidden lg:block xl:block 2xl:block space-y-7 sticky top-[190px]">
-              <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-300">
+              <div className="bg-white shadow-sm rounded-2xl p-6 border-2 border-main">
                 <div className="flex items-center mb-6">
                   <Image
                     unoptimized
@@ -122,7 +122,7 @@ export default function Projects() {
                     placeholder={`Search on ${protocolInfo.protocol_name} Ecosystem`}
                     autoFocus={true}
                     classNames={{
-                      root: "w-full bg-transparent text-gray-800 placeholder-gray-400 ssm:text-sm pl-3 border-2 border-sfblue rounded-lg",
+                      root: "w-full bg-transparent text-gray-800 placeholder-gray-400 sm:text-sm pl-3 border-2 border-sfblue rounded-lg",
                       form: "w-full focus:rounded-none",
                       input:
                         "border-0 outline-none focus:border-none focus:ring-0 w-full py-1.5 rounded-lg text-[14px]",
@@ -134,7 +134,7 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-300">
+              <div className="bg-white shadow-sm rounded-2xl p-6 border-2 border-main">
                 <div className="flex items-center mb-3">
                   <div className="flex flex-col justify-center">
                     <h1 className="text-lg font-bold">Categories</h1>
@@ -159,13 +159,13 @@ export default function Projects() {
                       items.filter((item) => item.count > 0)
                     }
                     classNames={{
-                      root: "bg-transparent text-gray-800 placeholder-gray-400 sm:text-sm border-t-2 border-sfblue",
+                      root: "bg-transparent text-gray-800 placeholder-gray-400 sm:text-sm border-t-2 border-gray-100",
                       list: "w-full mt-2",
                       link: "flex justify-between items-center w-full py-1.5 px-2",
                       item: "hover:bg-gray-100",
                       label: "text-md font-semibold",
                       count:
-                        "text-[#333333] text-sm font-normal bg-indigo-100 rounded-lg px-2",
+                        "text-white text-sm font-normal bg-side-500 rounded-lg px-2",
                       selectedItemLink: "bg-sfblue-700 text-white rounded-lg",
                       showMore:
                         "w-full border-2 border-sfblue rounded-lg mt-2 py-1 text-[#333333]",
@@ -175,7 +175,7 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-300 mx-auto">
+              <div className="bg-white shadow-sm rounded-2xl p-6 border-2 border-main mx-auto">
                 <div className="flex items-center mb-2">
                   <div className="flex flex-col justify-center">
                     <h1 className="text-lg font-bold">Health Score</h1>
@@ -198,7 +198,7 @@ export default function Projects() {
                         label: "w-full flex py-1",
                         labelText: "ml-2 text-md font-semibold",
                         count:
-                          "text-[#333333] text-sm font-normal bg-indigo-100 rounded-lg px-2 ml-auto",
+                          "text-white text-sm font-normal bg-side-500 rounded-lg px-2 ml-auto",
                         showMore: "hidden",
                       }}
                     />
@@ -265,16 +265,16 @@ export default function Projects() {
               </div>
             </div>
 
-            <div className="col-span-4 md:col-span-3 mx-auto">
+            <div className="col-span-5 md:col-span-4 mx-auto">
               <InfiniteHits
                 showPrevious={false}
                 hitComponent={(e) => <ProjectCard hit={e.hit} />}
                 classNames={{
-                  list: "grid grid-cols-3 gap-8",
+                  list: "grid grid-cols-4 gap-8",
                   item: "2xl:col-span-1 xl:col-span-1 col-span-3",
                   disabledLoadMore: "hidden",
                   loadMore:
-                    "w-full mt-10 mx-auto text-center inline-block py-3 text-center leading-6 text-lg text-white font-extrabold bg-sfblue-700 hover:bg-sfblue-800 border-3 border-indigo-900 shadow rounded transition duration-200",
+                    "w-full mt-10 mx-auto text-center inline-block py-3 text-center leading-6 text-lg text-white font-extrabold bg-main hover:bg-side-500 border-3 border-indigo-900 shadow rounded transition duration-200",
                 }}
               />
             </div>

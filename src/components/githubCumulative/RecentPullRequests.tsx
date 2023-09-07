@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Tooltip } from "react-tooltip";
 
 // Hooks
 import useCumulativeRecentPullRequests from "@/models/githubCumulative/useCumulativeRecentPullRequests";
@@ -11,15 +12,31 @@ import CardHeader from "@/modules/Card/Header/Header";
 import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoListData from "@/modules/NoData/NoListData";
 import { formatDistanceToNow } from "@/utils/functions";
+import { formatBadgeStatsCount } from "@/utils/functions";
 
 // Types
 import type { PullRequestState } from "@/types/githubTypes";
 import { Interval } from "@/types/general";
+import { FaReply } from "react-icons/fa";
 
 const intervals: Interval[] = [
   { name: "By Created Time", value: "created_at" },
   { name: "By Updated Time", value: "updated_at" },
 ];
+
+function CountIcon({ icon, count, tooltip, id }) {
+  return (
+    <span className="w-12 justify-center items-center inline-flex z-50">
+      {icon}
+      <span className="ml-1">{formatBadgeStatsCount(count)}</span>
+
+      {/* Tooltip */}
+      <Tooltip id={id} place="top">
+        {tooltip}
+      </Tooltip>
+    </span>
+  );
+}
 
 export default function RecentPullRequests() {
   const [selectedInterval, setSelectedInterval] = useState(intervals[1]);
@@ -61,24 +78,23 @@ export default function RecentPullRequests() {
 
   const getStatusBadgeColor = (state: PullRequestState) => {
     if (state === "OPEN") {
-      return "bg-green-500";
+      return "border-green-700 border-2 text-green-800 font-semibold";
     } else if (state === "CLOSED") {
-      return "bg-red-500";
+      return "border-red-800 border-2 text-red-800 font-semibold";
     } else if (state === "MERGED") {
-      return "bg-indigo-500";
+      return "border-indigo-700 border-2 text-indigo-800 font-semibold";
     }
     return "";
   };
 
-  const getStatusBadgeText = (state: PullRequestState) => {
-    if (state === "OPEN") {
-      return "Open";
-    } else if (state === "CLOSED") {
-      return "Closed";
-    } else if (state === "MERGED") {
-      return "Merged";
+  const getStatusText = (pull: string) => {
+    if (pull.state === "MERGED") {
+      return `Merged ${formatDistanceToNow(pull.updated_at)}`;
+    } else if (pull.state === "CLOSED") {
+      return `Closed ${formatDistanceToNow(pull.updated_at)}`;
+    } else {
+      return `Opened ${formatDistanceToNow(pull.created_at)}`;
     }
-    return "";
   };
 
   return (
@@ -95,7 +111,7 @@ export default function RecentPullRequests() {
           {recentPullRequests.map((pullRequest) => (
             <li
               key={pullRequest.number}
-              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500"
             >
               <Link
                 href={pullRequest.url}
@@ -121,30 +137,25 @@ export default function RecentPullRequests() {
                         <span
                           className={`ml-2 px-2 py-1 rounded-full ${getStatusBadgeColor(
                             pullRequest.state
-                          )} text-white text-xxs sm:text-xs opacity-75`}
+                          )} text-xs sm:text-xs opacity-75`}
                         >
-                          {getStatusBadgeText(pullRequest.state)}
+                          {getStatusText(pullRequest)}
                         </span>
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end">
-                    <div className="flex items-center space-x-2">
-                      {pullRequest.state === "CLOSED" ? (
-                        <div className="mr-2 px-2 py-1 bg-orange-200 border-2 border-orange-400 text-orange-700 rounded-md text-xs">
-                          Closed {formatDistanceToNow(pullRequest.updated_at)}
-                        </div>
-                      ) : (
-                        <div className="mr-2 px-2 py-1 bg-blue-200 border-2 border-blue-400 text-blue-700 rounded-md text-xs">
-                          Last Update:{" "}
-                          {formatDistanceToNow(pullRequest.updated_at)}
-                        </div>
-                      )}
-                      <div className="px-2 py-1 bg-indigo-200 border-2 border-indigo-400 text-indigo-700 rounded-md text-xs">
-                        {pullRequest.comments_count} comment
-                        {pullRequest.comments_count !== 1 && "s"}
-                      </div>
-                    </div>
+                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
+                    <span
+                      className="bg-orange-200/70 border-2 border-orange-300 text-orange-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="comments_count"
+                    >
+                      <CountIcon
+                        id="comments_count"
+                        icon={<FaReply className="inline" />}
+                        count={pullRequest.comments_count}
+                        tooltip="Comments Count"
+                      />
+                    </span>
                   </div>
                 </div>
               </Link>

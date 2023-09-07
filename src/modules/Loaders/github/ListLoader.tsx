@@ -4,7 +4,7 @@ import Layout from "@/modules/Card/Layout/Layout";
 
 const Loader = () => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-indigo-600 mb-3">
+    <div className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-sfblue-600 mb-3">
       <div className="flex justify-between">
         <div className="flex items-center space-x-2 w-1/2">
           <div

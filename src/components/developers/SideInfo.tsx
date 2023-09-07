@@ -51,7 +51,7 @@ export default function SideInfo() {
             href={protocolInfo.resource_link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block items-center mt-2.5 bg-sfred-500 border-2 border-sfred-800 text-[#333333] px-3 py-0.5 rounded-xl text-sm font-semibold"
+            className="items-center mt-2.5 bg-side border-2 border-main text-main px-3 py-0.5 rounded-xl text-sm font-semibold inline-block"
           >
             Data: Electric Capital
           </a>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Tooltip } from "react-tooltip";
 
 // Hooks
 import useDiscourseLatestPosts from "@/models/discourse/useDiscourseLatestPosts";
@@ -34,21 +35,19 @@ const forumInfos = {
   },
 };
 
-function CountIcon({ icon, count, tooltip }) {
+function CountIcon({ icon, count, tooltip, id }) {
   return (
-    <span className="w-12 flex justify-center items-center group relative">
+    <span className="w-12 justify-center items-center inline-flex z-50">
       {icon}
       <span className="ml-1">{formatBadgeStatsCount(count)}</span>
 
       {/* Tooltip */}
-      <span className="group-hover:opacity-100 opacity-0 bg-gray-800 text-white text-xs rounded py-1 px-2 absolute top-1/2 transform -translate-y-1/2 z-20">
-        {" "}
+      <Tooltip id={id} place="top">
         {tooltip}
-      </span>
+      </Tooltip>
     </span>
   );
 }
-
 export default function LatestPosts() {
   const { latestPosts, isLoading } = useDiscourseLatestPosts();
 
@@ -92,7 +91,7 @@ export default function LatestPosts() {
           {latestPosts.map((post) => (
             <li
               key={post.id}
-              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500"
             >
               <Link
                 href={
@@ -122,28 +121,34 @@ export default function LatestPosts() {
                     </div>
                   </div>
                   <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
-                    <span className="bg-red-300 border border-red-500 text-red-800 text-xs font-semibold px-2 py-1 rounded relative group">
+                    <span
+                      className="bg-red-200/70 border-2 border-red-300 text-red-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="reads"
+                    >
                       <CountIcon
+                        id="reads"
                         icon={<FaEye className="inline" />}
                         count={post.reads}
                         tooltip="Number of reads"
                       />
                     </span>
                     <span
-                      className="bg-green-300 border border-green-500 text-green-800 text-xs font-semibold px-2 py-1 rounded"
-                      title="Number of replies"
+                      className="bg-green-200/70 border-2 border-green-300 text-green-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="reply_count"
                     >
                       <CountIcon
+                        id="reply_count"
                         icon={<FaReply className="inline" />}
                         count={post.reply_count}
                         tooltip="Number of replies"
                       />
                     </span>
                     <span
-                      className="bg-purple-300 border border-purple-500 text-purple-800 text-xs font-semibold px-2 py-1 rounded"
-                      title="Number of views"
+                      className="bg-purple-200/70 border-2 border-purple-300 text-purple-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="score"
                     >
                       <CountIcon
+                        id="score"
                         icon={<FaMedal className="inline" />}
                         count={post.score}
                         tooltip="Score"

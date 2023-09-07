@@ -101,11 +101,11 @@ export default function Tags() {
         title="Tags"
         tooltip="Shows the distribution of tags in a pie chart, reflecting the most frequently used topics in discussions."
       />
-      <div className="h-full flex items-center -mt-16">
+      <div className="h-full flex items-center">
         <ReactECharts
           option={option}
           showLoading={isLoading}
-          style={{ minHeight: "350px", width: "100%" }}
+          style={{ minHeight: "450px", width: "100%" }}
           notMerge={true}
         />
       </div>

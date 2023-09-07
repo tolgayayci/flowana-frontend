@@ -53,7 +53,7 @@ export default function RecentReleases() {
           {recentReleases.slice(0, 5).map((release) => (
             <li
               key={release.tag_name}
-              className={`border border-gray-200 rounded-lg p-4 flex justify-between items-center`}
+              className={`border border-gray-200 rounded-lg p-4 flex justify-between items-center shadow-sm hover:shadow-xl transition-shadow duration-300`}
               style={{ flex: 1 }}
             >
               <Link

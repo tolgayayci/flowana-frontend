@@ -50,7 +50,7 @@ export default function RecentReleases() {
           {recentReleases.slice(0, 5).map((release, index) => (
             <li
               key={release.tag_name}
-              className={`border border-gray-200 rounded-lg p-4 flex justify-between items-center ${
+              className={`border border-gray-200 rounded-lg p-4 flex justify-between items-center shadow-md hover:shadow-2xl ${
                 release === latestRelease ? "bg-sfblue-100" : ""
               }`}
               style={{ flex: 1 }} // Added style to make the item fill available height

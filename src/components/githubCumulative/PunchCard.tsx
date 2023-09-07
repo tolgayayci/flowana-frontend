@@ -78,6 +78,11 @@ export default function PunchCard() {
     return [item.hour, item.day, item.commits];
   });
 
+  const maxSymbolSize = 40;
+  const minSymbolSize = 5;
+
+  const maxCommitCount = Math.max(...data.map((item) => item[2])); // Find the maximum commit count in your data
+
   const option = {
     tooltip: {
       position: "top",
@@ -121,13 +126,19 @@ export default function PunchCard() {
       splitLine: {
         show: false,
       },
+      axisLabel: {
+        padding: 10, // Add a margin to the right of the y-axis labels
+      },
     },
     series: [
       {
         name: "Punch Card",
         type: "scatter",
-        symbolSize: function (val: any) {
-          return val[2] * 0.015; // Here, the dots will be one-tenth of their previous size.
+        symbolSize: function (val) {
+          const normalizedSize =
+            (val[2] / maxCommitCount) * (maxSymbolSize - minSymbolSize) +
+            minSymbolSize;
+          return normalizedSize;
         },
         data: data,
         animationDelay: function (idx: any) {

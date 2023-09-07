@@ -47,11 +47,17 @@ module.exports = {
         },
         "main" : {
           DEFAULT: "#2A3855",
+          700: "#3C4D6E",
           800: "#2A3855"
         },
         "side" : {
-          DEFAULT: "#E4EEF2",
-          400: "#E4EEF2"
+          DEFAULT: "#DAE1ED",
+          300: "#91A4C9",
+          400: "#DAE1ED",
+          500: "#455D8C"
+        },
+        "niceblack":{
+          DEFAULT: "#333333"
         },
         sfgray: "#FFCDB2",
         sfblack: "rgba(51, 51, 51, 0.5)"

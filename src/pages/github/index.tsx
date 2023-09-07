@@ -125,7 +125,7 @@ export default function Github() {
           </div>
           <div className="md:col-span-4 col-span-5">
             <div className="flex flex-wrap space-y-10">
-              <div id="stats" className="w-full">
+              <div id="protocol-overview" className="w-full">
                 <Stats />
               </div>
               <div id="commit-activity" className="w-full">

@@ -11,6 +11,8 @@ import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoListData from "@/modules/NoData/NoListData";
 import { formatDistanceToNow } from "@/utils/functions";
 
+import { FaCode } from "react-icons/fa";
+
 export default function RecentCommits() {
   const { recentCommits, isLoading } = useCumulativeRecentCommits();
 
@@ -50,7 +52,7 @@ export default function RecentCommits() {
           {recentCommits.map((commit) => (
             <li
               key={commit.url}
-              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500"
             >
               <Link
                 href={commit.url}
@@ -72,17 +74,14 @@ export default function RecentCommits() {
                         {commit.message}
                       </h3>
                       <p className="text-gray-500 text-xs sm:text-sm mt-1">
-                        Commit by{" "}
-                        <span className="bg-sfgreen-600 border-2 border-sfgreen-800 text-white rounded-lg px-1 py-0.5">
-                          {commit.author_login}
-                        </span>
+                        Committed {formatDistanceToNow(commit.committed_date)}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end">
-                    <div className="px-2 py-1 bg-sfred-500 border-2 border-sfred-700 text-sfblue-800 rounded-md text-xs">
-                      Committed Date:{" "}
-                      {formatDistanceToNow(commit.committed_date)}
+                    <div className="px-2 py-1 bg-side border-2 border-main text-niceblack-800 font-semibold rounded-md text-xs flex items-center">
+                      <FaCode className="mr-1" />
+                      {commit.author_login}
                     </div>
                   </div>
                 </div>

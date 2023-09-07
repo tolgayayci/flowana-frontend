@@ -43,9 +43,9 @@ export default function TopicMetrics() {
 
     return (
       <div className="col-span-1">
-        <div className="p-5 pl-6 border-2 border-sfblack rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-          <div className="text-sfgreen-800 text-medium mb-5">{title}</div>
-          <div className="text-5xl font-bold text-[#333333] mb-3">
+        <div className="p-5 pl-6 border border-sfblack rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div className="text-side-500 text-medium mb-5">{title}</div>
+          <div className="text-5xl font-bold text-niceblack mb-3">
             {formattedCount}
           </div>
         </div>

@@ -110,7 +110,7 @@ export default function Contributors() {
               <li
                 key={contributor.author.login}
                 onClick={() => setSelectedContributor(contributor)}
-                className={`cursor-pointer hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-sfblue-600 ${
+                className={`cursor-pointer hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500 ${
                   selectedContributor &&
                   contributor.author.login === selectedContributor.author.login
                     ? "bg-gray-100"

@@ -75,7 +75,7 @@ export default function Safes() {
           {safes.gnosisSafes.map((safe) => (
             <li
               key={safe.id}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-sfblue-600"
+              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-side-500"
             >
               <Link
                 href={safe.tally_url}
