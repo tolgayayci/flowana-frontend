@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import ReactECharts from "echarts-for-react";
-import * as echarts from "echarts";
 // Hooks
 import useCommitActivity from "@/models/github/useCommitActivity";
 

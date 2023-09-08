@@ -10,6 +10,7 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
 import { formatChartDate } from "@/utils/functions";
+import React from "react";
 
 export default function CodeFrequency() {
   const { codeFrequency, isLoading } = useCumulativeCodeFrequency();
@@ -45,7 +46,7 @@ export default function CodeFrequency() {
       data: codeFrequency["xAxis"]["data"].map((date) => formatChartDate(date)),
       axisLine: {
         lineStyle: {
-          color: "#3b4e6e", 
+          color: "#3b4e6e",
         },
       },
     },
@@ -53,7 +54,7 @@ export default function CodeFrequency() {
       type: "value",
       axisLine: {
         lineStyle: {
-          color: "#3b4e6e", 
+          color: "#3b4e6e",
         },
       },
     },

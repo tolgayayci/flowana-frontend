@@ -66,6 +66,7 @@ export interface ICumulativeMostActiveIssues {
     author_avatar_url: string;
     author_login: string;
     closed: boolean;
+    url: string;
     comments_count: number;
     created_at: string;
     number: number;
@@ -92,6 +93,7 @@ export interface ICumulativeRecentIssues {
     updated_at: string;
     owner: string;
     repo: string;
+    url: string;
 }
 
 export interface ICumulativeRecentPullRequests {
@@ -105,6 +107,7 @@ export interface ICumulativeRecentPullRequests {
     updated_at: string;
     owner: string;
     repo: string;
+    url: string;
 }
 
 export interface ICumulativeRecentCommits {

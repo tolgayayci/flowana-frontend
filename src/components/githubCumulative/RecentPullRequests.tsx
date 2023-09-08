@@ -15,9 +15,13 @@ import { formatDistanceToNow } from "@/utils/functions";
 import { formatBadgeStatsCount } from "@/utils/functions";
 
 // Types
-import type { PullRequestState } from "@/types/githubTypes";
+import type {
+  IRecentPullRequests,
+  PullRequestState,
+} from "@/types/githubTypes";
 import { Interval } from "@/types/general";
 import { FaReply } from "react-icons/fa";
+import { ICumulativeRecentPullRequests } from "@/types/githubCumulativeTypes";
 
 const intervals: Interval[] = [
   { name: "By Created Time", value: "created_at" },
@@ -87,7 +91,7 @@ export default function RecentPullRequests() {
     return "";
   };
 
-  const getStatusText = (pull: string) => {
+  const getStatusText = (pull: ICumulativeRecentPullRequests) => {
     if (pull.state === "MERGED") {
       return `Merged ${formatDistanceToNow(pull.updated_at)}`;
     } else if (pull.state === "CLOSED") {

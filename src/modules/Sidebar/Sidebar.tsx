@@ -12,8 +12,8 @@ export default function Sidebar({
   navigation: INavigationItem[];
   element: React.ReactNode | null;
 }) {
-  const [currentSection, setCurrentSection] = useState(null);
-  const sectionRefs = useRef({});
+  const [currentSection, setCurrentSection] = useState<string | null>(null);
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,23 +27,25 @@ export default function Sidebar({
       { threshold: 0.1 }
     );
 
+    const refsSnapshot = sectionRefs.current; // Capture the current value
     navigation.forEach((item) => {
-      const section = document.querySelector(item.href);
+      const section = refsSnapshot[item.href] as HTMLElement | null;
       if (section) {
-        sectionRefs.current[item.href] = section;
         observer.observe(section);
       }
     });
 
     return () => {
-      Object.values(sectionRefs.current).forEach((section) => {
-        observer.unobserve(section);
+      Object.values(refsSnapshot).forEach((section) => {
+        if (section) {
+          observer.unobserve(section);
+        }
       });
     };
   }, [navigation]);
 
   function smoothScrollToSection(href: string) {
-    const section = document.querySelector(href);
+    const section = document.querySelector(href) as HTMLElement | null;
     if (section) {
       const topPosition = section.offsetTop - 180; // OFFSET to account for any header/nav bar height
       window.scrollTo({ top: topPosition, behavior: "smooth" });
@@ -52,9 +54,9 @@ export default function Sidebar({
 
   return (
     <>
-      <div className={`w-full ${element ? "mb-6" : null}`}>{element}</div>
+      <div className={`w-full ${element ? "mb-6" : ""}`}>{element}</div>
       <div className="sticky top-[180px]">
-        <div className=" h-auto shadow-xl p-8 border-2  border-main tracking-wide rounded-2xl">
+        <div className="h-auto shadow-xl p-8 border-2  border-main tracking-wide rounded-2xl">
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>

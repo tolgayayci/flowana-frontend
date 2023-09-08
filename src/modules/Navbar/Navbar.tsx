@@ -314,7 +314,7 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
-            <div className="w-1/4">
+            {/* <div className="w-1/4">
               <SearchBar
                 open={isSearchOpen}
                 setOpen={setIsSearchOpen}
@@ -327,7 +327,7 @@ export default function Navbar() {
               >
                 Search on {selected?.name}
               </button>
-            </div>
+            </div> */}
           </div>
         </header>
       </div>

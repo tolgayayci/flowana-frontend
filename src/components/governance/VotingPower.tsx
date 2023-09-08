@@ -65,7 +65,7 @@ export default function VotingPower() {
   // Extract and sort timestamps from the series
   const sortedTimestamps = votingPowerChart?.series[0].data
     .map((item) => item.timestamp)
-    .sort((a, b) => new Date(a) - new Date(b))
+    .sort((a, b) => new Date(a).valueOf() - new Date(b).valueOf())
     .map(formatChartDate);
 
   // Sort series by their data length and slice top 5 for legends

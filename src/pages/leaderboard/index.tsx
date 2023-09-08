@@ -46,8 +46,8 @@ export default function LeaderBoard() {
                     key={tab.key}
                     className={classNames(
                       tab.current
-                        ? "border-side-400 text-white bg-main"
-                        : "border-b-2 border-indigo-500 text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                        ? "bg-side-500 border-2 border-main text-white font-semibold"
+                        : "border-b-2 border-main text-side-500 font-semibold hover:border-gray-300 hover:text-gray-700",
                       "w-1/2 border-2 py-3 px-1 text-center text-sm font-medium rounded-xl"
                     )}
                     onClick={() => handleTabChange(tab.key)}

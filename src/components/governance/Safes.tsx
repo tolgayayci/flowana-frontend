@@ -100,7 +100,7 @@ export default function Safes() {
                         <span className="px-2 py-1 rounded-lg text-xxs sm:text-xs bg-green-200 text-green-800 border-2 border-green-500">
                           Total Value: $
                           {Intl.NumberFormat().format(
-                            safe.balance.totalUSDValue
+                            safe.balance.totalUSDValue as any as number
                           )}
                         </span>
                       </p>
@@ -122,7 +122,9 @@ export default function Safes() {
                               tooltipContent={
                                 token.symbol +
                                 " $" +
-                                Intl.NumberFormat().format(token.fiat)
+                                Intl.NumberFormat().format(
+                                  token.fiat as any as number
+                                )
                               }
                               tooltipPlace="top"
                             />

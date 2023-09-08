@@ -95,7 +95,7 @@ export default function Projects() {
           indexName={getSearchIndexForProtocol(protocol["protocol"])}
         >
           <div className="grid grid-cols-5 gap-12">
-            <Configure analytics={false} hitsPerPage={16} />
+            <Configure analytics={false} hitsPerPage={15} />
             <div className="self-start col-span-5 md:col-span-1 hidden lg:block xl:block 2xl:block space-y-7 sticky top-[190px]">
               <div className="bg-white shadow-sm rounded-2xl p-6 border-2 border-main">
                 <div className="flex items-center mb-6">
@@ -270,7 +270,7 @@ export default function Projects() {
                 showPrevious={false}
                 hitComponent={(e) => <ProjectCard hit={e.hit} />}
                 classNames={{
-                  list: "grid grid-cols-4 gap-8",
+                  list: "grid grid-cols-3 gap-8",
                   item: "2xl:col-span-1 xl:col-span-1 col-span-3",
                   disabledLoadMore: "hidden",
                   loadMore:

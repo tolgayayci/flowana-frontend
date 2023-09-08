@@ -14,7 +14,6 @@ import TotalMonthlyActiveDevChart from "@/components/developers/TotalMonthlyActi
 
 // Heroicons
 import {
-  PresentationChartLineIcon,
   TableCellsIcon,
   MagnifyingGlassIcon,
   ChartBarIcon,

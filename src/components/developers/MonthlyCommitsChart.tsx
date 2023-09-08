@@ -95,15 +95,19 @@ export default function MonthlyCommitsChart() {
           y: 0,
           x2: 0,
           y2: 1,
-          colorStops: [{
-              offset: 0, color: "#DC7989" // color at 0% position
-          }, {
-              offset: 1, color: "#EEBEC6" // color at 100% position, which is white
-          }, 
-        ],
-          global: false 
-        }
-      }, 
+          colorStops: [
+            {
+              offset: 0,
+              color: "#DC7989", // color at 0% position
+            },
+            {
+              offset: 1,
+              color: "#EEBEC6", // color at 100% position, which is white
+            },
+          ],
+          global: false,
+        },
+      },
       emphasis: {
         focus: "series",
       },
@@ -114,7 +118,7 @@ export default function MonthlyCommitsChart() {
       itemStyle: {
         color: "#DC7989",
       },
-})),
+    })),
     dataZoom: [
       // Slider
       {

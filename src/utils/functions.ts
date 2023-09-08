@@ -25,7 +25,7 @@ export const formatDistanceToNow = (dateString: string) => {
 
 export function formatChartDate(dateString: string) {
   const options = { year: "numeric", month: "short", day: "numeric" };
-  return new Date(dateString).toLocaleDateString(undefined, options);
+  return new Date(dateString).toLocaleDateString(undefined, {});
 }
 
 export function formatBadgeStatsCount(count: number) {

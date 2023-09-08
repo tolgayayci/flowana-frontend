@@ -90,19 +90,19 @@ export default function MonthlyCommitsByDevTypeChart() {
       left: "center",
     },
     series: monthlyCommitsByDevTypeChart?.series.map((series, index) => {
+      let startColor,
+        endColor = "#FFFFFF"; // The gradient will end with white color for all lines
 
-      let startColor, endColor = "#FFFFFF"; // The gradient will end with white color for all lines
-    
-      switch(index) {
-        case 0: 
-        startColor = "#657ECA"; // red
-        endColor = "#98A9DC"; // light blue
-        break;
+      switch (index) {
+        case 0:
+          startColor = "#657ECA"; // red
+          endColor = "#98A9DC"; // light blue
+          break;
         case 1:
           startColor = "#DC7989"; // blue
-          endColor = "#EEBEC6" ; // light blue
+          endColor = "#EEBEC6"; // light blue
           break;
-          
+
         default: // For third line or any additional lines
           startColor = "#64A490"; // green
           endColor = "#F2E3D8"; // light blue
@@ -121,15 +121,19 @@ export default function MonthlyCommitsByDevTypeChart() {
             y: 0,
             x2: 0,
             y2: 1,
-            colorStops: [{
-                offset: 0, color: startColor // color at 0% position
-            }, {
-                offset: 1, color: endColor // color at 100% position, which is white
-            }, 
-          ],
-            global: false 
-          }
-        }, 
+            colorStops: [
+              {
+                offset: 0,
+                color: startColor, // color at 0% position
+              },
+              {
+                offset: 1,
+                color: endColor, // color at 100% position, which is white
+              },
+            ],
+            global: false,
+          },
+        },
         emphasis: {
           focus: "series",
         },
@@ -141,8 +145,9 @@ export default function MonthlyCommitsByDevTypeChart() {
         itemStyle: {
           color: startColor,
         },
-      }
+      };
     }),
+    animation: false,
     dataZoom: [
       // Slider
       {

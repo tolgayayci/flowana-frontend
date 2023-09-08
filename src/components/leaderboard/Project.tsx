@@ -86,14 +86,14 @@ export default function Project() {
             height={40}
           />
           <div className="flex-grow">
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-xl font-bold">
               {project.owner}/{project.repo}
             </h2>
             <p className="text-indigo-600 truncate max-w-lg">
               {project.repository_info.description}
             </p>
           </div>
-          <span className="ml-auto p-3 bg-indigo-600 text-white text-lg font-semibold rounded flex items-center">
+          <span className="ml-auto p-3 bg-side-500 text-white text-lg font-semibold rounded flex items-center">
             {project.health_score.grade}
           </span>
         </div>
@@ -138,7 +138,7 @@ export default function Project() {
         </div>
         <Link
           href={`/${protocol["protocol"]}/projects/${project.owner}/${project.repo}`}
-          className="bg-indigo-600 text-white py-2 rounded-md w-full mt-4 text-center"
+          className="bg-side-500 text-white py-2 rounded-md w-full mt-4 text-center"
         >
           View Project
         </Link>
@@ -192,28 +192,26 @@ export default function Project() {
                     </div>
                   </div>
                   <div className="flex items-center sm:text-sm w-1/3 justify-end">
-                    <div className="flex items-center space-x-2">
-                      {index < 3 ? (
-                        <>
-                          <FaMedal
-                            className={`${
-                              index === 0
-                                ? "text-white bg-gold rounded-md px-2 py-0.5"
-                                : index === 1
-                                ? "text-white bg-silver rounded-md p-2"
-                                : "text-white bg-bronze rounded-md p-2"
-                            } text-[42px]`}
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <FaStar className="text-gray-400 text-2xl" />
-                          <span className="font-bold text-gray-400 text-2xl">
-                            {index + 1}
-                          </span>
-                        </>
-                      )}
-                    </div>
+                    {index < 3 ? (
+                      <>
+                        <FaMedal
+                          className={`${
+                            index === 0
+                              ? "text-white bg-gold rounded-md px-2 py-0.5"
+                              : index === 1
+                              ? "text-white bg-silver rounded-md p-2"
+                              : "text-white bg-bronze rounded-md p-2"
+                          } text-[42px]`}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <FaStar className="text-side-500 text-2xl mr-2" />
+                        <span className="font-bold text-side-500 text-2xl">
+                          {index + 1}
+                        </span>
+                      </>
+                    )}
                   </div>
                 </div>
               </li>

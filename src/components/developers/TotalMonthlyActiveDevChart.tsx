@@ -96,15 +96,19 @@ export default function TotalMonthlyActiveDevChart() {
             y: 0,
             x2: 0,
             y2: 1,
-            colorStops: [{
-                offset: 0, color: "#657ECA" // color at 0% position
-            }, {
-                offset: 1, color: "#98A9DC" // color at 100% position, which is white
-            }, 
-          ],
-            global: false 
-          }
-        }, 
+            colorStops: [
+              {
+                offset: 0,
+                color: "#657ECA", // color at 0% position
+              },
+              {
+                offset: 1,
+                color: "#98A9DC", // color at 100% position, which is white
+              },
+            ],
+            global: false,
+          },
+        },
         emphasis: {
           focus: "series",
         },
@@ -115,7 +119,6 @@ export default function TotalMonthlyActiveDevChart() {
         itemStyle: {
           color: "#657ECA",
         },
-
       },
     ],
     dataZoom: [
