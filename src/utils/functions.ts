@@ -23,6 +23,23 @@ export const formatDistanceToNow = (dateString: string) => {
     }
 };
 
+export function formatLargeNumber(numStr: string): string {
+  // Remove commas, spaces and convert to a number
+  let num = parseFloat(numStr.replace(/,/g, '').replace(/\s+/g, ''));
+
+  let units = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "De"];
+  let unitIndex = 0;
+
+  while (num >= 1000 && unitIndex < units.length - 1) {
+      num /= 1000;
+      unitIndex++;
+  }
+
+  // Round to two decimal places and add the unit
+  return `${num.toFixed(2)} ${units[unitIndex]}`;
+}
+
+
 export function formatChartDate(dateString: string) {
   const options = { year: "numeric", month: "short", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, {});

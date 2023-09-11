@@ -13,7 +13,6 @@ import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoListData from "@/modules/NoData/NoListData";
 
 import { FaWallet } from "react-icons/fa";
-import { get } from "http";
 
 const sortBy = [
   { name: "Created", value: "CREATED" },
@@ -98,48 +97,53 @@ export default function Delegates() {
             </h3>
             <p className="text-sm font-semibold border border-indigo-500 text-indigo-800 bg-indigo-300 py-0.5 px-2 rounded-xl inline-flex items-center">
               <FaWallet className="mr-2" />
-              <BadgeWithTooltip
-                text={shortenAddress(delegate.account.address)}
-                tooltipId="address"
-                tooltipContent={delegate.account.address}
-                tooltipPlace="top"
-              />
+              {shortenAddress(delegate.account.address)}
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
+          {/* <div className="flex justify-between space-x-2">
             <BadgeWithTooltip
-              text={`Voting Power: ${delegate.participation.stats.votingPower.net}`}
-              tooltipId="voting-power"
-              tooltipContent="Net voting power of the delegate."
+              text={`Vote Count: ${delegate.participation.stats.voteCount}`}
+              tooltipId="vote-count"
+              tooltipContent="Vote Count"
               tooltipPlace="top"
+              icon={<FaWallet className="mr-2" />}
             />
             <BadgeWithTooltip
               text={`Delegations: ${delegate.participation.stats.delegations.total}`}
               tooltipId="delegations"
-              tooltipContent="delegations."
+              tooltipContent="Delegations"
               tooltipPlace="top"
+              icon={<FaWallet className="mr-2" />}
             />
             <BadgeWithTooltip
               text={`Votes Cast: ${delegate.participation.stats.voteCount}`}
               tooltipId="votes-cast"
-              tooltipContent="cast"
+              tooltipContent="Votes Cast"
               tooltipPlace="top"
+              icon={<FaWallet className="mr-2" />}
             />
-            {/* Add more badges here as necessary */}
-          </div>
+          </div> */}
         </div>
       </Link>
     );
   }
 
-  function BadgeWithTooltip({ text, tooltipId, tooltipContent, tooltipPlace }) {
+  function BadgeWithTooltip({
+    text,
+    tooltipId,
+    tooltipContent,
+    tooltipPlace,
+    icon,
+  }) {
     return (
       <>
         <a
           data-tooltip-id={tooltipId}
           data-tooltip-content={tooltipContent}
           data-tooltip-place={tooltipPlace}
+          className="items-center justify-between mt-1 bg-side border-2 border-main text-main px-3 py-0.5 rounded-xl text-sm font-semibold inline-flex w-1/2"
         >
+          {icon}
           {text}
         </a>
         <Tooltip id={tooltipId} place={tooltipPlace}>

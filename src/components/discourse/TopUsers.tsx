@@ -167,7 +167,7 @@ export default function TopUsers() {
                   </div>
                   <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
                     <span
-                      className="bg-pink-200/70 border-2 border-pink-300 text-pink-800 text-xs font-semibold px-2 py-1 rounded"
+                      className="border-side border-2 text-xs font-semibold px-2 py-1 rounded"
                       data-tooltip-id="likes_given"
                     >
                       <CountIcon

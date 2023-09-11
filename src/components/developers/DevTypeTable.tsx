@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 // Hooks
 import useDevelopersDevTypeTable from "@/models/developers/useDevelopersDevTypeTable";
 
@@ -6,6 +8,8 @@ import Layout from "@/modules/Card/Layout/Layout";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
 import NoData from "@/modules/NoData/NoData";
+
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 export default function DevTypeTable() {
   const { devTypeTable, isLoading } = useDevelopersDevTypeTable();
@@ -39,64 +43,83 @@ export default function DevTypeTable() {
 
   return (
     <Layout>
-      <div className="overflow-x-auto rounded-xl shadow-md">
-        <table className="w-full border-collapse table-auto">
-          <thead>
-            <tr className="bg-[#3C4D6E] rounded-t-md">
-              {devTypeTable?.header.map((item) => (
-                <th
-                  key={item.index}
-                  className="py-1 px-4 font-semibold text-md text-white tracking-wider uppercase"
-                >
-                  {item.title}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="bg-white">
-            {devTypeTable?.rows.map((row, index) => (
-              <tr
-                key={index}
-                className={
-                  index === 3
-                    ? "bg-white"
-                    : (index + 1) % 2 === 0
-                    ? "bg-gray-50 border-side-500 border-b-2"
-                    : "bg-white border-side-500 border-b-2"
-                }
+      <div className="min-w-full mt-2">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-[#3C4D6E] to-[#4D5E7E] p-1 rounded-lg shadow-md flex">
+          {/* First item */}
+          {devTypeTable?.header.slice(0, 1).map((item, index) => (
+            <div
+              key={index}
+              className="py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider w-2/3 flex items-center justify-start"
+            >
+              {item.title}
+            </div>
+          ))}
+
+          {/* Other items in a container */}
+          <div className="w-1/3 flex">
+            {devTypeTable?.header.slice(1).map((item, index) => (
+              <div
+                key={index + 1}
+                className="py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider w-1/4 flex items-center justify-end"
               >
-                <td className="py-4 px-6 border-b font-semibold text-gray-700">
+                {item.title}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Rows */}
+        <div className="bg-white divide-y divide-sfblue-500 w-full">
+          {devTypeTable?.rows.map((row, index) => (
+            <div key={index} className="flex justify-between">
+              <div className="py-4 px-4 w-2/3 flex items-center">
+                <div className="w-12 h-12 overflow-hidden rounded">
+                  <Image
+                    unoptimized
+                    src={"/compound-logo.png"}
+                    alt="Proposal"
+                    className="w-full h-full object-cover"
+                    width={50}
+                    height={50}
+                  />
+                </div>
+                <div className="font-semibold text-gray-700 ml-4">
                   {row.developer_type[0]}
                   <div className="text-xs text-gray-500 mt-1 font-medium">
                     {row.developer_type[1]}
                   </div>
-                </td>
-                <td className="py-3 px-6 border-b">{row["jun-01_2023"]}</td>
-                <td
-                  className={`py-3 px-6 border-b ${
+                </div>
+              </div>
+              <div className="flex space-x-6 w-1/3">
+                <div className="w-1/4 px-4  flex flex-col justify-center items-end">
+                  {row["jun-01_2023"]}
+                </div>
+                <div
+                  className={`w-1/4 px-4 flex flex-col justify-center items-end ${
                     row["1y_%"] < 0 ? "text-red-500" : "text-green-500"
                   }`}
                 >
-                  {row["1y_%"] < 0 ? "↓" : "↑"} {Math.abs(row["1y_%"])}%
-                </td>
-                <td
-                  className={`py-3 px-6 border-b ${
+                  {Math.abs(row["1y_%"])}%
+                </div>
+                <div
+                  className={`w-1/4 px-4  flex flex-col justify-center items-end ${
                     row["2y_%"] < 0 ? "text-red-500" : "text-green-500"
                   }`}
                 >
-                  {row["2y_%"] < 0 ? "↓" : "↑"} {Math.abs(row["2y_%"])}%
-                </td>
-                <td
-                  className={`py-3 px-6 border-b ${
+                  {Math.abs(row["2y_%"])}%
+                </div>
+                <div
+                  className={`w-1/4 px-4  flex flex-col justify-center items-end ${
                     row["3y_%"] < 0 ? "text-red-500" : "text-green-500"
                   }`}
                 >
-                  {row["3y_%"] < 0 ? "↓" : "↑"} {Math.abs(row["3y_%"])}%
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  {Math.abs(row["3y_%"])}%
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </Layout>
   );

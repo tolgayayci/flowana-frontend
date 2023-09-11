@@ -64,7 +64,7 @@ export default function Project() {
         </div>
         <div className="relative rounded-full h-2 bg-gray-200">
           <div
-            className="absolute rounded-full h-2 bg-[#3C4D6E]"
+            className="absolute rounded-full h-2 bg-side-500"
             style={{ width: `${value}%` }}
           ></div>
         </div>

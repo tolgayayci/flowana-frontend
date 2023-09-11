@@ -314,7 +314,7 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
-            {/* <div className="w-1/4">
+            <div className="w-1/4">
               <SearchBar
                 open={isSearchOpen}
                 setOpen={setIsSearchOpen}
@@ -322,12 +322,12 @@ export default function Navbar() {
               />
               <button
                 type="button"
-                className="text-[#333333] text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-sfblue font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
+                className="text-[#333333] text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-main font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
                 onClick={() => setIsSearchOpen(true)}
               >
                 Search on {selected?.name}
               </button>
-            </div> */}
+            </div>
           </div>
         </header>
       </div>

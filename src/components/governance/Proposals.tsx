@@ -11,6 +11,7 @@ import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoData from "@/modules/NoData/NoData";
 
 import { formatChartDate } from "@/utils/functions";
+import { formatLargeNumber } from "@/utils/functions";
 
 export default function Proposals() {
   const { proposals, isLoading } = useProposals();
@@ -125,7 +126,7 @@ export default function Proposals() {
           {/* Votes For */}
           {/* Count */}
           <div className="text-sm font-semibold text-green-500">
-            {votesFor.weight}
+            {formatLargeNumber(votesFor.weight)}
           </div>
           {/* Percentage Bar */}
           <div className="mt-2">
@@ -142,7 +143,7 @@ export default function Proposals() {
           {/* Votes Against */}
           {/* Count */}
           <div className="text-sm font-semibold text-red-500">
-            {votesAgainst.weight}
+            {formatLargeNumber(votesAgainst.weight)}
           </div>
           {/* Percentage Bar */}
           <div className="mt-2">
@@ -157,7 +158,7 @@ export default function Proposals() {
         <div className="px-6 py-4 whitespace-nowrap flex flex-col justify-center items-end w-1/6">
           {/* Total Votes */}
           <div className="text-md font-semibold text-gray-900 text-right">
-            {totalVotes}
+            {formatLargeNumber(totalVotes)}
           </div>
           <div className="text-xs text-gray-500 text-right">
             {totalAddresses} addresses

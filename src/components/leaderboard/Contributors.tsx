@@ -10,7 +10,7 @@ import Layout from "@/modules/Card/Layout/Layout";
 import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoListData from "@/modules/NoData/NoListData";
 
-import { FaMedal, FaStar, FaGithub, FaUser } from "react-icons/fa";
+import { FaMedal, FaStar, FaGithub, FaCode } from "react-icons/fa";
 
 import { IContributor } from "@/types/githubLeaderboard";
 
@@ -28,13 +28,23 @@ export default function Contributors() {
 
   if (!contributors) return <NoListData element />;
 
-  function ProjectDetails({ contributor }: { contributor: IContributor }) {
+  const selectedContributorRank = selectedContributor
+    ? contributors.indexOf(selectedContributor) + 1
+    : null;
+
+  function ProjectDetails({
+    contributor,
+    rank,
+  }: {
+    contributor: IContributor;
+    rank: number;
+  }) {
     const sortedContributions = Object.values(contributor.contributions).sort(
       (a, b) => b.commits - a.commits
     );
 
     return (
-      <div className="flex flex-col justify-between p-8 rounded-md border-gray-100 border-2 h-full relative">
+      <div className="flex flex-col justify-between p-8 rounded-md border-gray-600/30 border-2 h-full relative">
         {" "}
         <div className="flex items-center mb-6">
           <Image
@@ -48,11 +58,11 @@ export default function Contributors() {
           <div className="flex-grow">
             <h2 className="text-2xl font-bold">{contributor.author.login}</h2>
           </div>
-          <span className="ml-auto p-3 bg-indigo-600 text-white text-lg font-semibold rounded flex items-center">
-            #1
+          <span className="ml-auto p-3 bg-side-500 text-white text-lg font-semibold rounded flex items-center">
+            #{rank}
           </span>
         </div>
-        <div className="max-h-[calc(5*3.2rem)] overflow-y-auto">
+        <div className="max-h-[calc(5*2.6rem)] overflow-y-auto">
           <div className="grid grid-cols-2 gap-4 mb-4">
             {sortedContributions.map((contribution, index) => (
               <div
@@ -65,20 +75,18 @@ export default function Contributors() {
                     `/commits?author=${contributor.author.login}`
                   }
                   target="_blank"
-                  className="text-indigo-600 hover:underline flex items-center justify-between"
+                  className="text-indigo-600 hover:no-underline flex items-center justify-between"
                 >
                   <div className="flex items-center">
-                    <FaGithub size={30} className="mr-3 text-gray-600" />
+                    <FaGithub size={30} className="mr-3 text-side-500" />
                     <div className="flex flex-col">
-                      <span className="text-gray-700 font-medium">
-                        {contribution.repo}
-                      </span>
-                      <span className="mt-1 text-xs bg-blue-500 text-white rounded-full px-2 py-0.5">
-                        {contribution.owner}
+                      <span className="text-gray-700 font-medium max-w-[230px] truncate">
+                        {contribution.owner + "/" + contribution.repo}
                       </span>
                     </div>
                   </div>
-                  <span className="ml-2 text-black text-md ">
+                  <span className="items-center bg-side border-2 border-main text-main px-3 py-0.5 rounded-xl text-sm font-semibold inline-flex">
+                    <FaCode className="mr-2" />
                     {contribution.commits} commits
                   </span>
                 </Link>
@@ -88,7 +96,8 @@ export default function Contributors() {
         </div>
         <Link
           href={contributor.author.html_url}
-          className="bg-indigo-600 text-white py-2 rounded-md w-full mt-4 text-center"
+          target="_blank"
+          className="bg-side-500 text-white py-2 rounded-md w-full mt-4 text-center"
         >
           View User
         </Link>
@@ -156,8 +165,8 @@ export default function Contributors() {
                         </>
                       ) : (
                         <>
-                          <FaStar className="text-gray-400 text-2xl" />
-                          <span className="font-bold text-gray-400 text-2xl">
+                          <FaStar className="text-side-500 text-2xl" />
+                          <span className="font-bold text-side-500 text-2xl">
                             {index + 1}
                           </span>
                         </>
@@ -172,7 +181,10 @@ export default function Contributors() {
         {/* Conditional rendering of details */}
         {selectedContributor && (
           <div className="w-1/2">
-            <ProjectDetails contributor={selectedContributor} />
+            <ProjectDetails
+              contributor={selectedContributor}
+              rank={selectedContributorRank}
+            />
           </div>
         )}
       </div>

@@ -12,9 +12,10 @@ import useInfo from "@/models/governance/useInfo";
 
 // Models and Utils
 import Layout from "@/modules/Card/Layout/Layout";
-import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
+
+import { formatLargeNumber } from "@/utils/functions";
 
 export default function Info() {
   const { info, isLoading } = useInfo();

@@ -161,7 +161,7 @@ export default function Categories() {
             shadowColor: "rgba(0, 0, 0, 0.30)",
           },
         },
-    
+
         label: {
           formatter: (params) => {
             return isClickable(params.name) ? `${params.name} ➔` : params.name;
@@ -198,7 +198,6 @@ export default function Categories() {
     },
     series: [
       {
-        
         name: "Subcategories",
         type: "pie",
         radius: ["40%", "70%"],
@@ -219,7 +218,7 @@ export default function Categories() {
             shadowColor: "rgba(0, 0, 0, 0.30)",
           },
         },
-    
+
         data:
           selectedCategory &&
           selectedCategory.subcategories &&
@@ -252,7 +251,7 @@ export default function Categories() {
           option={mainOption}
           onEvents={{ click: handleChartClick }}
           showLoading={isLoading}
-          style={{ minHeight: "450px", width: "100%" }}
+          style={{ minHeight: "400px", width: "100%" }}
           notMerge={true}
         />
 
@@ -260,7 +259,7 @@ export default function Categories() {
         <div className="border-l-2 border-gray-600/10 w-1/3">
           <ReactECharts
             option={subOption}
-            style={{ minHeight: "450px", width: "100%" }}
+            style={{ minHeight: "400px", width: "100%" }}
             notMerge={true}
           />
         </div>
