@@ -107,12 +107,12 @@ export default function ProjectDetail() {
       icon: ChartPieIcon,
       current: false,
     },
-    {
-      name: "Contributors",
-      href: "#contributors",
-      icon: ChartPieIcon,
-      current: false,
-    },
+    // {
+    //   name: "Contributors",
+    //   href: "#contributors",
+    //   icon: ChartPieIcon,
+    //   current: false,
+    // },
     {
       name: "Code Frequency",
       href: "#code-frequency",
@@ -234,9 +234,9 @@ export default function ProjectDetail() {
                   <ParticipationCount />
                 </div>
               </div>
-              <div id="contributors" className="w-full">
+              {/* <div id="contributors" className="w-full">
                 <Contributors />
-              </div>
+              </div> */}
               <div id="code-frequency" className="w-full">
                 <CodeFrequency />
               </div>
