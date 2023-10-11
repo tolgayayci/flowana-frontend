@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import { JsxElement } from "typescript";
 
 export type Interval = {
     value: string;
