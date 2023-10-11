@@ -113,8 +113,9 @@ export default function Github() {
   ];
 
   const router = useRouter();
+  const { owner, repo } = router.query;
 
-  if (!router.isReady) {
+  if (!router.isReady && owner && repo) {
     return null; // or return a loading spinner
   }
 

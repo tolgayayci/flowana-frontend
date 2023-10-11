@@ -8,10 +8,10 @@ const usePullRequestActivity = (interval: string = "month") => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/pull-request-activity?owner=${owner}&repo=${repo}&interval=${interval}`
-    const { data, error, isValidating } = useSWRImmutable<IPullRequestActivity>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IPullRequestActivity>(isInitialised ? url : null , fetcher);
 
     return {
         pullRequestActivity: data,

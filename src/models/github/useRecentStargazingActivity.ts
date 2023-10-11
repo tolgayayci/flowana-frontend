@@ -8,10 +8,10 @@ const useRecentStargazingActivity = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/recent-stargazing-activity?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IRecentStargazingActivity, any>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IRecentStargazingActivity, any>(isInitialised ? url : null , fetcher);
 
     return {
         recentStargazingActivity: data,

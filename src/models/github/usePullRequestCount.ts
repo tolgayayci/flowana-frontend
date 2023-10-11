@@ -8,10 +8,10 @@ const usePullRequestCount = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/pull-request-count?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IPullRequestCount>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IPullRequestCount>(isInitialised ? url : null , fetcher);
 
     return {
         pullRequestCount: data,

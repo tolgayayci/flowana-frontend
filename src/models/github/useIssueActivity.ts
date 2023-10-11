@@ -8,10 +8,10 @@ const useIssueActivity = (interval: string = "month") => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/issue-activity?owner=${owner}&repo=${repo}&interval=${interval}`
-    const { data, error, isValidating } = useSWRImmutable<IIssueActivity>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IIssueActivity>(isInitialised ? url : null , fetcher);
 
     return {
         issueActivity: data,

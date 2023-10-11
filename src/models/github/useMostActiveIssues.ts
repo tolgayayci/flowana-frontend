@@ -8,10 +8,10 @@ const useMostActiveIssues = (interval: string = "month") => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/most-active-issues?owner=${owner}&repo=${repo}&interval=${interval}`
-    const { data, error, isValidating } = useSWRImmutable<IMostActiveIssues[]>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IMostActiveIssues[]>(isInitialised ? url : null , fetcher);
 
     return {
         mostActiveIssues: data,

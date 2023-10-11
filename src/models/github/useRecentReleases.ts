@@ -8,10 +8,10 @@ const useRecentReleases = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/recent-releases?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IRecentReleases[]>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IRecentReleases[]>(isInitialised ? url : null , fetcher);
 
     return {
         recentReleases: data,
