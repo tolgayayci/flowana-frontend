@@ -30,14 +30,14 @@ export function ProtocolStateProvider({ children }: { children: ReactNode }) {
       updateProtocol(url);
     };
 
-    const storedHref = localStorage.getItem("protocol");
+    // const storedHref = localStorage.getItem("protocol");
 
-    if (storedHref && storedHref !== router.asPath.split("/")[1]) {
-      console.log("storedHref", storedHref);
-      router.push(storedHref + "/projects");
-    } else {
-      updateProtocol(router.asPath); // Update protocol initially based on the current path
-    }
+    // if (storedHref && storedHref !== router.asPath.split("/")[1]) {
+    //   console.log("storedHref", storedHref);
+    //   router.push(storedHref + "/projects");
+    // } else {
+    //   updateProtocol(router.asPath); // Update protocol initially based on the current path
+    // }
 
     // Listen to route changes
     router.events.on("routeChangeStart", handleRouteChange);

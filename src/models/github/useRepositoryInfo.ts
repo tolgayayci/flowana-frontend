@@ -13,9 +13,6 @@ const useRepositoryInfoModel = () => {
     const url = `/github-project/${protocol["protocol"]}/repository-info?owner=${owner}&repo=${repo}`
     const { data, error, isValidating } = useSWRImmutable<IRepositoryInfo, any>(protocol ? url : null , fetcher);
 
-    console.log("data", data)
-    console.log(protocol)
-
     return {
         repositoryInfo: data,
         isLoading: !error && !data,

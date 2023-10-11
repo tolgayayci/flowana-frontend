@@ -62,7 +62,7 @@ export default function Contributors() {
             #{rank}
           </span>
         </div>
-        <div className="max-h-[calc(5*2.6rem)] overflow-y-auto">
+        <div className="max-h-[calc(9*2.6rem)] overflow-y-auto">
           <div className="grid grid-cols-2 gap-4 mb-4">
             {sortedContributions.map((contribution, index) => (
               <div
@@ -109,7 +109,7 @@ export default function Contributors() {
     <Layout>
       <div className="flex flex-row space-x-6">
         <div
-          className={`max-h-[calc(5*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden ${
+          className={`max-h-[calc(7*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden ${
             selectedContributor ? "w-1/2" : "w-full"
           }`}
         >

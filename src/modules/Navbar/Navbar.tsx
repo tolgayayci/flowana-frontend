@@ -44,7 +44,6 @@ export default function Navbar() {
       (p) => p.value === protocol["protocol"]
     );
     setSelected(selectedProtocol);
-    console.log("Navbar.tsx: selectedProtocol: ", selectedProtocol);
   }, [protocol]);
 
   const initialNavigation: NavigationItem[] = [

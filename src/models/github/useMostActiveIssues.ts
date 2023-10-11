@@ -13,8 +13,6 @@ const useMostActiveIssues = (interval: string = "month") => {
     const url = `/github-project/${protocol["protocol"]}/most-active-issues?owner=${owner}&repo=${repo}&interval=${interval}`
     const { data, error, isValidating } = useSWRImmutable<IMostActiveIssues[]>(protocol ? url : null , fetcher);
 
-    if(!data) console.log(data);
-
     return {
         mostActiveIssues: data,
         isLoading: !error && !data,

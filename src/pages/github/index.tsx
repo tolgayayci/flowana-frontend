@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 // Sidebar
 import Sidebar from "@/modules/Sidebar/Sidebar";
@@ -109,6 +111,12 @@ export default function Github() {
       current: false,
     },
   ];
+
+  const router = useRouter();
+
+  if (!router.isReady) {
+    return null; // or return a loading spinner
+  }
 
   return (
     <>

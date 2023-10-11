@@ -23,6 +23,7 @@ export default function LanguageBreakdown() {
         }
       />
     );
+
   if (!languageBreakdown)
     return (
       <NoData

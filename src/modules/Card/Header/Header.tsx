@@ -98,10 +98,12 @@ const CardHeader: React.FC<ICardHeader> = ({
       )}
       {tooltip && (
         <>
-          <FaInfoCircle className="ml-2 text-white cursor-pointer info-icon text-xl" />
-          <Tooltip anchorSelect=".info-icon" place="top">
-            {tooltip}
-          </Tooltip>
+          <a data-tooltip-id={title}>
+            <FaInfoCircle className="ml-2 text-white cursor-pointer info-icon text-xl" />
+            <Tooltip id={title} place="top" className="max-w-lg">
+              {tooltip}
+            </Tooltip>
+          </a>
         </>
       )}
     </div>
