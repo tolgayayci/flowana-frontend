@@ -10,6 +10,7 @@ import CardHeader from "@/modules/Card/Header/Header";
 import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoListData from "@/modules/NoData/NoListData";
 import { formatDistanceToNow } from "@/utils/functions";
+import { FaCode } from "react-icons/fa";
 
 export default function RecentCommits() {
   const { recentCommits, isLoading } = useRecentCommits();
@@ -39,58 +40,56 @@ export default function RecentCommits() {
       />
     );
 
-  return (
-    <Layout>
-      <CardHeader
-        title="Latest Commits"
-        tooltip="View the latest commits made to the repository."
-      />{" "}
-      <div className="max-h-[calc(5*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
-        <ul className="space-y-3">
-          {recentCommits.map((commit) => (
-            <li
-              key={commit.url}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-side-500"
-            >
-              <Link
-                href={commit.url}
-                target="_blank"
-                className="block hover:no-underline"
+    return (
+      <Layout>
+        <CardHeader
+          title="Latest Commits"
+          tooltip="View the latest commits across all repositories of the protocol."
+        />
+        <div className="max-h-[calc(5*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
+          <ul className="space-y-3">
+            {recentCommits.map((commit) => (
+              <li
+                key={commit.url}
+                className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500"
               >
-                <div className="flex justify-between">
-                  <div className="flex items-center space-x-2 w-1/2">
-                    <Image
-                      unoptimized
-                      src={commit.author_avatar_url}
-                      className="rounded-full mr-5"
-                      alt="Avatar"
-                      width={52}
-                      height={52}
-                    />
-                    <div className="flex-grow min-w-0 max-w-xs">
-                      <h3 className="text-base sm:text-md font-semibold truncate">
-                        {commit.message}
-                      </h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">
-                        Commit by{" "}
-                        <span className="bg-sfgreen-600 border-2 border-sfgreen-800 text-white rounded-lg px-1 py-0.5">
-                          {commit.author_login}
-                        </span>
-                      </p>
+                <Link
+                  href={commit.url}
+                  target="_blank"
+                  className="block hover:no-underline"
+                >
+                  <div className="flex justify-between">
+                    <div className="flex items-center space-x-2 w-1/2">
+                      <Image
+                        unoptimized
+                        src={commit.author_avatar_url}
+                        className="rounded-full mr-5"
+                        alt="Avatar"
+                        width={52}
+                        height={52}
+                      />
+                      <div className="flex-grow min-w-0 max-w-xs">
+                        <h3 className="text-base sm:text-md font-semibold truncate">
+                          {commit.message}
+                        </h3>
+                        <p className="text-gray-500 text-xs sm:text-sm mt-1">
+                          Committed {formatDistanceToNow(commit.committed_date)}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end">
+                      <div className="px-2 py-1 bg-side border-2 border-main text-niceblack-800 font-semibold rounded-md text-xs flex items-center">
+                        <FaCode className="mr-1" />
+                        {commit.author_login}
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end">
-                    <div className="px-2 py-1 bg-sfred-500 border-2 border-sfred-700 text-sfblue-800 rounded-md text-xs">
-                      Committed Date:{" "}
-                      {formatDistanceToNow(commit.committed_date)}
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Layout>
-  );
-}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Layout>
+    );
+  }
+  

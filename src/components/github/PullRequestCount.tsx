@@ -36,41 +36,53 @@ export default function PullRequestCount() {
       />
     );
 
-  const option = {
-    tooltip: {
-      trigger: "item",
-      formatter: "{b}: {c} ({d}%)",
-    },
-    legend: {
-      orient: "horizontal",
-      top: "top",
-      x: "center",
-      data: ["Closed", "Open"],
-    },
-    series: [
-      {
-        name: "Issue Status",
-        type: "pie",
-        radius: "55%",
-        center: ["50%", "50%"],
-        data: [
-          { value: pullRequestCount.closed, name: "Closed" },
-          { value: pullRequestCount.open, name: "Open" },
-        ],
-        color: ["#778dd1", "#ECA1A5"], // sfblue.500 for "Others" and sfgreen.500 for "Owner"
-        label: {
-          formatter: "{b}: {d}%",
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontWeight: "bold",
-          },
-        },
+    const option = {
+      tooltip: {
+        trigger: "item",
       },
-    ],
-  };
-
+      legend: {
+        top: "0%",
+        left: "center",
+      },
+      color:["#e28d9b", "#778dd1"],
+      series: [
+        {
+          name: "Pull Request Count",
+          type: "pie",
+          radius: ["40%", "70%"],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: "#fff",
+            borderWidth: 2,
+          },
+          label: {
+            show: false,
+            position: "center",
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 15,
+              fontWeight: "bold",
+            },
+            itemStyle: {
+              shadowBlur: 2,
+              shadowOffsetX: 0,
+              shadowColor: "rgba(0, 0, 0, 0.30)",
+            }
+          },
+          labelLine: {
+            show: false,
+          },
+          data: [
+            { value: pullRequestCount?.closed, name: "Closed" },
+            { value: pullRequestCount?.open, name: "Open" },
+          ],
+        },
+      ],
+    };
+  
   return (
     <Layout>
       <CardHeader

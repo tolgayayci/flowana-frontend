@@ -4,6 +4,7 @@ import Image from "next/image";
 
 // Hooks
 import useRecentIssues from "@/models/github/useRecentIssues";
+import { Tooltip } from "react-tooltip";
 
 // Modules and Utils
 import Layout from "@/modules/Card/Layout/Layout";
@@ -11,8 +12,11 @@ import CardHeader from "@/modules/Card/Header/Header";
 import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoListData from "@/modules/NoData/NoListData";
 import { formatDistanceToNow } from "@/utils/functions";
+import { FaReply } from "react-icons/fa";
+import { formatBadgeStatsCount } from "@/utils/functions";
 
 // Types
+
 
 import { Interval } from "@/types/general";
 
@@ -21,10 +25,26 @@ const intervals: Interval[] = [
   { name: "By Updated Time", value: "updated_at" },
 ];
 
+
+function CountIcon({ icon, count, tooltip, id }) {
+  return (
+    <span className="w-12 justify-center items-center inline-flex z-50">
+      {icon}
+      <span className="ml-1">{formatBadgeStatsCount(count)}</span>
+
+      {/* Tooltip */}
+      <Tooltip id={id} place="top">
+        {tooltip}
+      </Tooltip>
+    </span>
+  );
+}
 export default function RecentIssues() {
   const [selectedInterval, setSelectedInterval] = useState(intervals[0]);
 
-  const { recentIssues, isLoading } = useRecentIssues(selectedInterval.value);
+  const { recentIssues, isLoading } = useRecentIssues(
+    selectedInterval.value
+  );
 
   if (isLoading)
     return (
@@ -33,7 +53,7 @@ export default function RecentIssues() {
         element={
           <CardHeader
             title="Latest Issues"
-            tooltip="View the latest issues sorted by either creation time, or update time."
+            tooltip="View the latest issues sorted by either creation time, or update time across all repositories of the protocol."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -48,7 +68,7 @@ export default function RecentIssues() {
         element={
           <CardHeader
             title="Latest Issues"
-            tooltip="View the latest issues sorted by either creation time, or update time."
+            tooltip="View the latest issues sorted by either creation time, or update time across all repositories of the protocol."
             selectedInterval={selectedInterval}
             setSelectedInterval={setSelectedInterval}
             intervals={intervals}
@@ -61,7 +81,7 @@ export default function RecentIssues() {
     <Layout>
       <CardHeader
         title="Latest Issues"
-        tooltip="View the latest issues sorted by either creation time, or update time."
+        tooltip="View the latest issues sorted by either creation time, or update time across all repositories of the protocol."
         selectedInterval={selectedInterval}
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}
@@ -71,7 +91,7 @@ export default function RecentIssues() {
           {recentIssues.map((issue) => (
             <li
               key={issue.number}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-side-500"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500"
             >
               <Link
                 href={issue.url}
@@ -97,31 +117,29 @@ export default function RecentIssues() {
                         <span
                           className={`ml-2 px-2 py-1 rounded-full ${
                             issue.state === "CLOSED"
-                              ? "bg-red-500"
-                              : "bg-green-500"
-                          } text-white text-xxs sm:text-xs opacity-75`}
+                              ? "border-red-800 border-2 text-red-800 font-semibold"
+                              : "border-green-700 border-2 text-green-800 font-semibold"
+                          } text-xs sm:text-xs opacity-75`}
                         >
-                          {issue.state === "CLOSED" ? "Closed" : "Open"}
+                          {issue.state === "CLOSED"
+                            ? `Closed ${formatDistanceToNow(issue.updated_at)}`
+                            : `Opened ${formatDistanceToNow(issue.created_at)}`}
                         </span>
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end">
-                    <div className="flex items-center space-x-2">
-                      {issue.state === "CLOSED" ? (
-                        <div className="mr-2 px-2 py-1 bg-sfred-500 border-2 border-sfred-800 text-sfred-900 rounded-md text-xs">
-                          Closed {formatDistanceToNow(issue.updated_at)}
-                        </div>
-                      ) : (
-                        <div className="mr-2 px-2 py-1 bg-blue-200 border-2 border-blue-400 text-blue-700 rounded-md text-xs">
-                          Last Update: {formatDistanceToNow(issue.updated_at)}
-                        </div>
-                      )}
-                      <div className="px-2 py-1 bg-indigo-200 border-2 border-indigo-400 text-indigo-700 rounded-md text-xs">
-                        {issue.comments_count} comment
-                        {issue.comments_count !== 1 && "s"}
-                      </div>
-                    </div>
+                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
+                    <span
+                      className="bg-orange-200/70 border-2 border-orange-300 text-orange-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="comments_count"
+                    >
+                      <CountIcon
+                        id="comments_count"
+                        icon={<FaReply className="inline" />}
+                        count={issue.comments_count}
+                        tooltip="Comments Count"
+                      />
+                    </span>
                   </div>
                 </div>
               </Link>

@@ -36,24 +36,24 @@ export default function ProjectCard({ hit }: any) {
   const protocolInfo = protocolInfos[protocol["protocol"]];
 
   const gradeStyles = {
-    "S+": "bg-green-500 text-white border-2 border-green-700",
-    S: "bg-blue-500 text-white border-2 border-blue-700",
-    "A+": "bg-yellow-500 text-white border-2 border-yellow-700",
-    A: "bg-yellow-500 text-white border-2 border-yellow-700",
-    "B+": "bg-blue-500 text-white border-2 border-blue-700",
-    B: "bg-blue-500 text-white border-2 border-blue-700",
-    "C+": "bg-yellow-500 text-white border-2 border-yellow-700",
-    C: "bg-yellow-500 text-white border-2 border-yellow-700",
-    "D+": "bg-red-500 text-white border-2 border-red-700",
-    D: "bg-red-500 text-white border-2 border-red-700",
+    "S+": "bg-emerald-500 text-white border-2 border-emerald-700",
+    "S": "bg-emerald-500 text-white border-2 border-emerald-700",
+    "A+": "bg-indigo-500 text-white border-2 border-indigo-700",
+    "A": "bg-indigo-500 text-white border-2 border-indigo-700",
+    "B+": "bg-cyan-500 text-white border-2 border-cyan-700",
+    "B": "bg-cyan-500 text-white border-2 border-cyan-700",
+    "C+": "bg-rose-500 text-white border-2 border-rose-700",
+    "C": "bg-rose-500 text-white border-2 border-rose-700",
+    "D+": "bg-amber-500	text-white border-2 border-amber-700",
+    "D": "bg-amber-500	 text-white border-2 border-amber-700",
     "E+": "bg-red-500 text-white border-2 border-red-700",
-    E: "bg-red-500 text-white border-2 border-red-700",
-    F: "bg-gray-400 text-gray-800 border-2 border-gray-600",
+    "E": "bg-red-500 text-white border-2 border-red-700",
+    "F": "bg-gray-400 text-gray-800 border-2 border-gray-600",
   };
 
   return (
     <Link href={`/${protocol["protocol"]}/projects/${hit.owner}/${hit.repo}`}>
-      <div className="bg-white h-full p-10 rounded-2xl w-full border-2 border-sfblack flex flex-col justify-between shadow-lg hover:shadow-xl">
+      <div className="h-full p-10 rounded-2xl w-full border-2 border-sfblack flex flex-col justify-between shadow-lg hover:shadow-xl">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Image

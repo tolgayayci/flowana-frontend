@@ -36,42 +36,53 @@ export default function ParticipationCount() {
       />
     );
 
-  const option = {
+      const option = {
     tooltip: {
       trigger: "item",
-      formatter: "{b}: {c} ({d}%)",
     },
     legend: {
-      orient: "horizontal",
-      top: "top",
+      top: "0%",
       left: "center",
-      textStyle: {
-        color: "#2F5061", // sfblue.DEFAULT
-      },
     },
+    color: ["#e28d9b", "#778dd1"],
     series: [
       {
-        name: "Status",
+        name: "Issue Count",
         type: "pie",
-        radius: "60%",
-        center: ["50%", "50%"], // Update the center property to center the pie chart
-        data: [
-          { value: participationCount.others, name: "Others" },
-          { value: participationCount.owner, name: "Owner" },
-        ],
-        color: ["#5B93AF", "#ECA1A5"], // sfblue.500 for "Others" and sfgreen.500 for "Owner"
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
         label: {
-          formatter: "{b}: {d}%",
+          show: false,
+          position: "center",
         },
         emphasis: {
           label: {
             show: true,
+            fontSize: 15,
             fontWeight: "bold",
           },
+          itemStyle: {
+            shadowBlur: 2,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.30)",
+          },
         },
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: participationCount.others, name: "Others" },
+          { value: participationCount.owner, name: "Owner" },
+        ],
       },
     ],
   };
+
 
   return (
     <Layout>

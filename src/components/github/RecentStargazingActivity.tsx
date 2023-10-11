@@ -42,6 +42,7 @@ export default function RecentStargazingActivity() {
     xAxis: {
       type: "category",
       data: recentStargazingActivity["xAxis"]["data"],
+      boundaryGap: false,
       axisLine: {
         lineStyle: {
           color: "#2F5061", // sfblue.DEFAULT
@@ -59,19 +60,16 @@ export default function RecentStargazingActivity() {
     series: recentStargazingActivity["series"].map((s) => ({
       ...s,
       name: "Stars",
-      smooth: true, // This makes the lines smooth
+      smooth: true, // To make the line chart smooth
+      showSymbol: false, // To hide the dots on the line chart
       itemStyle: {
-        color: "#DC5057", // sfred.900
-        shadowBlur: 10,
-        shadowOffsetX: 0,
-        shadowOffsetY: 3,
-        shadowColor: "rgba(0, 0, 0, 0.3)",
+        color: "#778dd1", // sfred.900
       },
-      lineStyle: {
-        color: "#1D313B", // sfblue.900
+    lineStyle: {
+        color: "#778dd1", // sfblue.900
       },
       areaStyle: {
-        color: "#2F5061", // sfblue.DEFAULT
+        color: "#778dd1", // sfblue.DEFAULT
       },
     })),
     renderer: "svg",
@@ -87,7 +85,7 @@ export default function RecentStargazingActivity() {
     legend: {
       show: true,
       textStyle: {
-        color: "#2F5061", // sfblue.DEFAULT
+        color: "#3b4e6e", // sfblue.DEFAULT
       },
     },
     dataZoom: [
@@ -97,11 +95,7 @@ export default function RecentStargazingActivity() {
         start: 0,
         end: 100,
         handleStyle: {
-          color: "#E57F84", // sfred.800
-          shadowBlur: 3,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
-          shadowOffsetX: 2,
-          shadowOffsetY: 2,
+          color: "#e8efff", // sfred.800
         },
       },
       {

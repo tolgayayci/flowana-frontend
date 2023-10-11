@@ -17,6 +17,7 @@ export default function RepositoryInfo() {
     watcher_count,
     stargazer_count,
     commit_comment_count,
+    description,
     pull_request_count,
     issue_count,
     release_count,
@@ -42,40 +43,49 @@ export default function RepositoryInfo() {
               height={64}
             />
             <div className="text-gray-800">
-              <p className="font-bold text-lg">{repo}</p>
-              <p className="text-sm text-gray-500">{owner}</p>
+              <p className="font-bold text-lg">{owner}/{repo}</p>
+              {/* <p className="text-sm text-gray-500"></p> */}
+              <p className="text-sm text-gray-500">{description}</p>
+
             </div>
           </div>
 
           {/* Badges */}
           <div className="flex items-center space-x-6">
-            <div className="flex items-center border-2 border-sfred-700 bg-sfred-500 px-3 py-1 rounded-md shadow-md space-x-4">
-              <span>👁️</span>
-              <p className="text-sm text-sfblack inline-block font-semibold">
+            <div className="flex items-center px-3 py-1 rounded-md shadow-md space-x-4"
+                          style={ { backgroundColor: "#455e8d" } }
+                          >
+              <span>👀</span>
+              <p className="text-sm text-white inline-block font-semibold">
                 Watchers
               </p>
-              <p className="text-xs inline-block mr-2 bg-sfred-800 px-3 py-1 rounded-xl font-semibold text-white">
+              <p className="text-xs inline-block mr-2 px-3 py-1 rounded-xl font-semibold text-black bg-white"
+              >
                 {watcher_count}
               </p>
             </div>
 
-            <div className="flex items-center border-2 border-sfred-700 bg-sfred-500 px-3 py-1 rounded-md shadow-md space-x-4">
+            <div className="flex items-center px-3 py-1 rounded-md shadow-md space-x-4"
+                                     style={ { backgroundColor: "#455e8d", color: "white" } }
+                                     >
               <span>Y</span>
-              <p className="text-sm text-sfblack inline-block font-semibold">
+              <p className="text-sm text-white inline-block font-semibold">
                 Forks
               </p>
-              <p className="text-xs inline-block mr-2 bg-sfred-800 px-3 py-1 rounded-xl font-semibold text-white">
+              <p className="text-xs inline-block mr-2 bg-white px-3 py-1 rounded-xl font-semibold text-black">
                 {fork_count}
               </p>
             </div>
 
-            <div className="flex items-center border-2 border-sfred-700 bg-sfred-500 px-3 py-1 rounded-md shadow-md space-x-4">
-              <span>⭐</span>
-              <p className="text-sm text-sfblack inline-block font-semibold">
+            <div className="flex items-center px-3 py-1 rounded-md shadow-md space-x-4"style={ { backgroundColor: "#455e8d", color: "white" } }
+                                     >
+              <span>★</span>
+              <p className="text-sm text-white inline-block font-semibold">
                 Stargazers
               </p>
-              <p className="text-xs inline-block mr-2 bg-sfred-800 px-3 py-1 rounded-xl font-semibold text-white">
-                {stargazer_count}
+              <p className="text-xs inline-block mr-2 bg-white px-3 py-1 rounded-xl font-semibold text-black">
+                {/* IF stargazer_count is 0 then show as 0 */}
+                {stargazer_count ? stargazer_count : 0 }
               </p>
             </div>
           </div>

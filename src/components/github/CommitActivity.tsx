@@ -35,7 +35,7 @@ export default function CommitActivity() {
         }
       />
     );
-  if (!commitActivity)
+    if (!commitActivity || !commitActivity[0].total)
     return (
       <NoData
         element={

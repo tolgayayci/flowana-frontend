@@ -8,6 +8,7 @@ import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
+import { formatChartDate } from "@/utils/functions";
 
 export default function CodeFrequency() {
   const { codeFrequency, isLoading } = useCodeFrequency();
@@ -40,10 +41,10 @@ export default function CodeFrequency() {
   const option = {
     xAxis: {
       type: "category",
-      data: codeFrequency["xAxis"]["data"],
+      data: codeFrequency["xAxis"]["data"].map((date) => formatChartDate(date)),
       axisLine: {
         lineStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#3b4e6e",
         },
       },
     },
@@ -51,7 +52,7 @@ export default function CodeFrequency() {
       type: "value",
       axisLine: {
         lineStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#3b4e6e",
         },
       },
     },
@@ -59,10 +60,10 @@ export default function CodeFrequency() {
       let color, name;
 
       if (index === 0) {
-        color = "#28A745"; // Green for additions
+        color = "#778dd1"; // Green for additions
         name = "Additions";
       } else {
-        color = "#DC5057"; // Red for deletions
+        color = "#e28d9b"; // Red for deletions
         name = "Deletions";
       }
 
@@ -70,18 +71,13 @@ export default function CodeFrequency() {
         ...s,
         name: name, // Setting name for series
         smooth: true,
+        showSymbol: false,
         itemStyle: {
           color: color,
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowOffsetY: 3,
-          shadowColor: "rgba(0, 0, 0, 0.3)",
         },
         lineStyle: {
           color: color,
-        },
-        areaStyle: {
-          color: "#2F5061", // sfblue.DEFAULT for area under the line
+          width: 2.5,
         },
       };
     }),
@@ -99,7 +95,7 @@ export default function CodeFrequency() {
       show: true,
       data: ["Additions", "Deletions"],
       textStyle: {
-        color: "#2F5061", // sfblue.DEFAULT
+        color: "#3b4e6e",
       },
       selectedMode: "multiple", // Allows multiple selection (default behavior)
     },
@@ -110,17 +106,14 @@ export default function CodeFrequency() {
         start: 0,
         end: 100,
         handleStyle: {
-          color: "#E57F84", // sfred.800
-          shadowBlur: 3,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
-          shadowOffsetX: 2,
-          shadowOffsetY: 2,
+          color: "#e8efff", // sfred.800
         },
       },
       {
         type: "inside",
       },
     ],
+
     grid: {
       left: "1%",
       right: "1%",

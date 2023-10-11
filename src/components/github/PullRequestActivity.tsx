@@ -56,32 +56,111 @@ export default function PullRequestActivity() {
   const option = {
     tooltip: {
       trigger: "axis",
+      axisPointer: {
+        type: "cross",
+        crossStyle: {
+          color: "#999",
+        },
+      },
     },
     legend: {
-      show: true,
-      data: ["Opened", "Closed"],
+      data: pullRequestActivity.series.map((series) => series.name),
       textStyle: {
-        color: "#2F5061", // sfblue.DEFAULT
+        color: "#3b4e6e", // sfblue.DEFAULT
       },
-      selectedMode: "multiple",
+      top: "0%",
+      left: "center",
     },
     xAxis: {
       type: "category",
-      boundaryGap: false,
-      data: pullRequestActivity?.xAxis.data,
+      data: pullRequestActivity["xAxis"]["data"],
+      axisLine: {
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
+      axisTick: {
+        alignWithLabel: true,
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
     },
     yAxis: {
       type: "value",
-    },
-    series: pullRequestActivity.series.map((series: any) => ({
-      name: series.name,
-      type: "line",
-      areaStyle: {}, // Area style can give a better visual presentation for issue activities
-      emphasis: {
-        focus: "series",
+      axisLine: {
+        lineStyle: {
+          color: "#3b4e6e",
+        },
       },
-      data: series.data,
-    })),
+      axisTick: {
+        lineStyle: {
+          color: "#3b4e6e",
+        },
+      },
+    },
+    series: pullRequestActivity.series.map((series, index) => {
+      let startColor,
+        endColor = "#FFFFFF"; // The gradient will end with white color for all lines
+
+      switch (index) {
+        case 0:
+          startColor = "#778dd1"; // red
+          endColor = "#E2E7F5"; // light blue
+          break;
+          case 1:
+          startColor = "#e28d9b"; // blue
+          endColor = "#F7DFE3"; // light blue
+          break;
+        default: // For third line or any additional lines
+          startColor = "#64A490"; // green
+          endColor = "#F2E3D8"; // light blue
+          break;
+      }
+
+      return {
+        name: series.name,
+        type: "line",
+        smooth: true,
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: startColor, // color at 0% position
+              },
+              {
+                offset: 0.9,
+                color: endColor, // color at 100% position, which is white
+              },
+              {
+                offset: 1,
+                color: "#FFFF", // color at 100% position, which is white
+              },
+            ],
+            global: false,
+          },
+        },
+        showSymbol: false,
+        emphasis: {
+          focus: "series",
+        },
+        data: series.data,
+        lineStyle: {
+          color: startColor,
+          width: 2,
+        },
+        itemStyle: {
+          color: startColor,
+        },
+      };
+    }),
+    renderer: "svg",
     dataZoom: [
       // Slider
       {
@@ -89,11 +168,7 @@ export default function PullRequestActivity() {
         start: 0,
         end: 100,
         handleStyle: {
-          color: "#E57F84", // sfred.800
-          shadowBlur: 3,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
-          shadowOffsetX: 2,
-          shadowOffsetY: 2,
+          color: "#e8efff", // sfred.800
         },
       },
       {
