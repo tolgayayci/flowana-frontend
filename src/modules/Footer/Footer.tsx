@@ -7,9 +7,9 @@ export default function Footer() {
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <a href="https://flowbite.com/" className="flex items-center">
+            <a href="https://yk-labs.com/" className="flex items-center">
               <Image
-                src="/yk-logo.svg"
+                src="/yk-labs.svg"
                 className="h-32 mr-3"
                 alt="YK Labs Logo"
                 width={90}

@@ -19,6 +19,7 @@ export function ProtocolStateProvider({ children }: { children: ReactNode }) {
 
       if (protocol) {
         setProtocol({ protocol: protocol.value });
+        console.log(protocol);
         localStorage.setItem("protocol", protocol.value);
         setIsInitialised(true); // Set initialized to true once protocol is set
       }
@@ -32,21 +33,12 @@ export function ProtocolStateProvider({ children }: { children: ReactNode }) {
       updateProtocol(url);
     };
 
-    // const storedHref = localStorage.getItem("protocol");
-
-    // if (storedHref && storedHref !== router.asPath.split("/")[1]) {
-    //   console.log("storedHref", storedHref);
-    //   router.push(storedHref + "/projects");
-    // } else {
-    //   updateProtocol(router.asPath); // Update protocol initially based on the current path
-    // }
-
     // Listen to route changes
-    router.events.on("routeChangeStart", handleRouteChange);
+    router.events.on("routeChangeComplete", handleRouteChange);
 
     // Cleanup
     return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
+      router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.asPath]);
 
