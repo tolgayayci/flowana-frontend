@@ -57,20 +57,24 @@ export default function CommunityProfile() {
         <div className="flex flex-col items-center justify-center w-1/3">
           {/* Display Health Percentage */}
           <div className="mb-8">
-            <div className="w-full h-16 rounded-lg bg-sfgreen-600 border-2 border-sfgreen-900 text-white flex items-center justify-center text-lg font-bold px-8">
+            <div className="w-full h-16 rounded-lg border-2 border-sfgreen-900 text-white flex items-center justify-center text-lg font-bold px-8"
+                      style={{ backgroundColor: "#455e8d"}}>
+      
               Score: {health_percentage}%
             </div>
           </div>
 
           {/* Display Other Details */}
-          <div className="flex-grow">
-            <p className="mb-2 text-center">{description}</p>
-          </div>
+          {/* <div className="flex-grow"> */}
+            {/* <p className="mb-2 text-center">{description}</p> */}
+          {/* </div> */}
         </div>
 
         {/* Right Side */}
         <div className="flex flex-col space-y-4 w-2/3">
-          <ul className="divide-y divide-sfred-700">
+          <ul className="divide-y"
+          style={ { borderColor: "#5978b8" } }
+          >
             {Object.keys(files)
               .sort((a, b) => (files[b] ? 1 : -1))
               .map((key) => (
@@ -81,7 +85,7 @@ export default function CommunityProfile() {
                   {files[key] ? (
                     // SVG for existing files (checkmark)
                     <svg
-                      className="w-6 h-6 mr-4 text-green-500"
+                      className="w-6 h-6 mr-4 text-green-600"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -119,8 +123,8 @@ export default function CommunityProfile() {
                       href={files[key].html_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-sfgreen-600 border-2 border-sfgreen-800 text-white px-3 text-sm rounded-md hover:underline mr-4"
-                    >
+                      className=" text-white px-3 text-sm rounded-md hover:underline mr-4"
+                      style={{ backgroundColor: "#5c7cd9"}}>
                       View
                     </a>
                   )}

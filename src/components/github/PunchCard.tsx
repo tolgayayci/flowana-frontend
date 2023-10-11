@@ -36,94 +36,117 @@ export default function PunchCard() {
       />
     );
 
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  const hours = Array.from(Array(24).keys());
-
-  const hoursFormatted = hours.map((hour) => {
-    if (hour === 0) {
-      return "12 am"; // Special case for midnight
-    } else if (hour < 12) {
-      return `${hour} am`; // Morning hours
-    } else if (hour === 12) {
-      return "12 pm"; // Special case for noon
-    } else {
-      return `${hour - 12} pm`; // Afternoon and evening hours
-    }
-  });
-
-  const option = {
-    tooltip: {
-      position: "top",
-      formatter: (params: any) => {
-        const day = punchCard.map((d) => [d.day, d.hour, d.commits]);
-        return `Number of commits on ${day[0]}, ${day[1]} ${day[2]}`;
-      },
-    },
-    legend: {
-      data: ["Number of Commits"], // add your legend title
-      align: "right",
-      textStyle: {
-        color: "#333333", // Using sfblack color
-      },
-    },
-    grid: {
-      left: "1%",
-      right: "5%",
-      top: "3%",
-      bottom: "5%",
-      containLabel: true,
-    },
-    xAxis: {
-      type: "category",
-      data: hoursFormatted,
-      boundaryGap: true,
-      splitArea: { show: true },
-      axisTick: { alignWithLabel: true },
-    },
-    yAxis: {
-      type: "category",
-      data: days,
-      splitArea: { show: true },
-    },
-    visualMap: {
-      min: 0,
-      max: Math.max(...punchCard.map((d) => d.commits)),
-      calculable: true,
-      orient: "vertical",
-      left: "95%",
-      bottom: "center",
-      inRange: {
-        color: ["#C9DBE5", "#2F5061"],
-      },
-    },
-    series: [
-      {
-        type: "heatmap",
-        data: punchCard.map((d) => [d.hour, d.day, d.commits]),
-        label: {
-          show: true,
-          color: "#000",
-          formatter: (params: any) => params.value[2],
+    const hours = [
+      "12 am",
+      "1 am",
+      "2 am",
+      "3 am",
+      "4 am",
+      "5 am",
+      "6 am",
+      "7 am",
+      "8 am",
+      "9 am",
+      "10 am",
+      "11 am",
+      "12 pm",
+      "1 pm",
+      "2 pm",
+      "3 pm",
+      "4 pm",
+      "5 pm",
+      "6 pm",
+      "7 pm",
+      "8 pm",
+      "9 pm",
+      "10 pm",
+      "11 pm",
+    ];
+  
+    const days = [
+      "Saturday",
+      "Friday",
+      "Thursday",
+      "Wednesday",
+      "Tuesday",
+      "Monday",
+      "Sunday",
+    ];
+  
+    const data = punchCard.map((item) => {
+      return [item.hour, item.day, item.commits];
+    });
+  
+    const maxSymbolSize = 40;
+    const minSymbolSize = 5;
+  
+    const maxCommitCount = Math.max(...data.map((item) => item[2])); // Find the maximum commit count in your data
+  
+    const option = {
+      tooltip: {
+        position: "top",
+        formatter: function (params: any) {
+          return (
+            params.value[2] +
+            " commits in " +
+            hours[params.value[0]] +
+            " of " +
+            days[params.value[1]]
+          );
         },
-        emphasis: {
-          itemStyle: {
-            borderColor: "#333333", // Using sfblack color for emphasis
-            borderWidth: 2,
+      },
+      grid: {
+        left: "1%",
+        top: "5%",
+        bottom: "10%",
+        right: "1%",
+        containLabel: true,
+      },
+      xAxis: {
+        type: "category",
+        data: hours,
+        boundaryGap: false,
+        splitLine: {
+          show: true,
+        },
+        axisLine: {
+          show: false,
+        },
+      },
+      yAxis: {
+        type: "category",
+        data: days,
+        axisLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,
+        },
+        splitLine: {
+          show: false,
+        },
+        axisLabel: {
+          padding: 10, // Add a margin to the right of the y-axis labels
+        },
+      },
+      series: [
+        {
+          name: "Punch Card",
+          type: "scatter",
+          symbolSize: function (val) {
+            const normalizedSize =
+              (val[2] / maxCommitCount) * (maxSymbolSize - minSymbolSize) +
+              minSymbolSize;
+            return normalizedSize;
+          },
+          data: data,
+          animationDelay: function (idx: any) {
+            return idx * 5;
           },
         },
-      },
-    ],
-  };
-
+      ],
+    };
+  
   return (
     <Layout>
       <CardHeader

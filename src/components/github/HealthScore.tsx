@@ -40,8 +40,8 @@ export default function HealthScore() {
         <p className="text-sm font-bold mb-3">{label}</p>
         <div className="w-full bg-gray-300 rounded h-4">
           <div
-            className="bg-sfred-700 text-xs leading-none py-1 text-center text-white rounded h-4"
-            style={{ width: `${value}%` }}
+            className=" text-xs leading-none py-0.5 text-center text-white rounded h-4"
+            style={{ width: `${value}%`, backgroundColor: "#5978b8"}}
           >
             {value}%
           </div>
@@ -58,10 +58,13 @@ export default function HealthScore() {
       />
       <div className="flex items-center space-x-12 mt-12">
         <div className="flex flex-col items-center justify-center w-2/5 bg-gradient-to-br p-6 rounded-lg transition-shadow duration-300 ease-in-out">
-          <p className="text-8xl font-extrabold text-sfgreen-800 mb-4">
+          <p className="text-7xl font-extrabold mb-4"
+          style={{ color: "#455e8d"}}>
             {healthScore?.grade}
           </p>
-          <p className="text-2xl text-white bg-sfgreen-700 py-2 px-6 rounded-2xl">
+          <p className="text-2xl text-white py-2 px-6 
+          rounded-2xl"
+          style={{ backgroundColor: "#455e8d"}}>
             {healthScore?.total.toFixed(2)} %
           </p>
         </div>

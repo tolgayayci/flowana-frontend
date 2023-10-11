@@ -50,16 +50,43 @@ export default function LanguageBreakdown() {
     "#E57F84", // sfred
   ];
 
-  // Generate legend data
-  const legendData = languageBreakdown.map(function (item) {
-    return item.name;
-  });
+    // Sort the data by size in descending order
+const sortedData = [...languageBreakdown].sort((a, b) => b.size - a.size);
+  
+// Define a threshold for the minimum percentage a language must have to get its own slice
+const thresholdPercentage = 3; // for instance, 5%
+const totalSize = sortedData.reduce((sum, language) => sum + language.size, 0);
 
-  // Generate series data
-  const seriesData = languageBreakdown.map(function (item) {
+let othersSize = 0;
+const thresholdData = sortedData.filter(language => {
+  if ((language.size / totalSize) * 100 < thresholdPercentage) {
+    othersSize += language.size;
+    return false;
+  }
+  return true;
+});
+
+if (othersSize > 0) {
+  thresholdData.push({
+    name: "Others",
+    size: othersSize,
+    percentage: (othersSize / totalSize) * 100,
+  });
+}
+
+  // Generate legend data for top 5 languages
+  const topLegends = thresholdData.slice(0, 4).map((item) => item.name);
+
+  const topLanguageName = thresholdData[0].name; // Get the name of the top language
+
+  // Generate series data for all languages
+  const allSeriesData = thresholdData.map((item) => {
+    let isSelected = item.name === topLanguageName;
     return {
       name: item.name,
       value: item.size,
+      // selected: isSelected,
+      // itemStyle: isSelected ? { borderWidth: 2 } : {}, // Optional: Highlight selected item with a border
     };
   });
 
@@ -70,29 +97,88 @@ export default function LanguageBreakdown() {
       formatter: "{b}: {c} ({d}%)",
     },
     legend: {
-      orient: "horizontal",
-      top: "5%", // Adjust this value if needed for vertical positioning
+      top: "2%",
       left: "center",
-      data: legendData,
+      data: topLegends,
     },
     series: [
       {
-        name: "File Size",
+        name: "Access From",
         type: "pie",
-        radius: "55%",
-        center: ["50%", "60%"],
-        data: seriesData,
-        color: colorPalette, // Using the defined color palette
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        selectedMode: "single", // This allows for only one slice to be selected at a time
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: false,
+          position: "center",
+        },
         emphasis: {
+          label: {
+            show: true,
+            fontSize: 15,
+            fontWeight: "bold",
+          },
           itemStyle: {
-            shadowBlur: 10,
+            shadowBlur: 2,
             shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
+            shadowColor: "rgba(0, 0, 0, 0.30)",
           },
         },
+        labelLine: {
+          show: false,
+        },
+        data: allSeriesData,
       },
     ],
   };
+  // // Generate legend data
+  // const legendData = languageBreakdown.map(function (item) {
+  //   return item.name;
+  // });
+
+  // // Generate series data
+  // const seriesData = languageBreakdown.map(function (item) {
+  //   return {
+  //     name: item.name,
+  //     value: item.size,
+  //   };
+  // });
+
+  // // Configure the chart options
+  // var option = {
+  //   tooltip: {
+  //     trigger: "item",
+  //     formatter: "{b}: {c} ({d}%)",
+  //   },
+  //   legend: {
+  //     orient: "horizontal",
+  //     top: "5%", // Adjust this value if needed for vertical positioning
+  //     left: "center",
+  //     data: legendData,
+  //   },
+  //   series: [
+  //     {
+  //       name: "File Size",
+  //       type: "pie",
+  //       radius: "55%",
+  //       center: ["50%", "60%"],
+  //       data: seriesData,
+  //       color: colorPalette, // Using the defined color palette
+  //       emphasis: {
+  //         itemStyle: {
+  //           shadowBlur: 10,
+  //           shadowOffsetX: 0,
+  //           shadowColor: "rgba(0, 0, 0, 0.5)",
+  //         },
+  //       },
+  //     },
+  //   ],
+  // };
 
   return (
     <Layout>
