@@ -30,6 +30,7 @@ import HealthScore from "@/components/github/HealthScore";
 import Custom404 from "@/pages/404";
 import Closed404 from "@/components/github/Closed404";
 import Forked404 from "@/components/github/Forked404";
+import Archived404 from "@/components/github/Archived404";
 import Loader from "@/modules/Loader/Loader";
 
 // Heroicons
@@ -56,6 +57,10 @@ export default function ProjectDetail() {
 
   if (repositoryInfo.is_fork) {
     return <Forked404 />;
+  }
+
+  if (repositoryInfo.is_archived) {
+    return <Archived404 />;
   }
 
   const navigation = [

@@ -8,10 +8,10 @@ const useRecentIssues = (order_by: string = "created_at") => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/recent-issues?owner=${owner}&repo=${repo}&order_by=${order_by}`
-    const { data, error, isValidating } = useSWRImmutable<IRecentIssues[]>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IRecentIssues[]>(isInitialised ? url : null , fetcher);
 
     return {
         recentIssues: data,

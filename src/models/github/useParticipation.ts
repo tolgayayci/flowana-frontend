@@ -8,10 +8,10 @@ const useParticipation = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/participation?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IParticipation>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IParticipation>(isInitialised ? url : null , fetcher);
 
     return {
         participation: data,

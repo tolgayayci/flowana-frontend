@@ -7,6 +7,7 @@ import { protocols } from "@/utils/protocols";
 
 export function ProtocolStateProvider({ children }: { children: ReactNode }) {
   const [protocol, setProtocol] = useState<IProtocol>({ protocol: "flow" });
+  const [isInitialised, setIsInitialised] = useState(false); // New state variable
 
   const router = useRouter();
 
@@ -19,6 +20,7 @@ export function ProtocolStateProvider({ children }: { children: ReactNode }) {
       if (protocol) {
         setProtocol({ protocol: protocol.value });
         localStorage.setItem("protocol", protocol.value);
+        setIsInitialised(true); // Set initialized to true once protocol is set
       }
     };
 
@@ -30,14 +32,14 @@ export function ProtocolStateProvider({ children }: { children: ReactNode }) {
       updateProtocol(url);
     };
 
-    const storedHref = localStorage.getItem("protocol");
+    // const storedHref = localStorage.getItem("protocol");
 
-    if (storedHref && storedHref !== router.asPath.split("/")[1]) {
-      console.log("storedHref", storedHref);
-      router.push(storedHref + "/projects");
-    } else {
-      updateProtocol(router.asPath); // Update protocol initially based on the current path
-    }
+    // if (storedHref && storedHref !== router.asPath.split("/")[1]) {
+    //   console.log("storedHref", storedHref);
+    //   router.push(storedHref + "/projects");
+    // } else {
+    //   updateProtocol(router.asPath); // Update protocol initially based on the current path
+    // }
 
     // Listen to route changes
     router.events.on("routeChangeStart", handleRouteChange);
@@ -49,7 +51,7 @@ export function ProtocolStateProvider({ children }: { children: ReactNode }) {
   }, [router.asPath]);
 
   return (
-    <ProtocolContext.Provider value={{ protocol, setProtocol }}>
+    <ProtocolContext.Provider value={{ protocol, setProtocol, isInitialised }}>
       {children}
     </ProtocolContext.Provider>
   );

@@ -61,7 +61,6 @@ export default function SearchBar(props: SearchBarProps) {
   const protocolInfo = protocolInfos[protocol["protocol"]];
 
   function ProjectHit(hits: any) {
-    console.log(hits);
     return (
       <>
         <div className="-mx-2 text-sm text-gray-700">

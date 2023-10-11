@@ -8,10 +8,10 @@ const usePunchCard = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/punch-card?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<IPunchCard[]>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<IPunchCard[]>(isInitialised ? url : null , fetcher);
 
     return {
         punchCard: data,

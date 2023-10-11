@@ -8,10 +8,10 @@ const useCommitActivity = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/commit-activity?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<ICommitActivity[], any>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICommitActivity[], any>(isInitialised ? url : null , fetcher);
 
     return {
         commitActivity: data,

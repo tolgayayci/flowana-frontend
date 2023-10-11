@@ -97,7 +97,7 @@ export default function Project() {
             {project.health_score.grade}
           </span>
         </div>
-        <div className="mb-4">
+        <div className="grid grid-cols-1 gap-6">
           <ProgressBar
             icon={
               <FaHeartbeat className="bg-red-100 text-red-500 rounded-full p-2" />
@@ -105,8 +105,6 @@ export default function Project() {
             label="Total Health Score"
             value={project.health_score.total}
           />
-        </div>
-        <div className="grid grid-cols-2 gap-4">
           <ProgressBar
             icon={
               <FaCode className="bg-blue-100 text-blue-500 rounded-full p-2" />
@@ -150,7 +148,7 @@ export default function Project() {
     <Layout>
       <div className="flex flex-row space-x-6">
         <div
-          className={`max-h-[calc(5*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden ${
+          className={`max-h-[calc(7*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden ${
             selectedProject ? "w-1/2" : "w-full"
           }`}
         >

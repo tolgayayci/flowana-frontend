@@ -8,10 +8,10 @@ const useCommunityProfile = () => {
     const router = useRouter();
     const { owner, repo } = router.query;
 
-    const { protocol } = useProtocol();
+    const { protocol, isInitialised } = useProtocol();
 
     const url = `/github-project/${protocol["protocol"]}/community-profile?owner=${owner}&repo=${repo}`
-    const { data, error, isValidating } = useSWRImmutable<ICommunityProfile, any>(protocol ? url : null , fetcher);
+    const { data, error, isValidating } = useSWRImmutable<ICommunityProfile, any>(isInitialised ? url : null , fetcher);
 
     return {
         communityProfile: data,
