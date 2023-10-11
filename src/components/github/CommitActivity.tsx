@@ -47,18 +47,29 @@ export default function CommitActivity() {
         message=""
       />
     );
-
   const handleClick = (params: any) => {
     const weekIndex = params.dataIndex;
     const clickedWeek = commitActivity[weekIndex];
     setSelectedWeek(clickedWeek);
   };
 
+  const formatDateRange = (timestamp: number) => {
+    const startDate = new Date(timestamp * 1000); // start of the week
+    const endDate = new Date(timestamp * 1000 + 6 * 86400000); // end of the week
+
+    return `${startDate.getDate()} ${startDate.toLocaleString("default", {
+      month: "short",
+    })} ${startDate.getFullYear()} - ${endDate.getDate()} ${endDate.toLocaleString(
+      "default",
+      { month: "short" }
+    )} ${endDate.getFullYear()}`;
+  };
+
   const option = {
     tooltip: {
       trigger: "axis",
       axisPointer: {
-        type: "shadow",
+        type: "cross",
       },
     },
     xAxis: {
@@ -79,11 +90,12 @@ export default function CommitActivity() {
         type: "bar",
         name: "Commit Count",
         itemStyle: {
-          color: "#3C677C", // using sfblue.500 for a solid color
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowOffsetY: 3,
-          shadowColor: "rgba(0, 0, 0, 0.3)",
+          emphasis: {
+            barBorderRadius: [3, 3],
+          },
+          normal: {
+            barBorderRadius: [5, 5, 0, 0],
+          },
         },
       },
     ],
@@ -96,29 +108,25 @@ export default function CommitActivity() {
     },
   };
 
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
   const selectedWeekOption = {
     tooltip: {
       trigger: "axis",
       axisPointer: {
         type: "line",
         lineStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#999", // sfblue.DEFAULT
         },
       },
     },
     xAxis: {
       type: "category",
-      data: selectedWeek
-        ? Array.from({ length: 7 }).map((_, i) => {
-            const date = new Date(selectedWeek.week * 1000 + i * 86400000); // 86400000 milliseconds = 1 day
-            return `${date.getDate()} ${date.toLocaleString("default", {
-              month: "short",
-            })} ${date.getFullYear()}`; // Format: "dd MMM yyyy"
-          })
-        : [],
+      boundaryGap: false,
+      data: days,
       axisLine: {
         lineStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#3b4e6e", // sfblue.DEFAULT
         },
       },
     },
@@ -126,7 +134,7 @@ export default function CommitActivity() {
       type: "value",
       axisLine: {
         lineStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#3b4e6e", // sfblue.DEFAULT
         },
       },
     },
@@ -136,18 +144,16 @@ export default function CommitActivity() {
         type: "line",
         name: "Commit Count",
         smooth: true, // To make the line chart smooth
+        showSymbol: false, // To hide the dots on the line chart
+        // remove area color
+        areaStyle: null,
+
         itemStyle: {
-          color: "#DC5057", // sfred.900
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowOffsetY: 3,
-          shadowColor: "rgba(0, 0, 0, 0.3)",
+          color: "#778dd1", // sfred.900
         },
         lineStyle: {
-          color: "#1D313B", // sfblue.900
-        },
-        areaStyle: {
-          color: "#2F5061", // sfblue.DEFAULT
+          color: "#778dd1", // sfblue.900
+          width: 2.5,
         },
       },
     ],
@@ -155,11 +161,10 @@ export default function CommitActivity() {
       left: "1%",
       right: "1%",
       top: "10%",
-      bottom: "17%",
+      bottom: "0%",
       containLabel: true,
     },
   };
-
   return (
     <Layout>
       <CardHeader
@@ -172,11 +177,10 @@ export default function CommitActivity() {
         onEvents={{ click: handleClick }}
       />
       {selectedWeek && (
-        <div className="border-sfblue-700 border-2 py-12 px-8 rounded-lg mt-4 mb-2">
+        <div className=" border-2 border-gray-300 py-12 px-8 rounded-lg mt-4 mb-2">
           <CardHeader
             title={`Week ${commitActivity.indexOf(selectedWeek) + 1} Details`}
           />
-
           <ReactECharts
             option={selectedWeekOption}
             style={{ height: "200px" }}
