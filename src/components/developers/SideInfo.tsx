@@ -24,6 +24,46 @@ const protocolInfos = {
     image_url: "/lens-logo.jpg",
     resource_link: "#",
   },
+  balancer: {
+    protocol_name: "Balancer",
+    image_url: "/balancer-logo.png",
+    resource_link: "https://www.developerreport.com/ecosystems/balancer",
+  },
+  aave: {
+    protocol_name: "Aave",
+    image_url: "/aave-logo.png",
+    resource_link: "https://www.developerreport.com/ecosystems/aave",
+  },
+  proton: {
+    protocol_name: "Proton",
+    image_url: "/proton-logo.jpg",
+    resource_link: "#",
+  },
+  osmosis: {
+    protocol_name: "Osmosis",
+    image_url: "/osmosis-logo.jpg",
+    resource_link: "https://www.developerreport.com/ecosystems/osmosis",
+  },
+  "the-graph": {
+    protocol_name: "The Graph",
+    image_url: "/the-graph-logo.png",
+    resource_link: "https://www.developerreport.com/ecosystems/the-graph",
+  },
+  ton: {
+    protocol_name: "TON",
+    image_url: "/ton-logo.png",
+    resource_link: "https://www.developerreport.com/ecosystems/ton",
+  },
+  ocean: {
+    protocol_name: "Ocean",
+    image_url: "/ocean-logo.jpg",
+    resource_link: "#",
+  },
+  eos: {
+    protocol_name: "EOS",
+    image_url: "/eos-logo.jpg",
+    resource_link: "https://www.developerreport.com/ecosystems/eos",
+  },
 };
 
 export default function SideInfo() {

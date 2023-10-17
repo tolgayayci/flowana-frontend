@@ -35,7 +35,7 @@ export default function CommitActivity() {
         }
       />
     );
-    if (!commitActivity || !commitActivity[0].total || commitActivity[0] === undefined)
+  if (!commitActivity || commitActivity[0] === undefined)
     return (
       <NoData
         element={

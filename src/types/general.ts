@@ -54,7 +54,7 @@ export interface INavigationItem {
 }
 
 export interface IProtocol {
-    protocol: 'compound' | 'polkadot' | 'lens' | 'flow';
+    protocol: 'compound' | 'polkadot' | 'lens' | 'flow' | 'balancer' | 'aave' | 'proton' | 'osmosis' | 'the-graph' | 'ton'| 'ocean' | 'eos';
 }
 
 export interface IProtocols{

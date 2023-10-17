@@ -2,6 +2,7 @@ import Image from "next/image";
 
 // Hooks
 import useDevelopersDevTypeTable from "@/models/developers/useDevelopersDevTypeTable";
+import { useProtocol } from "@/models/protocols/useProtocol";
 
 // Models and Utils
 import Layout from "@/modules/Card/Layout/Layout";
@@ -13,6 +14,60 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 export default function DevTypeTable() {
   const { devTypeTable, isLoading } = useDevelopersDevTypeTable();
+
+  const { protocol } = useProtocol();
+
+  const protocolInfos = {
+    flow: {
+      protocol_name: "Flow",
+      image_url: "/flow-logo.png",
+    },
+    compound: {
+      protocol_name: "Compound",
+      image_url: "/compound-logo.png",
+    },
+    polkadot: {
+      protocol_name: "Polkadot",
+      image_url: "/polkadot-logo.jpg",
+    },
+    lens: {
+      protocol_name: "Lens",
+      image_url: "/lens-logo.jpg",
+    },
+    balancer: {
+      protocol_name: "Balancer",
+      image_url: "/balancer-logo.png",
+    },
+    aave: {
+      protocol_name: "Aave",
+      image_url: "/aave-logo.png",
+    },
+    proton: {
+      protocol_name: "Proton",
+      image_url: "/proton-logo.jpg",
+    },
+    osmosis: {
+      protocol_name: "Osmosis",
+      image_url: "/osmosis-logo.jpg",
+    },
+    "the-graph": {
+      protocol_name: "The Graph",
+      image_url: "/the-graph-logo.png",
+    },
+    ton: {
+      protocol_name: "TON",
+      image_url: "/ton-logo.png",
+    },
+    ocean: {
+      protocol_name: "Ocean",
+      image_url: "/ocean-logo.jpg",
+      resource_link: "#",
+    },
+    eos: {
+      protocol_name: "EOS",
+      image_url: "/eos-logo.jpg",
+    },
+  };
 
   if (isLoading) {
     return (
@@ -77,7 +132,10 @@ export default function DevTypeTable() {
                 <div className="w-12 h-12 overflow-hidden rounded">
                   <Image
                     unoptimized
-                    src={"/compound-logo.png"}
+                    src={
+                      protocolInfos[protocol["protocol"]].image_url ||
+                      "/flow-logo.png"
+                    }
                     alt="Proposal"
                     className="w-full h-full object-cover"
                     width={50}

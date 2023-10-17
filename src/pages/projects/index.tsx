@@ -34,6 +34,38 @@ const protocolInfos = {
     protocol_name: "Lens",
     image_url: "/lens-logo.jpg",
   },
+  balancer: {
+    protocol_name: "Balancer",
+    image_url: "/balancer-logo.png",
+  },
+  aave: {
+    protocol_name: "Aave",
+    image_url: "/aave-logo.png",
+  },
+  proton: {
+    protocol_name: "Proton",
+    image_url: "/proton-logo.jpg",
+  },
+  osmosis: {
+    protocol_name: "Osmosis",
+    image_url: "/osmosis-logo.jpg",
+  },
+  "the-graph": {
+    protocol_name: "The Graph",
+    image_url: "/the-graph-logo.png",
+  },
+  ton: {
+    protocol_name: "TON",
+    image_url: "/ton-logo.png",
+  },
+  ocean: {
+    protocol_name: "Ocean",
+    image_url: "/ocean-logo.jpg",
+  },
+  eos: {
+    protocol_name: "EOS",
+    image_url: "/eos-logo.jpg",
+  },
 };
 
 export function RangeSlider(props: UseRangeProps) {

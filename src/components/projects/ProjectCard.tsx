@@ -28,6 +28,38 @@ const protocolInfos = {
     protocol_name: "Lens",
     image_url: "/lens-logo.jpg",
   },
+  balancer: {
+    protocol_name: "Balancer",
+    image_url: "/balancer-logo.png",
+  },
+  aave: {
+    protocol_name: "Aave",
+    image_url: "/aave-logo.png",
+  },
+  proton: {
+    protocol_name: "Proton",
+    image_url: "/proton-logo.jpg",
+  },
+  osmosis: {
+    protocol_name: "Osmosis",
+    image_url: "/osmosis-logo.jpg",
+  },
+  "the-graph": {
+    protocol_name: "The Graph",
+    image_url: "/the-graph-logo.png",
+  },
+  ton: {
+    protocol_name: "TON",
+    image_url: "/ton-logo.png",
+  },
+  ocean: {
+    protocol_name: "Ocean",
+    image_url: "/ocean-logo.jpg",
+  },
+  eos: {
+    protocol_name: "EOS",
+    image_url: "/eos-logo.jpg",
+  },
 };
 
 export default function ProjectCard({ hit }: any) {
@@ -37,18 +69,18 @@ export default function ProjectCard({ hit }: any) {
 
   const gradeStyles = {
     "S+": "bg-emerald-500 text-white border-2 border-emerald-700",
-    "S": "bg-emerald-500 text-white border-2 border-emerald-700",
+    S: "bg-emerald-500 text-white border-2 border-emerald-700",
     "A+": "bg-indigo-500 text-white border-2 border-indigo-700",
-    "A": "bg-indigo-500 text-white border-2 border-indigo-700",
+    A: "bg-indigo-500 text-white border-2 border-indigo-700",
     "B+": "bg-cyan-500 text-white border-2 border-cyan-700",
-    "B": "bg-cyan-500 text-white border-2 border-cyan-700",
+    B: "bg-cyan-500 text-white border-2 border-cyan-700",
     "C+": "bg-rose-500 text-white border-2 border-rose-700",
-    "C": "bg-rose-500 text-white border-2 border-rose-700",
+    C: "bg-rose-500 text-white border-2 border-rose-700",
     "D+": "bg-amber-500	text-white border-2 border-amber-700",
-    "D": "bg-amber-500	 text-white border-2 border-amber-700",
+    D: "bg-amber-500	 text-white border-2 border-amber-700",
     "E+": "bg-red-500 text-white border-2 border-red-700",
-    "E": "bg-red-500 text-white border-2 border-red-700",
-    "F": "bg-gray-400 text-gray-800 border-2 border-gray-600",
+    E: "bg-red-500 text-white border-2 border-red-700",
+    F: "bg-gray-400 text-gray-800 border-2 border-gray-600",
   };
 
   return (

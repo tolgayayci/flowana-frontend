@@ -23,7 +23,7 @@ export default function ParticipationCount() {
         }
       />
     );
-  if (!participationCount)
+  if (!participationCount || participationCount.others === undefined)
     return (
       <NoData
         element={
@@ -36,7 +36,7 @@ export default function ParticipationCount() {
       />
     );
 
-      const option = {
+  const option = {
     tooltip: {
       trigger: "item",
     },
@@ -82,7 +82,6 @@ export default function ParticipationCount() {
       },
     ],
   };
-
 
   return (
     <Layout>

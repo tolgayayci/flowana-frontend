@@ -61,6 +61,14 @@ export function getAppIdForProtocol(protocol: string) {
        case 'flow': return process.env.NEXT_PUBLIC_FLOW_ALGOLIA_APP_ID as string;
        case 'lens': return process.env.NEXT_PUBLIC_LENS_ALGOLIA_APP_ID as string;
        case 'compound': return process.env.NEXT_PUBLIC_COMPOUND_ALGOLIA_APP_ID as string;
+       case 'balancer': return process.env.NEXT_PUBLIC_BALANCER_ALGOLIA_APP_ID as string;
+       case 'aave': return process.env.NEXT_PUBLIC_AAVE_ALGOLIA_APP_ID as string;
+       case 'proton': return process.env.NEXT_PUBLIC_PROTON_ALGOLIA_APP_ID as string;
+       case 'osmosis': return process.env.NEXT_PUBLIC_OSMOSIS_ALGOLIA_APP_ID as string;
+       case 'the-graph': return process.env.NEXT_PUBLIC_THE_GRAPH_ALGOLIA_APP_ID as string;
+       case 'ton': return process.env.NEXT_PUBLIC_TON_ALGOLIA_APP_ID as string;
+       case 'ocean': return process.env.NEXT_PUBLIC_OCEAN_ALGOLIA_APP_ID as string;
+       case 'eos': return process.env.NEXT_PUBLIC_EOS_ALGOLIA_APP_ID as string;
     }
 }
  
@@ -70,6 +78,14 @@ export function getSearchKeyForProtocol(protocol: string) {
        case 'flow': return process.env.NEXT_PUBLIC_FLOW_ALGOLIA_SEARCH_KEY as string;
        case 'lens': return process.env.NEXT_PUBLIC_LENS_ALGOLIA_SEARCH_KEY as string;
        case 'compound': return process.env.NEXT_PUBLIC_COMPOUND_ALGOLIA_SEARCH_KEY as string;
+       case 'balancer': return process.env.NEXT_PUBLIC_BALANCER_ALGOLIA_SEARCH_KEY as string;
+       case 'aave': return process.env.NEXT_PUBLIC_AAVE_ALGOLIA_SEARCH_KEY as string;
+       case 'proton': return process.env.NEXT_PUBLIC_PROTON_ALGOLIA_SEARCH_KEY as string;
+       case 'osmosis': return process.env.NEXT_PUBLIC_OSMOSIS_ALGOLIA_SEARCH_KEY as string;
+       case 'the-graph': return process.env.NEXT_PUBLIC_THE_GRAPH_ALGOLIA_SEARCH_KEY as string;
+       case 'ton': return process.env.NEXT_PUBLIC_TON_ALGOLIA_SEARCH_KEY as string;
+       case 'ocean': return process.env.NEXT_PUBLIC_OCEAN_ALGOLIA_SEARCH_KEY as string;
+       case 'eos': return process.env.NEXT_PUBLIC_EOS_ALGOLIA_SEARCH_KEY as string;
     }
 }
 
@@ -79,5 +95,13 @@ export function getSearchIndexForProtocol(protocol: string) {
        case 'flow': return process.env.NEXT_PUBLIC_FLOW_INDEX_NAME as string;
        case 'lens': return process.env.NEXT_PUBLIC_LENS_INDEX_NAME as string;
        case 'compound': return process.env.NEXT_PUBLIC_COMPOUND_INDEX_NAME as string;
+       case 'balancer': return process.env.NEXT_PUBLIC_BALANCER_INDEX_NAME as string;
+       case 'aave': return process.env.NEXT_PUBLIC_AAVE_INDEX_NAME as string;
+       case 'proton': return process.env.NEXT_PUBLIC_PROTON_INDEX_NAME as string;
+       case 'osmosis': return process.env.NEXT_PUBLIC_OSMOSIS_INDEX_NAME as string;
+       case 'the-graph': return process.env.NEXT_PUBLIC_THE_GRAPH_INDEX_NAME as string;
+       case 'ton': return process.env.NEXT_PUBLIC_TON_INDEX_NAME as string;
+       case 'ocean': return process.env.NEXT_PUBLIC_OCEAN_INDEX_NAME as string;
+       case 'eos': return process.env.NEXT_PUBLIC_EOS_INDEX_NAME as string;
     }
 }

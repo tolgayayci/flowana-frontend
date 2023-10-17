@@ -39,6 +39,38 @@ const nextConfig = {
         source: '/polkadot/:path*',
         destination: '/:path*',
       },
+      {
+        source: '/balancer/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/aave/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/proton/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/osmosis/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/the-graph/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/ton/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/ocean/:path*',
+        destination: '/:path*',
+      },
+      {
+        source: '/eos/:path*',
+        destination: '/:path*',
+      },
     ];
   },
 }

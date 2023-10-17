@@ -24,6 +24,46 @@ const protocolInfos = {
     image_url: "/lens-logo.jpg",
     forum_url: "#",
   },
+  balancer: {
+    protocol_name: "Balancer",
+    image_url: "/balancer-logo.png",
+    forum_url: "https://forum.balancer.fi/",
+  },
+  aave: {
+    protocol_name: "Aave",
+    image_url: "/aave-logo.png",
+    forum_url: "https://governance.aave.com/",
+  },
+  proton: {
+    protocol_name: "Proton",
+    image_url: "/proton-logo.jpg",
+    forum_url: "#",
+  },
+  osmosis: {
+    protocol_name: "Osmosis",
+    image_url: "/osmosis-logo.jpg",
+    forum_url: "#",
+  },
+  "the-graph": {
+    protocol_name: "The Graph",
+    image_url: "/the-graph-logo.png",
+    forum_url: "https://forum.thegraph.com/",
+  },
+  ton: {
+    protocol_name: "TON",
+    image_url: "/ton-logo.png",
+    forum_url: "#",
+  },
+  ocean: {
+    protocol_name: "Ocean",
+    image_url: "/ocean-logo.jpg",
+    forum_url: "#",
+  },
+  eos: {
+    protocol_name: "EOS",
+    image_url: "/eos-logo.jpg",
+    forum_url: "https://forums.eoscommunity.org/",
+  },
 };
 
 export default function SideInfo() {
