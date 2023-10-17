@@ -38,20 +38,64 @@ const intervals: Interval[] = [
 
 const forumInfos = {
   flow: {
-    forum_url: "https://forum.onflow.org/t/",
+    protocol_name: "Flow",
     logo: "/flow-logo.png",
+    forum_url: "https://forum.onflow.org/t/",
   },
   compound: {
-    forum_url: "https://www.comp.xyz/t/",
+    protocol_name: "Compound",
     logo: "/compound-logo.png",
+    forum_url: "https://www.comp.xyz/t/",
   },
   polkadot: {
-    forum_url: "https://forum.polkadot.network/t/",
+    protocol_name: "Polkadot",
     logo: "/polkadot-logo.jpg",
+    forum_url: "https://forum.polkadot.network/t/",
   },
   lens: {
-    forum_url: "#",
+    protocol_name: "Lens",
     logo: "/lens-logo.jpg",
+    forum_url: "#",
+  },
+  balancer: {
+    protocol_name: "Balancer",
+    logo: "/balancer-logo.png",
+    forum_url: "https://forum.balancer.fi/t/",
+  },
+  aave: {
+    protocol_name: "Aave",
+    logo: "/aave-logo.png",
+    forum_url: "https://governance.aave.com/t/",
+  },
+  proton: {
+    protocol_name: "Proton",
+    logo: "/proton-logo.jpg",
+    forum_url: "#",
+  },
+  osmosis: {
+    protocol_name: "Osmosis",
+    logo: "/osmosis-logo.jpg",
+    forum_url: "#",
+  },
+  "the-graph": {
+    protocol_name: "The Graph",
+    logo: "/the-graph-logo.png",
+    forum_url: "https://forum.thegraph.com/t/",
+  },
+  ton: {
+    protocol_name: "TON",
+    logo: "/ton-logo.png",
+    forum_url: "#",
+  },
+  ocean: {
+    protocol_name: "Ocean",
+    logo: "/ocean-logo.jpg",
+    forum_url: "#",
+  },
+  eos: {
+    protocol_name: "EOS",
+    logo: "/eos-logo.jpg",
+    forum_url: "https://forums.eoscommunity.org/t/",
   },
 };
 

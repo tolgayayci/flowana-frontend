@@ -25,7 +25,7 @@ export default function Tags() {
     );
   }
 
-  if (!discourseTags || discourseTags.length === 0) {
+  if (!discourseTags || discourseTags[0] === undefined) {
     return (
       <NoData
         element={

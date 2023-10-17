@@ -47,20 +47,64 @@ const orders: Order[] = [
 
 const forumInfos = {
   flow: {
-    forum_url: "https://forum.onflow.org/",
+    protocol_name: "Flow",
     logo: "/flow-logo.png",
+    forum_url: "https://forum.onflow.org/",
   },
   compound: {
-    forum_url: "https://www.comp.xyz/",
+    protocol_name: "Compound",
     logo: "/compound-logo.png",
+    forum_url: "https://www.comp.xyz/",
   },
   polkadot: {
-    forum_url: "https://forum.polkadot.network/",
+    protocol_name: "Polkadot",
     logo: "/polkadot-logo.jpg",
+    forum_url: "https://forum.polkadot.network/",
   },
   lens: {
-    forum_url: "#",
+    protocol_name: "Lens",
     logo: "/lens-logo.jpg",
+    forum_url: "#",
+  },
+  balancer: {
+    protocol_name: "Balancer",
+    logo: "/balancer-logo.png",
+    forum_url: "https://forum.balancer.fi/",
+  },
+  aave: {
+    protocol_name: "Aave",
+    logo: "/aave-logo.png",
+    forum_url: "https://governance.aave.com/",
+  },
+  proton: {
+    protocol_name: "Proton",
+    logo: "/proton-logo.jpg",
+    forum_url: "#",
+  },
+  osmosis: {
+    protocol_name: "Osmosis",
+    logo: "/osmosis-logo.jpg",
+    forum_url: "#",
+  },
+  "the-graph": {
+    protocol_name: "The Graph",
+    logo: "/the-graph-logo.png",
+    forum_url: "https://forum.thegraph.com/",
+  },
+  ton: {
+    protocol_name: "TON",
+    logo: "/ton-logo.png",
+    forum_url: "#",
+  },
+  ocean: {
+    protocol_name: "Ocean",
+    logo: "/ocean-logo.jpg",
+    forum_url: "#",
+  },
+  eos: {
+    protocol_name: "EOS",
+    logo: "/eos-logo.jpg",
+    forum_url: "https://forums.eoscommunity.org/",
   },
 };
 
@@ -102,7 +146,7 @@ export default function TopUsers() {
       />
     );
 
-  if (!topUsers)
+  if (!topUsers || topUsers[0] === undefined)
     return (
       <NoListData
         element={

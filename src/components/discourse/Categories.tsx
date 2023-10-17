@@ -19,20 +19,64 @@ import { FaMedal, FaReply, FaEye } from "react-icons/fa";
 
 const forumInfos = {
   flow: {
-    forum_url: "https://forum.onflow.org/c/",
+    protocol_name: "Flow",
     logo: "/flow-logo.png",
+    forum_url: "https://forum.onflow.org/c/",
   },
   compound: {
-    forum_url: "https://www.comp.xyz/c/",
+    protocol_name: "Compound",
     logo: "/compound-logo.png",
+    forum_url: "https://www.comp.xyz/c/",
   },
   polkadot: {
-    forum_url: "https://forum.polkadot.network/c/",
+    protocol_name: "Polkadot",
     logo: "/polkadot-logo.jpg",
+    forum_url: "https://forum.polkadot.network/c/",
   },
   lens: {
-    forum_url: "#",
+    protocol_name: "Lens",
     logo: "/lens-logo.jpg",
+    forum_url: "#",
+  },
+  balancer: {
+    protocol_name: "Balancer",
+    logo: "/balancer-logo.png",
+    forum_url: "https://forum.balancer.fi/c/",
+  },
+  aave: {
+    protocol_name: "Aave",
+    logo: "/aave-logo.png",
+    forum_url: "https://governance.aave.com/c/",
+  },
+  proton: {
+    protocol_name: "Proton",
+    logo: "/proton-logo.jpg",
+    forum_url: "#",
+  },
+  osmosis: {
+    protocol_name: "Osmosis",
+    logo: "/osmosis-logo.jpg",
+    forum_url: "#",
+  },
+  "the-graph": {
+    protocol_name: "The Graph",
+    logo: "/the-graph-logo.png",
+    forum_url: "https://forum.thegraph.com/c/",
+  },
+  ton: {
+    protocol_name: "TON",
+    logo: "/ton-logo.png",
+    forum_url: "#",
+  },
+  ocean: {
+    protocol_name: "Ocean",
+    logo: "/ocean-logo.jpg",
+    forum_url: "#",
+  },
+  eos: {
+    protocol_name: "EOS",
+    logo: "/eos-logo.jpg",
+    forum_url: "https://forums.eoscommunity.org/c/",
   },
 };
 
