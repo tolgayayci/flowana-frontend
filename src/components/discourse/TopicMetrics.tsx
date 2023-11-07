@@ -43,9 +43,9 @@ export default function TopicMetrics() {
 
     return (
       <div className="col-span-1">
-        <div className="p-5 pl-6 border border-sfblack rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-          <div className="text-side-500 text-medium mb-5">{title}</div>
-          <div className="text-5xl font-bold text-niceblack mb-3">
+        <div className="md:p-5 p-4 pl-6 border border-sfblack rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div className="text-side-500 text-medium md:mb-5 mb-2">{title}</div>
+          <div className="md:text-5xl text-xl font-bold text-niceblack md:mb-3">
             {formattedCount}
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function TopicMetrics() {
           title="Forum Overview"
           tooltip="View a summary of forum engagement, showcasing the total number of topics, posts, replies, views, likes, and their respective averages."
         />
-        <div className="grid grid-cols-4 gap-5">
+        <div className="max-h-[calc(5*5.6rem)] md:max-h-[calc(5*6.4rem)] grid grid-cols-1 md:grid-cols-4 gap-5 overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
           <StatItem title="Total Replies" count={topicMetrics.total_replies} />
           <StatItem title="Total Posts" count={topicMetrics.total_posts} />
           <StatItem title="Total Views" count={topicMetrics.total_views} />

@@ -130,7 +130,7 @@ export default function LatestPosts() {
         title="Latest Posts"
         tooltip="View the latest posts on the forum."
       />
-      <div className="max-h-[calc(5*6.1rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
+      <div className="max-h-[calc(5*6.2rem)] md:max-h-[calc(5*6.1rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
         <ul className="space-y-3">
           {latestPosts.map((post) => (
             <li
@@ -153,18 +153,53 @@ export default function LatestPosts() {
                       alt="Avatar"
                       width={52}
                       height={52}
-                      className="rounded-full mr-5"
+                      className="rounded-full mr-2 md:mr-5"
                     />
-                    <div className="flex-grow min-w-0 max-w-lg">
-                      <h3 className="text-base sm:text-md font-semibold truncate">
+                    <div className="flex-grow space-y-2 md:space-y-1">
+                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] md:max-w-md -mb-1 md:mb-0">
                         {post.topic_title}
                       </h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">
+                      <p className="text-gray-500 text-xs sm:text-sm truncate">
                         Opened {formatDistanceToNow(post.created_at)}
                       </p>
+                      <div className="flex md:hidden items-center text-xs sm:text-sm space-x-2 overflow-x-auto">
+                        <span
+                          className="bg-red-200/70 border-2 border-red-300 text-red-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          data-tooltip-id="reads"
+                        >
+                          <CountIcon
+                            id="reads"
+                            icon={<FaEye className="inline" />}
+                            count={post.reads}
+                            tooltip="Number of reads"
+                          />
+                        </span>
+                        <span
+                          className="bg-green-200/70 border-2 border-green-300 text-green-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          data-tooltip-id="reply_count"
+                        >
+                          <CountIcon
+                            id="reply_count"
+                            icon={<FaReply className="inline" />}
+                            count={post.reply_count}
+                            tooltip="Number of replies"
+                          />
+                        </span>
+                        <span
+                          className="bg-purple-200/70 border-2 border-purple-300 text-purple-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          data-tooltip-id="score"
+                        >
+                          <CountIcon
+                            id="score"
+                            icon={<FaMedal className="inline" />}
+                            count={post.score}
+                            tooltip="Score"
+                          />
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
+                  <div className="hidden md:flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
                     <span
                       className="bg-red-200/70 border-2 border-red-300 text-red-800 text-xs font-semibold px-2 py-1 rounded"
                       data-tooltip-id="reads"

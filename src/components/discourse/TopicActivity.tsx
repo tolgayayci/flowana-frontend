@@ -12,7 +12,8 @@ import NoData from "@/modules/NoData/NoData";
 
 // Types
 import { Interval } from "@/types/general";
-import { formatChartDate } from "@/utils/functions";
+import { formatChartDate, formatLargeNumber } from "@/utils/functions";
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
 
 const intervals: Interval[] = [
   { name: "Day", value: "daily" },
@@ -26,6 +27,8 @@ export default function TopicActivity() {
   const { discourseTopicActivity, isLoading } = useDiscourseTopicActivity(
     selectedInterval.value
   );
+
+  const dataZoomStart = useMobileDataZoomStart(40, 80);
 
   if (isLoading) {
     return (
@@ -69,6 +72,11 @@ export default function TopicActivity() {
     },
     yAxis: {
       type: "value",
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
+        },
+      },
     },
     series: discourseTopicActivity!["series"].map((s) => ({
       ...s,
@@ -80,7 +88,7 @@ export default function TopicActivity() {
       },
       lineStyle: {
         color: "#778dd1", // sfblue.900
-      }
+      },
     })),
     renderer: "svg",
     tooltip: {
@@ -96,7 +104,7 @@ export default function TopicActivity() {
       // Slider
       {
         type: "slider",
-        start: 60,
+        start: dataZoomStart,
         end: 100,
         handleStyle: {
           color: "#e8efff", // sfred.800
@@ -105,7 +113,7 @@ export default function TopicActivity() {
       {
         type: "inside",
       },
-        ],
+    ],
     grid: {
       left: "1%",
       right: "1%",

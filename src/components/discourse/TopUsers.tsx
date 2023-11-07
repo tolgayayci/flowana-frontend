@@ -110,7 +110,7 @@ const forumInfos = {
 
 function CountIcon({ icon, count, tooltip, id }) {
   return (
-    <span className="w-12 justify-center items-center inline-flex z-50">
+    <span className="w-7 md:w-12 justify-center items-center inline-flex z-50">
       {icon}
       <span className="ml-1">{formatBadgeStatsCount(count)}</span>
 
@@ -124,7 +124,6 @@ function CountIcon({ icon, count, tooltip, id }) {
 
 export default function TopUsers() {
   const [selectedInterval, setSelectedInterval] = useState(intervals[4]);
-  const [selectedOrder, setSelectedOrder] = useState(orders[0]);
   const { topUsers, isLoading } = useDiscourseTopUsers(selectedInterval.value);
 
   const { protocol } = useProtocol();
@@ -170,7 +169,7 @@ export default function TopUsers() {
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}
       />
-      <div className="max-h-[calc(6*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
+      <div className="max-h-[calc(5*6.2rem)] md:max-h-[calc(5*7.4rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
         <ul className="space-y-3">
           {topUsers.map((user) => (
             <li
@@ -197,19 +196,75 @@ export default function TopUsers() {
                       alt="Avatar"
                       width={52}
                       height={52}
-                      className="rounded-full mr-5"
+                      className="rounded-full mr-2 md:mr-5"
                     />
-
-                    <div className="flex-grow min-w-0 max-w-lg">
-                      <h3 className="text-base sm:text-md font-semibold truncate">
+                    <div className="flex-grow space-y-2 md:space-y-1">
+                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] md:max-w-md -mb-1 md:mb-0">
                         {user.name ? user.name : "No Name"}
                       </h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">
+                      <p className="text-gray-500 text-xs sm:text-sm truncate">
                         {user.username}
                       </p>
+                      <div className="flex md:hidden items-center text-xs sm:text-sm justify-end space-x-2 overflow-x-auto">
+                        <span
+                          className="border-side border-2 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          data-tooltip-id="likes_given"
+                        >
+                          <CountIcon
+                            id="likes_given"
+                            icon={<FaThumbsUp className="inline" />}
+                            count={user.likes_given}
+                            tooltip="Given likes"
+                          />
+                        </span>
+                        <span
+                          className="bg-red-200/70 border-2 border-red-300 text-red-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          data-tooltip-id="likes_received"
+                        >
+                          <CountIcon
+                            id="likes_received"
+                            icon={<FaHeart className="inline" />}
+                            count={user.likes_received}
+                            tooltip="Received likes"
+                          />
+                        </span>
+                        <span
+                          className="bg-green-200/70 border-2 border-green-300 text-green-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          data-tooltip-id="topic_count"
+                        >
+                          <CountIcon
+                            id="topic_count"
+                            icon={<FaBook className="inline" />}
+                            count={user.topic_count}
+                            tooltip="Topic count"
+                          />
+                        </span>
+                        {/* <span
+                          className="bg-purple-200/70 border-2 border-purple-300 text-purple-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          data-tooltip-id="posts_read"
+                        >
+                          <CountIcon
+                            id="posts_read"
+                            icon={<FaEye className="inline" />}
+                            count={user.posts_read}
+                            tooltip="Posts read"
+                          />
+                        </span> */}
+                        <span
+                          className="bg-orange-200/70 border-2 border-orange-300 text-orange-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          data-tooltip-id="topics_entered"
+                        >
+                          <CountIcon
+                            id="topics_entered"
+                            icon={<FaComments className="inline" />}
+                            count={user.topics_entered}
+                            tooltip="Topics Entered"
+                          />
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
+                  <div className="hidden md:flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
                     <span
                       className="border-side border-2 text-xs font-semibold px-2 py-1 rounded"
                       data-tooltip-id="likes_given"

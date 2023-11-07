@@ -93,7 +93,7 @@ const forumInfos = {
 
 function CountIcon({ icon, count, tooltip, id }) {
   return (
-    <span className="w-12 justify-center items-center inline-flex z-50">
+    <span className="w-7 md:w-12 justify-center items-center inline-flex z-50">
       {icon}
       <span className="ml-1">{formatBadgeStatsCount(count)}</span>
 
@@ -155,7 +155,7 @@ export default function TopTopics() {
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}
       />
-      <div className="max-h-[calc(5*6.1rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
+      <div className="max-h-[calc(5*6.2rem)] md:max-h-[calc(5*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
         <ul className="space-y-3">
           {discourseTopTopics.map((topic) => (
             <li
@@ -175,18 +175,67 @@ export default function TopTopics() {
                       alt="Avatar"
                       width={52}
                       height={52}
-                      className="rounded-full mr-5"
+                      className="rounded-full mr-2 md:mr-5"
                     />
-                    <div className="flex-grow min-w-0 max-w-lg">
-                      <h3 className="text-base sm:text-md font-semibold truncate">
+                    <div className="flex-grow space-y-2 md:space-y-1">
+                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] md:max-w-md -mb-1 md:mb-0">
                         {topic.title}
                       </h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">
+                      <p className="text-gray-500 text-xs sm:text-sm truncate">
                         Opened {formatDistanceToNow(topic.created_at)}
                       </p>
+                      <div className="flex md:hidden items-center text-xs sm:text-sm justify-end space-x-2 overflow-x-auto">
+                        <span
+                          className="bg-red-200/70 border-2 border-red-300 text-red-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          data-tooltip-id="likes"
+                        >
+                          <CountIcon
+                            id="likes"
+                            icon={<FaHeart className="inline" />}
+                            count={topic.like_count}
+                            tooltip="Number of likes"
+                          />
+                        </span>
+                        <span
+                          className="bg-green-200/70 border-2 border-green-300 text-green-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          title="Number of replies"
+                          data-tooltip-id="replies"
+                        >
+                          <CountIcon
+                            id="replies"
+                            icon={<FaReply className="inline" />}
+                            count={topic.reply_count}
+                            tooltip="Number of replies"
+                          />
+                        </span>
+                        <span
+                          className="bg-purple-200/70 border-2 border-purple-300 text-purple-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          title="Number of views"
+                          data-tooltip-id="views"
+                        >
+                          <CountIcon
+                            id="views"
+                            icon={<FaEye className="inline" />}
+                            count={topic.views}
+                            tooltip="Number of views"
+                          />
+                        </span>
+                        <span
+                          className="bg-orange-200/70 border-2 border-orange-300 text-orange-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          title="Number of posts"
+                          data-tooltip-id="posts"
+                        >
+                          <CountIcon
+                            id="posts"
+                            icon={<FaComments className="inline" />}
+                            count={topic.posts_count}
+                            tooltip="Number of posts"
+                          />
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
+                  <div className="hidden md:flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
                     <span
                       className="bg-red-200/70 border-2 border-red-300 text-red-800 text-xs font-semibold px-2 py-1 rounded"
                       data-tooltip-id="likes"
