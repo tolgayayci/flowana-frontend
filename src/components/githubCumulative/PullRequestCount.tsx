@@ -45,7 +45,7 @@ export default function PullRequestCount() {
       top: "0%",
       left: "center",
     },
-    color:["#e28d9b", "#778dd1"],
+    color: ["#e28d9b", "#778dd1"],
     series: [
       {
         name: "Pull Request Count",
@@ -71,7 +71,7 @@ export default function PullRequestCount() {
             shadowBlur: 2,
             shadowOffsetX: 0,
             shadowColor: "rgba(0, 0, 0, 0.30)",
-          }
+          },
         },
         labelLine: {
           show: false,
@@ -90,7 +90,7 @@ export default function PullRequestCount() {
         title="Pull Request Distribution"
         tooltip="Shows the distribution of open and closed pull requests across all repositories in a pie chart."
       />
-      <div className="h-full flex items-center -mt-8">
+      <div className="h-full flex items-center md:-mt-8">
         <ReactECharts
           option={option}
           showLoading={isLoading}

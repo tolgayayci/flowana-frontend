@@ -37,67 +37,65 @@ export default function IssueCount() {
       />
     );
 
-    const option = {
-      tooltip: {
-        trigger: "item",
-      },
-      legend: {
-        top: "0%",
-        left: "center",
-      },
-      color: ["#e28d9b", "#778dd1"],
-      series: [
-        {
-          name: "Issue Count",
-          type: "pie",
-          radius: ["40%", "70%"],
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 10,
-            borderColor: "#fff",
-            borderWidth: 2,
-          },
-          label: {
-            show: false,
-            position: "center",
-          },
-          emphasis: {
-            label: {
-              show: true,
-              fontSize: 15,
-              fontWeight: "bold",
-            },
-            itemStyle: {
-              shadowBlur: 2,
-              shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.30)",
-            },
-          },
-          labelLine: {
-            show: false,
-          },
-          data: [
-            { value: issueCount?.closed, name: "Closed" },
-            { value: issueCount?.open, name: "Open" },
-          ],
+  const option = {
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      top: "2%",
+      left: "center",
+    },
+    color: ["#e28d9b", "#778dd1"],
+    series: [
+      {
+        name: "Issue Count",
+        type: "pie",
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
         },
-      ],
-    };
-  
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 15,
+            fontWeight: "bold",
+          },
+          itemStyle: {
+            shadowBlur: 2,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.30)",
+          },
+        },
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: issueCount?.closed, name: "Closed" },
+          { value: issueCount?.open, name: "Open" },
+        ],
+      },
+    ],
+  };
+
   return (
     <Layout>
       <CardHeader
         title="Issue Distribution"
         tooltip="Shows the distribution of open and closed issues in a pie chart. Quickly understand the current status of issues in the repository at a glance."
       />
-      <div className="h-full flex items-center -mt-8">
-        <ReactECharts
-          option={option}
-          showLoading={isLoading}
-          style={{ minHeight: "350px", width: "100%" }}
-          notMerge={true}
-        />
-      </div>
+      <ReactECharts
+        option={option}
+        showLoading={isLoading}
+        style={{ minHeight: "350px", width: "100%" }}
+        notMerge={true}
+      />
     </Layout>
   );
 }

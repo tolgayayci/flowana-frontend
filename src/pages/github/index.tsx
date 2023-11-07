@@ -127,7 +127,7 @@ export default function Github() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <section className="max-w-[90%] mx-auto mb-8 -mt-6 px-4 sm:px-6 lg:px-8 py-1">
+      <section className="max-w-[95%] md:max-w-[90%] mx-auto mb-8 mt-6 md:-mt-6 px-4 sm:px-6 lg:px-8 py-1">
         <div className="grid grid-cols-5 gap-12">
           <div className="md:col-span-1 md:block hidden">
             <Sidebar navigation={navigation} element={<SideInfo />} />
@@ -140,8 +140,8 @@ export default function Github() {
               <div id="commit-activity" className="w-full">
                 <CommitActivity />
               </div>
-              <div className="flex space-x-10 w-full">
-                <div id="recent-commits" className="w-full sm:w-2/3">
+              <div className="flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10 w-full">
+                <div id="recent-commits" className="w-full md:w-2/3">
                   <RecentCommits />
                 </div>
                 <div id="language-breakdown" className="w-full md:w-1/3">
@@ -154,15 +154,15 @@ export default function Github() {
               <div id="code-frequency" className="w-full">
                 <CodeFrequency />
               </div>
-              <div className="flex space-x-10 w-full">
-                <div id="recent-issues" className="w-full sm:w-2/3 h-full">
+              <div className="flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10 w-full">
+                <div id="recent-issues" className="w-full md:w-2/3 h-full">
                   <RecentIssues />
                 </div>
-                <div id="issue-count" className="w-full sm:w-1/3 h-full">
+                <div id="issue-count" className="w-full md:w-1/3 h-full">
                   <IssueCount />
                 </div>
               </div>
-              <div className="flex space-x-10 w-full">
+              <div className="flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10 w-full">
                 <div id="pull-request-count" className="w-full sm:w-1/3 h-full">
                   <PullRequestCount />
                 </div>
@@ -176,7 +176,7 @@ export default function Github() {
               <div id="participation" className="w-full">
                 <Participation />
               </div>
-              <div className="flex space-x-10 w-full">
+              <div className="flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10 w-full">
                 <div id="most-active-issues" className="w-full sm:w-2/3 h-full">
                   <MostActiveIssues />
                 </div>

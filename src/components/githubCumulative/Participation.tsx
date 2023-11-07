@@ -10,9 +10,12 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
 import { formatChartDate } from "@/utils/functions";
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
+import { formatLargeNumber } from "@/utils/functions";
 
 export default function Participation() {
   const { participation, isLoading } = useCumulativeParticipation();
+  const dataZoomStart = useMobileDataZoomStart(0, 80);
 
   if (isLoading)
     return (
@@ -90,14 +93,20 @@ export default function Participation() {
           color: "#3b4e6e",
         },
       },
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
+        },
+      },
     },
     series: participation.series.map((series, index) => {
-      let startColor, endColor = "#FFFFFF"; // The gradient will end with white color for all lines
-    
-      switch(index) {
-        case 0: 
+      let startColor,
+        endColor = "#FFFFFF"; // The gradient will end with white color for all lines
+
+      switch (index) {
+        case 0:
           startColor = "#e28d9b"; // blue
-          endColor = "#F7DFE3" ; // light blue
+          endColor = "#F7DFE3"; // light blue
           break;
         case 1:
           startColor = "#64A490"; // green
@@ -108,7 +117,7 @@ export default function Participation() {
           endColor = "#E2E7F5"; // light blue
           break;
       }
-    
+
       return {
         name: series.name,
         type: "line",
@@ -120,15 +129,22 @@ export default function Participation() {
             y: 0,
             x2: 0,
             y2: 1,
-            colorStops: [{
-                offset: 0, color: startColor // color at 0% position
-            }, {
-                offset: 0.9, color: endColor // color at 100% position, which is white
-            }, {
-              offset: 1, color: "#FFFF" // color at 100% position, which is white
-          }],
-            global: false 
-          }
+            colorStops: [
+              {
+                offset: 0,
+                color: startColor, // color at 0% position
+              },
+              {
+                offset: 0.9,
+                color: endColor, // color at 100% position, which is white
+              },
+              {
+                offset: 1,
+                color: "#FFFF", // color at 100% position, which is white
+              },
+            ],
+            global: false,
+          },
         },
         showSymbol: false,
         emphasis: {
@@ -149,7 +165,7 @@ export default function Participation() {
       // Slider
       {
         type: "slider",
-        start: 0,
+        start: dataZoomStart,
         end: 100,
         handleStyle: {
           color: "#e8efff", // sfred.800

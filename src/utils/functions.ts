@@ -26,6 +26,8 @@ export const formatDistanceToNow = (dateString: string) => {
 export function formatLargeNumber(numStr: string): string {
   // Remove commas, spaces and convert to a number
   let num = parseFloat(numStr.replace(/,/g, '').replace(/\s+/g, ''));
+  const isNegative = num < 0; // Check if the number is negative
+  num = Math.abs(num); // Work with the absolute value
 
   let units = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "De"];
   let unitIndex = 0;
@@ -35,8 +37,8 @@ export function formatLargeNumber(numStr: string): string {
       unitIndex++;
   }
 
-  // Round to two decimal places and add the unit
-  return `${num.toFixed(2)} ${units[unitIndex]}`;
+  // Round to two decimal places, add the unit, and restore the negative sign if needed
+  return `${isNegative ? '-' : ''}${num.toFixed(0)} ${units[unitIndex]}`.trim();
 }
 
 

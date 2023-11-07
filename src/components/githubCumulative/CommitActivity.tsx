@@ -3,6 +3,7 @@ import ReactECharts from "echarts-for-react";
 
 // Hooks
 import useCumulativeCommitActivity from "@/models/githubCumulative/useCumulativeCommitActivity";
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
 
 // Modules and Utils
 import Layout from "@/modules/Card/Layout/Layout";
@@ -11,9 +12,11 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
 import { ICommitActivity } from "@/types/githubTypes";
+import { formatLargeNumber } from "@/utils/functions";
 
 export default function CommitActivity() {
   const { commitActivity, isLoading } = useCumulativeCommitActivity();
+  const dataZoomStart = useMobileDataZoomStart(0, 80);
 
   const [selectedWeek, setSelectedWeek] = useState<ICommitActivity | null>(
     null
@@ -37,7 +40,11 @@ export default function CommitActivity() {
       />
     );
 
-    if (!commitActivity || !commitActivity[0].total || commitActivity[0] === undefined)
+  if (
+    !commitActivity ||
+    !commitActivity[0].total ||
+    commitActivity[0] === undefined
+  )
     return (
       <NoData
         element={
@@ -86,6 +93,11 @@ export default function CommitActivity() {
     },
     yAxis: {
       type: "value",
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
+        },
+      },
     },
     series: [
       {
@@ -102,11 +114,24 @@ export default function CommitActivity() {
         },
       },
     ],
+    dataZoom: [
+      {
+        type: "slider",
+        start: dataZoomStart, // Use the hook value here
+        end: 100,
+        handleStyle: {
+          color: "#e8efff",
+        },
+      },
+      {
+        type: "inside",
+      },
+    ],
     grid: {
       left: "1%",
       right: "1%",
       top: "10%",
-      bottom: "17%",
+      bottom: "20%",
       containLabel: true,
     },
   };
@@ -178,7 +203,7 @@ export default function CommitActivity() {
         onEvents={{ click: handleClick }}
       />
       {selectedWeek && (
-        <div className="border-sfblue-700 border-2 py-12 px-8 rounded-lg mt-4 mb-2">
+        <div className="border-sfblue-700 border-2 md:py-12 md:px-8 py-8 px-4 rounded-lg mt-6 mb-2">
           <CardHeader
             title={`${formatDateRange(selectedWeek.week)} - Commit Activity`}
           />

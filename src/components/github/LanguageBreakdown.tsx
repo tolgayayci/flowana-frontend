@@ -37,42 +37,32 @@ export default function LanguageBreakdown() {
       />
     );
 
-  // Color palette based on the provided styles
-  const colorPalette = [
-    "#2F5061",
-    "#5B93AF",
-    "#4A7D98", // sfblue
-    "#4297A0",
-    "#8DC9D0",
-    "#70BCC4", // sfgreen
-    "#FAE5E6",
-    "#ECA1A5",
-    "#E57F84", // sfred
-  ];
+  // Sort the data by size in descending order
+  const sortedData = [...languageBreakdown].sort((a, b) => b.size - a.size);
 
-    // Sort the data by size in descending order
-const sortedData = [...languageBreakdown].sort((a, b) => b.size - a.size);
-  
-// Define a threshold for the minimum percentage a language must have to get its own slice
-const thresholdPercentage = 3; // for instance, 5%
-const totalSize = sortedData.reduce((sum, language) => sum + language.size, 0);
+  // Define a threshold for the minimum percentage a language must have to get its own slice
+  const thresholdPercentage = 3; // for instance, 5%
+  const totalSize = sortedData.reduce(
+    (sum, language) => sum + language.size,
+    0
+  );
 
-let othersSize = 0;
-const thresholdData = sortedData.filter(language => {
-  if ((language.size / totalSize) * 100 < thresholdPercentage) {
-    othersSize += language.size;
-    return false;
-  }
-  return true;
-});
-
-if (othersSize > 0) {
-  thresholdData.push({
-    name: "Others",
-    size: othersSize,
-    percentage: (othersSize / totalSize) * 100,
+  let othersSize = 0;
+  const thresholdData = sortedData.filter((language) => {
+    if ((language.size / totalSize) * 100 < thresholdPercentage) {
+      othersSize += language.size;
+      return false;
+    }
+    return true;
   });
-}
+
+  if (othersSize > 0) {
+    thresholdData.push({
+      name: "Others",
+      size: othersSize,
+      percentage: (othersSize / totalSize) * 100,
+    });
+  }
 
   // Generate legend data for top 5 languages
   const topLegends = thresholdData.slice(0, 4).map((item) => item.name);
@@ -136,49 +126,6 @@ if (othersSize > 0) {
       },
     ],
   };
-  // // Generate legend data
-  // const legendData = languageBreakdown.map(function (item) {
-  //   return item.name;
-  // });
-
-  // // Generate series data
-  // const seriesData = languageBreakdown.map(function (item) {
-  //   return {
-  //     name: item.name,
-  //     value: item.size,
-  //   };
-  // });
-
-  // // Configure the chart options
-  // var option = {
-  //   tooltip: {
-  //     trigger: "item",
-  //     formatter: "{b}: {c} ({d}%)",
-  //   },
-  //   legend: {
-  //     orient: "horizontal",
-  //     top: "5%", // Adjust this value if needed for vertical positioning
-  //     left: "center",
-  //     data: legendData,
-  //   },
-  //   series: [
-  //     {
-  //       name: "File Size",
-  //       type: "pie",
-  //       radius: "55%",
-  //       center: ["50%", "60%"],
-  //       data: seriesData,
-  //       color: colorPalette, // Using the defined color palette
-  //       emphasis: {
-  //         itemStyle: {
-  //           shadowBlur: 10,
-  //           shadowOffsetX: 0,
-  //           shadowColor: "rgba(0, 0, 0, 0.5)",
-  //         },
-  //       },
-  //     },
-  //   ],
-  // };
 
   return (
     <Layout>

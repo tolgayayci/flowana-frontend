@@ -64,15 +64,7 @@ export default function PunchCard() {
     "11 pm",
   ];
 
-  const days = [
-    "Saturday",
-    "Friday",
-    "Thursday",
-    "Wednesday",
-    "Tuesday",
-    "Monday",
-    "Sunday",
-  ];
+  const days = ["Sat", "Fri", "Thu", "Wed", "Tue", "Mon", "Sun"];
 
   const data = punchCard.map((item) => {
     return [item.hour, item.day, item.commits];
@@ -97,7 +89,7 @@ export default function PunchCard() {
       },
     },
     grid: {
-      left: "1%",
+      left: "3%",
       top: "5%",
       bottom: "10%",
       right: "1%",

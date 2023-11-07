@@ -21,7 +21,7 @@ const CardHeader: React.FC<ICardHeader> = ({
       <h1
         className={`${
           !intervals ? "w-full" : "w-3/4"
-        } font-semibold text-md text-white tracking-wider uppercase ${
+        } font-semibold md:text-md text-sm text-white tracking-wider uppercase ${
           !intervals ? "py-1" : ""
         }`}
       >
