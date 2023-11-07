@@ -67,12 +67,12 @@ export default function Developers() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <section className="max-w-[90%] mx-auto mb-8 -mt-6 px-4 sm:px-6 lg:px-8 py-1">
+      <section className="max-w-[95%] md:max-w-[90%] mx-auto mb-8 mt-6 md:-mt-6 px-4 sm:px-6 lg:px-8 py-1">
         <div className="grid grid-cols-5 gap-12">
-          <div className="col-span-1">
+          <div className="md:col-span-1 md:block hidden">
             <Sidebar navigation={navigation} element={<SideInfo />} />
           </div>
-          <div className="col-span-4">
+          <div className="md:col-span-4 col-span-5">
             <div className="flex flex-wrap space-y-8">
               <div id="developer-overview" className="w-full">
                 <Stats />

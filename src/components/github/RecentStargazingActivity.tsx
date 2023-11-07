@@ -9,8 +9,13 @@ import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
+import { formatLargeNumber, formatChartDate } from "@/utils/functions";
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
+
 export default function RecentStargazingActivity() {
   const { recentStargazingActivity, isLoading } = useRecentStargazingActivity();
+
+  const dataZoomStart = useMobileDataZoomStart(0, 0);
 
   if (isLoading) {
     return (
@@ -56,6 +61,11 @@ export default function RecentStargazingActivity() {
           color: "#2F5061", // sfblue.DEFAULT
         },
       },
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
+        },
+      },
     },
     series: recentStargazingActivity["series"].map((s) => ({
       ...s,
@@ -65,7 +75,7 @@ export default function RecentStargazingActivity() {
       itemStyle: {
         color: "#778dd1", // sfred.900
       },
-    lineStyle: {
+      lineStyle: {
         color: "#778dd1", // sfblue.900
       },
       areaStyle: {
@@ -92,7 +102,7 @@ export default function RecentStargazingActivity() {
       // Slider
       {
         type: "slider",
-        start: 0,
+        start: dataZoomStart,
         end: 100,
         handleStyle: {
           color: "#e8efff", // sfred.800

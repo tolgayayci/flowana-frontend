@@ -62,12 +62,12 @@ export default function Stats() {
 
     return (
       <div className="col-span-1">
-        <div className="p-5 pl-6 border border-sfblack rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-          <div className="text-side-500 text-medium mb-5">{title}</div>
-          <div className="text-5xl font-bold text-niceblack mb-3">
+        <div className="md:p-5 p-4 pl-6 border border-sfblack rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div className="text-side-500 text-medium md:mb-5 mb-2">{title}</div>
+          <div className="md:text-5xl text-xl font-bold text-niceblack md:mb-3">
             {formattedCount}
           </div>
-          <div className="inline-block bg-side border-2 border-main text-main text-xs font-semibold rounded-2xl px-2 py-0.5">
+          <div className="inline-block bg-side border-2 border-main text-main text-xs font-semibold rounded-lg md:rounded-2xl px-2 py-0.5 mt-2 md:mt-0">
             Last Update: {date.split(" ")[2]}
           </div>
         </div>
@@ -81,7 +81,7 @@ export default function Stats() {
         title="Developer Overview"
         tooltip="Dive into the pulse of developer ecosystem. Displays key insights on developer and repository activities."
       />{" "}
-      <div className="grid grid-cols-4 gap-5">
+      <div className="max-h-[calc(6*6.2rem)] md:max-h-[calc(5*6.4rem)] grid grid-cols-1 md:grid-cols-4 gap-5 overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
         <StatItem
           title="Full Time Devs"
           count={fullTime.count}

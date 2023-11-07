@@ -8,10 +8,13 @@ import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
-import { all } from "axios";
+
+import { formatLargeNumber, formatChartDate } from "@/utils/functions";
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
 
 export default function Participation() {
   const { participation, isLoading } = useParticipation();
+  const dataZoomStart = useMobileDataZoomStart(0, 80);
 
   if (isLoading)
     return (
@@ -90,6 +93,11 @@ export default function Participation() {
       axisTick: {
         lineStyle: {
           color: "#3b4e6e",
+        },
+      },
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
         },
       },
     },
@@ -172,7 +180,7 @@ export default function Participation() {
     grid: {
       left: "1%",
       right: "1%",
-      top: "5%",
+      top: "14%",
       bottom: "20%",
       containLabel: true,
     },

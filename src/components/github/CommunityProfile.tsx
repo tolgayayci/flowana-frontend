@@ -52,29 +52,29 @@ export default function CommunityProfile() {
         title="Community Profile"
         tooltip="Displays key components of the protocol's community structure along with a health score. This score encapsulates the robustness of the community's guidelines and resources."
       />{" "}
-      <div className="flex items-center space-x-12">
+      <div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-12 mt-8">
+        {" "}
         {/* Left Side */}
-        <div className="flex flex-col items-center justify-center w-1/3">
+        <div className="flex flex-col items-center justify-center w-full md:w-1/3 mb-4 md:mb-0">
+          {" "}
           {/* Display Health Percentage */}
-          <div className="mb-8">
-            <div className="w-full h-16 rounded-lg border-2 border-sfgreen-900 text-white flex items-center justify-center text-lg font-bold px-8"
-                      style={{ backgroundColor: "#455e8d"}}>
-      
+          <div className="mb-2 md:mb-8 w-full">
+            <div
+              className="w-full h-16 rounded-xl md:rounded-lg border-2 border-sfgreen-900 text-white flex items-center justify-center text-lg font-bold px-8"
+              style={{ backgroundColor: "#455e8d" }}
+            >
               Score: {health_percentage}%
             </div>
           </div>
-
-          {/* Display Other Details */}
-          {/* <div className="flex-grow"> */}
-            {/* <p className="mb-2 text-center">{description}</p> */}
-          {/* </div> */}
         </div>
-
         {/* Right Side */}
-        <div className="flex flex-col space-y-4 w-2/3">
-          <ul className="divide-y"
-          style={ { borderColor: "#5978b8" } }
+        <div className="flex flex-col space-y-4 w-full md:w-2/3">
+          {" "}
+          <ul
+            className="divide-y divide-opacity-50"
+            style={{ borderColor: "#5978b8" }}
           >
+            {" "}
             {Object.keys(files)
               .sort((a, b) => (files[b] ? 1 : -1))
               .map((key) => (
@@ -124,7 +124,8 @@ export default function CommunityProfile() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className=" text-white px-3 text-sm rounded-md hover:underline mr-4"
-                      style={{ backgroundColor: "#5c7cd9"}}>
+                      style={{ backgroundColor: "#5c7cd9" }}
+                    >
                       View
                     </a>
                   )}

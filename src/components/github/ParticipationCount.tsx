@@ -90,7 +90,7 @@ export default function ParticipationCount() {
         title="Contribution Breakdown"
         tooltip="See the total commit contributions from owners and others over the past year."
       />{" "}
-      <div className="h-full flex items-center -mt-8">
+      <div className="h-full flex items-center -mt-4 md:-mt-8">
         <ReactECharts
           option={option}
           showLoading={isLoading}

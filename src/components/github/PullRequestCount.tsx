@@ -36,60 +36,60 @@ export default function PullRequestCount() {
       />
     );
 
-    const option = {
-      tooltip: {
-        trigger: "item",
-      },
-      legend: {
-        top: "0%",
-        left: "center",
-      },
-      color:["#e28d9b", "#778dd1"],
-      series: [
-        {
-          name: "Pull Request Count",
-          type: "pie",
-          radius: ["40%", "70%"],
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 10,
-            borderColor: "#fff",
-            borderWidth: 2,
-          },
-          label: {
-            show: false,
-            position: "center",
-          },
-          emphasis: {
-            label: {
-              show: true,
-              fontSize: 15,
-              fontWeight: "bold",
-            },
-            itemStyle: {
-              shadowBlur: 2,
-              shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.30)",
-            }
-          },
-          labelLine: {
-            show: false,
-          },
-          data: [
-            { value: pullRequestCount?.closed, name: "Closed" },
-            { value: pullRequestCount?.open, name: "Open" },
-          ],
+  const option = {
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      top: "0%",
+      left: "center",
+    },
+    color: ["#e28d9b", "#778dd1"],
+    series: [
+      {
+        name: "Pull Request Count",
+        type: "pie",
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
         },
-      ],
-    };
-  
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 15,
+            fontWeight: "bold",
+          },
+          itemStyle: {
+            shadowBlur: 2,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.30)",
+          },
+        },
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: pullRequestCount?.closed, name: "Closed" },
+          { value: pullRequestCount?.open, name: "Open" },
+        ],
+      },
+    ],
+  };
+
   return (
     <Layout>
       <CardHeader
         title="Pull Request Count"
         tooltip="Shows the distribution of open and closed pull requests in a pie chart. Quickly understand the current status of pull requests in the repository at a glance."
       />
-      <div className="h-full flex items-center -mt-8">
+      <div className="h-full flex items-center -mt-4 md:-mt-8">
         <ReactECharts
           option={option}
           showLoading={isLoading}

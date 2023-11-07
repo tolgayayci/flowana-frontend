@@ -9,11 +9,14 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
 import NoData from "@/modules/NoData/NoData";
 
-import { formatChartDate } from "@/utils/functions";
+import { formatChartDate, formatLargeNumber } from "@/utils/functions";
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
 
 export default function MonthlyActiveDevChart() {
   const { monthlyActiveDevChart, isLoading } =
     useDevelopersMonthlyActiveDevChart();
+
+  const dataZoomStart = useMobileDataZoomStart(60, 80);
 
   if (isLoading) {
     return (
@@ -79,6 +82,11 @@ export default function MonthlyActiveDevChart() {
       axisTick: {
         lineStyle: {
           color: "#2F5061",
+        },
+      },
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
         },
       },
     },
@@ -151,7 +159,7 @@ export default function MonthlyActiveDevChart() {
       // Slider
       {
         type: "slider",
-        start: 60,
+        start: dataZoomStart,
         end: 100,
         handleStyle: {
           color: "#e8efff", // styling applied
@@ -164,8 +172,8 @@ export default function MonthlyActiveDevChart() {
     grid: {
       left: "1%",
       right: "1%",
-      top: "13%", // updated values from component
-      bottom: "20%", // updated values from component
+      top: "18%", // updated values from component
+      bottom: "17%", // updated values from component
       containLabel: true,
     },
   };

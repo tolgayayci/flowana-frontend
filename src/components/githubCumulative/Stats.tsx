@@ -7,21 +7,6 @@ import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
-function StatItem({ title, count }: { title: string; count: number }) {
-  const formattedCount = new Intl.NumberFormat(undefined, {}).format(count);
-
-  return (
-    <div className="col-span-1">
-      <div className="md:p-5 p-4 pl-6 border border-sfblack rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-        <div className="text-side-500 text-medium md:mb-5 mb-2">{title}</div>
-        <div className="md:text-5xl text-xl font-bold text-niceblack md:mb-3">
-          <div>{formattedCount}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function Stats() {
   const { stats, isLoading } = useCumulativeStats();
 
@@ -49,6 +34,21 @@ export default function Stats() {
         message=""
       />
     );
+
+  function StatItem({ title, count }: { title: string; count: number }) {
+    const formattedCount = new Intl.NumberFormat(undefined, {}).format(count);
+
+    return (
+      <div className="col-span-1">
+        <div className="md:p-5 p-4 pl-6 border border-sfblack rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div className="text-side-500 text-medium md:mb-5 mb-2">{title}</div>
+          <div className="md:text-5xl text-xl font-bold text-niceblack md:mb-3">
+            <div>{formattedCount}</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Layout>

@@ -10,6 +10,9 @@ import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
+import { formatChartDate, formatLargeNumber } from "@/utils/functions";
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
+
 const intervals = [
   { name: "Week", value: "week" },
   { name: "Month", value: "month" },
@@ -21,6 +24,7 @@ export default function PullRequestActivity() {
   const { pullRequestActivity, isLoading } = usePullRequestActivity(
     selectedInterval.value
   );
+  const dataZoomStart = useMobileDataZoomStart(60, 90);
 
   if (isLoading)
     return (
@@ -98,6 +102,11 @@ export default function PullRequestActivity() {
           color: "#3b4e6e",
         },
       },
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
+        },
+      },
     },
     series: pullRequestActivity.series.map((series, index) => {
       let startColor,
@@ -108,7 +117,7 @@ export default function PullRequestActivity() {
           startColor = "#778dd1"; // red
           endColor = "#E2E7F5"; // light blue
           break;
-          case 1:
+        case 1:
           startColor = "#e28d9b"; // blue
           endColor = "#F7DFE3"; // light blue
           break;
@@ -178,7 +187,7 @@ export default function PullRequestActivity() {
     grid: {
       left: "1%",
       right: "1%",
-      top: "17%",
+      top: "14%",
       bottom: "20%",
       containLabel: true,
     },

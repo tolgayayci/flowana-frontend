@@ -9,11 +9,14 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
 import NoData from "@/modules/NoData/NoData";
 
-import { formatChartDate } from "@/utils/functions";
+import { formatChartDate, formatLargeNumber } from "@/utils/functions";
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
 
 export default function MonthlyCommitsByDevTypeChart() {
   const { monthlyCommitsByDevTypeChart, isLoading } =
     useDevelopersMonthlyCommitsByDevTypeChart();
+
+  const dataZoomStart = useMobileDataZoomStart(60, 80);
 
   if (isLoading) {
     return (
@@ -78,6 +81,11 @@ export default function MonthlyCommitsByDevTypeChart() {
       axisTick: {
         lineStyle: {
           color: "#3b4e6e",
+        },
+      },
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
         },
       },
     },
@@ -152,7 +160,7 @@ export default function MonthlyCommitsByDevTypeChart() {
       // Slider
       {
         type: "slider",
-        start: 60,
+        start: dataZoomStart,
         end: 100,
         handleStyle: {
           color: "#e8efff", // sfred.800
@@ -166,7 +174,7 @@ export default function MonthlyCommitsByDevTypeChart() {
       left: "1%",
       right: "1%",
       top: "13%",
-      bottom: "20%",
+      bottom: "15%",
       containLabel: true,
     },
   };

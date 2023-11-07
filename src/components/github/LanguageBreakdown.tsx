@@ -67,16 +67,11 @@ export default function LanguageBreakdown() {
   // Generate legend data for top 5 languages
   const topLegends = thresholdData.slice(0, 4).map((item) => item.name);
 
-  const topLanguageName = thresholdData[0].name; // Get the name of the top language
-
   // Generate series data for all languages
   const allSeriesData = thresholdData.map((item) => {
-    let isSelected = item.name === topLanguageName;
     return {
       name: item.name,
       value: item.size,
-      // selected: isSelected,
-      // itemStyle: isSelected ? { borderWidth: 2 } : {}, // Optional: Highlight selected item with a border
     };
   });
 

@@ -10,9 +10,12 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
 import { ICommitActivity } from "@/types/githubTypes";
+import { formatLargeNumber, formatChartDate } from "@/utils/functions";
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
 
 export default function CommitActivity() {
   const { commitActivity, isLoading } = useCommitActivity();
+  const dataZoomStart = useMobileDataZoomStart(0, 80);
 
   const [selectedWeek, setSelectedWeek] = useState<ICommitActivity | null>(
     null
@@ -83,6 +86,11 @@ export default function CommitActivity() {
     },
     yAxis: {
       type: "value",
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
+        },
+      },
     },
     series: [
       {
@@ -99,11 +107,26 @@ export default function CommitActivity() {
         },
       },
     ],
+    dataZoom: [
+      {
+        type: "slider", // this is the default
+        start: dataZoomStart, // default starting position is 0%
+        end: 100, // default ending position is 100%
+        xAxisIndex: [0], // Specifies that this dataZoom component controls the first xAxis, which is the category axis in this case
+      },
+      // Optionally, you can add the inside type of dataZoom, which allows for zooming by scrolling the mouse wheel over the chart
+      {
+        type: "inside",
+        xAxisIndex: [0],
+        start: 0,
+        end: 100,
+      },
+    ],
     grid: {
       left: "1%",
       right: "1%",
       top: "10%",
-      bottom: "17%",
+      bottom: "20%",
       containLabel: true,
     },
   };
@@ -158,8 +181,8 @@ export default function CommitActivity() {
       },
     ],
     grid: {
-      left: "1%",
-      right: "1%",
+      left: "2%",
+      right: "5%",
       top: "10%",
       bottom: "0%",
       containLabel: true,
@@ -177,7 +200,7 @@ export default function CommitActivity() {
         onEvents={{ click: handleClick }}
       />
       {selectedWeek && (
-        <div className=" border-2 border-gray-300 py-12 px-8 rounded-lg mt-4 mb-2">
+        <div className="border-sfblue-700 border-2 md:py-12 md:px-8 py-8 px-4 rounded-lg mt-6 mb-2">
           <CardHeader
             title={`Week ${commitActivity.indexOf(selectedWeek) + 1} Details`}
           />

@@ -9,10 +9,13 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
 import NoData from "@/modules/NoData/NoData";
 
-import { formatChartDate } from "@/utils/functions";
+import { formatChartDate, formatLargeNumber } from "@/utils/functions";
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
 
 export default function MonthlyCommitsChart() {
   const { monthlyCommitsChart, isLoading } = useDevelopersMonthlyCommitsChart();
+
+  const dataZoomStart = useMobileDataZoomStart(60, 80);
 
   if (isLoading) {
     return (
@@ -80,6 +83,11 @@ export default function MonthlyCommitsChart() {
           color: "#3b4e6e",
         },
       },
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
+        },
+      },
     },
 
     series: monthlyCommitsChart?.series.map((series, index) => ({
@@ -123,7 +131,7 @@ export default function MonthlyCommitsChart() {
       // Slider
       {
         type: "slider",
-        start: 60,
+        start: dataZoomStart,
         end: 100,
         handleStyle: {
           color: "#e8efff", // sfred.800
@@ -136,7 +144,7 @@ export default function MonthlyCommitsChart() {
     grid: {
       left: "1%",
       right: "1%",
-      top: "10%",
+      top: "5%",
       bottom: "17%",
       containLabel: true,
     },

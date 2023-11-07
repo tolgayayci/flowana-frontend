@@ -90,12 +90,14 @@ export default function IssueCount() {
         title="Issue Distribution"
         tooltip="Shows the distribution of open and closed issues in a pie chart. Quickly understand the current status of issues in the repository at a glance."
       />
-      <ReactECharts
-        option={option}
-        showLoading={isLoading}
-        style={{ minHeight: "350px", width: "100%" }}
-        notMerge={true}
-      />
+      <div className="h-full flex items-center -mt-4 md:-mt-8">
+        <ReactECharts
+          option={option}
+          showLoading={isLoading}
+          style={{ minHeight: "350px", width: "100%" }}
+          notMerge={true}
+        />
+      </div>
     </Layout>
   );
 }

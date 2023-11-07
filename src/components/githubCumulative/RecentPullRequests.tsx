@@ -15,12 +15,8 @@ import { formatDistanceToNow } from "@/utils/functions";
 import { formatBadgeStatsCount } from "@/utils/functions";
 
 // Types
-import type {
-  IRecentPullRequests,
-  PullRequestState,
-} from "@/types/githubTypes";
+import type { PullRequestState } from "@/types/githubTypes";
 import { Interval } from "@/types/general";
-import { FaReply } from "react-icons/fa";
 import { ICumulativeRecentPullRequests } from "@/types/githubCumulativeTypes";
 
 const intervals: Interval[] = [

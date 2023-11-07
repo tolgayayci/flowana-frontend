@@ -8,10 +8,13 @@ import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
-import { formatChartDate } from "@/utils/functions";
+
+import { useMobileDataZoomStart } from "@/utils/useMobileDataZoom";
+import { formatChartDate, formatLargeNumber } from "@/utils/functions";
 
 export default function CodeFrequency() {
   const { codeFrequency, isLoading } = useCodeFrequency();
+  const dataZoomStart = useMobileDataZoomStart(60, 90);
 
   if (isLoading)
     return (
@@ -53,6 +56,11 @@ export default function CodeFrequency() {
       axisLine: {
         lineStyle: {
           color: "#3b4e6e",
+        },
+      },
+      axisLabel: {
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
         },
       },
     },
@@ -103,7 +111,7 @@ export default function CodeFrequency() {
       // Slider
       {
         type: "slider",
-        start: 0,
+        start: dataZoomStart,
         end: 100,
         handleStyle: {
           color: "#e8efff", // sfred.800
@@ -117,7 +125,7 @@ export default function CodeFrequency() {
     grid: {
       left: "1%",
       right: "1%",
-      top: "12%",
+      top: "14%",
       bottom: "20%",
       containLabel: true,
     },
