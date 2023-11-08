@@ -38,28 +38,31 @@ export default function LanguageBreakdown() {
     );
 
   // Sort the data by size in descending order
-const sortedData = [...languageBreakdown].sort((a, b) => b.size - a.size);
-  
-// Define a threshold for the minimum percentage a language must have to get its own slice
-const thresholdPercentage = 3; // for instance, 5%
-const totalSize = sortedData.reduce((sum, language) => sum + language.size, 0);
+  const sortedData = [...languageBreakdown].sort((a, b) => b.size - a.size);
 
-let othersSize = 0;
-const thresholdData = sortedData.filter(language => {
-  if ((language.size / totalSize) * 100 < thresholdPercentage) {
-    othersSize += language.size;
-    return false;
-  }
-  return true;
-});
+  // Define a threshold for the minimum percentage a language must have to get its own slice
+  const thresholdPercentage = 3; // for instance, 5%
+  const totalSize = sortedData.reduce(
+    (sum, language) => sum + language.size,
+    0
+  );
 
-if (othersSize > 0) {
-  thresholdData.push({
-    name: "Others",
-    size: othersSize,
-    percentage: (othersSize / totalSize) * 100,
+  let othersSize = 0;
+  const thresholdData = sortedData.filter((language) => {
+    if ((language.size / totalSize) * 100 < thresholdPercentage) {
+      othersSize += language.size;
+      return false;
+    }
+    return true;
   });
-}
+
+  if (othersSize > 0) {
+    thresholdData.push({
+      name: "Others",
+      size: othersSize,
+      percentage: (othersSize / totalSize) * 100,
+    });
+  }
 
   // Generate legend data for top 5 languages
   const topLegends = thresholdData.slice(0, 4).map((item) => item.name);
@@ -130,7 +133,7 @@ if (othersSize > 0) {
         title="Language Breakdown"
         tooltip="Visualizes the distribution of programming languages used across all repositories, highlighting the dominant languages by code size."
       />
-      <div className="h-full flex items-center">
+      <div className="h-full flex items-center md:-mt-4">
         <ReactECharts
           option={option}
           showLoading={isLoading}

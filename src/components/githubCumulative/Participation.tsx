@@ -179,7 +179,7 @@ export default function Participation() {
       left: "1%",
       right: "1%",
       top: "13%",
-      bottom: "20%",
+      bottom: "17%",
       containLabel: true,
     },
   };

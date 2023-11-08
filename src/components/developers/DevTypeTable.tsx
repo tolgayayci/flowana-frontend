@@ -10,8 +10,6 @@ import CardLoader from "@/modules/CardLoader/CardLoader";
 import CardHeader from "@/modules/Card/Header/Header";
 import NoData from "@/modules/NoData/NoData";
 
-import { FaArrowUp, FaArrowDown } from "react-icons/fa";
-
 export default function DevTypeTable() {
   const { devTypeTable, isLoading } = useDevelopersDevTypeTable();
 
@@ -100,25 +98,25 @@ export default function DevTypeTable() {
     <Layout>
       <div className="min-w-full mt-2">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#3C4D6E] to-[#4D5E7E] p-1 rounded-lg shadow-md flex">
+        <div className="bg-gradient-to-r from-[#3C4D6E] to-[#4D5E7E] p-1 rounded-lg shadow-md flex flex-col md:flex-row">
           {/* First item */}
           {devTypeTable?.header.slice(0, 1).map((item, index) => (
             <div
               key={index}
-              className="py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider w-2/3 flex items-center justify-start"
+              className="hidden py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider md:w-2/3 md:flex items-center justify-start"
             >
               {item.title}
             </div>
           ))}
 
           {/* Other items in a container */}
-          <div className="w-1/3 flex">
+          <div className="w-full md:w-1/3 flex flex-row flex-wrap md:flex-nowrap">
             {devTypeTable?.header.slice(1).map((item, index) => (
               <div
                 key={index + 1}
-                className="py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider w-1/4 flex items-center justify-end"
+                className="py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider w-1/4 md:w-1/4 flex items-center md:justify-end"
               >
-                {item.title}
+                {index === 0 ? item.title.substring(0, 3) : item.title}{" "}
               </div>
             ))}
           </div>
@@ -127,9 +125,12 @@ export default function DevTypeTable() {
         {/* Rows */}
         <div className="bg-white divide-y divide-sfblue-500 w-full">
           {devTypeTable?.rows.map((row, index) => (
-            <div key={index} className="flex justify-between">
-              <div className="py-4 px-4 w-2/3 flex items-center">
-                <div className="w-12 h-12 overflow-hidden rounded">
+            <div
+              key={index}
+              className="flex flex-col md:flex-row justify-between"
+            >
+              <div className="py-4 px-4 md:w-2/3 flex items-center">
+                <div className="w-12 h-12 overflow-hidden rounded hidden md:flex">
                   <Image
                     unoptimized
                     src={
@@ -137,38 +138,38 @@ export default function DevTypeTable() {
                       "/flow-logo.png"
                     }
                     alt="Proposal"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                     width={50}
                     height={50}
                   />
                 </div>
-                <div className="font-semibold text-gray-700 ml-4">
+                <div className="font-semibold text-gray-700 md:ml-4">
                   {row.developer_type[0]}
                   <div className="text-xs text-gray-500 mt-1 font-medium">
                     {row.developer_type[1]}
                   </div>
                 </div>
               </div>
-              <div className="flex space-x-6 w-1/3">
-                <div className="w-1/4 px-4  flex flex-col justify-center items-end">
-                  {row["jun-01_2023"]}
+              <div className="flex space-x-1 md:space-x-6 w-full md:w-1/3">
+                <div className="w-1/2 md:w-1/4 px-4 py-2 md:py-0 flex flex-col md:justify-center md:items-end">
+                  {row["oct-01_2023"]}
                 </div>
                 <div
-                  className={`w-1/4 px-4 flex flex-col justify-center items-end ${
+                  className={`w-1/2 md:w-1/4 px-4 py-2 md:py-0 flex flex-col md:justify-center md:items-end ${
                     row["1y_%"] < 0 ? "text-red-500" : "text-green-500"
                   }`}
                 >
                   {Math.abs(row["1y_%"])}%
                 </div>
                 <div
-                  className={`w-1/4 px-4  flex flex-col justify-center items-end ${
+                  className={`w-1/2 md:w-1/4 px-4 py-2 md:py-0 flex flex-col md:justify-center md:items-end ${
                     row["2y_%"] < 0 ? "text-red-500" : "text-green-500"
                   }`}
                 >
                   {Math.abs(row["2y_%"])}%
                 </div>
                 <div
-                  className={`w-1/4 px-4  flex flex-col justify-center items-end ${
+                  className={`w-1/2 md:w-1/4 px-4 py-2 md:py-0 flex flex-col md:justify-center md:items-end ${
                     row["3y_%"] < 0 ? "text-red-500" : "text-green-500"
                   }`}
                 >

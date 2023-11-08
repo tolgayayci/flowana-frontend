@@ -184,12 +184,22 @@ export default function MonthlyActiveDevChart() {
         title="Monthly Active Devs"
         tooltip="Visualizes the monthly engagement of developers in different categories. Track the activity of Full-Time, Part-Time, and One-Time Developers to understand the protocol's developer engagement depth and breadth."
       />
-      <ReactECharts
-        option={option}
-        showLoading={isLoading}
-        style={{ minHeight: "400px", width: "100%" }}
-        notMerge={true}
-      />
+      <div className="hidden md:flex">
+        <ReactECharts
+          option={option}
+          showLoading={isLoading}
+          style={{ minHeight: "400px", width: "100%" }}
+          notMerge={true}
+        />
+      </div>
+      <div className="flex md:hidden">
+        <ReactECharts
+          option={option}
+          showLoading={isLoading}
+          style={{ minHeight: "450px", width: "100%" }}
+          notMerge={true}
+        />
+      </div>
     </Layout>
   );
 }

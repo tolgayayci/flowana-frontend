@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import ReactECharts from "echarts-for-react";
 
 //Hooks
@@ -11,6 +12,26 @@ import NoData from "@/modules/NoData/NoData";
 
 export default function PunchCard() {
   const { punchCard, isLoading } = useCumulativePunchCard();
+  const [chartSize, setChartSize] = useState({
+    maxSymbolSize: 40,
+    minSymbolSize: 5,
+  });
+
+  // Responsive design for symbol sizes based on screen width
+  useEffect(() => {
+    const updateSize = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 768) {
+        // Adjust these values as needed for different breakpoints
+        setChartSize({ maxSymbolSize: 10, minSymbolSize: 2 });
+      } else {
+        setChartSize({ maxSymbolSize: 40, minSymbolSize: 5 });
+      }
+    };
+    window.addEventListener("resize", updateSize);
+    updateSize(); // Initialize size on first render
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
 
   if (isLoading)
     return (
@@ -128,8 +149,9 @@ export default function PunchCard() {
         type: "scatter",
         symbolSize: function (val) {
           const normalizedSize =
-            (val[2] / maxCommitCount) * (maxSymbolSize - minSymbolSize) +
-            minSymbolSize;
+            (val[2] / maxCommitCount) *
+              (chartSize.maxSymbolSize - chartSize.minSymbolSize) +
+            chartSize.minSymbolSize;
           return normalizedSize;
         },
         data: data,

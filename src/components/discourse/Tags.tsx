@@ -105,7 +105,7 @@ export default function Tags() {
         <ReactECharts
           option={option}
           showLoading={isLoading}
-          style={{ minHeight: "450px", width: "100%" }}
+          style={{ minHeight: "400px", width: "100%" }}
           notMerge={true}
         />
       </div>

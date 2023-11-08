@@ -173,7 +173,7 @@ export default function MonthlyCommitsByDevTypeChart() {
     grid: {
       left: "1%",
       right: "1%",
-      top: "13%",
+      top: "21%",
       bottom: "15%",
       containLabel: true,
     },
@@ -185,12 +185,22 @@ export default function MonthlyCommitsByDevTypeChart() {
         title="Commit Trends by Devs"
         tooltip="Displays monthly commits segmented by developer categories. See how Full-Time, Part-Time, and One-Time Developers contribute over time, revealing the protocol's developer engagement diversity."
       />{" "}
-      <ReactECharts
-        option={option}
-        showLoading={isLoading}
-        style={{ minHeight: "400px", width: "100%" }}
-        notMerge={true}
-      />
+      <div className="hidden md:flex">
+        <ReactECharts
+          option={option}
+          showLoading={isLoading}
+          style={{ minHeight: "400px", width: "100%" }}
+          notMerge={true}
+        />
+      </div>
+      <div className="flex md:hidden">
+        <ReactECharts
+          option={option}
+          showLoading={isLoading}
+          style={{ minHeight: "480px", width: "100%" }}
+          notMerge={true}
+        />
+      </div>
     </Layout>
   );
 }

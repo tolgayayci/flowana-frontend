@@ -97,6 +97,7 @@ function CountIcon({ icon, count, tooltip, id }) {
 export default function Categories() {
   const { discourseCategories, isLoading } = useDiscourseCategories();
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [chartRadius, setChartRadius] = useState(["20%", "40%"]);
 
   const { protocol } = useProtocol();
 
@@ -107,6 +108,26 @@ export default function Categories() {
       setSelectedCategory(discourseCategories[0]);
     }
   }, [discourseCategories]);
+
+  useEffect(() => {
+    function handleResize() {
+      // Set the radius for desktop if the window width is greater than 768px
+      if (window.innerWidth > 768) {
+        setChartRadius(["40%", "70%"]);
+      } else {
+        setChartRadius(["20%", "40%"]);
+      }
+    }
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty array ensures that effect is only run on mount and unmount
 
   if (isLoading) {
     return (
@@ -180,7 +201,7 @@ export default function Categories() {
       {
         name: "Categories",
         type: "pie",
-        radius: ["40%", "70%"],
+        radius: chartRadius,
         selectedMode: "single", // This allows only one item to be selected at a time
         selectedOffset: 10, // This controls the pixel distance the selected slice moves outward
         data: discourseCategories.map((cat) => ({
@@ -289,21 +310,29 @@ export default function Categories() {
         title="Category Distribution"
         tooltip="Dive into a dual-pie chart experience! The first chart showcases the main categories, and by clicking on any segment, the second chart reveals the associated subcategories. Each category and subcategory displays their respective post and topic counts, offering a comprehensive view of content distribution on the platform."
       />{" "}
-      <div className="flex justify-between my-10">
+      <div className="flex flex-col md:flex-row justify-between md:my-10">
+        {" "}
         {/* Main Categories Chart */}
         <ReactECharts
           option={mainOption}
           onEvents={{ click: handleChartClick }}
           showLoading={isLoading}
           style={{ minHeight: "400px", width: "100%" }}
+          className="-mt-20 md:-mt-0"
           notMerge={true}
         />
-
         {/* Subcategories Chart */}
-        <div className="border-l-2 border-gray-600/10 w-1/3">
+        <div className="hidden md:flex md:border-l-2 border-gray-600/10 w-full md:w-1/3 pt-10">
           <ReactECharts
             option={subOption}
             style={{ minHeight: "400px", width: "100%" }}
+            notMerge={true}
+          />
+        </div>
+        <div className="border-t-2 md:hidden border-gray-600/10 w-full md:w-1/3 pt-10 mb-4">
+          <ReactECharts
+            option={subOption}
+            style={{ minHeight: "300px", width: "100%" }}
             notMerge={true}
           />
         </div>
@@ -328,18 +357,53 @@ export default function Categories() {
                       alt="Avatar"
                       width={52}
                       height={52}
-                      className="rounded-full mr-5"
+                      className="rounded-full mr-2 md:mr-5"
                     />
-                    <div className="flex-grow min-w-0 max-w-lg">
-                      <h3 className="text-base sm:text-md font-semibold truncate">
+                    <div className="flex-grow space-y-2 md:space-y-1">
+                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] md:max-w-md -mb-1 md:mb-0">
                         {selectedCategory.name}
                       </h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1 truncate">
+                      <p className="text-gray-500 text-xs sm:text-sm mt-1">
                         {selectedCategory.description_text}
                       </p>
+                      <div className="flex md:hidden items-center text-xs sm:text-sm justify-start space-x-2 overflow-x-auto">
+                        <span
+                          className="bg-green-200/70 border-2 border-green-300 text-green-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          id="topic_count"
+                        >
+                          <CountIcon
+                            id="topic_count"
+                            icon={<FaReply className="inline" />}
+                            count={selectedCategory.topic_count}
+                            tooltip="Topic Count"
+                          />
+                        </span>
+                        <span
+                          className="bg-red-200/70 border-2 border-red-300 text-red-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          id="post_count"
+                        >
+                          <CountIcon
+                            id="post_count"
+                            icon={<FaEye className="inline" />}
+                            count={selectedCategory.post_count}
+                            tooltip="Post Count"
+                          />
+                        </span>
+                        <span
+                          className="bg-purple-200/70 border-2 border-purple-300 text-purple-800 text-[11px] font-semibold px-1.5 py-0.5 rounded"
+                          id="num_featured_topics"
+                        >
+                          <CountIcon
+                            id="num_featured_topics"
+                            icon={<FaMedal className="inline" />}
+                            count={selectedCategory.num_featured_topics}
+                            tooltip="Number of Featured Topics"
+                          />
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
+                  <div className="hidden md:flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
                     <span
                       className="bg-green-200/70 border-2 border-green-300 text-green-800 text-xs font-semibold px-2 py-1 rounded"
                       id="topic_count"

@@ -90,7 +90,7 @@ export default function PullRequestCount() {
         title="Pull Request Distribution"
         tooltip="Shows the distribution of open and closed pull requests across all repositories in a pie chart."
       />
-      <div className="h-full flex items-center md:-mt-8">
+      <div className="h-full flex items-center -mt-2 md:-mt-8">
         <ReactECharts
           option={option}
           showLoading={isLoading}

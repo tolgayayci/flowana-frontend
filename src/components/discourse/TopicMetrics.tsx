@@ -60,7 +60,7 @@ export default function TopicMetrics() {
           title="Forum Overview"
           tooltip="View a summary of forum engagement, showcasing the total number of topics, posts, replies, views, likes, and their respective averages."
         />
-        <div className="max-h-[calc(5*5.6rem)] md:max-h-[calc(5*6.4rem)] grid grid-cols-1 md:grid-cols-4 gap-5 overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
+        <div className="max-h-[calc(5*5.6rem)] md:max-h-[calc(5*6.4rem)] grid grid-cols-1 md:grid-cols-4 gap-5 pr-0.5 md:pr-0 overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
           <StatItem title="Total Replies" count={topicMetrics.total_replies} />
           <StatItem title="Total Posts" count={topicMetrics.total_posts} />
           <StatItem title="Total Views" count={topicMetrics.total_views} />

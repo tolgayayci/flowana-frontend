@@ -126,7 +126,7 @@ export default function CodeFrequency() {
       left: "1%",
       right: "1%",
       top: "14%",
-      bottom: "20%",
+      bottom: "18%",
       containLabel: true,
     },
   };
