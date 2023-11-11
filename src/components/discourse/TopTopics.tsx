@@ -93,7 +93,7 @@ const forumInfos = {
 
 function CountIcon({ icon, count, tooltip, id }) {
   return (
-    <span className="w-7 md:w-12 justify-center items-center inline-flex z-50">
+    <span className="w-7 md:w-12 justify-center items-center inline-flex z-2">
       {icon}
       <span className="ml-1">{formatBadgeStatsCount(count)}</span>
 

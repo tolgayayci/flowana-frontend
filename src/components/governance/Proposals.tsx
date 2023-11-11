@@ -90,10 +90,11 @@ export default function Proposals() {
     );
 
     return (
-      <div className="hover:bg-gray-100/50 flex">
-        <div className="py-4 px-4 w-1/2 flex items-center">
+      <div className="flex flex-col md:flex-row hover:bg-gray-100/50">
+        <div className="py-4 px-4 w-full md:w-1/2 flex flex-col md:flex-row items-center">
+          {" "}
           {/* Displaying the image on the left */}
-          <div className="w-12 h-12 overflow-hidden rounded">
+          <div className="w-12 h-12 overflow-hidden rounded my-4 md:my-0">
             <Image
               unoptimized
               src={"/compound-logo.png"}
@@ -105,24 +106,25 @@ export default function Proposals() {
           </div>
           {/* Content to the right of the image */}
           <Link href={proposal.tally_url} target="_blank">
-            <div className="ml-4">
-              <div className="text-md font-semibold text-gray-900 truncate max-w-xl">
-                {title.startsWith("#") ? title.slice(1).trim() : title}{" "}
+            <div className="md:ml-4 md:flex-grow flex-wrap w-full">
+              <div className="text-md font-semibold text-gray-900 text-center md:text-left truncate max-w-[calc(12*1rem)] md:max-w-lg">
+                {title.startsWith("#") ? title.slice(1).trim() : title}
               </div>
-              <div className="flex items-center space-x-2 mt-2">
+              <div className="flex flex-col md:flex-row items-center justify-center md:justify-start space-x-0 md:space-x-2 mt-2">
                 <div
-                  className={`text-xs ${statusColors.textColor} ${statusColors.bgColor} p-1 rounded inline-block`}
+                  className={`text-xs ${statusColors.textColor} ${statusColors.bgColor} px-2 py-1 rounded inline-block mb-2 md:mb-0`}
                 >
                   {statusChanges[statusChanges.length - 1].type}
                 </div>
-                <div className="text-sm text-sfblue-800">
+                <div className="text-sm text-sfblue-800 mt-1 md:mt-0">
                   Proposed on: {formatChartDate(start.timestamp)}
                 </div>
               </div>
             </div>
           </Link>
         </div>
-        <div className="px-6 py-4 w-1/6 flex flex-col justify-center">
+        <div className="px-6 py-4 w-full md:w-1/6 flex flex-col justify-center">
+          {" "}
           {/* Votes For */}
           {/* Count */}
           <div className="text-sm font-semibold text-green-500">
@@ -139,7 +141,8 @@ export default function Proposals() {
           </div>
         </div>
 
-        <div className="px-6 py-4 w-1/6 flex flex-col justify-center">
+        <div className="px-6 py-4 w-full md:w-1/6 flex flex-col justify-center">
+          {" "}
           {/* Votes Against */}
           {/* Count */}
           <div className="text-sm font-semibold text-red-500">
@@ -155,7 +158,8 @@ export default function Proposals() {
             </div>
           </div>
         </div>
-        <div className="px-6 py-4 whitespace-nowrap flex flex-col justify-center items-end w-1/6">
+        <div className="px-6 py-4 w-full md:w-1/6 flex flex-col justify-center items-end mb-4 md:mb-0">
+          {" "}
           {/* Total Votes */}
           <div className="text-md font-semibold text-gray-900 text-right">
             {formatLargeNumber(totalVotes)}
@@ -171,7 +175,7 @@ export default function Proposals() {
   return (
     <Layout>
       <div className="min-w-full mt-2">
-        <div className="bg-gradient-to-r from-[#3C4D6E] to-[#4D5E7E] p-1 rounded-lg shadow-md flex">
+        <div className="bg-gradient-to-r from-[#3C4D6E] to-[#4D5E7E] p-1 rounded-lg shadow-md md:flex hidden">
           {/* First div now has flex-2 to take up half the space */}
           <div className="py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider w-1/2">
             Proposal
@@ -185,6 +189,12 @@ export default function Proposals() {
           </div>
           <div className="py-1.5 px-4 text-end text-md font-semibold text-white tracking-wider w-1/6 justify-end items-end">
             Total Votes
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-[#3C4D6E] to-[#4D5E7E] p-1 rounded-lg shadow-md md:hidden flex">
+          <div className="py-1.5 px-4 text-left text-md font-semibold text-white tracking-wider w-full">
+            Latest Proposals
           </div>
         </div>
 

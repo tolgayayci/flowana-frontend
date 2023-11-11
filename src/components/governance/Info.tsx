@@ -51,7 +51,7 @@ export default function Info() {
           href={info.organization.tally_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#3C4D6E] text-white font-bold py-2 px-3 rounded text-md"
+          className="bg-[#3C4D6E] text-white font-bold py-1.5 md:py-2 px-2 md:px-3 rounded text-sm md:text-md"
         >
           View on Tally
         </a>
@@ -81,7 +81,8 @@ export default function Info() {
           {info.tokens[0].type}
         </span>
         <span className="inline-flex items-center px-2 py-1 rounded-lg bg-indigo-300 text-indigo-700 text-sm font-semibold">
-          {Intl.NumberFormat().format(info.stats.tokens.supply)} Supply
+          {formatLargeNumber(info.stats.tokens.supply as unknown as string)}{" "}
+          Supply
         </span>
       </div>
 
@@ -101,7 +102,7 @@ export default function Info() {
 
       <div className={`${accordionOpen ? "block" : "hidden"}`}>
         <div className="grid grid-cols-3 gap-4 pt-8">
-          <div className="col-span-1">
+          <div className="col-span-3 md:col-span-1">
             <div className="bg-gray-200/50 pl-2 py-1.5 text-indigo-700 font-semibold text-md mb-2">
               Parameters
             </div>
@@ -131,7 +132,7 @@ export default function Info() {
               </div>
             </div>
           </div>
-          <div className="col-span-2">
+          <div className="col-span-3 md:col-span-2">
             <div className="bg-gray-200/50 pl-2 py-1.5 text-indigo-700 font-semibold text-md mb-2">
               Contract Addresses
             </div>

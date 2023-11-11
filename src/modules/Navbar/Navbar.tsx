@@ -255,7 +255,7 @@ export default function Navbar() {
               </div>
 
               <Disclosure.Panel className="md:hidden">
-                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3 max-w-[90%]">
+                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3 max-w-[90%] mx-auto">
                   {navigation.map((item) => (
                     <Disclosure.Button
                       key={item.name}
@@ -273,8 +273,9 @@ export default function Navbar() {
                     </Disclosure.Button>
                   ))}
                 </div>
-                <div className="border-t border-indigo-700 pb-3 pt-4">
-                  <div className="w-full px-4">
+                <div className="border-t border-indigo-700 pb-3 pt-4 max-w-[90%] mx-auto flex space-x-2 items-stretch">
+                  <div className="flex flex-col w-2/3">
+                    {" "}
                     <SearchBar
                       open={isSearchOpen}
                       setOpen={setIsSearchOpen}
@@ -282,11 +283,85 @@ export default function Navbar() {
                     />
                     <button
                       type="button"
-                      className="text-[#333333] text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-indigo-900 font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
+                      className="text-[#333333] md:text-[15px] w-full bg-white hover:bg-gray-100 border-[3px] border-indigo-900 font-bold rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
                       onClick={() => setIsSearchOpen(true)}
                     >
                       Search on {protocol["protocol"]}
                     </button>
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    {" "}
+                    {/* Protocol Select */}
+                    <Listbox
+                      value={selected}
+                      onChange={(e) => handleProtocolChange(e)}
+                    >
+                      <div className="relative">
+                        <Listbox.Button className="relative w-[10rem] cursor-default rounded-lg bg-white py-2 px-3 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm flex items-center justify-between">
+                          <Image
+                            unoptimized
+                            src={selected.logo}
+                            width="20"
+                            height="20"
+                            alt={selected.name}
+                            className="rounded-full mr-1 md:mr-0"
+                          />
+                          <span className="mr-1 text-md font-medium truncate">
+                            {selected.name}
+                          </span>
+                          <span className="pointer-events-none">
+                            <ChevronUpDownIcon
+                              className="h-5 w-5 text-gray-400"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </Listbox.Button>
+                        <Transition
+                          as={Fragment}
+                          leave="transition ease-in duration-100"
+                          leaveFrom="opacity-100"
+                          leaveTo="opacity-0"
+                        >
+                          <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            {protocols.map((protocol, protocolIdx) => (
+                              <Listbox.Option
+                                key={protocolIdx}
+                                className={({ active }) =>
+                                  `relative cursor-default select-none py-2 pl-4 pr-4 ${
+                                    active
+                                      ? "bg-amber-100 text-amber-900"
+                                      : "text-gray-900"
+                                  }`
+                                }
+                                value={protocol}
+                              >
+                                {({ selected }) => (
+                                  <span className="flex items-center">
+                                    <span className="mr-2">
+                                      <Image
+                                        unoptimized
+                                        src={protocol.logo}
+                                        width="20"
+                                        height="20"
+                                        alt={protocol.name}
+                                        className="rounded-full"
+                                      />
+                                    </span>
+                                    <span
+                                      className={`truncate ${
+                                        selected ? "font-medium" : "font-normal"
+                                      }`}
+                                    >
+                                      {protocol.name}
+                                    </span>
+                                  </span>
+                                )}
+                              </Listbox.Option>
+                            ))}
+                          </Listbox.Options>
+                        </Transition>
+                      </div>
+                    </Listbox>
                   </div>
                 </div>
               </Disclosure.Panel>

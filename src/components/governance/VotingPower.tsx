@@ -11,7 +11,7 @@ import CardHeader from "@/modules/Card/Header/Header";
 import NoData from "@/modules/NoData/NoData";
 
 import { Interval } from "@/types/general";
-import { formatChartDate } from "@/utils/functions";
+import { formatChartDate, formatLargeNumber } from "@/utils/functions";
 
 const intervals: Interval[] = [
   { name: "Week", value: "WEEK" },
@@ -89,6 +89,9 @@ export default function VotingPower() {
           color: "#666",
           fontSize: 12,
         },
+        formatter: function (value) {
+          return formatLargeNumber(value.toString());
+        },
       },
     },
     legend: {
@@ -128,8 +131,8 @@ export default function VotingPower() {
     grid: {
       left: "1%",
       right: "1%",
-      top: "14%",
-      bottom: "20%",
+      top: "18%",
+      bottom: "18%",
       containLabel: true,
     },
   };

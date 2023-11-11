@@ -82,21 +82,24 @@ export default function Safes() {
                 target="_blank"
                 className="block hover:no-underline"
               >
-                <div className="flex justify-between">
-                  <div className="flex items-center space-x-2 w-1/2">
+                <div className="flex flex-col md:flex-row justify-between">
+                  {" "}
+                  <div className="flex items-center space-x-2 md:w-1/2">
+                    {" "}
                     <Image
                       unoptimized
                       src={"/compound-logo.png"}
                       alt="Avatar"
                       width={52}
                       height={52}
-                      className="rounded-full mr-5"
+                      className="rounded-full md:mr-5 mr-2"
                     />
                     <div className="flex-grow min-w-0 max-w-xs">
-                      <h3 className="text-base sm:text-md font-semibold truncate">
+                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] md:max-w-md -mb-1 md:mb-0">
+                        {" "}
                         {safe.name}
                       </h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">
+                      <p className="text-gray-500 text-xs sm:text-sm mt-3 md:mt-1">
                         <span className="px-2 py-1 rounded-lg text-xxs sm:text-xs bg-green-200 text-green-800 border-2 border-green-500">
                           Total Value: $
                           {Intl.NumberFormat().format(
@@ -104,9 +107,64 @@ export default function Safes() {
                           )}
                         </span>
                       </p>
+                      <div className="flex md:hidden items-start text-xs sm:text-sm w-full justify-start">
+                        <div className="flex flex-col items-start space-x-0 mt-3">
+                          <span className="mr-2 font-semibold">Tokens</span>
+                          <div className="isolate flex -space-x-2 overflow-hidden items-start">
+                            {safe.balance.tokens.map((token) => (
+                              <Link
+                                href={token.logoURI || "#"}
+                                key={token.address}
+                              >
+                                <BadgeWithTooltip
+                                  element={
+                                    <div className="relative z-30 h-8 w-8 rounded-full bg-indigo-700 text-white inline-flex items-center justify-center">
+                                      {token.symbol.charAt(0).toUpperCase()}
+                                    </div>
+                                  }
+                                  tooltipId={token.address}
+                                  tooltipContent={
+                                    token.symbol +
+                                    " $" +
+                                    Intl.NumberFormat().format(
+                                      token.fiat as any as number
+                                    )
+                                  }
+                                  tooltipPlace="top"
+                                />
+                              </Link>
+                            ))}
+                          </div>
+                          <span className="mr-2 mt-2 font-semibold">
+                            Owners
+                          </span>
+                          <div className="isolate flex -space-x-2 overflow-hidden items-center">
+                            {safe.owners.map((owner) => (
+                              <Link href={owner.tally_url} key={owner.address}>
+                                <BadgeWithTooltip
+                                  element={
+                                    <Image
+                                      className="relative z-30 inline-block h-8 w-8 rounded-full ring-2 ring-white hover:scale-105"
+                                      src={
+                                        owner.picture || "/compound-logo.png"
+                                      }
+                                      alt=""
+                                      width={35}
+                                      height={25}
+                                    />
+                                  }
+                                  tooltipId={owner.address}
+                                  tooltipContent={owner.name}
+                                  tooltipPlace="top"
+                                />
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end">
+                  <div className="hidden md:flex items-center text-xs sm:text-sm w-1/2 justify-end">
                     <div className="flex items-center space-x-2">
                       <span className="mr-2 font-semibold">Tokens</span>
                       <div className="isolate flex -space-x-2 overflow-hidden items-center">

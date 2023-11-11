@@ -71,7 +71,7 @@ export default function ProjectDetail() {
       current: true,
     },
     {
-      name: "Recent Stargazing Activity",
+      name: "Stargazing Trend",
       href: "#recent-stargazing-activity",
       icon: ChartBarIcon,
       current: false,
@@ -83,7 +83,7 @@ export default function ProjectDetail() {
       current: false,
     },
     {
-      name: "Health Score",
+      name: "Flowana Health Score",
       href: "#health-score",
       icon: ChartPieIcon,
       current: false,
@@ -101,13 +101,13 @@ export default function ProjectDetail() {
       current: false,
     },
     {
-      name: "Recent Commits",
+      name: "Latest Commits",
       href: "#recent-commits",
       icon: ListBulletIcon,
       current: false,
     },
     {
-      name: "Participation Count",
+      name: "Contribution Breakdown",
       href: "#participation-count",
       icon: ChartPieIcon,
       current: false,
@@ -137,13 +137,13 @@ export default function ProjectDetail() {
       current: false,
     },
     {
-      name: "Recent Issues",
+      name: "Latest Issues",
       href: "#recent-issues",
       icon: ListBulletIcon,
       current: false,
     },
     {
-      name: "Issue Count",
+      name: "Issue Distribution",
       href: "#issue-count",
       icon: ChartPieIcon,
       current: false,
@@ -161,13 +161,13 @@ export default function ProjectDetail() {
       current: false,
     },
     {
-      name: "Recent Pull Requests",
+      name: "Latest Pull Requests",
       href: "#recent-pull-requests",
       icon: ListBulletIcon,
       current: false,
     },
     {
-      name: "Participation",
+      name: "Participation Trend",
       href: "#participation",
       icon: ChartBarIcon,
       current: false,
@@ -179,7 +179,7 @@ export default function ProjectDetail() {
       current: false,
     },
     {
-      name: "Recent Releases",
+      name: "Latest Releases",
       href: "#recent-releases",
       icon: ListBulletIcon,
       current: false,

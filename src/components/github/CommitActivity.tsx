@@ -38,7 +38,11 @@ export default function CommitActivity() {
         }
       />
     );
-  if (!commitActivity || commitActivity[0] === undefined)
+  if (
+    !commitActivity ||
+    !commitActivity[0].total ||
+    commitActivity[0] === undefined
+  )
     return (
       <NoData
         element={
@@ -202,7 +206,7 @@ export default function CommitActivity() {
       {selectedWeek && (
         <div className="border-sfblue-700 border-2 md:py-12 md:px-8 py-8 px-4 rounded-lg mt-6 mb-2">
           <CardHeader
-            title={`Week ${commitActivity.indexOf(selectedWeek) + 1} Details`}
+            title={`${formatDateRange(selectedWeek.week)} - Commit Activity`}
           />
           <ReactECharts
             option={selectedWeekOption}

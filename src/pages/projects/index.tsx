@@ -120,15 +120,15 @@ export default function Projects() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <section className="max-w-[90%] mx-auto mb-16 -mt-6 px-4 sm:px-6 lg:px-8 py-1">
+      <section className="max-w-[95%] md:max-w-[90%] mx-auto mb-8 mt-6 md:-mt-6 px-4 sm:px-6 lg:px-8 py-1">
         <InstantSearch
           key={protocol["protocol"]}
           searchClient={searchClient(protocol["protocol"])}
           indexName={getSearchIndexForProtocol(protocol["protocol"])}
         >
-          <div className="grid grid-cols-5 gap-12">
+          <div className="grid grid-cols-5 gap-8 md:gap-12">
             <Configure analytics={false} hitsPerPage={15} />
-            <div className="self-start col-span-5 md:col-span-1 hidden lg:block xl:block 2xl:block space-y-7 sticky top-[190px]">
+            <div className="self-start col-span-5 md:col-span-1 lg:block xl:block 2xl:block space-y-7 md:sticky md:top-[190px]">
               <div className="bg-white shadow-sm rounded-2xl p-6 border-2 border-main">
                 <div className="flex items-center mb-6">
                   <Image
@@ -154,10 +154,10 @@ export default function Projects() {
                     placeholder={`Search on ${protocolInfo.protocol_name} Ecosystem`}
                     autoFocus={true}
                     classNames={{
-                      root: "w-full bg-transparent text-gray-800 placeholder-gray-400 sm:text-sm pl-3 border-2 border-sfblue rounded-lg",
+                      root: "w-full bg-transparent text-gray-800 placeholder-gray-400 sm:text-sm md:pl-3 border-2 border-sfblue rounded-lg",
                       form: "w-full focus:rounded-none",
                       input:
-                        "border-0 outline-none focus:border-none focus:ring-0 w-full py-1.5 rounded-lg text-[14px]",
+                        "border-0 outline-none focus:border-none focus:ring-0 w-full py-1.5 pl-3 rounded-lg text-[14px]",
                       submitIcon: "hidden",
                     }}
                     submitIconComponent={() => null}
@@ -166,7 +166,7 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="bg-white shadow-sm rounded-2xl p-6 border-2 border-main">
+              <div className="bg-white shadow-sm rounded-2xl p-6 border-2 border-main hidden md:block">
                 <div className="flex items-center mb-3">
                   <div className="flex flex-col justify-center">
                     <h1 className="text-lg font-bold">Categories</h1>
@@ -207,7 +207,7 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="bg-white shadow-sm rounded-2xl p-6 border-2 border-main mx-auto">
+              <div className="bg-white shadow-sm rounded-2xl p-6 border-2 border-main mx-auto hidden md:block">
                 <div className="flex items-center mb-2">
                   <div className="flex flex-col justify-center">
                     <h1 className="text-lg font-bold">Health Score</h1>

@@ -15,15 +15,17 @@ const CardHeader: React.FC<ICardHeader> = ({
   intervals,
 }) => {
   return (
-    <div className="flex justify-between items-center mb-6 bg-main-700 rounded-md px-4 h-10">
+    <div
+      className={`flex justify-between items-center mb-6 bg-main-700 rounded-md px-4 ${
+        !intervals ? "h-10" : "h-14 md:h-10"
+      }`}
+    >
       {" "}
       {/* 1. Set a fixed height */}{" "}
       <h1
         className={`${
-          !intervals ? "w-full" : "w-3/4"
-        } font-semibold md:text-md text-sm text-white tracking-wider uppercase ${
-          !intervals ? "py-1" : ""
-        }`}
+          !intervals ? "w-full" : "w-1/2 line-clamp-2"
+        } font-semibold md:text-md text-sm text-white tracking-wider uppercase`}
       >
         {title}
       </h1>
@@ -31,23 +33,23 @@ const CardHeader: React.FC<ICardHeader> = ({
         <Listbox value={selectedInterval} onChange={setSelectedInterval}>
           {({ open }) => (
             <>
-              <div className="relative w-1/4 max-w-xs">
-                <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 py-1.5 my-1 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <div className="relative md:w-1/4 w-1/2">
+                <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-2 md:pr-10 py-1.5 md:py-1 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-xs md:text-sm">
                   <span className="block truncate">
                     {selectedInterval?.name}
                   </span>
-                  <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <span className="absolute inset-y-0 right-0 flex items-center pr-1 md:pr-2 pointer-events-none">
                     <ChevronDownIcon
-                      className="w-5 h-5 text-gray-400"
+                      className="w-4 h-4 md:w-5 md:h-5 text-gray-400"
                       aria-hidden="true"
                     />
                   </span>
                 </Listbox.Button>
                 {open && (
-                  <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-50">
+                  <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-2">
                     <Listbox.Options
                       static
-                      className="py-1 overflow-auto text-base max-h-60 focus:outline-none"
+                      className="py-0.5 text-xs md:text-base overflow-auto max-h-60 focus:outline-none"
                     >
                       {intervals.map((interval) => (
                         <Listbox.Option
@@ -58,32 +60,18 @@ const CardHeader: React.FC<ICardHeader> = ({
                               active
                                 ? "text-white bg-indigo-600"
                                 : "text-gray-900"
-                            } cursor-default select-none relative py-2 pl-8 pr-4`
+                            } cursor-default select-none relative py-2`
                           }
                         >
-                          {({ active }) => (
+                          {({ selected, active }) => (
                             <>
                               <span
-                                className={`${
-                                  active ? "font-medium" : "font-normal"
-                                } block truncate`}
+                                className={`block truncate pl-3 ${
+                                  selected ? "font-medium" : "font-normal"
+                                }`}
                               >
                                 {interval.name}
                               </span>
-                              {active && (
-                                <span
-                                  className={`${
-                                    interval.value === selectedInterval?.value
-                                      ? "text-white"
-                                      : "text-indigo-600"
-                                  } absolute inset-y-0 left-0 flex items-center pl-3`}
-                                >
-                                  <CheckIcon
-                                    className="w-5 h-5"
-                                    aria-hidden="true"
-                                  />
-                                </span>
-                              )}
                             </>
                           )}
                         </Listbox.Option>

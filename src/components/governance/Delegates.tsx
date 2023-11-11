@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Tooltip } from "react-tooltip";
 
 // Hooks
 import useDelegates from "@/models/governance/useDelegates";
@@ -100,56 +99,8 @@ export default function Delegates() {
               {shortenAddress(delegate.account.address)}
             </p>
           </div>
-          {/* <div className="flex justify-between space-x-2">
-            <BadgeWithTooltip
-              text={`Vote Count: ${delegate.participation.stats.voteCount}`}
-              tooltipId="vote-count"
-              tooltipContent="Vote Count"
-              tooltipPlace="top"
-              icon={<FaWallet className="mr-2" />}
-            />
-            <BadgeWithTooltip
-              text={`Delegations: ${delegate.participation.stats.delegations.total}`}
-              tooltipId="delegations"
-              tooltipContent="Delegations"
-              tooltipPlace="top"
-              icon={<FaWallet className="mr-2" />}
-            />
-            <BadgeWithTooltip
-              text={`Votes Cast: ${delegate.participation.stats.voteCount}`}
-              tooltipId="votes-cast"
-              tooltipContent="Votes Cast"
-              tooltipPlace="top"
-              icon={<FaWallet className="mr-2" />}
-            />
-          </div> */}
         </div>
       </Link>
-    );
-  }
-
-  function BadgeWithTooltip({
-    text,
-    tooltipId,
-    tooltipContent,
-    tooltipPlace,
-    icon,
-  }) {
-    return (
-      <>
-        <a
-          data-tooltip-id={tooltipId}
-          data-tooltip-content={tooltipContent}
-          data-tooltip-place={tooltipPlace}
-          className="items-center justify-between mt-1 bg-side border-2 border-main text-main px-3 py-0.5 rounded-xl text-sm font-semibold inline-flex w-1/2"
-        >
-          {icon}
-          {text}
-        </a>
-        <Tooltip id={tooltipId} place={tooltipPlace}>
-          {tooltipContent}
-        </Tooltip>
-      </>
     );
   }
 
@@ -162,8 +113,8 @@ export default function Delegates() {
         setSelectedInterval={setSelectedInterval}
         intervals={sortBy}
       />
-      <div className="grid grid-cols-3 gap-4">
-        {delegates.slice(0, 6).map((delegate) => (
+      <div className="grid md:grid-cols-3 grid-cols-1 gap-4 max-h-[calc(6*6.6rem)] md:max-h-[calc(4*6.6rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
+        {delegates.slice(0, 15).map((delegate) => (
           <DelegateCard key={delegate.account.id} delegate={delegate} />
         ))}
       </div>

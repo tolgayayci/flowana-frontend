@@ -85,7 +85,7 @@ export default function ProjectCard({ hit }: any) {
 
   return (
     <Link href={`/${protocol["protocol"]}/projects/${hit.owner}/${hit.repo}`}>
-      <div className="h-full p-10 rounded-2xl w-full border-2 border-sfblack flex flex-col justify-between shadow-lg hover:shadow-xl">
+      <div className="h-full p-7 md:p-10 rounded-2xl w-full border-2 border-sfblack flex flex-col justify-between shadow-lg hover:shadow-xl">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Image
@@ -97,10 +97,10 @@ export default function ProjectCard({ hit }: any) {
               height={48}
             />
             <div>
-              <div className="text-lg truncate font-semibold max-w-[220px]">
+              <div className="md:text-lg text-md truncate font-semibold md:max-w-[220px] max-w-[calc(10*1rem)] leading-2">
                 {hit.repo}
               </div>
-              <div className="text-sm text-gray-500 truncate font-semibold">
+              <div className="text-sm text-gray-500 truncate font-semibold md:max-w-[220px] max-w-[calc(10*1rem)]">
                 {hit.owner}
               </div>
             </div>

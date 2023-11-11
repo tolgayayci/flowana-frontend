@@ -26,6 +26,7 @@ import { IProjects } from "@/types/githubLeaderboard";
 export default function Project() {
   const [selectedProject, setSelectedProject] = useState(null);
   const { projects, isLoading } = useProjects();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { protocol } = useProtocol();
 
@@ -38,6 +39,25 @@ export default function Project() {
   if (isLoading) return <ListLoader isLoading={isLoading} element />;
 
   if (!projects) return <NoListData element />;
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSelectProject = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true); // Open modal on small screens
+  };
+
+  function Modal({ children }) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-2 flex justify-center items-center p-4">
+        <div className="bg-white rounded-lg p-4 md:max-w-xl w-full">
+          {children}
+        </div>
+      </div>
+    );
+  }
 
   function ProgressBar({
     icon,
@@ -157,7 +177,7 @@ export default function Project() {
             {projects.slice(0, 15).map((project, index) => (
               <li
                 key={project.owner + "/" + project.repo}
-                onClick={() => setSelectedProject(project)}
+                onClick={() => handleSelectProject(project)}
                 className={`cursor-pointer hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500 ${
                   selectedProject &&
                   project.owner + "/" + project.repo ===
@@ -216,12 +236,30 @@ export default function Project() {
             ))}
           </ul>
         </div>
-        {/* Conditional rendering of details */}
-        {selectedProject && (
-          <div className="w-1/2">
-            <ProjectDetails project={selectedProject} />
+
+        {/* Modal for smaller screens */}
+        {isModalOpen && (
+          <div className="fixed inset-0 z-2 p-4 md:hidden">
+            <div className="bg-white rounded-lg p-4 max-h-full overflow-auto">
+              <ProjectDetails project={selectedProject} />
+              <button
+                onClick={closeModal}
+                className="mt-4 bg-red-500 text-white py-2 px-4 rounded"
+              >
+                Close
+              </button>
+            </div>
+            <div
+              className="fixed inset-0 bg-black opacity-50"
+              onClick={closeModal}
+            ></div>
           </div>
         )}
+
+        {/* Desktop ProjectDetails - hidden on mobile */}
+        <div className="hidden md:block md:w-1/2">
+          {selectedProject && <ProjectDetails project={selectedProject} />}
+        </div>
       </div>
     </Layout>
   );

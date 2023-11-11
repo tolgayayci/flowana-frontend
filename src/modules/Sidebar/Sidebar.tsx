@@ -54,9 +54,9 @@ export default function Sidebar({
 
   return (
     <>
-      <div className={`w-full ${element ? "mb-6" : ""}`}>{element}</div>
+      <div className={`w-full ${element ? "mb-0 md:mb-6" : ""}`}>{element}</div>
       <div className="sticky top-[180px]">
-        <div className="h-auto shadow-xl p-8 border-2  border-main tracking-wide rounded-2xl">
+        <div className="h-auto shadow-xl p-8 border-2  border-main tracking-wide rounded-2xl hidden md:block">
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>

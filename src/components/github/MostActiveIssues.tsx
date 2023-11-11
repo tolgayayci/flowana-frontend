@@ -10,10 +10,12 @@ import Layout from "@/modules/Card/Layout/Layout";
 import CardHeader from "@/modules/Card/Header/Header";
 import ListLoader from "@/modules/Loaders/github/ListLoader";
 import NoListData from "@/modules/NoData/NoListData";
-import { formatDistanceToNow } from "@/utils/functions";
+import { formatDistanceToNow, formatBadgeStatsCount } from "@/utils/functions";
+import { Tooltip } from "react-tooltip";
 
 // Types
 import { Interval } from "@/types/general";
+import { FaReply } from "react-icons/fa";
 
 const intervals: Interval[] = [
   { name: "Day", value: "day" },
@@ -59,6 +61,20 @@ export default function MostActiveIssues() {
       />
     );
 
+  function CountIcon({ icon, count, tooltip, id }) {
+    return (
+      <span className="w-12 justify-center items-center inline-flex z-2">
+        {icon}
+        <span className="ml-1">{formatBadgeStatsCount(count)}</span>
+
+        {/* Tooltip */}
+        <Tooltip id={id} place="top">
+          {tooltip}
+        </Tooltip>
+      </span>
+    );
+  }
+
   return (
     <Layout>
       <CardHeader
@@ -68,12 +84,12 @@ export default function MostActiveIssues() {
         setSelectedInterval={setSelectedInterval}
         intervals={intervals}
       />
-      <div className="max-h-[calc(5*6.2rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
+      <div className="max-h-[calc(5*7.4rem)] md:max-h-[calc(5*6.4rem)] overflow-y-auto scrollbar scrollbar-thumb-indigo-500 scrollbar-track-indigo-100 overflow-x-hidden">
         <ul className="space-y-3">
           {mostActiveIssues?.map((issue) => (
             <li
               key={issue.number}
-              className="bg-white rounded-lg shadow-md p-4 transition-transform duration-300 transform border-2 border-side-500"
+              className="bg-white hover:bg-gray-200/80 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border-2 border-side-500"
             >
               <Link
                 href={issue.url}
@@ -90,38 +106,59 @@ export default function MostActiveIssues() {
                       height={52}
                       className="rounded-full mr-5"
                     />
-                    <div className="flex-grow min-w-0 max-w-xs">
-                      <h3 className="text-base sm:text-md font-semibold truncate">
+                    <div className="flex-grow space-y-1.5 md:space-y-1">
+                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] md:max-w-md -mb-1 md:mb-0">
                         {issue.title}
                       </h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">
+                      <p className="text-gray-500 text-xs sm:text-sm truncate">
                         Issue #{issue.number}
                         <span
-                          className={`ml-2 px-2 py-1 rounded-full ${
-                            issue.closed ? "bg-red-500" : "bg-green-500"
-                          } text-white text-xxs sm:text-xs opacity-75`}
+                          className={`hidden md:inline-flex ml-2 px-2 py-1 rounded-full ${
+                            issue.closed
+                              ? "border-red-800 border-2 text-red-800 font-semibold"
+                              : "border-green-700 border-2 text-green-800 font-semibold"
+                          } text-xs sm:text-xs opacity-75`}
                         >
-                          {issue.closed ? "Closed" : "Open"}
+                          {issue.state === "CLOSED"
+                            ? `Closed ${formatDistanceToNow(issue.updated_at)}`
+                            : `Opened ${formatDistanceToNow(issue.created_at)}`}
                         </span>
                       </p>
+                      <span
+                        className={`md:hidden inline-block px-1.5 py-0.5 rounded-full ${
+                          issue.state === "CLOSED"
+                            ? "border-red-800 border-2 text-red-800 font-semibold"
+                            : "border-green-700 border-2 text-green-800 font-semibold"
+                        } text-[10px] opacity-75`}
+                      >
+                        {issue.state === "CLOSED"
+                          ? `Closed ${formatDistanceToNow(issue.updated_at)}`
+                          : `Opened ${formatDistanceToNow(issue.created_at)}`}
+                      </span>
+                      <span
+                        className="md:hidden flex w-12 bg-orange-200/70 border-2 border-orange-300 text-orange-800 text-[10px] font-semibold px-1 py-0.5 rounded"
+                        data-tooltip-id="comments_count"
+                      >
+                        <CountIcon
+                          id="comments_count"
+                          icon={<FaReply className="inline" />}
+                          count={issue.comments_count}
+                          tooltip="Comments Count"
+                        />
+                      </span>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs sm:text-sm w-1/2 justify-end">
-                    {issue.closed ? (
-                      <span className="mr-2 px-2 py-1 bg-orange-200 border-2 border-orange-400 text-orange-700 rounded-md text-xs">
-                        Closed{" "}
-                        {formatDistanceToNow(
-                          issue.closed_at ? issue.closed_at : ""
-                        )}
-                      </span>
-                    ) : (
-                      <span className="mr-2 px-2 py-1 bg-blue-200 border-2 border-blue-400 text-blue-700 rounded-md text-xs">
-                        Last Update: {formatDistanceToNow(issue.updated_at)}
-                      </span>
-                    )}
-                    <span className="px-2 py-1 bg-indigo-200 border-2 border-indigo-400 text-indigo-700 rounded-md text-xs">
-                      {issue.comments_count} comment
-                      {issue.comments_count !== 1 && "s"}
+                  <div className="hidden md:flex items-center text-xs sm:text-sm w-1/2 justify-end space-x-2 overflow-x-auto">
+                    <span
+                      className="bg-orange-200/70 border-2 border-orange-300 text-orange-800 text-xs font-semibold px-2 py-1 rounded"
+                      data-tooltip-id="comments_count"
+                    >
+                      <CountIcon
+                        id="comments_count"
+                        icon={<FaReply className="inline" />}
+                        count={issue.comments_count}
+                        tooltip="Comments Count"
+                      />
                     </span>
                   </div>
                 </div>

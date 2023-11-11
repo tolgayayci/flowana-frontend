@@ -5,8 +5,8 @@ import Project from "@/components/leaderboard/Project";
 import Contributors from "@/components/leaderboard/Contributors";
 
 const tabOptions = [
-  { name: "Project Leaderboard", current: true, key: "project" },
-  { name: "Contributor Leaderboard", current: false, key: "contributors" },
+  { name: "Projects Leaderboard", current: true, key: "project" },
+  { name: "Contributors Leaderboard", current: false, key: "contributors" },
 ];
 
 function classNames(...classes) {
@@ -38,7 +38,7 @@ export default function LeaderBoard() {
       </Head>
       <section className="max-w-[90%] mx-auto mb-8 mt-6 px-4 sm:px-6 lg:px-8 py-1">
         <div>
-          <div className="hidden sm:block">
+          <div className="sm:block md:block">
             <div>
               <nav className="-mb-px flex space-x-6" aria-label="Tabs">
                 {tabs.map((tab) => (
@@ -62,8 +62,8 @@ export default function LeaderBoard() {
         </div>
         <div className="flex flex-wrap space-y-8">
           <div className="w-full mt-8">
-            {selectedTab === "Project Leaderboard" && <Project />}
-            {selectedTab === "Contributor Leaderboard" && <Contributors />}
+            {selectedTab === "Projects Leaderboard" && <Project />}
+            {selectedTab === "Contributors Leaderboard" && <Contributors />}
           </div>
         </div>
       </section>

@@ -91,9 +91,6 @@ export default function PunchCard() {
     return [item.hour, item.day, item.commits];
   });
 
-  const maxSymbolSize = 40;
-  const minSymbolSize = 5;
-
   const maxCommitCount = Math.max(...data.map((item) => item[2])); // Find the maximum commit count in your data
 
   const option = {
