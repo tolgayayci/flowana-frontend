@@ -96,7 +96,7 @@ export default function Project() {
     return (
       <div className="flex flex-col justify-between p-8 rounded-md border-gray-600/30 border-2 h-full relative">
         {" "}
-        <div className="flex items-center mb-8">
+        <div className="flex items-center w-full">
           <Image
             unoptimized
             src={project.repository_info.owner_avatar_url}
@@ -109,7 +109,7 @@ export default function Project() {
             <h2 className="text-xl font-bold">
               {project.owner}/{project.repo}
             </h2>
-            <p className="text-indigo-600 truncate max-w-lg">
+            <p className="text-indigo-600 mr-3 overflow-hidden">
               {project.repository_info.description}
             </p>
           </div>

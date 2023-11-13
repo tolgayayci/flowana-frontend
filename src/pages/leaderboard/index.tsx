@@ -36,11 +36,11 @@ export default function LeaderBoard() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <section className="max-w-[90%] mx-auto mb-8 mt-6 px-4 sm:px-6 lg:px-8 py-1">
+      <section className="max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8 py-1">
         <div>
           <div className="sm:block md:block">
             <div>
-              <nav className="-mb-px flex space-x-6" aria-label="Tabs">
+              <nav className="-mt-8 flex space-x-6" aria-label="Tabs">
                 {tabs.map((tab) => (
                   <a
                     key={tab.key}

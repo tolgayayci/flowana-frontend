@@ -62,7 +62,7 @@ export default function Contributors() {
             #{rank}
           </span>
         </div>
-        <div className="max-h-[calc(9*2.6rem)] overflow-y-auto">
+        <div className="max-h-[calc(8*2.9rem)] overflow-y-auto">
           <div className="grid grid-cols-2 gap-4 mb-4">
             {sortedContributions.map((contribution, index) => (
               <div
@@ -80,15 +80,17 @@ export default function Contributors() {
                   <div className="flex items-center">
                     <FaGithub size={30} className="mr-3 text-side-500" />
                     <div className="flex flex-col">
-                      <span className="text-gray-700 font-medium max-w-[230px] truncate">
+                      <span className="text-gray-700 font-medium 2xl:max-w-[200px] xl:max-w-[150px] truncate">
                         {contribution.owner + "/" + contribution.repo}
                       </span>
+                      <div className="inline-flex">
+                        <span className="items-center bg-side border-2 border-main text-main px-2 py-0.5 rounded-md text-xs font-semibold inline-flex mt-1">
+                          <FaCode className="mr-2" />
+                          {contribution.commits} commits
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <span className="items-center bg-side border-2 border-main text-main px-3 py-0.5 rounded-xl text-sm font-semibold inline-flex">
-                    <FaCode className="mr-2" />
-                    {contribution.commits} commits
-                  </span>
                 </Link>
               </div>
             ))}
