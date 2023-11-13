@@ -70,7 +70,7 @@ export default function HealthScore() {
       rounded-2xl"
             style={{ backgroundColor: "#455e8d" }}
           >
-            {healthScore?.total.toFixed(2)} %
+            {healthScore?.total.toFixed(2)}%
           </p>
         </div>
         <div className="flex flex-col space-y-4 w-full md:w-3/5">

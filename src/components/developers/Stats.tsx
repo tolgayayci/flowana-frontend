@@ -63,12 +63,14 @@ export default function Stats() {
     return (
       <div className="col-span-1">
         <div className="md:p-5 p-4 pl-6 border border-sfblack rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-          <div className="text-side-500 text-medium md:mb-5 mb-2">{title}</div>
-          <div className="md:text-5xl text-xl font-bold text-niceblack md:mb-3">
+          <div className="text-side-500 text-medium md:mb-5 mb-2 truncate">
+            {title}
+          </div>
+          <div className="xl:text-3xl 2xl:text-4xl text-xl font-bold text-niceblack md:mb-3">
             {formattedCount}
           </div>
-          <div className="inline-block bg-side border-2 border-main text-main text-xs font-semibold rounded-lg md:rounded-2xl px-2 py-0.5 mt-2 md:mt-0">
-            Last Update: {date.split(" ")[2]}
+          <div className="inline-block bg-side border-2 border-main text-main text-[11px] font-semibold rounded-lg md:rounded-xl px-2 py-0.5 mt-2 md:mt-0">
+            Last Update: {date.split(" ")[2].slice(0, 3)}
           </div>
         </div>
       </div>

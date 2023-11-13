@@ -105,23 +105,24 @@ export default function RecentIssues() {
                       className="rounded-full mr-2 md:mr-5"
                     />
                     <div className="flex-grow space-y-1.5 md:space-y-1">
-                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] md:max-w-md -mb-1 md:mb-0">
+                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] xl:max-w-[calc(14*1rem)] 2xl:max-w-[calc(19*1rem)] -mb-1 md:mb-0">
                         {issue.title}
                       </h3>
                       <p className="text-gray-500 text-xs sm:text-sm truncate">
                         Issue #{issue.number}
+                        <span
+                          className={`hidden md:inline-flex ml-2 px-2 py-1 rounded-full ${
+                            issue.state === "CLOSED"
+                              ? "border-red-800 border-2 text-red-800 font-semibold"
+                              : "border-green-700 border-2 text-green-800 font-semibold"
+                          } text-xs sm:text-xs opacity-75`}
+                        >
+                          {issue.state === "CLOSED"
+                            ? `Closed ${formatDistanceToNow(issue.updated_at)}`
+                            : `Opened ${formatDistanceToNow(issue.created_at)}`}
+                        </span>
                       </p>
-                      <span
-                        className={`hidden md:inline-flex ml-2 px-2 py-1 rounded-full ${
-                          issue.state === "CLOSED"
-                            ? "border-red-800 border-2 text-red-800 font-semibold"
-                            : "border-green-700 border-2 text-green-800 font-semibold"
-                        } text-xs sm:text-xs opacity-75`}
-                      >
-                        {issue.state === "CLOSED"
-                          ? `Closed ${formatDistanceToNow(issue.updated_at)}`
-                          : `Opened ${formatDistanceToNow(issue.created_at)}`}
-                      </span>
+
                       <span
                         className={`md:hidden inline-block px-1.5 py-0.5 rounded-full ${
                           issue.state === "CLOSED"

@@ -69,7 +69,7 @@ export default function RecentCommits() {
                       height={52}
                     />
                     <div>
-                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] md:max-w-md">
+                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] xl:max-w-[calc(14*1rem)] 2xl:max-w-[calc(19*1rem)]">
                         {commit.message}
                       </h3>
                       <p className="text-gray-500 text-xs sm:text-sm mt-1 truncate">

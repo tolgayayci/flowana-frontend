@@ -175,10 +175,10 @@ export default function TopTopics() {
                       alt="Avatar"
                       width={52}
                       height={52}
-                      className="rounded-full mr-2 md:mr-5"
+                      className="rounded-full mr-2"
                     />
                     <div className="flex-grow space-y-2 md:space-y-1">
-                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] md:max-w-md -mb-1 md:mb-0">
+                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] xl:max-w-[calc(14*1rem)] 2xl:max-w-[calc(19*1rem)] -mb-1 md:mb-0">
                         {topic.title}
                       </h3>
                       <p className="text-gray-500 text-xs sm:text-sm truncate">

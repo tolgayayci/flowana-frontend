@@ -73,16 +73,16 @@ export default function SideInfo() {
 
   return (
     <div className="border-2 border-main text-sfblue-900 rounded-2xl p-5 h-full shadow-xl bg-white-100">
-      <div className="flex items-center">
+      <div className="flex items-center xl:flex-col 2xl:flex-row">
         <Image
           unoptimized
           src={protocolInfo.image_url}
           alt={`${protocolInfo.protocol_name} Avatar`}
-          className="rounded-lg mr-6"
+          className="rounded-lg mr-6 xl:mr-0 2xl:mr-4 mb-0 xl:mb-3 2xl:mb-0"
           width={64}
           height={64}
         />
-        <div>
+        <div className="text-left xl:text-center 2xl:text-left">
           <p className="text-xl font-semibold truncate w-full mb-1">
             {protocolInfo.protocol_name}
           </p>

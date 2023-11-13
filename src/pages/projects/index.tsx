@@ -135,13 +135,13 @@ export default function Projects() {
                     unoptimized
                     src={protocolInfo.image_url}
                     alt="Projects Icon"
-                    className="w-12 h-12 mr-4 rounded-full"
+                    className="w-12 h-12 mr-4 xl:mr-1 2xl:mr-4 rounded-full"
                     width={48}
                     height={48}
                   />
                   <div className="flex flex-col justify-center ml-2">
                     <h1 className="text-xl font-bold">Projects Portal</h1>
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-gray-500 text-sm xl:hidden 2xl:block mt-1 leading-5">
                       Find your project on {protocolInfo.protocol_name}
                     </p>
                   </div>
@@ -152,9 +152,9 @@ export default function Projects() {
                   <SearchBox
                     searchAsYouType={false}
                     placeholder={`Search on ${protocolInfo.protocol_name} Ecosystem`}
-                    autoFocus={true}
+                    autoFocus={false}
                     classNames={{
-                      root: "w-full bg-transparent text-gray-800 placeholder-gray-400 sm:text-sm md:pl-3 border-2 border-sfblue rounded-lg",
+                      root: "w-full bg-transparent text-gray-800 placeholder-gray-400 sm:text-sm border-2 border-sfblue rounded-lg",
                       form: "w-full focus:rounded-none",
                       input:
                         "border-0 outline-none focus:border-none focus:ring-0 w-full py-1.5 pl-3 rounded-lg text-[14px]",

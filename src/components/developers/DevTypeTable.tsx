@@ -110,7 +110,7 @@ export default function DevTypeTable() {
           ))}
 
           {/* Other items in a container */}
-          <div className="w-full md:w-1/3 flex flex-row flex-wrap md:flex-nowrap">
+          <div className="w-full md:w-2/3 flex flex-row flex-wrap md:flex-nowrap">
             {devTypeTable?.header.slice(1).map((item, index) => (
               <div
                 key={index + 1}
@@ -145,13 +145,13 @@ export default function DevTypeTable() {
                 </div>
                 <div className="font-semibold text-gray-700 md:ml-4">
                   {row.developer_type[0]}
-                  <div className="text-xs text-gray-500 mt-1 font-medium">
+                  <div className="text-xs text-gray-500 mt-1 font-medium max-w-md xl:max-w-xs 2xl:max-w-xs">
                     {row.developer_type[1]}
                   </div>
                 </div>
               </div>
-              <div className="flex space-x-1 md:space-x-6 w-full md:w-1/3">
-                <div className="w-1/2 md:w-1/4 px-4 py-2 md:py-0 flex flex-col md:justify-center md:items-end">
+              <div className="flex space-x-1 md:space-x-6 w-full md:w-2/3">
+                <div className="w-1/2 md:w-1/4 xl:w-1/3 px-4 py-2 md:py-0 flex flex-col md:justify-center md:items-end">
                   {row["oct-01_2023"]}
                 </div>
                 <div

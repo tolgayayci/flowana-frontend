@@ -46,13 +46,14 @@ export default function RepositoryInfo() {
               <p className="font-bold text-lg">
                 {owner}/{repo}
               </p>
-              {/* <p className="text-sm text-gray-500"></p> */}
-              <p className="text-sm text-gray-500">{description}</p>
+              <p className="text-sm text-gray-500 2xl:max-w-md">
+                {description}
+              </p>
             </div>
           </div>
 
           {/* Badges */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex xl:items-end 2xl:items-center space-x-4 xl:space-y-2 2xl:space-y-0 xl:flex-col 2xl:flex-row 2xl:ml-8">
             <div
               className="flex items-center px-3 py-1 rounded-md shadow-md space-x-4"
               style={{ backgroundColor: "#455e8d" }}

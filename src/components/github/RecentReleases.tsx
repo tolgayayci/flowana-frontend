@@ -69,7 +69,7 @@ export default function RecentReleases() {
                   </span>
                   <div className="flex space-x-2 items-center">
                     <span className="bg-indigo-200 border border-indigo-300 text-indigo-800 text-xs font-semibold px-2 py-0.5 rounded">
-                      <AiFillGithub className="inline mr-1" />
+                      <AiFillGithub className="inline mr-1 xl:hidden 2xl:inline" />
                       {release.repo}
                     </span>
                     <span className="bg-blue-200 border border-blue-300 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded">

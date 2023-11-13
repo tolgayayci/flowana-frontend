@@ -171,8 +171,9 @@ export default function SearchBar(props: SearchBarProps) {
                     <SearchBox
                       searchAsYouType={false}
                       placeholder={`Search on ${protocolInfo.protocol_name} projects`}
-                      autoFocus={true}
+                      autoFocus={false}
                       onSubmit={() => setSelectedProject(null)}
+                      onClick={(e) => e.stopPropagation()}
                       classNames={{
                         root: "w-full bg-transparent text-gray-800 placeholder-gray-400 ssm:text-sm pl-6",
                         form: "w-full focus:rounded-none",

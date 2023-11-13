@@ -3,6 +3,8 @@ import CardHeader from "@/modules/Card/Header/Header";
 import CardLoader from "@/modules/CardLoader/CardLoader";
 import NoData from "@/modules/NoData/NoData";
 
+import { AiFillRocket } from "react-icons/ai";
+
 //Hooks
 import useCommunityProfile from "@/models/github/useCommunityProfile";
 
@@ -55,20 +57,22 @@ export default function CommunityProfile() {
       <div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-12 mt-8">
         {" "}
         {/* Left Side */}
-        <div className="flex flex-col items-center justify-center w-full md:w-1/3 mb-4 md:mb-0">
-          {" "}
+        <div className="flex flex-col items-center justify-center w-full md:w-1/4 mb-4 md:mb-0">
           {/* Display Health Percentage */}
           <div className="mb-2 md:mb-8 w-full">
             <div
               className="w-full h-16 rounded-xl md:rounded-lg border-2 border-sfgreen-900 text-white flex items-center justify-center text-lg font-bold px-8"
               style={{ backgroundColor: "#455e8d" }}
             >
-              Score: {health_percentage}%
+              <span className="inline-flex items-center justify-center mr-1">
+                <AiFillRocket />
+              </span>
+              {health_percentage}%
             </div>
           </div>
         </div>
         {/* Right Side */}
-        <div className="flex flex-col space-y-4 w-full md:w-2/3">
+        <div className="flex flex-col space-y-4 w-full md:w-3/4">
           {" "}
           <ul
             className="divide-y divide-opacity-50"

@@ -84,7 +84,7 @@ export default function Safes() {
               >
                 <div className="flex flex-col md:flex-row justify-between">
                   {" "}
-                  <div className="flex items-center space-x-2 md:w-1/2">
+                  <div className="flex items-center space-x-2 xl:w-1/2">
                     {" "}
                     <Image
                       unoptimized
@@ -168,7 +168,7 @@ export default function Safes() {
                     <div className="flex items-center space-x-2">
                       <span className="mr-2 font-semibold">Tokens</span>
                       <div className="isolate flex -space-x-2 overflow-hidden items-center">
-                        {safe.balance.tokens.map((token) => (
+                        {safe.balance.tokens.slice(0, 5).map((token) => (
                           <Link href={token.logoURI || "#"} key={token.address}>
                             <BadgeWithTooltip
                               element={

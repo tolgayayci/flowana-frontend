@@ -8,19 +8,21 @@ export default function SideInfo() {
 
   return (
     <div className="border-2 border-sfblue-800 bg-sfblue-400 text-sfblue-900 rounded-2xl p-5 h-full shadow-xl bg-white-100">
-      <div className="flex items-center">
+      <div className="flex items-center xl:flex-col 2xl:flex-row">
         <Image
           unoptimized
           src={repositoryInfo?.owner_avatar_url as string}
           alt="Owner Avatar"
-          className="rounded-lg mr-6"
+          className="rounded-lg mr-6 xl:mr-0 2xl:mr-4 mb-0 xl:mb-3 2xl:mb-0"
           width={64}
           height={64}
         />
-        <div>
-          <p className="text-xl font-semibold truncate w-full">
-            {repositoryInfo?.repo}
-          </p>
+        <div className="text-left xl:text-center 2xl:text-left w-full truncate">
+          <div className="w-full">
+            <p className="text-xl font-semibold truncate w-full mb-1">
+              {repositoryInfo?.repo}
+            </p>
+          </div>
           <p className="text-gray-500">{repositoryInfo?.owner_login}</p>
           <a
             href={repositoryInfo?.url}

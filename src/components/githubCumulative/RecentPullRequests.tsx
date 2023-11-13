@@ -129,7 +129,7 @@ export default function RecentPullRequests() {
                       className="rounded-full mr-2 md:mr-5"
                     />
                     <div className="flex-grow">
-                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] md:max-w-md">
+                      <h3 className="text-base sm:text-md font-semibold truncate max-w-[calc(12*1rem)] xl:max-w-[calc(14*1rem)] 2xl:max-w-[calc(19*1rem)]">
                         {pullRequest.title}
                       </h3>
                       <p className="text-gray-500 text-xs sm:text-sm mt-1 truncate">

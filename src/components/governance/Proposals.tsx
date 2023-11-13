@@ -107,7 +107,7 @@ export default function Proposals() {
           {/* Content to the right of the image */}
           <Link href={proposal.tally_url} target="_blank">
             <div className="md:ml-4 md:flex-grow flex-wrap w-full">
-              <div className="text-md font-semibold text-gray-900 text-center md:text-left truncate max-w-[calc(12*1rem)] md:max-w-lg">
+              <div className="text-md font-semibold text-gray-900 text-center md:text-left truncate xl:max-w-xs 2xl:max-w-xs">
                 {title.startsWith("#") ? title.slice(1).trim() : title}
               </div>
               <div className="flex flex-col md:flex-row items-center justify-center md:justify-start space-x-0 md:space-x-2 mt-2">

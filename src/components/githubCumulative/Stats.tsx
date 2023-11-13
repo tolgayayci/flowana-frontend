@@ -41,8 +41,10 @@ export default function Stats() {
     return (
       <div className="col-span-1">
         <div className="md:p-5 p-4 pl-6 border border-sfblack rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-          <div className="text-side-500 text-medium md:mb-5 mb-2">{title}</div>
-          <div className="md:text-5xl text-xl font-bold text-niceblack md:mb-3">
+          <div className="text-side-500 text-medium md:mb-5 mb-2 truncate">
+            {title}
+          </div>
+          <div className="xl:text-3xl 2xl:text-4xl text-xl font-bold text-niceblack md:mb-3">
             <div>{formattedCount}</div>
           </div>
         </div>

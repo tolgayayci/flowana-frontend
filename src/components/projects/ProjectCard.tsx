@@ -85,7 +85,7 @@ export default function ProjectCard({ hit }: any) {
 
   return (
     <Link href={`/${protocol["protocol"]}/projects/${hit.owner}/${hit.repo}`}>
-      <div className="h-full p-7 md:p-10 rounded-2xl w-full border-2 border-sfblack flex flex-col justify-between shadow-lg hover:shadow-xl">
+      <div className="h-full p-7 md:p-10 xl:p-8 2xl:p-10 rounded-2xl w-full border-2 border-sfblack flex flex-col justify-between shadow-lg hover:shadow-xl">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Image
@@ -97,15 +97,15 @@ export default function ProjectCard({ hit }: any) {
               height={48}
             />
             <div>
-              <div className="md:text-lg text-md truncate font-semibold md:max-w-[220px] max-w-[calc(10*1rem)] leading-2">
+              <div className="md:text-lg text-md truncate font-semibold max-w-[calc(10*1rem)] md:max-w-[calc(9*1rem)] 2xl:max-w-[210px]">
                 {hit.repo}
               </div>
-              <div className="text-sm text-gray-500 truncate font-semibold md:max-w-[220px] max-w-[calc(10*1rem)]">
+              <div className="text-sm text-gray-500 truncate font-semibold md:max-w-[220px] max-w-[calc(10*1rem)] xl:max-w-[calc(9*1rem)]">
                 {hit.owner}
               </div>
             </div>
           </div>
-          <div className="px-3 py-1 text-sm bg-[#3C4D6E] text-white rounded-md flex items-center">
+          <div className="px-3 py-1 text-sm bg-[#3C4D6E] text-white rounded-md flex items-center xl:hidden 2xl:hidden">
             <FaStar className="mr-1" />
             {hit.stars}
           </div>
@@ -139,6 +139,10 @@ export default function ProjectCard({ hit }: any) {
               <FaArchive className="mr-1" /> Archived
             </span>
           )}
+          <div className="px-3 py-1 text-sm bg-[#3C4D6E] text-white rounded-md flex items-center  2xl:flex">
+            <FaStar className="mr-1" />
+            {hit.stars}
+          </div>
           {hit.health_score && (
             <span
               className={`px-3 py-1 text-sm rounded-md flex items-center ${
